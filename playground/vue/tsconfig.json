@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["../../packages/vue/core/*"],
+      "@addons/*": ["../../packages/vue/add-ons/*"]
+    },
+    "lib": ["DOM", "ES2020"],
+    "jsx": "preserve",
+    "target": "ES2020",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsxImportSource": "vue",
+    "useDefineForClassFields": true,
+
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"],
+  "references": [{ "path": "../../packages/vue/core/tsconfig.build.json" }]
+}

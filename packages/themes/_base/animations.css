@@ -1,0 +1,218 @@
+@import './animation-easing.css';
+
+@plugin 'tailwindcss-motion';
+@plugin 'tailwindcss-animated';
+
+@theme {
+  --animate-accordion-down: accordion-down var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+  --animate-accordion-up: accordion-up var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+  --animate-collapsible-down: collapsible-down var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-in-out);
+  --animate-collapsible-up: collapsible-up var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-in-out);
+  --animate-quick-squeeze-x: squeeze-x var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-in-out);
+  --animate-rippling: rippling var(--tw-ripple-duration, 600ms) ease-out;
+  --animate-spin: spin 1s linear infinite;
+  --animate-fade-scale-in: fade-scale-in var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+  --animate-fade-scale-out: fade-scale-out var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+
+  /* toast exit animations */
+  --animate-toast-exit-right: toast-exit-right var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+  --animate-toast-exit-left: toast-exit-left var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+  --animate-toast-exit-top: toast-exit-top var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+  --animate-toast-exit-bottom: toast-exit-bottom var(--tw-animate-duration, 200ms) var(--tw-animate-easing, ease-out);
+
+  /* Keyframes */
+  @keyframes accordion-down {
+    from {
+      height: 0px;
+    }
+
+    to {
+      height: var(--reka-accordion-content-height, 0px);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--reka-accordion-content-height, 0px);
+    }
+
+    to {
+      height: 0px;
+    }
+  }
+
+  @keyframes collapsible-down {
+    from {
+      height: 0px;
+    }
+
+    to {
+      height: var(--reka-collapsible-content-height, 0px);
+    }
+  }
+
+  @keyframes collapsible-up {
+    from {
+      height: var(--reka-collapsible-content-height, 0px);
+    }
+
+    to {
+      height: 0px;
+    }
+  }
+
+  @keyframes squeeze-x {
+    from {
+      transform: scaleX(1);
+    }
+
+    50% {
+      transform: scaleX(1.15);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes path-dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fade-down-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-2rem);
+    }
+  }
+
+  @keyframes blur-in {
+    from {
+      filter: blur(1rem);
+    }
+
+    to {
+      filter: blur(0);
+    }
+  }
+
+  @keyframes rippling {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes toast-exit-right {
+    from {
+      opacity: 1;
+      transform: translate3d(var(--reka-toast-swipe-end-x, 0), 0, 0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(calc(100% + 24px), 0, 0);
+    }
+  }
+
+  @keyframes toast-exit-left {
+    from {
+      opacity: 1;
+      transform: translate3d(var(--reka-toast-swipe-end-x, 0), 0, 0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(calc(-100% - 24px), 0, 0);
+    }
+  }
+
+  @keyframes toast-exit-top {
+    from {
+      opacity: 1;
+      transform: translate3d(0, var(--reka-toast-swipe-end-y, 0), 0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(0, calc(-100% - 24px), 0);
+    }
+  }
+
+  @keyframes toast-exit-bottom {
+    from {
+      opacity: 1;
+      transform: translate3d(0, var(--reka-toast-swipe-end-y, 0), 0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(0, calc(100% + 24px), 0);
+    }
+  }
+
+  @keyframes skeleton-wave {
+    to {
+      background-position-x: -200%;
+    }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes fade-scale-in{
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fade-scale-out{
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
+
+}
+
+@utility animate-check-dash {
+  stroke-dasharray: 50;
+  stroke-dashoffset: -50;
+  animation: path-dash var(--tw-animate-duration, 150ms) var(--tw-animate-easing, ease-out) forwards;
+}
+
+@utility animate-indeterminate-dash {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: path-dash var(--tw-animate-duration, 150ms) linear forwards;
+}
+
+@utility animate-fade-down-in {
+  @apply animate-fade-down;
+}
+
+@utility animate-fade-down-out {
+  animation: fade-down-out var(--tw-animate-duration, 150ms) var(--tw-animate-easing, ease-out) forwards;
+}

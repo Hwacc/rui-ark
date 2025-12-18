@@ -1,0 +1,22 @@
+@theme inline {
+  /* tw default duration */
+  --tw-duration: var(--motion-duration);
+  --default-transition-duration: var(--motion-duration);
+
+  /* tailwind animated plugin duration */
+  --tw-animate-duration: var(--motion-duration);
+
+  /* tailwind default easing */
+  --tw-ease: var(--motion-default-timing);
+  --default-transition-timing-function: var(--motion-default-timing);
+
+  /* tailwind animated plugin easing */
+  --tw-animate-easing: var(--motion-default-timing);
+}
+
+@layer components {
+  * {
+    /* tailwind motion duration */
+    --motion-duration: 200ms;
+  }
+}

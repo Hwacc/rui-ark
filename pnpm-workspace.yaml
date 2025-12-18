@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - packages/*/*
+  - playground/*
+ignoredBuiltDependencies:
+  - core-js
+onlyBuiltDependencies:
+  - esbuild
+  - vue-demi
