@@ -10,6 +10,7 @@
     "declarationMap": true,
     "noEmit": false,
     "outDir": "dist",
+    "preserveSymlinks": true,
     "skipLibCheck": true
   },
   "include": ["**/*.ts"],

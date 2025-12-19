@@ -1,5 +1,8 @@
 import type { Config } from 'tailwindcss'
 
 export default {
-  content: ['../mould/**/*.{ts}'],
+  content: [
+    '../crafts/**/*.{ts}',
+    '../../../vue/core/**/*.{vue,ts,tsx}',
+  ],
 } satisfies Config

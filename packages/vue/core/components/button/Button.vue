@@ -9,16 +9,28 @@ export interface ButtonProps {
   unstyled?: boolean
   ripple?: boolean
   loading?: boolean
-  ui?: {}
+  asChild?: boolean
+  ui?: {
+    root?: {
+      class?: HTMLAttributes['class']
+    }
+    loading?: {
+      class?: HTMLAttributes['class']
+    }
+  }
 }
 </script>
 
 <script setup lang="ts">
-import type { ButtonVariants } from '@rui-ark/themes/mould/button'
+import type { ButtonVariants } from '@rui-ark/themes/crafts/button'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
-import { tvButton } from '@rui-ark/themes/mould/button'
-import { useTemplateRef } from 'vue'
+import { tvButton } from '@rui-ark/themes/crafts/button'
+import { useRipple } from '@rui-ark/vue-core/composables/useRipple'
+import { useForwardExpose } from '@rui-ark/vue-core/libs/useForwardExpose'
+import { getNodeCssVar } from '@rui-ark/vue-core/utils/css'
+import { LoaderCircle } from 'lucide-vue-next'
+import { computed } from 'vue'
 
 const {
   variant = 'default',
@@ -26,27 +38,60 @@ const {
   class: propsClass,
   disabled,
   checked = false,
-  unstyled,
+  unstyled = false,
   ripple = false,
   loading = false,
-  tooltip,
+  asChild = false,
   ui,
 } = defineProps<ButtonProps>()
 
-const buttonRef = useTemplateRef<{ $el: HTMLButtonElement } | null>('button')
+const emits = defineEmits<{
+  click: [event: MouseEvent]
+}>()
+const slots = defineSlots<{
+  default?: () => any
+  tooltip?: () => any
+  loading?: () => any
+}>()
 
-const { base } = tvButton()
+const { forwardRef, currentElement } = useForwardExpose()
+const rippleColor = computed(() => {
+  return getNodeCssVar(
+    currentElement.value,
+    '--rui-ripple-color',
+    'transparent',
+  )
+})
+const {
+  onRipple,
+  referenceRef: rippleReferenceRef,
+  Ripple,
+} = useRipple({
+  color: rippleColor,
+})
+
+function onClick(event: MouseEvent) {
+  onRipple(event)
+  emits('click', event)
+}
+
+const { base, loading: tvLoading } = tvButton()
 </script>
 
 <template>
   <ark.button
-    ref="button"
+    :ref="
+      (r) => {
+        forwardRef(r)
+        rippleReferenceRef = r
+      }
+    "
     :class="base({
       variant: variant as ButtonVariants['variant'],
       size,
       unstyled,
       loading,
-      class: [propsClass],
+      class: [ui?.root?.class, propsClass],
     })"
     :disabled="disabled"
     :data-variant="variant"
@@ -56,7 +101,24 @@ const { base } = tvButton()
       variant === 'switch' ? (checked ? 'checked' : 'unchecked') : undefined
     "
     :data-size="size"
+    :as-child="asChild"
+    @click="onClick"
   >
+    <slot
+      v-if="loading"
+      name="loading"
+    >
+      <LoaderCircle
+        :class="tvLoading({
+          variant: variant as ButtonVariants['variant'],
+          size,
+          unstyled,
+          loading,
+          class: [ui?.loading?.class],
+        })"
+      />
+    </slot>
     <slot />
+    <Ripple v-if="ripple" />
   </ark.button>
 </template>

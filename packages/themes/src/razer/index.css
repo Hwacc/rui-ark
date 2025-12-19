@@ -1,4 +1,5 @@
 @import 'tailwindcss';
 @import './perset.css';
 
+@import './components/badge.css';
 @import './components/button.css';

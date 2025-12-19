@@ -15,8 +15,8 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@/*": ["./*"],
-      "@rui-ark/themes": ["../../themes/src"]
+      "@rui-ark/vue-core/*": ["./*"],
+      "@rui-ark/themes/*": ["../../themes/src/*"]
     },
 
     "allowImportingTsExtensions": true,
@@ -35,6 +35,9 @@
     "components/**/*.tsx",
     "components/**/*.vue",
     "composables/**/*.ts",
+    "composables/**/*.tsx",
+    "utils/**/*.ts",
+    "libs/**/*.ts",
     "types/**/*.d.ts"
   ],
   "exclude": ["node_modules", "dist"]

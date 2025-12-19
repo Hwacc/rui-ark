@@ -8,7 +8,7 @@
   "license": "ISC",
   "keywords": [],
   "exports": {
-    "./mould/*": "./src/mould/*.ts",
+    "./crafts/*": "./src/crafts/*.ts",
     "./utils/*": "./src/utils/*.ts",
     "./razer/index.css": "./src/razer/index.css"
   },
