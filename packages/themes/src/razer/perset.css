@@ -110,7 +110,7 @@
 
   /* Other */
   --outline: 2px solid var(--color-rz-green);
-  --disabled-opacity: var(--opacity-30, 0.3);
+  --disabled-opacity: var(--opacity-50, 0.5);
 
   /* RUI Theme*/
   --color-rui-parimary: var(--color-rz-green);

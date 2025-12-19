@@ -1,7 +1,7 @@
 import type { VariantProps } from '../utils/tv'
 import { tv } from '../utils/tv'
 
-const PREFIX = 'rui-badge'
+const prefix = 'rui-badge'
 
 export const tvBadge = tv(
   {
@@ -48,7 +48,7 @@ export const tvBadge = tv(
     ],
   },
   {
-    class: PREFIX,
+    class: prefix,
   },
 )
 
