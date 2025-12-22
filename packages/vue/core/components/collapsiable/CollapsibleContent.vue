@@ -9,7 +9,7 @@ export interface CollapsibleContentProps extends ArkCollapsibleContentProps {
 import type { CollapsibleContentProps as ArkCollapsibleContentProps } from '@ark-ui/vue/collapsible'
 import { useForwardProps } from '@ark-ui/vue'
 import { Collapsible } from '@ark-ui/vue/collapsible'
-import { tvCollapsiable } from '@rui-ark/themes/crafts/collapsiable'
+import { tvCollapsible } from '@rui-ark/themes/crafts/collapsible'
 
 const {
   class: propsClass,
@@ -18,7 +18,7 @@ const {
 } = defineProps<CollapsibleContentProps>()
 
 const forwarded = useForwardProps(props)
-const { content } = tvCollapsiable()
+const { content } = tvCollapsible()
 </script>
 
 <template>

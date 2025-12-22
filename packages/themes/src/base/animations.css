@@ -43,21 +43,21 @@
 
   @keyframes collapsible-down {
     from {
-      height: 0px;
+      height: var(--collapsed-height, 0px);
     }
 
     to {
-      height: var(--reka-collapsible-content-height, 0px);
+      height: var(--height, 0px);
     }
   }
 
   @keyframes collapsible-up {
     from {
-      height: var(--reka-collapsible-content-height, 0px);
+      height: var(--height, 0px);
     }
 
     to {
-      height: 0px;
+      height: var(--collapsed-height, 0px);
     }
   }
 

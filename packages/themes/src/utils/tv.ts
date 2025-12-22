@@ -37,7 +37,11 @@ export function tv<
     slots?: S
     variants?: V
     compoundVariants?: CV
-    compoundSlots?: TVCompoundSlots<V & { unstyled: { true: ClassValue, false: ClassValue } }, S, B>
+    compoundSlots?: TVCompoundSlots<
+      V & { unstyled: { true: ClassValue, false: ClassValue } },
+      S,
+      B
+    >
     defaultVariants?: DV
   },
   ruiConfig?: {
@@ -56,7 +60,7 @@ export function tv<
   })
 
   const unstyledCompoundSlots: any[] = []
-  each(ruiConfig?.slots, (value, key) => {
+  each(ruiConfig?.slots, (value: ClassValue, key: keyof S) => {
     unstyledCompoundSlots.push({
       slots: [key],
       unstyled: false,
@@ -65,7 +69,13 @@ export function tv<
   })
 
   options.variants = variants
-  options.compoundSlots = concat(options.compoundSlots ?? [], unstyledCompoundSlots)
+  options.defaultVariants = merge({}, options.defaultVariants, {
+    unstyled: false,
+  })
+  options.compoundSlots = concat(
+    options.compoundSlots ?? [],
+    unstyledCompoundSlots,
+  )
   return originTv<
     mergedV,
     TVCompoundVariants<mergedV, S, B, EV, ES>,

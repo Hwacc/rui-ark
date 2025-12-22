@@ -6,18 +6,10 @@ export interface CheckboxProps extends CheckboxRootProps {
   size?: CheckboxVariants['size']
   unstyled?: boolean
   ui?: {
-    root?: {
-      class?: HTMLAttributes['class']
-    }
-    control?: {
-      class?: HTMLAttributes['class']
-    }
-    indicator?: {
-      class?: HTMLAttributes['class']
-    }
-    label?: {
-      class?: HTMLAttributes['class']
-    }
+    root?: HTMLAttributes['class']
+    control?: HTMLAttributes['class']
+    indicator?: HTMLAttributes['class']
+    label?: HTMLAttributes['class']
   }
 }
 </script>
@@ -61,13 +53,11 @@ defineExpose({
 <template>
   <Checkbox.RootProvider
     :value="checkbox"
-    :class="root({ class: [ui?.root?.class, propsClass], unstyled, size })"
+    :class="root({ class: [ui?.root, propsClass], unstyled, size })"
   >
-    <Checkbox.Control
-      :class="control({ class: ui?.control?.class, unstyled, size })"
-    >
+    <Checkbox.Control :class="control({ class: ui?.control, unstyled, size })">
       <Checkbox.Indicator
-        :class="indicator({ class: ui?.indicator?.class, unstyled, size })"
+        :class="indicator({ class: ui?.indicator, unstyled, size })"
       >
         <slot
           name="indicator"
@@ -79,10 +69,13 @@ defineExpose({
         </slot>
       </Checkbox.Indicator>
       <Checkbox.Indicator
-        :class="indicator({ class: ui?.indicator?.class, unstyled, size })"
+        :class="indicator({ class: ui?.indicator, unstyled, size })"
         indeterminate
       >
-        <slot name="indicator" v-bind="{ checkedState: checkbox.checkedState }">
+        <slot
+          name="indicator"
+          v-bind="{ checkedState: checkbox.checkedState }"
+        >
           <Minus
             class="size-full stroke-black stroke-[.125rem] [&_path]:animate-indeterminate-dash"
           />
@@ -90,7 +83,7 @@ defineExpose({
       </Checkbox.Indicator>
     </Checkbox.Control>
     <Checkbox.Label
-      :class="tvLabel({ class: ui?.label?.class, unstyled, size })"
+      :class="tvLabel({ class: ui?.label, unstyled, size })"
       :as-child="!!label"
     >
       <slot name="label">
