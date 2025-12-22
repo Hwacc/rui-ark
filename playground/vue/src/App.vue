@@ -3,6 +3,7 @@ import BadgeExample from './examples/badge/index.vue'
 import ButtonExample from './examples/buttons/index.vue'
 import CheckboxExample from './examples/checkbox/index.vue'
 import CollapsiableExample from './examples/collapsiable/index.vue'
+import InputExample from './examples/input/index.vue'
 </script>
 
 <template>
@@ -11,5 +12,6 @@ import CollapsiableExample from './examples/collapsiable/index.vue'
     <BadgeExample />
     <CheckboxExample />
     <CollapsiableExample />
+    <InputExample />
   </div>
 </template>
