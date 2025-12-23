@@ -1,5 +1,6 @@
 <script lang="ts">
 export interface InputProps {
+  id?: string
   defaultValue?: string | number
   modelValue?: string | number
   class?: HTMLAttributes['class']
@@ -7,6 +8,7 @@ export interface InputProps {
   clearable?: boolean
   disabled?: boolean
   readonly?: boolean
+  maxlength?: number
   ui?: {
     base?: HTMLAttributes['class']
     inner?: HTMLAttributes['class']
@@ -24,9 +26,10 @@ import { ark } from '@ark-ui/vue/factory'
 import { tvInput } from '@rui-ark/themes/crafts/input'
 import { useVModel } from '@vueuse/core'
 import { CircleX } from 'lucide-vue-next'
-import { computed, ref, useTemplateRef } from 'vue'
+import { computed, ref, useId, useTemplateRef } from 'vue'
 
 const {
+  id,
   class: propsClass,
   size = 'base',
   clearable = false,
@@ -36,6 +39,7 @@ const {
   readonly,
   defaultValue,
   placeholder,
+  maxlength,
   ...props
 } = defineProps<InputProps>()
 const emits = defineEmits<{
@@ -46,6 +50,7 @@ const emits = defineEmits<{
   'change': [e: Event, value: string | number | undefined]
 }>()
 
+const inputId = useId()
 const modelValue = useVModel(props, 'modelValue', emits, {
   passive: true,
   defaultValue,
@@ -60,7 +65,7 @@ const inputState = computed(() => {
   return isFocus.value ? 'focused' : 'blur'
 })
 
-const inputRef = useTemplateRef<{ $el: HTMLInputElement }>('input')
+const inputRef = useTemplateRef<HTMLInputElement | null>('input')
 const rejectBlur = ref(false)
 function onBlur(event: Event) {
   setTimeout(() => {
@@ -82,7 +87,8 @@ const { root, inner, clearable: tvClearable } = tvInput()
     :data-state="inputState"
   >
     <slot name="prefix" />
-    <ark.input
+    <input
+      :id="id ?? inputId"
       ref="input"
       v-model="modelValue"
       :class="inner({ class: [ui?.inner], size, unstyled })"
@@ -90,6 +96,7 @@ const { root, inner, clearable: tvClearable } = tvInput()
       :data-state="inputState"
       :disabled="disabled ? true : undefined"
       :readonly="readonly ? true : undefined"
+      :maxlength="maxlength"
       @focus="
         (event: Event) => {
           isFocus = true;
@@ -99,14 +106,14 @@ const { root, inner, clearable: tvClearable } = tvInput()
       @blur="onBlur"
       @input="(e: Event) => emits('input', e, modelValue)"
       @change="(e: Event) => emits('change', e, modelValue)"
-    />
+    >
     <div
       v-if="inputState === 'focused' && clearable && modelValue"
-      :class="tvClearable({ size, unstyled, class: ui?.clearable?.class })"
+      :class="tvClearable({ size, unstyled, class: ui?.clearable })"
       @mousedown.stop="
         () => {
           rejectBlur = true
-          inputRef?.$el?.focus()
+          inputRef?.focus()
           modelValue = ''
         }
       "

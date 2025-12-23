@@ -3,5 +3,10 @@ import { Input } from '@rui-ark/vue-core/components/input'
 </script>
 
 <template>
-  <Input />
+  <div class="flex gap-4">
+    <Input class="w-50" default-value="Default Value" />
+    <Input class="w-50" placeholder="Placeholder" />
+    <Input class="w-50" placeholder="Placeholder" clearable />
+    <Input class="w-50" :maxlength="10" readonly default-value="1234567890" />
+  </div>
 </template>
