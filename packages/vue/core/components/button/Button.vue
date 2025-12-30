@@ -28,17 +28,18 @@ import { ark } from '@ark-ui/vue/factory'
 import { getNodeCssVar } from '@rui-ark/shared/css'
 import { tvButton } from '@rui-ark/themes/crafts/button'
 import { useRipple } from '@rui-ark/vue-core/composables/useRipple'
+import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { useForwardExpose } from '@rui-ark/vue-core/libs/useForwardExpose'
 import { LoaderCircle } from 'lucide-vue-next'
 import { computed } from 'vue'
 
 const {
   variant = 'default',
-  size = 'base',
+  size,
   class: propsClass,
   disabled,
   checked = false,
-  unstyled = false,
+  unstyled,
   ripple = false,
   loading = false,
   asChild = false,
@@ -75,6 +76,7 @@ function onClick(event: MouseEvent) {
   emits('click', event)
 }
 
+const theme = useTheme({ size, unstyled })
 const { base, loading: tvLoading } = tvButton()
 </script>
 
@@ -88,10 +90,9 @@ const { base, loading: tvLoading } = tvButton()
     "
     :class="base({
       variant: variant as ButtonVariants['variant'],
-      size,
-      unstyled,
       loading,
       class: [ui?.root?.class, propsClass],
+      ...theme,
     })"
     :disabled="disabled"
     :data-variant="variant"
@@ -100,21 +101,17 @@ const { base, loading: tvLoading } = tvButton()
     :data-switch-state="
       variant === 'switch' ? (checked ? 'checked' : 'unchecked') : undefined
     "
-    :data-size="size"
+    :data-size="theme.size"
     :as-child="asChild"
     @click="onClick"
   >
-    <slot
-      v-if="loading"
-      name="loading"
-    >
+    <slot v-if="loading" name="loading">
       <LoaderCircle
         :class="tvLoading({
           variant: variant as ButtonVariants['variant'],
-          size,
-          unstyled,
           loading,
           class: [ui?.loading?.class],
+          ...theme,
         })"
       />
     </slot>

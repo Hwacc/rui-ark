@@ -32,7 +32,8 @@ import {
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { findUp } from '@rui-ark/shared/dom'
 import { tvEditable } from '@rui-ark/themes/crafts/editable'
-import ThemeProvider from '@rui-ark/vue-core/providers/theme/ThemeProvider.vue'
+import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { pick } from 'lodash-es'
 import { computed } from 'vue'
 
@@ -81,6 +82,8 @@ const slotProps = computed<SlotProps>(() => {
     value: editable.value.value,
   }
 })
+
+const theme = useTheme({ size, unstyled })
 const { root, area } = tvEditable()
 
 defineExpose(
@@ -91,22 +94,14 @@ defineExpose(
 <template>
   <EditableRootProvider
     :value="editable"
-    :class="root({ class: [ui?.root, propsClass], unstyled, size })"
+    :class="root({ class: [ui?.root, propsClass], ...theme })"
   >
-    <ThemeProvider :value="{ size, unstyled }">
-      <slot
-        name="prefix"
-        v-bind="slotProps"
-      />
-      <EditableArea
-        :class="area({ class: [ui?.area, propsClass], unstyled, size })"
-      >
+    <ThemeProvider :value="theme">
+      <slot name="prefix" v-bind="slotProps" />
+      <EditableArea :class="area({ class: [ui?.area, propsClass], ...theme })">
         <slot v-bind="slotProps" />
       </EditableArea>
-      <slot
-        name="suffix"
-        v-bind="slotProps"
-      />
+      <slot name="suffix" v-bind="slotProps" />
     </ThemeProvider>
   </EditableRootProvider>
 </template>

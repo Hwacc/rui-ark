@@ -14,11 +14,12 @@ import type { BadgeVariants } from '@rui-ark/themes/crafts/badge'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { tvBadge } from '@rui-ark/themes/crafts/badge'
+import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { useForwardProps } from '@rui-ark/vue-core/libs/useForwardProps'
 
 const {
   variant,
-  size = 'base',
+  size,
   class: propsClass,
   unstyled,
   as = 'div',
@@ -27,13 +28,14 @@ const {
 } = defineProps<BadgeProps>()
 
 const forwarded = useForwardProps(props)
+const theme = useTheme({ size, unstyled })
 </script>
 
 <template>
   <component
     :is="as === 'div' ? ark.div : ark.sup"
     v-bind="forwarded"
-    :class="tvBadge({ variant, size, unstyled, class: propsClass })"
+    :class="tvBadge({ variant, class: propsClass, ...theme })"
     :data-variant="variant"
     :as-child="asChild"
   >

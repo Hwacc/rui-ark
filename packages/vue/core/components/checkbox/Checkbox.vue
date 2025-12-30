@@ -21,15 +21,16 @@ import type { HTMLAttributes } from 'vue'
 import { Checkbox, useCheckbox } from '@ark-ui/vue/checkbox'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvCheckbox } from '@rui-ark/themes/crafts/checkbox'
+import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { Check, Minus } from 'lucide-vue-next'
 import { computed } from 'vue'
 
 const {
   class: propsClass,
   label,
-  unstyled = false,
+  size,
+  unstyled,
   ui,
-  size = 'base',
   ...props
 } = defineProps<CheckboxProps>()
 const emit = defineEmits<CheckboxRootEmits>()
@@ -40,6 +41,7 @@ defineSlots<{
 
 const forwarded = useForwardProps(props)
 const checkbox = useCheckbox(forwarded, emit)
+const theme = useTheme({ size, unstyled })
 const { root, control, indicator, label: tvLabel } = tvCheckbox()
 
 defineExpose({
@@ -53,11 +55,11 @@ defineExpose({
 <template>
   <Checkbox.RootProvider
     :value="checkbox"
-    :class="root({ class: [ui?.root, propsClass], unstyled, size })"
+    :class="root({ class: [ui?.root, propsClass], ...theme })"
   >
-    <Checkbox.Control :class="control({ class: ui?.control, unstyled, size })">
+    <Checkbox.Control :class="control({ class: ui?.control, ...theme })">
       <Checkbox.Indicator
-        :class="indicator({ class: ui?.indicator, unstyled, size })"
+        :class="indicator({ class: ui?.indicator, ...theme })"
       >
         <slot
           name="indicator"
@@ -69,7 +71,7 @@ defineExpose({
         </slot>
       </Checkbox.Indicator>
       <Checkbox.Indicator
-        :class="indicator({ class: ui?.indicator, unstyled, size })"
+        :class="indicator({ class: ui?.indicator, ...theme })"
         indeterminate
       >
         <slot
@@ -83,7 +85,7 @@ defineExpose({
       </Checkbox.Indicator>
     </Checkbox.Control>
     <Checkbox.Label
-      :class="tvLabel({ class: ui?.label, unstyled, size })"
+      :class="tvLabel({ class: ui?.label, ...theme })"
       :as-child="!!label"
     >
       <slot name="label">

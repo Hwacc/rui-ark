@@ -1,0 +1,2 @@
+export type { ThemeContext } from './theme-context'
+export { default as ThemeProvider } from './ThemeProvider.vue'

@@ -16,6 +16,7 @@ export interface ReadMoreProps extends CollapsibleProps {
 import type { CollapsibleProps } from '.'
 import { useForwardProps } from '@ark-ui/vue'
 import { tvReadMore } from '@rui-ark/themes/crafts/collapsible'
+import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '.'
 
 const {
@@ -29,6 +30,8 @@ const {
   ...props
 } = defineProps<ReadMoreProps>()
 const forwarded = useForwardProps(props)
+
+const theme = useTheme({ unstyled })
 const { root, content, trigger } = tvReadMore()
 </script>
 
@@ -36,12 +39,12 @@ const { root, content, trigger } = tvReadMore()
   <Collapsible
     v-slot="{ open }"
     v-bind="forwarded"
-    :class="root({ class: [ui?.root, propsClass], unstyled })"
+    :class="root({ class: [ui?.root, propsClass], ...theme })"
   >
-    <CollapsibleContent :class="content({ class: [ui?.content], unstyled })">
+    <CollapsibleContent :class="content({ class: [ui?.content], ...theme })">
       <slot />
     </CollapsibleContent>
-    <CollapsibleTrigger :class="trigger({ class: [ui?.trigger], unstyled })">
+    <CollapsibleTrigger :class="trigger({ class: [ui?.trigger], ...theme })">
       <div>{{ open ? text.less : text.more }}</div>
     </CollapsibleTrigger>
   </Collapsible>
