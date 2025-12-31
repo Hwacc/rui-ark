@@ -13,10 +13,10 @@ import {
     <Tooltip
       default-open
       :positioning="{
-        placement: 'bottom-start',
+        placement: 'right-start',
       }"
     >
-      <TooltipTrigger>
+      <TooltipTrigger as-child>
         <Button>Hover me</Button>
       </TooltipTrigger>
       <TooltipContent>

@@ -35,17 +35,17 @@ const size = ref<'base' | 'sm' | 'lg'>('base')
       <EditablePreview />
       <template #suffix="{ editing }">
         <EditableControl class="flex items-center gap-2">
-          <EditableEditTrigger v-if="!editing">
+          <EditableEditTrigger v-if="!editing" as-child>
             <Button class="p-0 size-5" variant="text">
               <Pencil class="size-3" />
             </Button>
           </EditableEditTrigger>
-          <EditableSubmitTrigger v-if="editing">
+          <EditableSubmitTrigger v-if="editing" as-child>
             <Button class="p-0 size-5">
               <Check class="size-3" />
             </Button>
           </EditableSubmitTrigger>
-          <EditableCancelTrigger v-if="editing">
+          <EditableCancelTrigger v-if="editing" as-child>
             <Button
               variant="text"
               class="p-0 size-5"

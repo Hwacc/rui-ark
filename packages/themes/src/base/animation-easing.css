@@ -1,17 +1,20 @@
-@theme inline {
+@theme {
   /* tw default duration */
   --tw-duration: var(--motion-duration);
   --default-transition-duration: var(--motion-duration);
 
   /* tailwind animated plugin duration */
   --tw-animate-duration: var(--motion-duration);
+  --default-animation-duration: var(--motion-duration);
 
   /* tailwind default easing */
-  --tw-ease: var(--motion-default-timing);
-  --default-transition-timing-function: var(--motion-default-timing);
+  --tw-ease: var(--motion-timing);
+  --default-transition-timing-function: var(--motion-timing);
+  --default-animation-timing-function: var(--motion-timing);
 
   /* tailwind animated plugin easing */
-  --tw-animate-easing: var(--motion-default-timing);
+  --tw-animate-easing: var(--motion-timing);
+  --default-animation-easing: var(--motion-timing);
 }
 
 @layer components {

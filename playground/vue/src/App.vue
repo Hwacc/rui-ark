@@ -4,6 +4,7 @@ import BadgeExample from './examples/badge/index.vue'
 import ButtonExample from './examples/buttons/index.vue'
 import CheckboxExample from './examples/checkbox/index.vue'
 import CollapsiableExample from './examples/collapsiable/index.vue'
+import DialogExample from './examples/dialog/index.vue'
 import EditableExample from './examples/editable/index.vue'
 import InputExample from './examples/input/index.vue'
 import TooltipExample from './examples/tooltip/index.vue'
@@ -26,6 +27,7 @@ import TooltipExample from './examples/tooltip/index.vue'
       <InputExample />
       <EditableExample />
       <TooltipExample />
+      <DialogExample />
     </div>
   </RUIConfig>
 </template>

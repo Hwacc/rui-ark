@@ -70,6 +70,7 @@ const propsEx = computed<UseEditableProps>(() => {
         })
       ) {
         event.preventDefault()
+        forwarded.value.onInteractOutside?.(event)
       }
     },
   }
