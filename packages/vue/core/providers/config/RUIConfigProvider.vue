@@ -10,11 +10,12 @@ const props = withDefaults(
     theme?: RUIConfigContext['theme']
     tooltip?: RUIConfigContext['tooltip']
     dialog?: RUIConfigContext['dialog']
+    hoverCard?: RUIConfigContext['hover-card']
     iconify?: RUIConfigContext['iconify']
   }>(),
   {
     theme: () => ({
-      mode: 'dark',
+      mode: undefined,
       size: 'base',
       unstyled: false,
       bordered: true,
@@ -25,9 +26,15 @@ const props = withDefaults(
       lazyMount: false,
       unmountOnExit: false,
     }),
+    hoverCard: () => ({
+      openDelay: 0,
+      closeDelay: 300,
+      lazyMount: true,
+      unmountOnExit: true,
+    }),
     dialog: () => ({
-      lazyMount: false,
-      unmountOnExit: false,
+      lazyMount: true,
+      unmountOnExit: true,
     }),
     iconify: () => ({
       addIcons: [],

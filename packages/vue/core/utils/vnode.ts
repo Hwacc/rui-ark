@@ -21,3 +21,12 @@ export function someVNode(
   }
   return false
 }
+
+export function findVNodeByName(
+  nodes: VNode[] | undefined,
+  name: string,
+): VNode | undefined {
+  if (!nodes)
+    return undefined
+  return nodes.find(n => (n.type as any).__name === name)
+}

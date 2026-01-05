@@ -11,7 +11,7 @@ import type {
 } from './dialog-intercept-context'
 import { DialogContext } from '@ark-ui/vue/dialog'
 import { getCssVar } from '@rui-ark/shared/css'
-import { createApp, defineComponent, ref } from 'vue'
+import { createApp, defineComponent, reactive, ref } from 'vue'
 import {
   Dialog,
   DialogBody,
@@ -40,16 +40,17 @@ interface DialogOptions {
   onCancel?: (event: MouseEvent) => void
 }
 
-export function dialog({
-  title,
-  content,
-  footer = true,
-  render,
-  widget,
-  onOpenChange,
-  onOk,
-  onCancel,
-}: DialogOptions) {
+export function dialog(options: DialogOptions) {
+  const {
+    title,
+    content,
+    footer = true,
+    render,
+    widget,
+    onOpenChange,
+    onOk,
+    onCancel,
+  } = reactive(options)
   const open = ref(false)
   const DialogComponent = defineComponent({
     name: 'Dialog',

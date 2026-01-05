@@ -1,9 +1,9 @@
 <script lang="ts">
-export interface TooltipArrowProps extends ArkTooltipArrowProps {
+export interface HoverCardArrowProps extends ArkHoverCardArrowProps {
   class?: HTMLAttributes['class']
-  size?: TooltipVariants['size']
+  size?: HoverCardVariants['size']
   skin?: 'dark' | 'light'
-  bordered?: TooltipVariants['bordered']
+  bordered?: HoverCardVariants['bordered']
   unstyled?: boolean
   ui?: {
     arrow?: HTMLAttributes['class']
@@ -13,12 +13,12 @@ export interface TooltipArrowProps extends ArkTooltipArrowProps {
 </script>
 
 <script setup lang="ts">
-import type { TooltipArrowProps as ArkTooltipArrowProps } from '@ark-ui/vue/tooltip'
-import type { TooltipVariants } from '@rui-ark/themes/crafts/tooltip'
+import type { HoverCardArrowProps as ArkHoverCardArrowProps } from '@ark-ui/vue/hover-card'
+import type { HoverCardVariants } from '@rui-ark/themes/crafts/hover-card'
 import type { HTMLAttributes } from 'vue'
-import { Tooltip } from '@ark-ui/vue/tooltip'
+import { HoverCard } from '@ark-ui/vue/hover-card'
 import { useForwardProps } from '@ark-ui/vue/utils'
-import { tvTooltip } from '@rui-ark/themes/crafts/tooltip'
+import { tvHoverCard } from '@rui-ark/themes/crafts/hover-card'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { computed } from 'vue'
 
@@ -27,11 +27,11 @@ const {
   size,
   unstyled,
   bordered,
-  ui,
   skin,
+  ui,
   ...props
-} = defineProps<TooltipArrowProps>()
-const forwarded = useForwardProps<TooltipArrowProps, { asChild?: boolean }>(
+} = defineProps<HoverCardArrowProps>()
+const forwarded = useForwardProps<HoverCardArrowProps, { asChild?: boolean }>(
   props,
 )
 
@@ -47,11 +47,11 @@ const arrowSize = computed(() => {
       return '.375rem'
   }
 })
-const { arrow, arrowTip } = tvTooltip()
+const { arrow, arrowTip } = tvHoverCard()
 </script>
 
 <template>
-  <Tooltip.Arrow
+  <HoverCard.Arrow
     v-bind="forwarded"
     :class="arrow({ class: [ui?.arrow, propsClass], ...theme })"
     :data-skin="theme.skin"
@@ -60,10 +60,11 @@ const { arrow, arrowTip } = tvTooltip()
     }"
   >
     <slot>
-      <Tooltip.ArrowTip
-        :class="arrowTip({ class: ui?.arrowTip, ...theme })"
+      <HoverCard.ArrowTip
+        :class="arrowTip({ class: [ui?.arrowTip, propsClass], ...theme })"
         :data-bordered="theme.bordered ? 'true' : undefined"
+        :data-skin="theme.skin"
       />
     </slot>
-  </Tooltip.Arrow>
+  </HoverCard.Arrow>
 </template>

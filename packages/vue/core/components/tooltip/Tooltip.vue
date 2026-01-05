@@ -1,5 +1,6 @@
 <script lang="ts">
 export interface TooltipProps extends TooltipRootProps {
+  skin?: 'dark' | 'light'
   size?: TooltipVariants['size']
   bordered?: TooltipVariants['bordered']
   unstyled?: boolean
@@ -20,6 +21,7 @@ const {
   size,
   bordered,
   unstyled,
+  skin,
   lazyMount = undefined,
   unmountOnExit = undefined,
   ...props
@@ -29,7 +31,7 @@ const tooltipConfig = useConfig(
   computed(() => ({ lazyMount, unmountOnExit })),
 )
 const forwarded = useForwardProps(props)
-const theme = useTheme({ size, bordered, unstyled })
+const theme = useTheme({ size, bordered, unstyled, skin })
 </script>
 
 <template>

@@ -13,7 +13,6 @@ import TooltipExample from './examples/tooltip/index.vue'
 <template>
   <RUIConfig
     :theme="{
-      mode: 'dark',
       size: 'base',
       unstyled: false,
       bordered: true,

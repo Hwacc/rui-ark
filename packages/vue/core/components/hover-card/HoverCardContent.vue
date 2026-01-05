@@ -1,10 +1,10 @@
 <script lang="ts">
-export interface TooltipContentProps extends ArkTooltipContentProps {
+export interface HoverCardContentProps extends ArkHoverCardContentProps {
   class?: HTMLAttributes['class']
-  size?: TooltipVariants['size']
-  unstyled?: boolean
+  size?: HoverCardVariants['size']
   skin?: 'dark' | 'light'
-  bordered?: TooltipVariants['bordered']
+  unstyled?: boolean
+  bordered?: boolean
   ui?: {
     positioner?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -14,12 +14,12 @@ export interface TooltipContentProps extends ArkTooltipContentProps {
 </script>
 
 <script setup lang="ts">
-import type { TooltipContentProps as ArkTooltipContentProps } from '@ark-ui/vue/tooltip'
-import type { TooltipVariants } from '@rui-ark/themes/crafts/tooltip'
+import type { HoverCardContentProps as ArkHoverCardContentProps } from '@ark-ui/vue/hover-card'
+import type { HoverCardVariants } from '@rui-ark/themes/crafts/hover-card'
 import type { HTMLAttributes } from 'vue'
-import { TooltipContent, TooltipPositioner } from '@ark-ui/vue/tooltip'
+import { HoverCard } from '@ark-ui/vue/hover-card'
 import { useForwardProps } from '@ark-ui/vue/utils'
-import { tvTooltip } from '@rui-ark/themes/crafts/tooltip'
+import { tvHoverCard } from '@rui-ark/themes/crafts/hover-card'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { findVNodeByName } from '@rui-ark/vue-core/utils/vnode'
 import { useSlots } from 'vue'
@@ -28,30 +28,27 @@ const {
   class: propsClass,
   size,
   unstyled,
-  ui,
   skin,
   bordered,
+  ui,
   ...props
-} = defineProps<TooltipContentProps>()
-const forwarded = useForwardProps<TooltipContentProps, { asChild?: boolean }>(
+} = defineProps<HoverCardContentProps>()
+
+const forwarded = useForwardProps<HoverCardContentProps, { asChild?: boolean }>(
   props,
 )
-
 const slots = useSlots()
 const defaultSlots = slots.default?.()
-const arrowNode = findVNodeByName(defaultSlots, 'TooltipArrow')
+const arrowNode = findVNodeByName(defaultSlots, 'HoverCardArrow')
 const otherNodes = defaultSlots?.filter(n => n !== arrowNode) ?? []
 
 const theme = useTheme({ size, unstyled, skin, bordered })
-const { content, contentInner } = tvTooltip()
+const { content, contentInner } = tvHoverCard()
 </script>
 
 <template>
-  <TooltipPositioner
-    :class="ui?.positioner"
-    :style="{ zIndex: `var(--z-tooltip, --z-index)` }"
-  >
-    <TooltipContent
+  <HoverCard.Positioner :class="ui?.positioner">
+    <HoverCard.Content
       v-bind="forwarded"
       :class="content({ class: [ui?.content, propsClass], ...theme })"
       :data-bordered="theme.bordered ? 'true' : undefined"
@@ -68,6 +65,6 @@ const { content, contentInner } = tvTooltip()
           <component :is="node" />
         </template>
       </div>
-    </TooltipContent>
-  </TooltipPositioner>
+    </HoverCard.Content>
+  </HoverCard.Positioner>
 </template>

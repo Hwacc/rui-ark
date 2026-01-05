@@ -1,9 +1,9 @@
 import type { VariantProps } from '../utils/tv'
 import { tv } from '../utils/tv'
 
-const prefix = 'rui-tooltip'
+const prefix = 'rui-hover-card'
 
-export const tvTooltip = tv(
+export const tvHoverCard = tv(
   {
     slots: {
       content: [
@@ -22,7 +22,7 @@ export const tvTooltip = tv(
         'data-[state=closed]:data-[placement^=right]:motion-translate-x-out-[.25rem]',
       ],
       contentInner: ['relative', 'rounded', 'z-10'],
-      arrow: 'overflow-visible z-0',
+      arrow: 'z-0 overflow-visible',
       arrowTip: '',
     },
     variants: {
@@ -74,4 +74,4 @@ export const tvTooltip = tv(
   },
 )
 
-export type TooltipVariants = VariantProps<typeof tvTooltip>
+export type HoverCardVariants = VariantProps<typeof tvHoverCard>
