@@ -1,12 +1,12 @@
 @layer components {
   .rui-hover-card-content {
     @apply data-bordered:border-h00;
-    @apply dark:data-bordered:border-hff;
+    @apply dark:data-bordered:border-h33;
   }
 
   .rui-hover-card-content-inner {
     @apply bg-hff data-bordered:border-h00 text-h00;
-    @apply dark:bg-h00 dark:data-bordered:border-hff dark:text-hff;
+    @apply dark:bg-h00 dark:text-hff;
   }
 
   .rui-hover-card-arrow {
@@ -18,6 +18,6 @@
       --arrow-background: var(--color-h00);
     }
     @apply bg-hff data-bordered:border-h00;
-    @apply dark:bg-h00 dark:data-bordered:border-hff;
+    @apply dark:bg-h00 dark:data-bordered:border-h33;
   }
 }

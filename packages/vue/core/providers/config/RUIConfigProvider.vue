@@ -11,6 +11,7 @@ const props = withDefaults(
     tooltip?: RUIConfigContext['tooltip']
     dialog?: RUIConfigContext['dialog']
     hoverCard?: RUIConfigContext['hover-card']
+    popover?: RUIConfigContext['popover']
     iconify?: RUIConfigContext['iconify']
   }>(),
   {
@@ -33,6 +34,10 @@ const props = withDefaults(
       unmountOnExit: true,
     }),
     dialog: () => ({
+      lazyMount: true,
+      unmountOnExit: true,
+    }),
+    popover: () => ({
       lazyMount: true,
       unmountOnExit: true,
     }),

@@ -1,9 +1,9 @@
 import type { VariantProps } from '../utils/tv'
 import { tv } from '../utils/tv'
 
-const prefix = 'rui-hover-card'
+const prefix = 'rui-popover'
 
-export const tvHoverCard = tv(
+export const tvPopover = tv(
   {
     slots: {
       content: [
@@ -24,6 +24,7 @@ export const tvHoverCard = tv(
       contentInner: ['relative', 'rounded', 'z-10'],
       arrow: 'z-0 overflow-visible',
       arrowTip: '',
+      close: 'inline-flex w-fit items-center justify-center',
     },
     variants: {
       size: {
@@ -45,18 +46,21 @@ export const tvHoverCard = tv(
         size: 'sm',
         class: {
           contentInner: 'px-1.5 py-0.5 text-xs',
+          close: 'p-1 [&_svg]:size-3',
         },
       },
       {
         size: 'base',
         class: {
           contentInner: 'px-2 py-1 text-sm',
+          close: 'p-1.5 [&_svg]:size-4',
         },
       },
       {
         size: 'lg',
         class: {
           contentInner: 'px-2.5 py-1.5 text-base',
+          close: 'p-2 [&_svg]:size-4.5',
         },
       },
       {
@@ -74,8 +78,9 @@ export const tvHoverCard = tv(
       contentInner: `${prefix}-content-inner`,
       arrow: `${prefix}-arrow`,
       arrowTip: `${prefix}-arrow-tip`,
+      close: `${prefix}-close`,
     },
   },
 )
 
-export type HoverCardVariants = VariantProps<typeof tvHoverCard>
+export type PopoverVariants = VariantProps<typeof tvPopover>

@@ -36,6 +36,10 @@ export const tvTooltip = tv(
         false: '',
       },
     },
+    defaultVariants: {
+      size: 'base',
+      bordered: true,
+    },
     compoundVariants: [
       {
         size: 'sm',

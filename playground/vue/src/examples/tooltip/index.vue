@@ -7,6 +7,13 @@ import {
   HoverCardTrigger,
 } from '@rui-ark/vue-core/components/hover-card'
 import {
+  Popover,
+  PopoverArrow,
+  PopoverClose,
+  PopoverContent,
+  PopoverTrigger,
+} from '@rui-ark/vue-core/components/popover'
+import {
   Tooltip,
   TooltipArrow,
   TooltipContent,
@@ -17,12 +24,11 @@ import {
 <template>
   <div class="flex items-center gap-4">
     <Tooltip
-      default-open
       :positioning="{
         placement: 'bottom-start',
       }"
     >
-      <TooltipTrigger as-child>
+      <TooltipTrigger>
         <Button>Hover Tooltip</Button>
       </TooltipTrigger>
       <TooltipContent>
@@ -31,7 +37,7 @@ import {
       </TooltipContent>
     </Tooltip>
 
-    <HoverCard default-open :positioning="{ placement: 'right' }">
+    <HoverCard :positioning="{ placement: 'top' }">
       <HoverCardTrigger as-child>
         <Button>Hover Card</Button>
       </HoverCardTrigger>
@@ -40,5 +46,31 @@ import {
         content
       </HoverCardContent>
     </HoverCard>
+
+    <Popover skin="dark" :positioning="{ placement: 'bottom-start' }">
+      <PopoverTrigger as-child>
+        <Button>Click Dark Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverArrow />
+        <div class="flex flex-col gap-2">
+          <PopoverClose />
+          Popover content
+        </div>
+      </PopoverContent>
+    </Popover>
+
+    <Popover :positioning="{ placement: 'bottom-start' }">
+      <PopoverTrigger as-child>
+        <Button>Click Light Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverArrow />
+        <div class="flex flex-col gap-2">
+          <PopoverClose />
+          Popover content
+        </div>
+      </PopoverContent>
+    </Popover>
   </div>
 </template>

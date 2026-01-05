@@ -1,6 +1,6 @@
 import type { MaybeRefOrGetter } from 'vue'
 import type { ThemeContext } from '../providers/theme/theme-context'
-import { map, merge } from 'lodash-es'
+import { merge, transform } from 'lodash-es'
 import { computed, toValue } from 'vue'
 import { injectThemeContext } from '../providers/theme/theme-context'
 import { useConfig } from './useConfig'
@@ -19,11 +19,19 @@ export function useTheme(props?: MaybeRefOrGetter<ThemeContext>) {
       },
       themeConfig?.value ?? {},
       contextTheme?.value ?? {},
-      map(propsTheme, (value: any) => {
-        if (value === false)
-          return undefined
-        return value
-      }),
+      transform(
+        propsTheme,
+        (result: any, value: any, key: string) => {
+          if (value === false) {
+            result[key] = undefined
+          }
+          else {
+            result[key] = value
+          }
+          return true
+        },
+        {},
+      ),
     )
   })
 }
