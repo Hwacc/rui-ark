@@ -57,7 +57,10 @@ const {
   ...props
 } = defineProps<DialogProps>()
 const emits = defineEmits<DialogEmits>()
-const ruiConfig = useConfig(computed(() => ({ dialog: { lazyMount, unmountOnExit } })))
+const dialogConfig = useConfig(
+  'dialog',
+  computed(() => ({ lazyMount, unmountOnExit })),
+)
 const forwarded = useForwardProps<DialogRootProps, UseDialogPropsEx>(props)
 
 const triggerFrom = ref<DialogTriggerFrom>(undefined)
@@ -114,8 +117,8 @@ defineExpose({
 <template>
   <Dialog.RootProvider
     :value="dialog"
-    :lazy-mount="ruiConfig?.dialog?.lazyMount ?? lazyMount"
-    :unmount-on-exit="ruiConfig?.dialog?.unmountOnExit ?? unmountOnExit"
+    :lazy-mount="dialogConfig?.lazyMount ?? lazyMount"
+    :unmount-on-exit="dialogConfig?.unmountOnExit ?? unmountOnExit"
   >
     <DialogInterceptProvider :value="dialogInterceptContext">
       <ThemeProvider :value="theme">

@@ -24,15 +24,16 @@ const {
   unmountOnExit = undefined,
   ...props
 } = defineProps<TooltipProps>()
-const ruiConfig = useConfig(
-  computed(() => ({ tooltip: { lazyMount, unmountOnExit } })),
+const tooltipConfig = useConfig(
+  'tooltip',
+  computed(() => ({ lazyMount, unmountOnExit })),
 )
 const forwarded = useForwardProps(props)
 const theme = useTheme({ size, bordered, unstyled })
 </script>
 
 <template>
-  <TooltipRoot v-bind="{ ...ruiConfig.tooltip, ...forwarded }">
+  <TooltipRoot v-bind="{ ...tooltipConfig, ...forwarded }">
     <ThemeProvider :value="theme">
       <slot />
     </ThemeProvider>
