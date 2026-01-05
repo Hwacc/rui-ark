@@ -11,6 +11,7 @@ import {
   PopoverArrow,
   PopoverClose,
   PopoverContent,
+  PopoverIndicator,
   PopoverTrigger,
 } from '@rui-ark/vue-core/components/popover'
 import {
@@ -49,7 +50,7 @@ import {
 
     <Popover skin="dark" :positioning="{ placement: 'bottom-start' }">
       <PopoverTrigger as-child>
-        <Button>Click Dark Popover</Button>
+        <Button>Click Dark Popover <PopoverIndicator /></Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />

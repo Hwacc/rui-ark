@@ -7,6 +7,7 @@ import CollapsiableExample from './examples/collapsiable/index.vue'
 import DialogExample from './examples/dialog/index.vue'
 import EditableExample from './examples/editable/index.vue'
 import InputExample from './examples/input/index.vue'
+import SwitchExample from './examples/switch/index.vue'
 import TooltipExample from './examples/tooltip/index.vue'
 </script>
 
@@ -27,6 +28,7 @@ import TooltipExample from './examples/tooltip/index.vue'
       <EditableExample />
       <TooltipExample />
       <DialogExample />
+      <SwitchExample />
     </div>
   </RUIConfig>
 </template>

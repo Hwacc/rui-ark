@@ -25,6 +25,7 @@ export const tvPopover = tv(
       arrow: 'z-0 overflow-visible',
       arrowTip: '',
       close: 'inline-flex w-fit items-center justify-center',
+      indicator: ['data-[state=open]:motion-rotate-out-180', 'data-[state=closed]:motion-rotate-in-180'],
     },
     variants: {
       size: {
@@ -47,6 +48,7 @@ export const tvPopover = tv(
         class: {
           contentInner: 'px-1.5 py-0.5 text-xs',
           close: 'p-1 [&_svg]:size-3',
+          indicator: 'size-3',
         },
       },
       {
@@ -54,6 +56,7 @@ export const tvPopover = tv(
         class: {
           contentInner: 'px-2 py-1 text-sm',
           close: 'p-1.5 [&_svg]:size-4',
+          indicator: 'size-4',
         },
       },
       {
@@ -61,6 +64,7 @@ export const tvPopover = tv(
         class: {
           contentInner: 'px-2.5 py-1.5 text-base',
           close: 'p-2 [&_svg]:size-4.5',
+          indicator: 'size-4.5',
         },
       },
       {
@@ -79,6 +83,7 @@ export const tvPopover = tv(
       arrow: `${prefix}-arrow`,
       arrowTip: `${prefix}-arrow-tip`,
       close: `${prefix}-close`,
+      indicator: `${prefix}-indicator`,
     },
   },
 )

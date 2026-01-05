@@ -1,0 +1,16 @@
+@layer components {
+  .rui-switch-control {
+    @apply bg-h78
+           data-[state=unchecked]:hover:bg-h78/80
+           data-[state=checked]:bg-rz-green
+           data-[state=checked]:hover:bg-rz-green-light
+           border-transparent;
+    &[data-disabled]{
+      @apply bg-h78 hover:bg-h78;
+      @apply opacity-(--disabled-opacity);
+    }
+  }
+  .rui-switch-thumb {
+    @apply bg-h00;
+  }
+}

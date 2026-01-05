@@ -11,6 +11,7 @@ export {
   default as PopoverContent,
   type PopoverContentProps,
 } from './PopoverContent.vue'
+export { default as PopoverIndicator } from './PopoverIndicator.vue'
 
 export {
   PopoverCloseTrigger,

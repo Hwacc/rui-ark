@@ -16,7 +16,7 @@ const props = withDefaults(
   }>(),
   {
     theme: () => ({
-      mode: undefined,
+      skin: undefined,
       size: 'base',
       unstyled: false,
       bordered: true,
