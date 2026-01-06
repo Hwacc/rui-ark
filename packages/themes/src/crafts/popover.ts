@@ -25,7 +25,10 @@ export const tvPopover = tv(
       arrow: 'z-0 overflow-visible',
       arrowTip: '',
       close: 'inline-flex w-fit items-center justify-center',
-      indicator: ['data-[state=open]:motion-rotate-out-180', 'data-[state=closed]:motion-rotate-in-180'],
+      indicator: [
+        'data-[state=open]:motion-rotate-out-180',
+        'data-[state=closed]:motion-rotate-in-180',
+      ],
     },
     variants: {
       size: {

@@ -73,6 +73,9 @@ importers:
 
   playground/vue:
     dependencies:
+      '@ark-ui/vue':
+        specifier: ^5.30.0
+        version: 5.30.0(vue@3.5.25(typescript@5.9.3))
       '@rui-ark/themes':
         specifier: workspace:*
         version: link:../../packages/themes

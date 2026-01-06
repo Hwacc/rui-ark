@@ -8,10 +8,10 @@ export interface PopoverProps extends PopoverRootProps {
 </script>
 
 <script setup lang="ts">
-import type { PopoverRootProps } from '@ark-ui/vue/popover'
+import type { PopoverRootEmits, PopoverRootProps } from '@ark-ui/vue/popover'
 import type { PopoverVariants } from '@rui-ark/themes/crafts/popover'
 import { Popover } from '@ark-ui/vue/popover'
-import { useForwardProps } from '@ark-ui/vue/utils'
+import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
@@ -26,13 +26,13 @@ const {
   lazyMount = undefined,
   ...props
 } = defineProps<PopoverProps>()
-const forwarded = useForwardProps(props)
+const emit = defineEmits<PopoverRootEmits>()
+const forwarded = useForwardPropsEmits(props, emit)
 const popoverConfig = useConfig(
   'popover',
   computed(() => ({ unmountOnExit, lazyMount })),
 )
 const theme = useTheme({ size, unstyled, bordered, skin })
-console.log('skin', theme.value)
 </script>
 
 <template>

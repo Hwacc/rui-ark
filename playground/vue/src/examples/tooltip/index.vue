@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { PopoverContext } from '@ark-ui/vue/popover'
 import { Button } from '@rui-ark/vue-core/components/button'
 import {
   HoverCard,
@@ -14,12 +15,16 @@ import {
   PopoverIndicator,
   PopoverTrigger,
 } from '@rui-ark/vue-core/components/popover'
+import { Switch } from '@rui-ark/vue-core/components/switch'
 import {
   Tooltip,
   TooltipArrow,
   TooltipContent,
   TooltipTrigger,
 } from '@rui-ark/vue-core/components/tooltip'
+import { ref } from 'vue'
+
+const toggle = ref(true)
 </script>
 
 <template>
@@ -67,10 +72,16 @@ import {
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
-        <div class="flex flex-col gap-2">
-          <PopoverClose />
-          Popover content
-        </div>
+        <PopoverContext v-slot="context">
+          <div class="flex flex-col gap-2">
+            <PopoverClose />
+            Popover content {{ context.open ? 'open' : 'closed' }}
+            <p v-if="toggle">
+              test toggle
+            </p>
+            <Switch v-model:checked="toggle" />
+          </div>
+        </PopoverContext>
       </PopoverContent>
     </Popover>
   </div>

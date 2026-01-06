@@ -11,10 +11,10 @@ export interface HoverCardProps extends HoverCardRootProps {
 </script>
 
 <script setup lang="ts">
-import type { HoverCardRootProps } from '@ark-ui/vue/hover-card'
+import type { HoverCardRootEmits, HoverCardRootProps } from '@ark-ui/vue/hover-card'
 import type { HoverCardVariants } from '@rui-ark/themes/crafts/hover-card'
 import { HoverCardRoot } from '@ark-ui/vue/hover-card'
-import { useForwardProps } from '@ark-ui/vue/utils'
+import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
@@ -29,7 +29,8 @@ const {
   unmountOnExit = undefined,
   ...props
 } = defineProps<HoverCardProps>()
-const forwarded = useForwardProps(props)
+const emit = defineEmits<HoverCardRootEmits>()
+const forwarded = useForwardPropsEmits(props, emit)
 
 const hoverCardConfig = useConfig(
   'hover-card',

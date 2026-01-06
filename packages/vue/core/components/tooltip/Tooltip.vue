@@ -8,10 +8,10 @@ export interface TooltipProps extends TooltipRootProps {
 </script>
 
 <script setup lang="ts">
-import type { TooltipRootProps } from '@ark-ui/vue/tooltip'
+import type { TooltipRootEmits, TooltipRootProps } from '@ark-ui/vue/tooltip'
 import type { TooltipVariants } from '@rui-ark/themes/crafts/tooltip'
 import { TooltipRoot } from '@ark-ui/vue/tooltip'
-import { useForwardProps } from '@ark-ui/vue/utils'
+import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
@@ -26,11 +26,12 @@ const {
   unmountOnExit = undefined,
   ...props
 } = defineProps<TooltipProps>()
+const emit = defineEmits<TooltipRootEmits>()
 const tooltipConfig = useConfig(
   'tooltip',
   computed(() => ({ lazyMount, unmountOnExit })),
 )
-const forwarded = useForwardProps(props)
+const forwarded = useForwardPropsEmits(props, emit)
 const theme = useTheme({ size, bordered, unstyled, skin })
 </script>
 
