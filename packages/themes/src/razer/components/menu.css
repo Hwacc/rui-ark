@@ -19,6 +19,22 @@
   /** bg & text */
   .rui-menu-content,
   .rui-menu-content-inner {
-    @apply bg-h1a text-hcc;
+    @apply bg-h1a;
+  }
+
+  .rui-menu-item {
+    @apply bg-transparent
+    text-hcc
+    data-highlighted:bg-hff/10
+    data-highlighted:text-hff
+    data-[state=open]:bg-hff/10
+    data-[state=open]:text-hff;
+  }
+
+  .rui-menu-item-group-label {
+    @apply text-hff font-rz-bold;
+  }
+  .rui-menu-separator {
+    @apply border-h11;
   }
 }

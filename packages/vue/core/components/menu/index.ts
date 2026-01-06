@@ -10,7 +10,15 @@ export {
   type MenuContentProps,
 } from './MenuContent.vue'
 
-export { MenuContextTrigger, MenuTrigger } from '@ark-ui/vue/menu'
+export { default as MenuItem, type MenuItemProps } from './MenuItem.vue'
+export { default as MenuItemGroup, type MenuItemGroupProps } from './MenuItemGroup.vue'
+export { default as MenuTriggerItem, type MenuTriggerItemProps } from './MenuTriggerItem.vue'
+
+export {
+  MenuContextTrigger,
+  MenuItemText,
+  MenuTrigger,
+} from '@ark-ui/vue/menu'
 
 const MenuArrow = createArrow(ArkMenuArrow, ArkMenuArrowTip)
 export { MenuArrow }

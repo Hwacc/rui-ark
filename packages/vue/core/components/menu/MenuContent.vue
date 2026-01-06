@@ -4,7 +4,6 @@ export interface MenuContentProps extends ArkMenuContentProps {
   size?: MenuVariants['size']
   unstyled?: boolean
   bordered?: MenuVariants['bordered']
-  borderRadius?: number | string
   ui?: {
     positioner?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -33,7 +32,6 @@ const {
   unstyled,
   ui,
   bordered,
-  borderRadius = 2,
   ...props
 } = defineProps<MenuContentProps>()
 const forwarded = useForwardProps<MenuContentProps, { asChild?: boolean }>(
@@ -45,6 +43,8 @@ const defaultSlots = slots.default?.()
 contextVNodeWarning(defaultSlots, 'MenuContext', 'MenuContent')
 const arrowNode = findVNodeByName(defaultSlots, 'MenuArrow')
 const otherNodes = defaultSlots?.filter(n => n !== arrowNode) ?? []
+
+console.log('otherNodes', otherNodes)
 
 const theme = useTheme({ size, unstyled, bordered })
 const { content, contentInner } = tvMenu()
@@ -59,10 +59,6 @@ const { content, contentInner } = tvMenu()
       v-bind="forwarded"
       :class="content({ class: [ui?.content, propsClass], ...theme })"
       :data-bordered="theme.bordered ? 'true' : undefined"
-      :style="{
-        '--border-radius':
-          typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius,
-      }"
     >
       <template v-if="arrowNode">
         <component :is="arrowNode" />
