@@ -21,7 +21,10 @@ import { HoverCard } from '@ark-ui/vue/hover-card'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvHoverCard } from '@rui-ark/themes/crafts/hover-card'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { findVNodeByName } from '@rui-ark/vue-core/utils/vnode'
+import {
+  contextVNodeWarning,
+  findVNodeByName,
+} from '@rui-ark/vue-core/utils/vnode'
 import { useSlots } from 'vue'
 
 const {
@@ -39,6 +42,7 @@ const forwarded = useForwardProps<HoverCardContentProps, { asChild?: boolean }>(
 )
 const slots = useSlots()
 const defaultSlots = slots.default?.()
+contextVNodeWarning(defaultSlots, 'HoverCardContext', 'HoverCardContent')
 const arrowNode = findVNodeByName(defaultSlots, 'HoverCardArrow')
 const otherNodes = defaultSlots?.filter(n => n !== arrowNode) ?? []
 

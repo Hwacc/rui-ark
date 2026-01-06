@@ -1,10 +1,10 @@
 <script lang="ts">
-export interface PopoverContentProps extends ArkPopoverContentProps {
+export interface MenuContentProps extends ArkMenuContentProps {
   class?: HTMLAttributes['class']
-  size?: PopoverVariants['size']
+  size?: MenuVariants['size']
   unstyled?: boolean
-  skin?: 'dark' | 'light'
-  bordered?: PopoverVariants['bordered']
+  bordered?: MenuVariants['bordered']
+  borderRadius?: number | string
   ui?: {
     positioner?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -14,12 +14,12 @@ export interface PopoverContentProps extends ArkPopoverContentProps {
 </script>
 
 <script setup lang="ts">
-import type { PopoverContentProps as ArkPopoverContentProps } from '@ark-ui/vue/popover'
-import type { PopoverVariants } from '@rui-ark/themes/crafts/popover'
+import type { MenuContentProps as ArkMenuContentProps } from '@ark-ui/vue/menu'
+import type { MenuVariants } from '@rui-ark/themes/crafts/menu'
 import type { HTMLAttributes } from 'vue'
-import { Popover } from '@ark-ui/vue/popover'
+import { Menu } from '@ark-ui/vue/menu'
 import { useForwardProps } from '@ark-ui/vue/utils'
-import { tvPopover } from '@rui-ark/themes/crafts/popover'
+import { tvMenu } from '@rui-ark/themes/crafts/menu'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import {
   contextVNodeWarning,
@@ -31,45 +31,47 @@ const {
   class: propsClass,
   size,
   unstyled,
-  bordered,
-  skin,
   ui,
+  bordered,
+  borderRadius = 2,
   ...props
-} = defineProps<PopoverContentProps>()
-const forwarded = useForwardProps(props)
+} = defineProps<MenuContentProps>()
+const forwarded = useForwardProps<MenuContentProps, { asChild?: boolean }>(
+  props,
+)
 
 const slots = useSlots()
 const defaultSlots = slots.default?.()
-contextVNodeWarning(defaultSlots, 'PopoverContext', 'PopoverContent')
-const arrowNode = findVNodeByName(defaultSlots, 'PopoverArrow')
+contextVNodeWarning(defaultSlots, 'MenuContext', 'MenuContent')
+const arrowNode = findVNodeByName(defaultSlots, 'MenuArrow')
 const otherNodes = defaultSlots?.filter(n => n !== arrowNode) ?? []
 
-const theme = useTheme({ size, unstyled, bordered, skin })
-const { content, contentInner } = tvPopover()
+const theme = useTheme({ size, unstyled, bordered })
+const { content, contentInner } = tvMenu()
 </script>
 
 <template>
-  <Popover.Positioner
+  <Menu.Positioner
     :class="ui?.positioner"
-    :style="{ zIndex: `var(--z-popover, --z-index)` }"
+    :style="{ zIndex: `var(--z-dropdown, --z-index)` }"
   >
-    <Popover.Content
+    <Menu.Content
       v-bind="forwarded"
       :class="content({ class: [ui?.content, propsClass], ...theme })"
       :data-bordered="theme.bordered ? 'true' : undefined"
-      :data-skin="theme.skin"
+      :style="{
+        '--border-radius':
+          typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius,
+      }"
     >
       <template v-if="arrowNode">
         <component :is="arrowNode" />
       </template>
-      <div
-        :class="contentInner({ class: [ui?.inner], ...theme })"
-        :data-skin="theme.skin"
-      >
+      <div :class="contentInner({ class: [ui?.inner], ...theme })">
         <template v-for="node in otherNodes" :key="node.key">
           <component :is="node" />
         </template>
       </div>
-    </Popover.Content>
-  </Popover.Positioner>
+    </Menu.Content>
+  </Menu.Positioner>
 </template>

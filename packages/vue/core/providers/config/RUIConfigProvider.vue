@@ -12,6 +12,7 @@ const props = withDefaults(
     dialog?: RUIConfigContext['dialog']
     hoverCard?: RUIConfigContext['hover-card']
     popover?: RUIConfigContext['popover']
+    menu?: RUIConfigContext['menu']
     iconify?: RUIConfigContext['iconify']
   }>(),
   {
@@ -38,6 +39,10 @@ const props = withDefaults(
       unmountOnExit: true,
     }),
     popover: () => ({
+      lazyMount: true,
+      unmountOnExit: true,
+    }),
+    menu: () => ({
       lazyMount: true,
       unmountOnExit: true,
     }),

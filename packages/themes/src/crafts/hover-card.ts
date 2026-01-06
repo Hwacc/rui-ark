@@ -7,7 +7,7 @@ export const tvHoverCard = tv(
   {
     slots: {
       content: [
-        'rounded',
+        'rounded-(--border-radius)',
         'data-[state=open]:motion-opacity-in',
         'data-[state=open]:motion-scale-in-95',
         'data-[state=open]:data-[placement^=bottom]:motion-translate-y-in-[.25rem]',
@@ -21,9 +21,7 @@ export const tvHoverCard = tv(
         'data-[state=closed]:data-[placement^=left]:-motion-translate-x-out-[.25rem]',
         'data-[state=closed]:data-[placement^=right]:motion-translate-x-out-[.25rem]',
       ],
-      contentInner: ['relative', 'rounded', 'z-10'],
-      arrow: 'z-0 overflow-visible',
-      arrowTip: '',
+      contentInner: ['relative', 'rounded-(--border-radius)', 'z-10'],
     },
     variants: {
       size: {
@@ -63,7 +61,6 @@ export const tvHoverCard = tv(
         bordered: true,
         class: {
           content: 'border',
-          arrowTip: 'border',
         },
       },
     ],
@@ -72,8 +69,6 @@ export const tvHoverCard = tv(
     slots: {
       content: `${prefix}-content`,
       contentInner: `${prefix}-content-inner`,
-      arrow: `${prefix}-arrow`,
-      arrowTip: `${prefix}-arrow-tip`,
     },
   },
 )

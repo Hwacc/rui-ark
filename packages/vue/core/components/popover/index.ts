@@ -1,8 +1,10 @@
+import {
+  PopoverArrow as ArkPopoverArrow,
+  PopoverArrowTip as ArkPopoverArrowTip,
+} from '@ark-ui/vue/popover'
+import { createArrow } from '@rui-ark/vue-core/components/arrow/createArrow'
+
 export { default as Popover, type PopoverProps } from './Popover.vue'
-export {
-  default as PopoverArrow,
-  type PopoverArrowProps,
-} from './PopoverArrow.vue'
 export {
   default as PopoverClose,
   type PopoverCloseProps,
@@ -19,3 +21,6 @@ export {
   PopoverTitle,
   PopoverTrigger,
 } from '@ark-ui/vue/popover'
+
+const PopoverArrow = createArrow(ArkPopoverArrow, ArkPopoverArrowTip)
+export { PopoverArrow }

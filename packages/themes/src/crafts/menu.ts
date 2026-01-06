@@ -1,11 +1,12 @@
 import type { VariantProps } from '../utils/tv'
 import { tv } from '../utils/tv'
 
-const prefix = 'rui-popover'
+const prefix = 'rui-menu'
 
-export const tvPopover = tv(
+export const tvMenu = tv(
   {
     slots: {
+      root: '',
       content: [
         'rounded-(--border-radius)',
         'data-[state=open]:motion-opacity-in',
@@ -21,11 +22,13 @@ export const tvPopover = tv(
         'data-[state=closed]:data-[placement^=left]:-motion-translate-x-out-[.25rem]',
         'data-[state=closed]:data-[placement^=right]:motion-translate-x-out-[.25rem]',
       ],
-      contentInner: ['relative', 'rounded-(--border-radius)', 'z-10'],
-      close: 'inline-flex w-fit items-center justify-center',
-      indicator: [
-        'data-[state=open]:motion-rotate-out-180',
-        'data-[state=closed]:motion-rotate-in-180',
+      contentInner: [
+        'relative',
+        'rounded-(--border-radius)',
+        'z-10',
+        'min-w-(--reference-width)',
+        'px-2',
+        'py-1.5',
       ],
     },
     variants: {
@@ -39,35 +42,7 @@ export const tvPopover = tv(
         false: '',
       },
     },
-    defaultVariants: {
-      size: 'base',
-      bordered: true,
-    },
     compoundVariants: [
-      {
-        size: 'sm',
-        class: {
-          contentInner: 'px-1.5 py-0.5 text-xs',
-          close: 'p-1 [&_svg]:size-3',
-          indicator: 'size-3',
-        },
-      },
-      {
-        size: 'base',
-        class: {
-          contentInner: 'px-2 py-1 text-sm',
-          close: 'p-1.5 [&_svg]:size-4',
-          indicator: 'size-4',
-        },
-      },
-      {
-        size: 'lg',
-        class: {
-          contentInner: 'px-2.5 py-1.5 text-base',
-          close: 'p-2 [&_svg]:size-4.5',
-          indicator: 'size-4.5',
-        },
-      },
       {
         bordered: true,
         class: {
@@ -75,15 +50,14 @@ export const tvPopover = tv(
         },
       },
     ],
+    defaultVariants: { size: 'base', bordered: true },
   },
   {
     slots: {
+      root: prefix,
       content: `${prefix}-content`,
       contentInner: `${prefix}-content-inner`,
-      close: `${prefix}-close`,
-      indicator: `${prefix}-indicator`,
     },
   },
 )
-
-export type PopoverVariants = VariantProps<typeof tvPopover>
+export type MenuVariants = VariantProps<typeof tvMenu>

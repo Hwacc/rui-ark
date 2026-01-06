@@ -29,6 +29,10 @@ export interface RUIConfigContext {
     lazyMount?: boolean
     unmountOnExit?: boolean
   }
+  'menu'?: {
+    lazyMount?: boolean
+    unmountOnExit?: boolean
+  }
   'iconify'?: {
     addIcons?: Array<[string, IconifyIcon | null]>
     addCollections?: Array<[IconifyJSON, string | undefined]>

@@ -1,4 +1,5 @@
 import type { VNode, VNodeChild } from 'vue'
+import { camelCase } from 'lodash-es'
 
 export function someVNode(
   children: VNodeChild | VNodeChild[] | undefined,
@@ -28,5 +29,32 @@ export function findVNodeByName(
 ): VNode | undefined {
   if (!nodes)
     return undefined
-  return nodes.find(n => (n.type as any).__name === name)
+  return nodes.find((n) => {
+    const _type = n.type as any
+    if (!_type)
+      return false
+    const _tName = _type.name || _type.__name
+    if (!_tName)
+      return false
+    return camelCase(_tName) === camelCase(name)
+  })
+}
+
+export function contextVNodeWarning(
+  nodes: VNode[] | undefined,
+  contextName: string,
+  componentName?: string,
+) {
+  if (!nodes)
+    return
+  if (nodes.length === 1) {
+    const _targetName = camelCase(contextName)
+    const _srcName = camelCase(
+      (nodes[0].type as any).name || (nodes[0].type as any).__name,
+    )
+    _srcName === _targetName
+    && console.warn(
+      `\<${contextName}\> can not be a direct child of \<${componentName}\>, it may cause unexpected style behavior, consider lift it up or use it closer to where you want to use it `,
+    )
+  }
 }
