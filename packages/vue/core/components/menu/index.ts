@@ -9,6 +9,8 @@ export { default as MenuCheckboxItem, type MenuCheckboxItemProps } from './MenuC
 export { default as MenuContent, type MenuContentProps } from './MenuContent.vue'
 export { default as MenuItem, type MenuItemProps } from './MenuItem.vue'
 export { default as MenuItemGroup, type MenuItemGroupProps } from './MenuItemGroup.vue'
+export { default as MenuRadioItem, type MenuRadioItemProps } from './MenuRadioItem.vue'
+export { default as MenuRadioItemGroup, type MenuRadioItemGroupProps } from './MenuRadioItemGroup.vue'
 export { default as MenuTriggerItem, type MenuTriggerItemProps } from './MenuTriggerItem.vue'
 
 export {

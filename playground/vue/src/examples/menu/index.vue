@@ -9,6 +9,8 @@ import {
   MenuItem,
   MenuItemGroup,
   MenuItemText,
+  MenuRadioItem,
+  MenuRadioItemGroup,
   MenuTrigger,
   MenuTriggerItem,
 } from '@rui-ark/vue-core/components/menu'
@@ -105,6 +107,19 @@ const selected = ref<string | undefined>(vegetables[0])
         >
           <MenuItemText>{{ vegetable }}</MenuItemText>
         </MenuCheckboxItem>
+      </MenuContent>
+    </Menu>
+
+    <Menu>
+      <MenuTrigger as-child>
+        <Button>Menu Radio</Button>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuRadioItemGroup v-model="selected">
+          <MenuRadioItem v-for="vegetable in vegetables" :key="vegetable" :value="vegetable">
+            <MenuItemText>{{ vegetable }}</MenuItemText>
+          </MenuRadioItem>
+        </MenuRadioItemGroup>
       </MenuContent>
     </Menu>
   </div>
