@@ -12,10 +12,10 @@ export interface MenuRadioItemProps extends MenuRadioItemBaseProps {
 </script>
 
 <script setup lang="ts">
-import type { MenuRadioItemBaseProps } from '@ark-ui/vue/menu'
+import type { MenuRadioItemBaseProps, UseMenuItemContext } from '@ark-ui/vue/menu'
 import type { MenuVariants } from '@rui-ark/themes/crafts/menu'
 import type { RadioGroupVariants } from '@rui-ark/themes/crafts/radio-group'
-import type { HTMLAttributes } from 'vue'
+import type { HTMLAttributes, UnwrapRef } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvMenu } from '@rui-ark/themes/crafts/menu'
@@ -23,7 +23,6 @@ import { tvRadioGroup } from '@rui-ark/themes/crafts/radio-group'
 import { cn } from '@rui-ark/themes/utils/cn'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { Check, Circle } from 'lucide-vue-next'
-import MenuRadioItemContext from './MenuRadioItemContext.vue'
 
 const {
   class: propsClass,
@@ -34,8 +33,8 @@ const {
   ...props
 } = defineProps<MenuRadioItemProps>()
 defineSlots<{
-  default: (props: { checked: boolean | undefined }) => any
-  indicator: (props: { checked: boolean | undefined }) => any
+  default: (props: UnwrapRef<UseMenuItemContext>) => any
+  indicator: (props: UnwrapRef<UseMenuItemContext>) => any
 }>()
 const forwarded = useForwardProps(props)
 
@@ -49,8 +48,8 @@ const { itemIndicator } = tvRadioGroup()
     v-bind="forwarded"
     :class="item({ class: [ui?.root, propsClass], ...theme })"
   >
-    <MenuRadioItemContext v-slot="context">
-      <slot name="indicator" :checked="context.checked">
+    <Menu.ItemContext v-slot="context">
+      <slot name="indicator" v-bind="context">
         <Circle
           v-if="variant === 'default'"
           :class="cn(
@@ -72,7 +71,7 @@ const { itemIndicator } = tvRadioGroup()
           :data-variant="variant"
         />
       </slot>
-      <slot name="default" :checked="context.checked" />
-    </MenuRadioItemContext>
+      <slot name="default" v-bind="context" />
+    </Menu.ItemContext>
   </Menu.RadioItem>
 </template>
