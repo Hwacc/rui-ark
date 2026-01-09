@@ -28,7 +28,7 @@ const forwarded = useForwardProps<
   MenuTriggerItemBaseProps
 >(props)
 const theme = useTheme({ size, unstyled })
-const { item, triggerItem, indicator } = tvMenu()
+const { item, triggerItem, triggerItemIndicator } = tvMenu()
 </script>
 
 <template>
@@ -41,7 +41,7 @@ const { item, triggerItem, indicator } = tvMenu()
     <Menu.ItemText>
       <slot />
     </Menu.ItemText>
-    <Menu.Indicator :class="indicator({ ...theme })">
+    <Menu.Indicator :class="triggerItemIndicator({ ...theme })">
       <ChevronRight />
     </Menu.Indicator>
   </Menu.TriggerItem>

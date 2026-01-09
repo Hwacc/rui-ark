@@ -8,6 +8,10 @@
   }
 
   .rui-select-content {
-    @apply bg-h1a text-hcc border-h11 shadow-rui-popper;
+    @apply bg-h1a text-hcc border-h11 shadow-rui-popper webkit-small-scrollbar;
+  }
+
+  .rui-select-item {
+    @apply bg-transparent data-highlighted:bg-h28 text-hbb data-[state=checked]:text-rz-green;
   }
 }

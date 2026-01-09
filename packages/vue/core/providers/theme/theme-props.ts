@@ -1,7 +1,7 @@
 import type { ComputedRef } from 'vue'
 import { createContext } from '@ark-ui/vue/utils'
 
-export interface ThemeContext {
+export interface ThemeProps {
   skin?: 'dark' | 'light'
   size?: 'base' | 'sm' | 'lg'
   unstyled?: boolean
@@ -9,4 +9,4 @@ export interface ThemeContext {
 }
 
 export const [privideThemeContext, injectThemeContext]
-  = createContext<ComputedRef<ThemeContext>>('theme')
+  = createContext<ComputedRef<ThemeProps>>('theme')

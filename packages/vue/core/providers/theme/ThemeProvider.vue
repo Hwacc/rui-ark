@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ThemeContext } from './theme-context'
+import type { ThemeProps } from '.'
 import { computed } from 'vue'
-import { privideThemeContext } from './theme-context'
+import { privideThemeContext } from './theme-props'
 
 const props = defineProps<{
-  value?: ThemeContext
+  value?: ThemeProps
 }>()
 
 privideThemeContext(computed(() => props.value ?? {}))

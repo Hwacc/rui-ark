@@ -12,25 +12,33 @@ import type { SelectVariants } from '@rui-ark/themes/crafts/select'
 import type { HTMLAttributes } from 'vue'
 import { Select } from '@ark-ui/vue/select'
 import { useForwardProps } from '@ark-ui/vue/utils'
+import { tvSelect } from '@rui-ark/themes/crafts/select'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { Check } from 'lucide-vue-next'
 
-const { class: propsClass, size, unstyled, ...props } = defineProps<SelectItemProps>()
+const {
+  class: propsClass,
+  size,
+  unstyled,
+  ...props
+} = defineProps<SelectItemProps>()
 const forwarded = useForwardProps(props)
 const theme = useTheme({ size, unstyled })
+const { item, itemIndicator } = tvSelect()
 </script>
 
 <template>
   <Select.Item
     v-bind="forwarded"
+    :class="item({ class: [propsClass], ...theme })"
   >
-    <Select.ItemIndicator>
-      <slot name="indicator">
-        <Check />
-      </slot>
-    </Select.ItemIndicator>
     <Select.ItemText>
       <slot />
     </Select.ItemText>
+    <slot name="indicator">
+      <Select.ItemIndicator :class="itemIndicator({ ...theme })">
+        <Check />
+      </Select.ItemIndicator>
+    </slot>
   </Select.Item>
 </template>

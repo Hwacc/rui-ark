@@ -40,6 +40,11 @@
   .rui-menu-item-group-label {
     @apply text-hff font-rz-bold;
   }
+
+  .rui-menu-item-group-marker {
+    @apply bg-rz-green;
+  }
+
   .rui-menu-separator {
     @apply border-h11;
   }

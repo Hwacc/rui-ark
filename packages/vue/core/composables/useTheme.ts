@@ -1,15 +1,15 @@
 import type { MaybeRefOrGetter } from 'vue'
-import type { ThemeContext } from '../providers/theme/theme-context'
+import type { ThemeProps } from '../providers/theme/theme-props'
 import { merge, transform } from 'lodash-es'
 import { computed, toValue } from 'vue'
-import { injectThemeContext } from '../providers/theme/theme-context'
+import { injectThemeContext } from '../providers/theme/theme-props'
 import { useConfig } from './useConfig'
 
-export function useTheme(props?: MaybeRefOrGetter<ThemeContext>) {
+export function useTheme(props?: MaybeRefOrGetter<ThemeProps>) {
   const themeConfig = useConfig('theme')
   const propsTheme = toValue(props ?? {})
   const contextTheme = injectThemeContext(computed(() => ({})))
-  return computed<ThemeContext>(() => {
+  return computed<ThemeProps>(() => {
     return merge(
       {
         skin: undefined,

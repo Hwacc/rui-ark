@@ -40,14 +40,14 @@ export const tvMenu = tv(
         'data-[disabled]:opacity-(--disabled-opacity)',
       ],
       itemGroup: '',
-      itemGroupLabel: '',
-      separator: 'p-0',
-      indicator: '',
-      triggerItem: [
-        'justify-between',
-        '[&_[data-part=indicator]]:data-[state=open]:motion-rotate-out-180',
-        '[&_[data-part=indicator]]:data-[state=closed]:motion-rotate-in-180',
+      itemGroupLabel: 'relative',
+      itemGroupMarker: 'absolute left-0 w-0.5',
+      triggerItem: 'justify-between',
+      triggerItemIndicator: [
+        'transition-transform',
+        'data-[state=open]:rotate-180',
       ],
+      radioItem: 'justify-between',
     },
     variants: {
       size: {
@@ -66,9 +66,8 @@ export const tvMenu = tv(
         class: {
           contentInner: 'px-2 py-1',
           item: 'text-sm px-2 py-1',
-          itemGroupLabel: 'text-sm px-2 py-1',
-          separator: 'my-1',
-          indicator: '[&>svg]:size-4',
+          itemGroupLabel: 'text-sm px-2 py-2',
+          itemGroupMarker: 'top-2 bottom-2',
         },
       },
       {
@@ -76,9 +75,8 @@ export const tvMenu = tv(
         class: {
           contentInner: 'px-1.5 py-1',
           item: 'text-xs px-1.5 py-1',
-          itemGroupLabel: 'text-xs px-1.5 py-1',
-          separator: 'my-0.5',
-          indicator: '[&>svg]:size-3',
+          itemGroupLabel: 'text-xs px-1.5 py-1.5',
+          itemGroupMarker: 'top-1.5 bottom-1.5',
         },
       },
       {
@@ -86,9 +84,8 @@ export const tvMenu = tv(
         class: {
           contentInner: 'px-2.5 py-1.5',
           item: 'text-base px-2.5 py-1.5',
-          itemGroupLabel: 'text-base px-2.5 py-1.5',
-          separator: 'my-1.5',
-          indicator: '[&>svg]:size-4.5',
+          itemGroupLabel: 'text-base px-2.5 py-2.5',
+          itemGroupMarker: 'top-2.5 bottom-2.5',
         },
       },
       {
@@ -107,10 +104,11 @@ export const tvMenu = tv(
       contentInner: `${prefix}-content-inner`,
       item: `${prefix}-item`,
       itemGroup: `${prefix}-item-group`,
+      itemGroupMarker: `${prefix}-item-group-marker`,
       itemGroupLabel: `${prefix}-item-group-label`,
-      separator: `${prefix}-separator`,
-      indicator: `${prefix}-indicator`,
       triggerItem: `${prefix}-trigger-item`,
+      triggerItemIndicator: `${prefix}-trigger-item-indicator`,
+      radioItem: `${prefix}-radio-item`,
     },
   },
 )

@@ -7,7 +7,7 @@ export interface MenuItemGroupProps extends MenuItemGroupBaseProps {
   ui?: {
     root?: HTMLAttributes['class']
     label?: HTMLAttributes['class']
-    separator?: HTMLAttributes['class']
+    marker?: HTMLAttributes['class']
   }
 }
 </script>
@@ -32,7 +32,7 @@ const {
 const forwarded = useForwardProps(props)
 const theme = useTheme({ size, unstyled })
 
-const { itemGroup, itemGroupLabel, separator } = tvMenu()
+const { itemGroup, itemGroupMarker, itemGroupLabel } = tvMenu()
 </script>
 
 <template>
@@ -44,9 +44,11 @@ const { itemGroup, itemGroupLabel, separator } = tvMenu()
       <Menu.ItemGroupLabel
         :class="itemGroupLabel({ class: ui?.label, ...theme })"
       >
+        <slot name="marker">
+          <div :class="itemGroupMarker({ class: ui?.marker, ...theme })" />
+        </slot>
         {{ label }}
       </Menu.ItemGroupLabel>
-      <Menu.Separator :class="separator({ class: ui?.separator, ...theme })" />
     </slot>
     <slot />
   </Menu.ItemGroup>
