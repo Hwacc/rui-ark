@@ -60,14 +60,25 @@ const groupCollection = createListCollection({
           :key="type"
           :label="type === 'cat' ? 'Cats' : 'Birds'"
         >
-          <SelectItem
-            v-for="item in group"
-            :key="item.value"
-            :item="item"
-          >
+          <SelectItem v-for="item in group" :key="item.value" :item="item">
             {{ item.label }}
           </SelectItem>
         </SelectItemGroup>
+      </SelectContent>
+    </Select>
+
+    <Select :collection="collection" multiple>
+      <SelectTrigger>
+        <SelectValue placeholder="Select an animal" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem
+          v-for="item in collection.items"
+          :key="item.value"
+          :item="item"
+        >
+          {{ item.label }}
+        </SelectItem>
       </SelectContent>
     </Select>
   </div>
