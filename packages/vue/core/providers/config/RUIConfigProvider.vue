@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { CreateToasterReturn } from '@ark-ui/vue'
 import type { ToasterWrap } from '@rui-ark/vue-core/components/toast'
+import type { ComponentProps } from 'vue-component-type-helpers'
 import type { RUIConfigContext } from './rui-config-context'
 import { addAPIProvider, addCollection, addIcon } from '@iconify/vue'
 import { ToasterManager } from '@rui-ark/vue-core/components/toast'
@@ -17,6 +17,7 @@ const props = withDefaults(
     popover?: RUIConfigContext['popover']
     menu?: RUIConfigContext['menu']
     iconify?: RUIConfigContext['iconify']
+    toasterManager?: ComponentProps<typeof ToasterManager>
   }>(),
   {
     theme: () => ({
@@ -58,6 +59,9 @@ const props = withDefaults(
       addCollections: [],
       addAPIProviders: [],
     }),
+    toasterManager: () => ({
+      disableDefaultToaster: false,
+    }),
   },
 )
 
@@ -82,7 +86,7 @@ provideRUIConfigContext(
 <template>
   <ThemeProvider :value="props.theme">
     <slot />
-    <ToasterManager ref="toasterManager">
+    <ToasterManager ref="toasterManager" v-bind="props.toasterManager">
       <slot name="toaster" />
     </ToasterManager>
   </ThemeProvider>
