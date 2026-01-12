@@ -89,5 +89,10 @@ provideRUIConfigContext(
     <ToasterManager ref="toasterManager" v-bind="props.toasterManager">
       <slot name="toaster" />
     </ToasterManager>
+    <Messager ref="messager">
+      <slot name="message">
+        <Message />
+      </slot>
+    </Messager>
   </ThemeProvider>
 </template>
