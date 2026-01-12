@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { CreateToasterReturn } from '@ark-ui/vue'
+import type { ToasterWrap } from '@rui-ark/vue-core/components/toast'
 import type { RUIConfigContext } from './rui-config-context'
 import { addAPIProvider, addCollection, addIcon } from '@iconify/vue'
-import { Toaster, ToasterStore } from '@rui-ark/vue-core/components/toast'
+import { ToasterManager } from '@rui-ark/vue-core/components/toast'
 import { computed, ref } from 'vue'
 import { ThemeProvider } from '../theme'
 import { provideRUIConfigContext } from './rui-config-context'
@@ -70,15 +71,19 @@ props.iconify?.addAPIProviders?.forEach(([provider, config]) => {
   addAPIProvider(provider, config)
 })
 
-const toasters = ref<{ toasters: { toaster: CreateToasterReturn }[] }>({ toasters: [] })
-provideRUIConfigContext(computed(() => ({ ...props, toasters: toasters.value })))
+const toasterManager = ref<{ toasters: ToasterWrap[] }>({
+  toasters: [],
+})
+provideRUIConfigContext(
+  computed(() => ({ ...props, toasters: toasterManager.value })),
+)
 </script>
 
 <template>
   <ThemeProvider :value="props.theme">
     <slot />
-    <ToasterStore ref="toasters">
+    <ToasterManager ref="toasterManager">
       <slot name="toaster" />
-    </ToasterStore>
+    </ToasterManager>
   </ThemeProvider>
 </template>

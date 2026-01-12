@@ -64,6 +64,9 @@ importers:
       '@zag-js/select':
         specifier: ^1.31.1
         version: 1.32.0
+      '@zag-js/toast':
+        specifier: ^1.32.0
+        version: 1.32.0
       lucide-vue-next:
         specifier: ^0.562.0
         version: 0.562.0(vue@3.5.25(typescript@5.9.3))
@@ -1245,6 +1248,9 @@ packages:
 
   '@zag-js/toast@1.31.1':
     resolution: {integrity: sha512-MueHEei9ol3H6tWBruLxF7yEUpV3vsJ8brTQVRRtPr/6pqBs5kGzfL4YskhQ2tiwO6egay8YrkbaS3xJfpKt4w==}
+
+  '@zag-js/toast@1.32.0':
+    resolution: {integrity: sha512-f5APsASyGmhKlpQ/Wxc4bp9hAUVuXqV6FoHnu7ugfIuYllIaSz/RHgsb4yZvLjweNE24cw4B9Rjj9njOZGPe6Q==}
 
   '@zag-js/toggle-group@1.31.1':
     resolution: {integrity: sha512-Mojc7mex01/gvwXfrUIIThzT7HOktZoMge9rrb6+P7rQX7ulyNXYPjQrW2tay+t54GOJ3xODo9dU7PpRzXeHbw==}
@@ -4490,6 +4496,15 @@ snapshots:
       '@zag-js/dom-query': 1.31.1
       '@zag-js/types': 1.31.1
       '@zag-js/utils': 1.31.1
+
+  '@zag-js/toast@1.32.0':
+    dependencies:
+      '@zag-js/anatomy': 1.32.0
+      '@zag-js/core': 1.32.0
+      '@zag-js/dismissable': 1.32.0
+      '@zag-js/dom-query': 1.32.0
+      '@zag-js/types': 1.32.0
+      '@zag-js/utils': 1.32.0
 
   '@zag-js/toggle-group@1.31.1':
     dependencies:

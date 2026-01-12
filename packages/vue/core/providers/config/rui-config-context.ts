@@ -1,9 +1,9 @@
-import type { CreateToasterReturn } from '@ark-ui/vue'
 import type {
   IconifyIcon,
   IconifyJSON,
   PartialIconifyAPIConfig,
 } from '@iconify/vue'
+import type { ToasterWrap } from '@rui-ark/vue-core/components/toast'
 import type { ComputedRef } from 'vue'
 import type { ThemeProps } from '../theme/theme-props'
 import { createContext } from '@ark-ui/vue'
@@ -44,7 +44,7 @@ export interface RUIConfigContext {
     addAPIProviders?: Array<[string, PartialIconifyAPIConfig]>
   }
   'toasters'?: {
-    toasters: { toaster: CreateToasterReturn }[]
+    toasters: ToasterWrap[]
   }
 }
 

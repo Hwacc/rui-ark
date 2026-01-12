@@ -20,6 +20,7 @@
     "@rui-ark/themes": "workspace:*",
     "@vueuse/core": "^14.1.0",
     "@zag-js/select": "^1.31.1",
+    "@zag-js/toast": "^1.32.0",
     "lucide-vue-next": "^0.562.0",
     "vue": "^3.5.0",
     "vue-component-type-helpers": "^3.2.1"
@@ -31,6 +32,7 @@
     "@rui-ark/themes": "workspace:*",
     "@vueuse/core": "^14.1.0",
     "@zag-js/select": "^1.31.1",
+    "@zag-js/toast": "^1.32.0",
     "lucide-vue-next": "^0.562.0",
     "vue": "^3.5.0",
     "vue-component-type-helpers": "^3.2.1"
