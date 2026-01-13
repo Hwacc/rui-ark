@@ -12,20 +12,27 @@ export interface SelectValueProps {
 import type { SelectVariants } from '@rui-ark/themes/crafts/select'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
-import { Select, useSelectContext } from '@ark-ui/vue/select'
+import { Select } from '@ark-ui/vue/select'
 import { tvSelect } from '@rui-ark/themes/crafts/select'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 
-const { class: propsClass, size, unstyled, asChild, placeholder } = defineProps<SelectValueProps>()
-const context = useSelectContext()
-console.log('context', context.value)
+const {
+  class: propsClass,
+  size,
+  unstyled,
+  asChild,
+  placeholder,
+} = defineProps<SelectValueProps>()
 
 const theme = useTheme({ size, unstyled })
 const { value: tvValue } = tvSelect()
 </script>
 
 <template>
-  <ark.span :class="tvValue({ class: [propsClass], ...theme })" :as-child="asChild">
+  <ark.span
+    :class="tvValue({ class: [propsClass], ...theme })"
+    :as-child="asChild"
+  >
     <slot>
       <Select.ValueText :placeholder="placeholder" />
     </slot>

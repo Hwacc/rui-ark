@@ -3,7 +3,8 @@ import type {
   IconifyJSON,
   PartialIconifyAPIConfig,
 } from '@iconify/vue'
-import type { ToasterWrap } from '@rui-ark/vue-core/components/toast'
+import type { MessagerExpose } from '@rui-ark/vue-core/components/message'
+import type { ToasterManagerExpose } from '@rui-ark/vue-core/components/toast'
 import type { ComputedRef } from 'vue'
 import type { ThemeProps } from '../theme/theme-props'
 import { createContext } from '@ark-ui/vue'
@@ -43,9 +44,8 @@ export interface RUIConfigContext {
     addCollections?: Array<[IconifyJSON, string | undefined]>
     addAPIProviders?: Array<[string, PartialIconifyAPIConfig]>
   }
-  'toasters'?: {
-    toasters: ToasterWrap[]
-  }
+  'toaster-manager'?: ToasterManagerExpose | null
+  'messager'?: MessagerExpose | null
 }
 
 export const [provideRUIConfigContext, injectRUIConfigContext]

@@ -13,8 +13,8 @@ type PropTypes = NativeElements & {
 interface UseToastContext extends ComputedRef<toast.Api<PropTypes>> {}
 
 export interface ToastProps extends ToastRootBaseProps {
+  options: ToastOptions
   class?: HTMLAttributes['class']
-  options?: ToastOptions
   unstyled?: boolean
   size?: ToastVariants['size']
   ui?: {
@@ -66,7 +66,7 @@ const forwarded = useForwardProps(props)
 const toastContext: UseToastContext = useToastContext()
 const slotBindings = computed(() => ({
   options,
-  api: toastContext.value,
+  context: toastContext.value,
 }))
 
 const theme = useTheme({

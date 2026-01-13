@@ -1,69 +1,81 @@
+<script lang="ts">
+export interface RUIConfigProps {
+  theme?: RUIConfigContext['theme']
+  tooltip?: RUIConfigContext['tooltip']
+  dialog?: RUIConfigContext['dialog']
+  hoverCard?: RUIConfigContext['hover-card']
+  popover?: RUIConfigContext['popover']
+  menu?: RUIConfigContext['menu']
+  iconify?: RUIConfigContext['iconify']
+  toasterManager?: ToasterManagerProps
+  messager?: MessagerProps
+}
+</script>
+
 <script setup lang="ts">
-import type { ToasterWrap } from '@rui-ark/vue-core/components/toast'
-import type { ComponentProps } from 'vue-component-type-helpers'
+import type {
+  MessagerExpose,
+  MessagerProps,
+} from '@rui-ark/vue-core/components/message'
+import type {
+  ToasterManagerExpose,
+  ToasterManagerProps,
+} from '@rui-ark/vue-core/components/toast'
 import type { RUIConfigContext } from './rui-config-context'
 import { addAPIProvider, addCollection, addIcon } from '@iconify/vue'
+import { Message, Messager } from '@rui-ark/vue-core/components/message'
 import { ToasterManager } from '@rui-ark/vue-core/components/toast'
-import { computed, ref } from 'vue'
+import { omit } from 'lodash-es'
+import { computed, useTemplateRef } from 'vue'
 import { ThemeProvider } from '../theme'
 import { provideRUIConfigContext } from './rui-config-context'
 
-const props = withDefaults(
-  defineProps<{
-    theme?: RUIConfigContext['theme']
-    tooltip?: RUIConfigContext['tooltip']
-    dialog?: RUIConfigContext['dialog']
-    hoverCard?: RUIConfigContext['hover-card']
-    popover?: RUIConfigContext['popover']
-    menu?: RUIConfigContext['menu']
-    iconify?: RUIConfigContext['iconify']
-    toasterManager?: ComponentProps<typeof ToasterManager>
-  }>(),
-  {
-    theme: () => ({
-      skin: undefined,
-      size: 'base',
-      unstyled: false,
-      bordered: true,
-    }),
-    tooltip: () => ({
-      openDelay: 0,
-      closeDelay: 0,
-      lazyMount: false,
-      unmountOnExit: false,
-    }),
-    hoverCard: () => ({
-      openDelay: 0,
-      closeDelay: 300,
-      lazyMount: true,
-      unmountOnExit: true,
-    }),
-    dialog: () => ({
-      lazyMount: true,
-      unmountOnExit: true,
-    }),
-    popover: () => ({
-      lazyMount: true,
-      unmountOnExit: true,
-    }),
-    menu: () => ({
-      lazyMount: true,
-      unmountOnExit: true,
-    }),
-    select: () => ({
-      lazyMount: false,
-      unmountOnExit: false,
-    }),
-    iconify: () => ({
-      addIcons: [],
-      addCollections: [],
-      addAPIProviders: [],
-    }),
-    toasterManager: () => ({
-      disableDefaultToaster: false,
-    }),
-  },
-)
+const props = withDefaults(defineProps<RUIConfigProps>(), {
+  theme: () => ({
+    skin: undefined,
+    size: 'base',
+    unstyled: false,
+    bordered: true,
+  }),
+  tooltip: () => ({
+    openDelay: 0,
+    closeDelay: 0,
+    lazyMount: false,
+    unmountOnExit: false,
+  }),
+  hoverCard: () => ({
+    openDelay: 0,
+    closeDelay: 300,
+    lazyMount: true,
+    unmountOnExit: true,
+  }),
+  dialog: () => ({
+    lazyMount: true,
+    unmountOnExit: true,
+  }),
+  popover: () => ({
+    lazyMount: true,
+    unmountOnExit: true,
+  }),
+  menu: () => ({
+    lazyMount: true,
+    unmountOnExit: true,
+  }),
+  select: () => ({
+    lazyMount: false,
+    unmountOnExit: false,
+  }),
+  iconify: () => ({
+    addIcons: [],
+    addCollections: [],
+    addAPIProviders: [],
+  }),
+  toasterManager: () => ({
+    disableDefaultToaster: false,
+    defaultToasterProps: {},
+  }),
+  messager: () => ({}),
+})
 
 props.iconify?.addIcons?.forEach(([icon, iconifyIcon]) => {
   addIcon(icon, iconifyIcon)
@@ -75,11 +87,16 @@ props.iconify?.addAPIProviders?.forEach(([provider, config]) => {
   addAPIProvider(provider, config)
 })
 
-const toasterManager = ref<{ toasters: ToasterWrap[] }>({
-  toasters: [],
-})
+const toasterManagerExpose
+  = useTemplateRef<ToasterManagerExpose>('toasterManager')
+const messagerExpose = useTemplateRef<MessagerExpose>('messager')
+
 provideRUIConfigContext(
-  computed(() => ({ ...props, toasters: toasterManager.value })),
+  computed(() => ({
+    ...omit(props, ['toasterManager', 'messager']),
+    toasterManager: toasterManagerExpose.value,
+    messager: messagerExpose.value,
+  })),
 )
 </script>
 
@@ -89,9 +106,9 @@ provideRUIConfigContext(
     <ToasterManager ref="toasterManager" v-bind="props.toasterManager">
       <slot name="toaster" />
     </ToasterManager>
-    <Messager ref="messager">
+    <Messager ref="messager" v-bind="props.messager" v-slot="{ message }">
       <slot name="message">
-        <Message />
+        <Message :options="message" />
       </slot>
     </Messager>
   </ThemeProvider>

@@ -1,9 +1,11 @@
 <script setup lang="tsx">
 import type { ToastOptions } from '@rui-ark/vue-core/components/toast'
 import { Button } from '@rui-ark/vue-core/components/button'
+import { useMessage } from '@rui-ark/vue-core/components/message'
 import { ToastCloseTrigger, useToast } from '@rui-ark/vue-core/components/toast'
 
 const { toast } = useToast()
+const { message } = useMessage()
 
 function handleToast({
   size = 'base',
@@ -66,6 +68,14 @@ function handleToastPromise() {
     },
   )
 }
+
+function handleMessage() {
+  message.create({
+    description: 'This is a message',
+    size: 'base',
+    type: 'info',
+  })
+}
 </script>
 
 <template>
@@ -101,6 +111,10 @@ function handleToastPromise() {
     </Button>
     <Button @click="handleToastCustomRender">
       Toast custom render
+    </Button>
+
+    <Button @click="handleMessage">
+      Message
     </Button>
   </div>
 </template>

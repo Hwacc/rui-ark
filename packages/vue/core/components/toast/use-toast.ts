@@ -1,15 +1,15 @@
 import type * as toast from '@zag-js/toast'
 import type { MaybeRef, VNodeChild } from 'vue'
-import type { ToasterWrap, ToastOptions } from '.'
+import type { ToasterManagerExpose, ToasterWrap, ToastOptions } from '.'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { isEmpty } from 'lodash-es'
 import { computed, unref } from 'vue'
-import { DEFAULT_TOASTER_UNIQUE } from '.'
+import { DEFAULT_TOASTER_ID } from '.'
 
-function useToast(toastersProvider?: MaybeRef<ToasterWrap[]>) {
-  const config = useConfig('toasters')
+function useToast(manager?: MaybeRef<ToasterManagerExpose>) {
+  const toasterManager = useConfig('toaster-manager')
   const toasters = computed(
-    () => unref(toastersProvider) ?? config.value?.toasters ?? [],
+    () => unref(manager)?.toasters ?? toasterManager.value?.toasters ?? [],
   )
 
   function findToaster(
@@ -28,7 +28,7 @@ function useToast(toastersProvider?: MaybeRef<ToasterWrap[]>) {
       if (options?.placement) {
         return t.toaster.attrs.placement === options.placement
       }
-      return t.uniqueId === DEFAULT_TOASTER_UNIQUE
+      return t.toasterId === DEFAULT_TOASTER_ID
     })
   }
 

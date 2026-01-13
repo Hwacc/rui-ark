@@ -1,13 +1,19 @@
+<script lang="ts">
+export interface ToasterManagerProps {
+  disableDefaultToaster?: boolean
+  defaultToasterProps?: ToasterProps
+}
+</script>
+
 <script setup lang="ts">
 import type { VNode } from 'vue'
-import type { ToasterWrap } from '.'
+import type { ToasterProps, ToasterWrap } from '.'
 import { isEmpty, isNil } from 'lodash-es'
 import { computed, ref, useSlots } from 'vue'
-import { DEFAULT_TOASTER_UNIQUE, Toast, Toaster } from '.'
+import { DEFAULT_TOASTER_ID, Toast, Toaster } from '.'
 
-const { disableDefaultToaster = false } = defineProps<{
-  disableDefaultToaster?: boolean
-}>()
+const { disableDefaultToaster = false, defaultToasterProps }
+  = defineProps<ToasterManagerProps>()
 
 const slots = useSlots()
 let defaultSlots = slots.default?.()
@@ -48,7 +54,8 @@ defineExpose({
     ref="defaultToaster"
     placement="bottom-end"
     overlap
-    :unique-id="DEFAULT_TOASTER_UNIQUE"
+    v-bind="defaultToasterProps"
+    :toaster-id="DEFAULT_TOASTER_ID"
   >
     <Toast :options="toast" />
   </Toaster>

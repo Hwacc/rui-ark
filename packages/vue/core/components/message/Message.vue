@@ -3,7 +3,14 @@
  * deal with ts-2742
  */
 import type * as toast from '@zag-js/toast'
-import type { ComputedRef, CSSProperties, HTMLAttributes, NativeElements, ReservedProps, UnwrapRef } from 'vue'
+import type {
+  ComputedRef,
+  CSSProperties,
+  HTMLAttributes,
+  NativeElements,
+  ReservedProps,
+  UnwrapRef,
+} from 'vue'
 import { tvMessage } from '@rui-ark/themes/crafts/message'
 
 type Attrs<T> = T & ReservedProps
@@ -14,10 +21,10 @@ type PropTypes = NativeElements & {
 interface UseToastContext extends ComputedRef<toast.Api<PropTypes>> {}
 
 export interface MessageProps extends ToastRootBaseProps {
+  options: MessageOptions
   class?: HTMLAttributes['class']
-  options?: MessageOptions
   unstyled?: boolean
-  size?: ToastVariants['size']
+  size?: MessageVariants['size']
   ui?: {
     root?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -30,7 +37,7 @@ export interface MessageProps extends ToastRootBaseProps {
 
 <script setup lang="ts">
 import type { ToastRootBaseProps } from '@ark-ui/vue/toast'
-import type { ToastVariants } from '@rui-ark/themes/crafts/toast'
+import type { MessageVariants } from '@rui-ark/themes/crafts/message'
 import type { MessageOptions } from '.'
 import { useForwardProps } from '@ark-ui/vue'
 import { ark } from '@ark-ui/vue/factory'
@@ -64,7 +71,7 @@ const forwarded = useForwardProps(props)
 const messageContext: UseToastContext = useToastContext()
 const slotBindings = computed(() => ({
   options,
-  api: messageContext.value,
+  context: messageContext.value,
 }))
 
 const theme = useTheme({
@@ -141,7 +148,7 @@ const iconVNode = computed(() => {
             </Toast.Description>
           </template>
         </slot>
-        <slot name="close" v-bind="slotBindings">
+        <slot v-if="options?.showClose" name="close" v-bind="slotBindings">
           <Toast.CloseTrigger>
             <X
               v-if="messageContext.type !== 'loading'"
