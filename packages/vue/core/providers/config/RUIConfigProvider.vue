@@ -106,7 +106,12 @@ provideRUIConfigContext(
     <ToasterManager ref="toasterManager" v-bind="props.toasterManager">
       <slot name="toaster" />
     </ToasterManager>
-    <Messager ref="messager" v-bind="props.messager" v-slot="{ message }">
+    <Messager
+      ref="messager"
+      v-slot="{ message }"
+      overlap
+      v-bind="props.messager"
+    >
       <slot name="message">
         <Message :options="message" />
       </slot>

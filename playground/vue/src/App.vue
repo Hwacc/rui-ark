@@ -10,6 +10,7 @@ import EditableExample from './examples/editable/index.vue'
 import InputExample from './examples/input/index.vue'
 import MenuExample from './examples/menu/index.vue'
 import SelectExample from './examples/select/index.vue'
+import SliderExample from './examples/slider/index.vue'
 import SwitchExample from './examples/switch/index.vue'
 import ToastExample from './examples/toast/index.vue'
 import TooltipExample from './examples/tooltip/index.vue'
@@ -36,6 +37,7 @@ import TooltipExample from './examples/tooltip/index.vue'
       <MenuExample />
       <SelectExample />
       <ToastExample />
+      <SliderExample />
     </div>
 
     <template #toaster>
