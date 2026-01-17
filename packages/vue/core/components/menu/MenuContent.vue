@@ -22,6 +22,7 @@ import { tvMenu } from '@rui-ark/themes/crafts/menu'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import {
   checkContextVNodePosition,
+  excludeVNodesByName,
   findVNodeByName,
 } from '@rui-ark/vue-core/utils/vnode'
 import { computed, useSlots } from 'vue'
@@ -42,7 +43,7 @@ const slots = useSlots()
 const defaultSlots = computed(() => slots.default?.())
 checkContextVNodePosition(defaultSlots.value, 'MenuContext', 'MenuContent')
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'MenuArrow'))
-const otherNodes = computed(() => defaultSlots.value?.filter(n => n !== arrowNode.value) ?? [])
+const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'MenuArrow'))
 
 const theme = useTheme({ size, unstyled, bordered })
 const { content, contentInner } = tvMenu()

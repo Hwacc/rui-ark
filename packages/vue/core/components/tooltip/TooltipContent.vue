@@ -3,7 +3,7 @@ export interface TooltipContentProps extends ArkTooltipContentProps {
   class?: HTMLAttributes['class']
   size?: TooltipVariants['size']
   unstyled?: boolean
-  skin?: 'dark' | 'light'
+  skin?: Skin
   bordered?: TooltipVariants['bordered']
   ui?: {
     positioner?: HTMLAttributes['class']
@@ -16,6 +16,7 @@ export interface TooltipContentProps extends ArkTooltipContentProps {
 <script setup lang="ts">
 import type { TooltipContentProps as ArkTooltipContentProps } from '@ark-ui/vue/tooltip'
 import type { TooltipVariants } from '@rui-ark/themes/crafts/tooltip'
+import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
 import type { HTMLAttributes } from 'vue'
 import { TooltipContent, TooltipPositioner } from '@ark-ui/vue/tooltip'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -23,6 +24,7 @@ import { tvTooltip } from '@rui-ark/themes/crafts/tooltip'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import {
   checkContextVNodePosition,
+  excludeVNodesByName,
   findVNodeByName,
 } from '@rui-ark/vue-core/utils/vnode'
 import { computed, useSlots } from 'vue'
@@ -44,7 +46,7 @@ const slots = useSlots()
 const defaultSlots = computed(() => slots.default?.())
 checkContextVNodePosition(defaultSlots.value, 'TooltipContext', 'TooltipContent')
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'TooltipArrow'))
-const otherNodes = computed(() => defaultSlots.value?.filter(n => n !== arrowNode.value) ?? [])
+const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'TooltipArrow'))
 
 const theme = useTheme({ size, unstyled, skin, bordered })
 const { content, contentInner } = tvTooltip()

@@ -3,13 +3,14 @@ export interface PopoverCloseProps {
   class?: HTMLAttributes['class']
   size?: PopoverVariants['size']
   unstyled?: boolean
-  skin?: 'dark' | 'light'
+  skin?: Skin
   asChild?: boolean
 }
 </script>
 
 <script lang="ts" setup>
 import type { PopoverVariants } from '@rui-ark/themes/crafts/popover'
+import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { PopoverCloseTrigger } from '@ark-ui/vue/popover'

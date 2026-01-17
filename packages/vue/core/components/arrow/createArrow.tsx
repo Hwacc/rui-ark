@@ -1,3 +1,4 @@
+import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import { cn } from '@rui-ark/themes/utils/cn'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
@@ -6,7 +7,7 @@ import { computed, defineComponent } from 'vue'
 export interface ArrowProps {
   class?: HTMLAttributes['class']
   size?: 'sm' | 'base' | 'lg'
-  skin?: 'dark' | 'light'
+  skin?: Skin
   bordered?: boolean
   ui?: {
     arrow?: HTMLAttributes['class']

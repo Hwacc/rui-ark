@@ -22,12 +22,7 @@ export function useTheme(props?: MaybeRefOrGetter<ThemeProps>) {
       transform(
         propsTheme,
         (result: any, value: any, key: string) => {
-          if (value === false) {
-            result[key] = undefined
-          }
-          else {
-            result[key] = value
-          }
+          result[key] = value === false ? undefined : value
           return true
         },
         {},

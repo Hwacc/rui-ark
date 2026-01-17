@@ -3,13 +3,14 @@ export interface PopoverProps extends PopoverRootProps {
   size?: PopoverVariants['size']
   unstyled?: boolean
   bordered?: boolean
-  skin?: 'dark' | 'light'
+  skin?: Skin
 }
 </script>
 
 <script setup lang="ts">
 import type { PopoverRootEmits, PopoverRootProps } from '@ark-ui/vue/popover'
 import type { PopoverVariants } from '@rui-ark/themes/crafts/popover'
+import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
 import { Popover } from '@ark-ui/vue/popover'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'

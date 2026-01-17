@@ -1,6 +1,6 @@
 <script lang="ts">
 export interface TooltipProps extends TooltipRootProps {
-  skin?: 'dark' | 'light'
+  skin?: Skin
   size?: TooltipVariants['size']
   bordered?: TooltipVariants['bordered']
   unstyled?: boolean
@@ -10,6 +10,7 @@ export interface TooltipProps extends TooltipRootProps {
 <script setup lang="ts">
 import type { TooltipRootEmits, TooltipRootProps } from '@ark-ui/vue/tooltip'
 import type { TooltipVariants } from '@rui-ark/themes/crafts/tooltip'
+import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
 import { TooltipRoot } from '@ark-ui/vue/tooltip'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'

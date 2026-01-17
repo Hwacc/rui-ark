@@ -3,7 +3,7 @@ export interface PopoverContentProps extends ArkPopoverContentProps {
   class?: HTMLAttributes['class']
   size?: PopoverVariants['size']
   unstyled?: boolean
-  skin?: 'dark' | 'light'
+  skin?: Skin
   bordered?: PopoverVariants['bordered']
   ui?: {
     positioner?: HTMLAttributes['class']
@@ -16,6 +16,7 @@ export interface PopoverContentProps extends ArkPopoverContentProps {
 <script setup lang="ts">
 import type { PopoverContentProps as ArkPopoverContentProps } from '@ark-ui/vue/popover'
 import type { PopoverVariants } from '@rui-ark/themes/crafts/popover'
+import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
 import type { HTMLAttributes } from 'vue'
 import { Popover } from '@ark-ui/vue/popover'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -23,6 +24,7 @@ import { tvPopover } from '@rui-ark/themes/crafts/popover'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import {
   checkContextVNodePosition,
+  excludeVNodesByName,
   findVNodeByName,
 } from '@rui-ark/vue-core/utils/vnode'
 import { computed, useSlots } from 'vue'
@@ -42,7 +44,7 @@ const slots = useSlots()
 const defaultSlots = computed(() => slots.default?.())
 checkContextVNodePosition(defaultSlots.value, 'PopoverContext', 'PopoverContent')
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'PopoverArrow'))
-const otherNodes = computed(() => defaultSlots.value?.filter(n => n !== arrowNode.value) ?? [])
+const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'PopoverArrow'))
 
 const theme = useTheme({ size, unstyled, bordered, skin })
 const { content, contentInner } = tvPopover()

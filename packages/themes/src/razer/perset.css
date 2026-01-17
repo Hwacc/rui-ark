@@ -1,6 +1,7 @@
 @import '../base/index.css';
 
 @custom-variant dark (&:where([data-skin=dark], [data-skin=dark] *));
+@custom-variant razer (&:where([data-skin=razer], [data-skin=razer] *));
 @custom-variant success (&:where([data-type=success], [data-type=success] *));
 @custom-variant error (&:where([data-type=error], [data-type=error] *));
 @custom-variant warning (&:where([data-type=warning], [data-type=warning] *));

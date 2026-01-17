@@ -1,12 +1,19 @@
 @layer components {
   *:where([data-part='arrow']) {
     --arrow-background: var(--color-hff);
+
     &[data-skin='dark'] {
       --arrow-background: var(--color-h00);
     }
+
+    &[data-skin='razer'] {
+      --arrow-background: var(--color-rz-green);
+    }
   }
+
   *:where([data-part='arrow-tip']) {
     @apply bg-hff data-bordered:border-h00;
     @apply dark:bg-h00 dark:data-bordered:border-h33;
+    @apply razer:bg-rz-green razer:data-bordered:border-h00;
   }
 }

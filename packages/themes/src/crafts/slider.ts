@@ -11,6 +11,7 @@ export const tvSlider = tv(
       track: '',
       range: '',
       thumb: 'rounded-full data-dragging:scale-120 transition-transform',
+      marker: '',
     },
     variants: {
       size: {
@@ -64,6 +65,7 @@ export const tvSlider = tv(
       track: `${prefix}-track`,
       range: `${prefix}-range`,
       thumb: `${prefix}-thumb`,
+      marker: `${prefix}-marker`,
     },
   },
 )

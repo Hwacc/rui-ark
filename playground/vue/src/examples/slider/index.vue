@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Slider, SliderThumb, SliderTooltipThumb } from '@rui-ark/vue-core/components/slider'
+import { Slider, SliderMarker, SliderMarkerGroup, SliderThumb, SliderTooltipThumb } from '@rui-ark/vue-core/components/slider'
 import { ref } from 'vue'
 
 const value = ref([0])
@@ -16,7 +16,18 @@ const value = ref([0])
       <SliderThumb :index="1" />
     </Slider>
     <Slider v-model="value" class="w-75" size="lg">
-      <SliderThumb :index="0" />
+      <SliderTooltipThumb
+        :index="0"
+        :open="() => true"
+        skin="razer"
+      />
+      <template #suffix>
+        <SliderMarkerGroup>
+          <SliderMarker :value="10">
+            10
+          </SliderMarker>
+        </SliderMarkerGroup>
+      </template>
     </Slider>
   </div>
 </template>

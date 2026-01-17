@@ -1,5 +1,6 @@
 import type { VNode, VNodeChild } from 'vue'
-import { camelCase } from 'lodash-es'
+import { camelCase, isEmpty } from 'lodash-es'
+import { isVNode } from 'vue'
 
 export function someVNode(
   children: VNodeChild | VNodeChild[] | undefined,
@@ -27,17 +28,63 @@ export function findVNodeByName(
   nodes: VNode[] | undefined,
   name: string,
 ): VNode | undefined {
-  if (!nodes)
+  const target = camelCase(name)
+  if (isEmpty(nodes))
     return undefined
-  return nodes.find((n) => {
-    const _type = n.type as any
-    if (!_type)
-      return false
-    const _tName = _type.name || _type.__name
-    if (!_tName)
-      return false
-    return camelCase(_tName) === camelCase(name)
-  })
+  for (const n of nodes!) {
+    if (!n || !n.type)
+      continue
+    if (typeof n.type === 'symbol' && Array.isArray(n.children)) {
+      // is a slot node
+      return findVNodeByName(n.children as VNode[], name)
+    }
+    const tName = (n.type as any).name || (n.type as any).__name
+    if (!tName)
+      continue
+    if (camelCase(tName) === target)
+      return n
+  }
+  return undefined
+}
+
+export function excludeVNodesByName(nodes: VNode[] | undefined, name: string): VNode[] {
+  const target = camelCase(name)
+  const result: VNode[] = []
+  if (isEmpty(nodes))
+    return []
+  for (const n of nodes!) {
+    if (!n || !n.type)
+      continue
+    if (typeof n.type === 'symbol' && Array.isArray(n.children)) {
+      // is a slot node
+      result.push(...excludeVNodesByName(n.children as VNode[], name))
+      continue
+    }
+    const tName = (n.type as any).name || (n.type as any).__name
+    if (camelCase(tName) !== target)
+      result.push(n)
+  }
+  return result
+}
+
+export function hasChildVNodeByName(node: VNode, name: string): boolean {
+  if (isEmpty(node.children))
+    return false
+  const target = camelCase(name)
+  if (Array.isArray(node.children)) {
+    for (const n of node.children) {
+      if (!isVNode(n))
+        continue
+      if (typeof n.type === 'symbol' && Array.isArray(n.children)) {
+        // is a slot node
+        return hasChildVNodeByName(n, name)
+      }
+      const tName = (n.type as any).name || (n.type as any).__name
+      if (camelCase(tName) === target)
+        return true
+    }
+  }
+  return false
 }
 
 export function checkContextVNodePosition(

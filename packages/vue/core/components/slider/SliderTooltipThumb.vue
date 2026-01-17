@@ -1,15 +1,24 @@
 <script lang="ts">
-export interface SliderTooltipThumbProps extends SliderThumbBaseProps {
+export interface SliderTooltipThumbProps extends SliderThumbBaseProps, Omit<TooltipRootProps, 'open'> {
   class?: HTMLAttributes['class']
   size?: SliderVariants['size']
   unstyled?: boolean
+  skin?: Skin
+  open?: (context: UnwrapRef<UseSliderContext>) => boolean
+  widget?: {
+    tooltipContent?: ComponentProps<typeof TooltipContent>
+    tooltipArrow?: ComponentProps<typeof TooltipArrow>
+  }
 }
 </script>
 
 <script setup lang="ts">
-import type { SliderThumbBaseProps } from '@ark-ui/vue/slider'
+import type { SliderThumbBaseProps, UseSliderContext } from '@ark-ui/vue/slider'
+import type { TooltipRootProps } from '@ark-ui/vue/tooltip'
 import type { SliderVariants } from '@rui-ark/themes/crafts/slider'
-import type { HTMLAttributes } from 'vue'
+import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
+import type { HTMLAttributes, UnwrapRef } from 'vue'
+import type { ComponentProps } from 'vue-component-type-helpers'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { Slider, useSliderContext } from '@ark-ui/vue/slider'
 import { TooltipRootProvider, useTooltip } from '@ark-ui/vue/tooltip'
@@ -20,38 +29,51 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@rui-ark/vue-core/components/tooltip'
+import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
+import { merge } from 'lodash-es'
 import { computed, ref, watch } from 'vue'
 
 const {
   class: propsClass,
   size,
   unstyled,
+  index, // thumb prop
+  name, // thumb prop
+  open, // tooltip prop
+  widget,
+  skin,
   ...props
 } = defineProps<SliderTooltipThumbProps>()
-const forwarded = useForwardProps(props)
+const tooltipForwarded = useForwardProps(props)
 const context = useSliderContext()
 const { forwardRef, currentElement } = useForwardExpose()
 
-// TODO: mark boundary type
 const boundary = ref()
 watch(currentElement, (val) => {
   boundary.value
     = findParentElementByScope(val, 'slider', 'root') ?? 'clipping-ancestors'
 })
 
-// TODO: make custom tooltip configs
+const configs = useConfig('tooltip')
 const tooltip = useTooltip(
-  computed(() => ({
-    open: context.value.dragging,
-    positioning: {
-      boundary: boundary.value,
-      overflowPadding: 0,
-      placement: 'top',
-      shift: 0,
-      flip: false,
-    },
-  })),
+  computed(() => (
+    merge(
+      {
+        open: open?.(context.value) ?? context.value.dragging,
+        positioning: {
+          boundary: boundary.value,
+          overflowPadding: 0,
+          placement: 'top',
+          shift: 0,
+          flip: false,
+        },
+      },
+      configs.value,
+      tooltipForwarded.value,
+    )
+  )),
 )
 
 watch(
@@ -62,27 +84,32 @@ watch(
   },
 )
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme({ size, unstyled, skin })
 const { thumb: tvThumb } = tvSlider()
 </script>
 
 <template>
-  <Slider.Context v-slot="{ getThumbValue }">
+  <ThemeProvider :value="theme">
     <TooltipRootProvider :value="tooltip">
       <TooltipTrigger as-child>
         <Slider.Thumb
-          :ref="forwardRef"
-          v-bind="forwarded"
+          :ref="(el) => el && forwardRef(el)"
           :class="tvThumb({ class: [propsClass], ...theme })"
           :data-size="theme.size"
+          :index="index"
+          :name="name"
         >
           <Slider.HiddenInput />
         </Slider.Thumb>
       </TooltipTrigger>
-      <TooltipContent>
-        <TooltipArrow />
-        {{ getThumbValue(forwarded.index) }}
+      <TooltipContent v-bind="widget?.tooltipContent">
+        <slot name="arrow">
+          <TooltipArrow v-bind="widget?.tooltipArrow" />
+        </slot>
+        <slot name="default">
+          <Slider.ValueText />
+        </slot>
       </TooltipContent>
     </TooltipRootProvider>
-  </Slider.Context>
+  </ThemeProvider>
 </template>
