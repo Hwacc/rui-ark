@@ -1,8 +1,6 @@
 <script lang="ts">
-export interface DialogHeaderProps {
+export interface DialogHeaderProps extends ThemeProps {
   class?: HTMLAttributes['class']
-  unstyled?: boolean
-  size?: DialogVariants['size']
   ui?: {
     root?: HTMLAttributes['class']
     title?: HTMLAttributes['class']
@@ -12,20 +10,20 @@ export interface DialogHeaderProps {
 </script>
 
 <script setup lang="ts">
-import type { DialogVariants } from '@rui-ark/themes/crafts/dialog'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Dialog } from '@ark-ui/vue/dialog'
 import { ark } from '@ark-ui/vue/factory'
 import { tvDialog } from '@rui-ark/themes/crafts/dialog'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { X } from 'lucide-vue-next'
-import { useId } from 'vue'
+import { computed, useId } from 'vue'
 import { DialogCloseTrigger } from '.'
 
 const { class: propsClass, unstyled, size } = defineProps<DialogHeaderProps>()
 
 const id = useId()
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { header, title, close } = tvDialog()
 </script>
 

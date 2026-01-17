@@ -1,8 +1,6 @@
 <script lang="ts">
-export interface MenuItemGroupProps extends MenuItemGroupBaseProps {
+export interface MenuItemGroupProps extends MenuItemGroupBaseProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: MenuVariants['size']
-  unstyled?: boolean
   label?: string
   ui?: {
     root?: HTMLAttributes['class']
@@ -14,12 +12,13 @@ export interface MenuItemGroupProps extends MenuItemGroupBaseProps {
 
 <script setup lang="ts">
 import type { MenuItemGroupBaseProps } from '@ark-ui/vue/menu'
-import type { MenuVariants } from '@rui-ark/themes/crafts/menu'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvMenu } from '@rui-ark/themes/crafts/menu'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -30,7 +29,7 @@ const {
   ...props
 } = defineProps<MenuItemGroupProps>()
 const forwarded = useForwardProps(props)
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 
 const { itemGroup, itemGroupLabel } = tvMenu()
 </script>

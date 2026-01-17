@@ -1,19 +1,18 @@
 <script lang="ts">
-export interface MessagerProps extends Omit<ToastStoreProps, 'placement'> {
-  unstyled?: boolean
-  size?: ToastVariants['size']
+export interface MessagerProps extends Omit<ToastStoreProps, 'placement'>, ThemeProps {
   showClose?: boolean
 }
 </script>
 
 <script setup lang="ts">
 import type { ToastStoreProps } from '@ark-ui/vue/toast'
-import type { ToastVariants } from '@rui-ark/themes/crafts/toast'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { MessageOptions } from '.'
 import { createToaster, Toaster } from '@ark-ui/vue/toast'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { defaults } from 'lodash-es'
+import { computed } from 'vue'
 
 const {
   unstyled,
@@ -29,7 +28,7 @@ const messager = createToaster({
   placement: 'top',
 })
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 defineExpose({
   messager,
 })

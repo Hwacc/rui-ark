@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 /**
  * deal with ts-2742
  */
@@ -20,11 +21,9 @@ type PropTypes = NativeElements & {
 }
 interface UseToastContext extends ComputedRef<toast.Api<PropTypes>> {}
 
-export interface MessageProps extends ToastRootBaseProps {
+export interface MessageProps extends ToastRootBaseProps, ThemeProps {
   options: MessageOptions
   class?: HTMLAttributes['class']
-  unstyled?: boolean
-  size?: MessageVariants['size']
   ui?: {
     root?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -37,7 +36,6 @@ export interface MessageProps extends ToastRootBaseProps {
 
 <script setup lang="ts">
 import type { ToastRootBaseProps } from '@ark-ui/vue/toast'
-import type { MessageVariants } from '@rui-ark/themes/crafts/message'
 import type { MessageOptions } from '.'
 import { useForwardProps } from '@ark-ui/vue'
 import { ark } from '@ark-ui/vue/factory'
@@ -74,10 +72,10 @@ const slotBindings = computed(() => ({
   context: messageContext.value,
 }))
 
-const theme = useTheme({
+const theme = useTheme(computed(() => ({
   size: size ?? options?.size,
   unstyled: unstyled ?? options?.unstyled,
-})
+})))
 const { root, content, icon, close, description } = tvMessage({
   class: [ui?.root, propsClass],
   ...theme,

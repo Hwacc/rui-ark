@@ -3,10 +3,8 @@ export type DialogOpenChangeDetails = OpenChangeDetails & {
   // the trigger that toggled the dialog
   from: DialogTriggerFrom
 }
-export interface DialogProps extends DialogRootProps {
+export interface DialogProps extends DialogRootProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: DialogVariants['size']
-  unstyled?: boolean
 }
 type UseDialogPropsEx = UseDialogProps & {
   onOpenChange: (details: DialogOpenChangeDetails) => void
@@ -28,7 +26,7 @@ import type {
   DialogRootProps,
   UseDialogProps,
 } from '@ark-ui/vue/dialog'
-import type { DialogVariants } from '@rui-ark/themes/crafts/dialog'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import type {
   DialogInterceptContext,
@@ -104,7 +102,7 @@ watch(
   },
 )
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 defineExpose({
   open: dialog.value.open,
   setOpen: (open: boolean, from?: DialogTriggerFrom) => {

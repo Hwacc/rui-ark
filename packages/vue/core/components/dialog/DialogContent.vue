@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface DialogContentProps {
+export interface DialogContentProps extends ThemeProps {
   class?: HTMLAttributes['class']
   ui?: {
     backdrop?: HTMLAttributes['class']
@@ -7,14 +7,12 @@ export interface DialogContentProps {
     content?: HTMLAttributes['class']
     close?: HTMLAttributes['class']
   }
-  unstyled?: boolean
-  size?: DialogVariants['size']
   showClose?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import type { DialogVariants } from '@rui-ark/themes/crafts/dialog'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Dialog } from '@ark-ui/vue/dialog'
 import { ark } from '@ark-ui/vue/factory'
@@ -48,7 +46,7 @@ const hasDialogHeader = computed(() =>
 const showContentClose = computed(() => showClose && !hasDialogHeader.value)
 
 const attrs = useAttrs()
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { positioner, content, close } = tvDialog()
 </script>
 

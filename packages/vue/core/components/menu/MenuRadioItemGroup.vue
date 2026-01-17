@@ -1,8 +1,6 @@
 <script lang="ts">
-export interface MenuRadioItemGroupProps extends ArkMenuRadioItemGroupProps {
+export interface MenuRadioItemGroupProps extends ArkMenuRadioItemGroupProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: MenuVariants['size']
-  unstyled?: boolean
 }
 </script>
 
@@ -11,7 +9,7 @@ import type {
   MenuRadioItemGroupProps as ArkMenuRadioItemGroupProps,
   MenuRadioItemGroupEmits,
 } from '@ark-ui/vue/menu'
-import type { MenuVariants } from '@rui-ark/themes/crafts/menu'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'

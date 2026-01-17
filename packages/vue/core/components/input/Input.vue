@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface InputProps {
+export interface InputProps extends ThemeProps {
   id?: string
   defaultValue?: string | number
   modelValue?: string | number
@@ -14,13 +14,11 @@ export interface InputProps {
     inner?: HTMLAttributes['class']
     clearable?: HTMLAttributes['class']
   }
-  unstyled?: boolean
-  size?: InputVariants['size']
 }
 </script>
 
 <script setup lang="ts">
-import type { InputVariants } from '@rui-ark/themes/crafts/input'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { tvInput } from '@rui-ark/themes/crafts/input'
@@ -79,7 +77,7 @@ function onBlur(event: Event) {
   })
 }
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { root, inner, clearable: tvClearable } = tvInput()
 </script>
 

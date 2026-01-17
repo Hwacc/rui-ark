@@ -11,4 +11,13 @@
     @apply data-[size=base]:border-[.1563rem] data-[size=sm]:border-2 data-[size=lg]:border-3;
     @apply border-rz-green bg-h00;
   }
+
+  .rui-slider-marker-dot {
+    &[data-state="over-value"] {
+      @apply bg-h33;
+    }
+    &[data-state="under-value"] {
+      @apply bg-rz-green;
+    }
+  }
 }

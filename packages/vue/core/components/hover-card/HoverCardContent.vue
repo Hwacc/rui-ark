@@ -1,10 +1,6 @@
 <script lang="ts">
-export interface HoverCardContentProps extends ArkHoverCardContentProps {
+export interface HoverCardContentProps extends ArkHoverCardContentProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: HoverCardVariants['size']
-  skin?: Skin
-  unstyled?: boolean
-  bordered?: boolean
   ui?: {
     positioner?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -15,8 +11,7 @@ export interface HoverCardContentProps extends ArkHoverCardContentProps {
 
 <script setup lang="ts">
 import type { HoverCardContentProps as ArkHoverCardContentProps } from '@ark-ui/vue/hover-card'
-import type { HoverCardVariants } from '@rui-ark/themes/crafts/hover-card'
-import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme/theme-props'
 import type { HTMLAttributes } from 'vue'
 import { HoverCard } from '@ark-ui/vue/hover-card'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -48,7 +43,7 @@ checkContextVNodePosition(defaultSlots.value, 'HoverCardContext', 'HoverCardCont
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'HoverCardArrow'))
 const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'HoverCardArrow'))
 
-const theme = useTheme({ size, unstyled, skin, bordered })
+const theme = useTheme(computed(() => ({ size, unstyled, skin, bordered })))
 const { content, contentInner } = tvHoverCard()
 </script>
 

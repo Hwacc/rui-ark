@@ -1,10 +1,8 @@
 <script lang="ts">
 export type CheckedState = boolean | 'indeterminate'
-export interface CheckboxProps extends CheckboxRootProps {
+export interface CheckboxProps extends CheckboxRootProps, ThemeProps {
   label?: string
   class?: HTMLAttributes['class']
-  size?: CheckboxVariants['size']
-  unstyled?: boolean
   ui?: {
     root?: HTMLAttributes['class']
     control?: HTMLAttributes['class']
@@ -16,7 +14,7 @@ export interface CheckboxProps extends CheckboxRootProps {
 
 <script setup lang="ts">
 import type { CheckboxRootEmits, CheckboxRootProps } from '@ark-ui/vue/checkbox'
-import type { CheckboxVariants } from '@rui-ark/themes/crafts/checkbox'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Checkbox, useCheckbox } from '@ark-ui/vue/checkbox'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -41,7 +39,7 @@ defineSlots<{
 
 const forwarded = useForwardProps(props)
 const checkbox = useCheckbox(forwarded, emit)
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { root, control, indicator, label: tvLabel } = tvCheckbox()
 
 defineExpose({

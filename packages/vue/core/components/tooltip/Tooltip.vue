@@ -1,16 +1,10 @@
 <script lang="ts">
-export interface TooltipProps extends TooltipRootProps {
-  skin?: Skin
-  size?: TooltipVariants['size']
-  bordered?: TooltipVariants['bordered']
-  unstyled?: boolean
-}
+export interface TooltipProps extends TooltipRootProps, ThemeProps {}
 </script>
 
 <script setup lang="ts">
 import type { TooltipRootEmits, TooltipRootProps } from '@ark-ui/vue/tooltip'
-import type { TooltipVariants } from '@rui-ark/themes/crafts/tooltip'
-import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import { TooltipRoot } from '@ark-ui/vue/tooltip'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
@@ -33,7 +27,7 @@ const tooltipConfig = useConfig(
   computed(() => ({ lazyMount, unmountOnExit })),
 )
 const forwarded = useForwardPropsEmits(props, emit)
-const theme = useTheme({ size, bordered, unstyled, skin })
+const theme = useTheme(computed(() => ({ size, bordered, unstyled, skin })))
 </script>
 
 <template>

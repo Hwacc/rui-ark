@@ -1,9 +1,7 @@
 <script lang="ts">
 export interface SelectProps<T extends CollectionItem>
-  extends SelectRootProps<T> {
+  extends SelectRootProps<T>, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: SelectVariants['size']
-  unstyled?: boolean
 }
 // 这里我们必须重新定义SelectEmits类型, 否则Volar/VLS在推断ts时会报错ts-plugin(2742)
 // 这也导致必须将'@zag-js/select'包引入项目中, 所幸的是我们只需要其类型推断, 实际的runtime js依然会引用@ark-ui/vue中相关zag-js的runtime js
@@ -23,7 +21,7 @@ export interface SelectEmits<T extends CollectionItem> {
 
 <script setup lang="ts" generic="T extends CollectionItem">
 import type { CollectionItem, SelectRootProps } from '@ark-ui/vue/select'
-import type { SelectVariants } from '@rui-ark/themes/crafts/select'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type * as select from '@zag-js/select'
 import type { HTMLAttributes } from 'vue'
 import { Select } from '@ark-ui/vue/select'
@@ -42,7 +40,7 @@ const selectConfig = useConfig(
   computed(() => ({ lazyMount, unmountOnExit })),
 )
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { root } = tvSelect()
 </script>
 

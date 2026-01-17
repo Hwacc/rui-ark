@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { DialogVariants } from '@rui-ark/themes/crafts/dialog'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { tvDialog } from '@rui-ark/themes/crafts/dialog'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { useId } from 'vue'
+import { computed, useId } from 'vue'
 
 const {
   class: propsClass,
@@ -12,12 +12,10 @@ const {
   unstyled,
 } = defineProps<{
   class?: HTMLAttributes['class']
-  size?: DialogVariants['size']
-  unstyled?: boolean
-}>()
+} & ThemeProps>()
 
 const id = useId()
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { body } = tvDialog()
 </script>
 

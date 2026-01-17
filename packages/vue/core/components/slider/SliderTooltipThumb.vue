@@ -1,9 +1,6 @@
 <script lang="ts">
-export interface SliderTooltipThumbProps extends SliderThumbBaseProps, Omit<TooltipRootProps, 'open'> {
+export interface SliderTooltipThumbProps extends SliderThumbBaseProps, Omit<TooltipRootProps, 'open'>, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: SliderVariants['size']
-  unstyled?: boolean
-  skin?: Skin
   open?: (context: UnwrapRef<UseSliderContext>) => boolean
   widget?: {
     tooltipContent?: ComponentProps<typeof TooltipContent>
@@ -15,14 +12,12 @@ export interface SliderTooltipThumbProps extends SliderThumbBaseProps, Omit<Tool
 <script setup lang="ts">
 import type { SliderThumbBaseProps, UseSliderContext } from '@ark-ui/vue/slider'
 import type { TooltipRootProps } from '@ark-ui/vue/tooltip'
-import type { SliderVariants } from '@rui-ark/themes/crafts/slider'
-import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes, UnwrapRef } from 'vue'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { Slider, useSliderContext } from '@ark-ui/vue/slider'
 import { TooltipRootProvider, useTooltip } from '@ark-ui/vue/tooltip'
-import { findParentElementByScope } from '@rui-ark/shared/dom'
 import { tvSlider } from '@rui-ark/themes/crafts/slider'
 import {
   TooltipArrow,
@@ -33,7 +28,8 @@ import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { merge } from 'lodash-es'
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
+import { injectSliderBoundaryContext } from './SliderBoundaryProvider.vue'
 
 const {
   class: propsClass,
@@ -46,16 +42,10 @@ const {
   skin,
   ...props
 } = defineProps<SliderTooltipThumbProps>()
-const tooltipForwarded = useForwardProps(props)
 const context = useSliderContext()
-const { forwardRef, currentElement } = useForwardExpose()
 
-const boundary = ref()
-watch(currentElement, (val) => {
-  boundary.value
-    = findParentElementByScope(val, 'slider', 'root') ?? 'clipping-ancestors'
-})
-
+const boundary = injectSliderBoundaryContext()
+const tooltipForwarded = useForwardProps(props)
 const configs = useConfig('tooltip')
 const tooltip = useTooltip(
   computed(() => (
@@ -84,7 +74,8 @@ watch(
   },
 )
 
-const theme = useTheme({ size, unstyled, skin })
+const { forwardRef } = useForwardExpose()
+const theme = useTheme(computed(() => ({ size, unstyled, skin })))
 const { thumb: tvThumb } = tvSlider()
 </script>
 
@@ -102,7 +93,20 @@ const { thumb: tvThumb } = tvSlider()
           <Slider.HiddenInput />
         </Slider.Thumb>
       </TooltipTrigger>
-      <TooltipContent v-bind="widget?.tooltipContent">
+      <Teleport
+        v-if="tooltipForwarded.positioning?.strategy === 'fixed'"
+        to="body"
+      >
+        <TooltipContent v-bind="widget?.tooltipContent">
+          <slot name="arrow">
+            <TooltipArrow v-bind="widget?.tooltipArrow" />
+          </slot>
+          <slot name="default">
+            <Slider.ValueText />
+          </slot>
+        </TooltipContent>
+      </Teleport>
+      <TooltipContent v-else v-bind="widget?.tooltipContent">
         <slot name="arrow">
           <TooltipArrow v-bind="widget?.tooltipArrow" />
         </slot>

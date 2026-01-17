@@ -1,8 +1,6 @@
 <script lang="ts">
-export interface SelectContentProps extends ArkSelectContentProps {
+export interface SelectContentProps extends ArkSelectContentProps, ThemeProps {
   class?: HTMLAttributes['class']
-  unstyled?: boolean
-  bordered?: SelectVariants['bordered']
   ui?: {
     root?: HTMLAttributes['class']
     inner?: HTMLAttributes['class']
@@ -12,13 +10,14 @@ export interface SelectContentProps extends ArkSelectContentProps {
 
 <script setup lang="ts">
 import type { SelectContentProps as ArkSelectContentProps } from '@ark-ui/vue/select'
-import type { SelectVariants } from '@rui-ark/themes/crafts/select'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { Select } from '@ark-ui/vue/select'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvSelect } from '@rui-ark/themes/crafts/select'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -29,7 +28,7 @@ const {
 } = defineProps<SelectContentProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme({ unstyled, bordered })
+const theme = useTheme(computed(() => ({ unstyled, bordered })))
 const { content, contentInner } = tvSelect()
 </script>
 

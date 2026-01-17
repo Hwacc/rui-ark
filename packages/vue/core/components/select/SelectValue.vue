@@ -1,20 +1,19 @@
 <script lang="ts">
-export interface SelectValueProps {
+export interface SelectValueProps extends ThemeProps {
   class?: HTMLAttributes['class']
-  size?: SelectVariants['size']
-  unstyled?: boolean
   placeholder?: string
   asChild?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import type { SelectVariants } from '@rui-ark/themes/crafts/select'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { Select } from '@ark-ui/vue/select'
 import { tvSelect } from '@rui-ark/themes/crafts/select'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -24,7 +23,7 @@ const {
   placeholder,
 } = defineProps<SelectValueProps>()
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { value: tvValue } = tvSelect()
 </script>
 

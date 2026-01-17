@@ -1,17 +1,18 @@
 <script lang="ts">
-export interface DialogBackdropProps extends ArkDialogBackdropProps {
+export interface DialogBackdropProps extends ArkDialogBackdropProps, ThemeProps {
   class?: HTMLAttributes['class']
-  unstyled?: boolean
 }
 </script>
 
 <script setup lang="ts">
 import type { DialogBackdropProps as ArkDialogBackdropProps } from '@ark-ui/vue/dialog'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Dialog } from '@ark-ui/vue/dialog'
 import { tvDialog } from '@rui-ark/themes/crafts/dialog'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -20,7 +21,7 @@ const {
 } = defineProps<DialogBackdropProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme({ unstyled })
+const theme = useTheme(computed(() => ({ unstyled })))
 const { backdrop } = tvDialog()
 </script>
 

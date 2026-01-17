@@ -1,18 +1,17 @@
 <script lang="ts">
-export interface ToasterProps extends ToastStoreProps {
+export interface ToasterProps extends ToastStoreProps, ThemeProps {
   toasterId?: string
-  unstyled?: boolean
-  size?: ToastVariants['size']
 }
 </script>
 
 <script setup lang="ts">
 import type { CreateToasterProps, ToastStoreProps } from '@ark-ui/vue/toast'
-import type { ToastVariants } from '@rui-ark/themes/crafts/toast'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { ToastOptions } from '.'
 import { createToaster, Toaster } from '@ark-ui/vue/toast'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
+import { computed } from 'vue'
 
 const { toasterId, unstyled, size, ...props } = defineProps<ToasterProps>()
 defineSlots<{
@@ -20,7 +19,7 @@ defineSlots<{
 }>()
 const toaster = createToaster(props as CreateToasterProps)
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 defineExpose({
   toasterId,
   toaster,

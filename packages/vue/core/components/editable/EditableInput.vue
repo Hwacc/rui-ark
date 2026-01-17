@@ -1,15 +1,13 @@
 <script lang="ts">
-export interface EditableInputProps extends ArkEditableInputProps {
+export interface EditableInputProps extends EditableInputBaseProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: EditableVariants['size']
-  unstyled?: boolean
   clearable?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import type { EditableInputProps as ArkEditableInputProps } from '@ark-ui/vue/editable'
-import type { EditableVariants } from '@rui-ark/themes/crafts/editable'
+import type { EditableInputBaseProps } from '@ark-ui/vue/editable'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { EditableInput, useEditableContext } from '@ark-ui/vue/editable'
 import { ark } from '@ark-ui/vue/factory'
@@ -17,7 +15,7 @@ import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvEditableInput } from '@rui-ark/themes/crafts/editable'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { CircleX } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const {
   class: propsClass,
@@ -48,7 +46,7 @@ function onClear() {
   })
 }
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { root, inner, clearable: tvClearable } = tvEditableInput()
 </script>
 

@@ -2,18 +2,12 @@
 /**
  * @description Imagine HoverCard is a interactive Tooltip.
  */
-export interface HoverCardProps extends HoverCardRootProps {
-  skin?: Skin
-  size?: HoverCardVariants['size']
-  unstyled?: boolean
-  bordered?: boolean
-}
+export interface HoverCardProps extends HoverCardRootProps, ThemeProps {}
 </script>
 
 <script setup lang="ts">
 import type { HoverCardRootEmits, HoverCardRootProps } from '@ark-ui/vue/hover-card'
-import type { HoverCardVariants } from '@rui-ark/themes/crafts/hover-card'
-import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme/theme-props'
 import { HoverCardRoot } from '@ark-ui/vue/hover-card'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
@@ -40,7 +34,7 @@ const hoverCardConfig = useConfig(
     unmountOnExit,
   })),
 )
-const theme = useTheme({ size, unstyled, bordered, skin })
+const theme = useTheme(computed(() => ({ size, unstyled, bordered, skin })))
 </script>
 
 <template>

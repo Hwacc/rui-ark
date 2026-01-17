@@ -12,11 +12,9 @@ type PropTypes = NativeElements & {
 }
 interface UseToastContext extends ComputedRef<toast.Api<PropTypes>> {}
 
-export interface ToastProps extends ToastRootBaseProps {
+export interface ToastProps extends ToastRootBaseProps, ThemeProps {
   options: ToastOptions
   class?: HTMLAttributes['class']
-  unstyled?: boolean
-  size?: ToastVariants['size']
   ui?: {
     root?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -31,7 +29,7 @@ export interface ToastProps extends ToastRootBaseProps {
 
 <script setup lang="ts">
 import type { ToastRootBaseProps } from '@ark-ui/vue/toast'
-import type { ToastVariants } from '@rui-ark/themes/crafts/toast'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { ToastOptions } from '.'
 import { useForwardProps } from '@ark-ui/vue'
 import { ark } from '@ark-ui/vue/factory'
@@ -69,10 +67,10 @@ const slotBindings = computed(() => ({
   context: toastContext.value,
 }))
 
-const theme = useTheme({
+const theme = useTheme(computed(() => ({
   size: size ?? options?.size,
   unstyled: unstyled ?? options?.unstyled,
-})
+})))
 const { root, content, inner, icon, close, title, description } = tvToast({
   class: [ui?.root, propsClass],
   ...theme,

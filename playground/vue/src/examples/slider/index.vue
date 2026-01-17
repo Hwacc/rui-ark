@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Slider, SliderMarker, SliderMarkerGroup, SliderThumb, SliderTooltipThumb } from '@rui-ark/vue-core/components/slider'
+import { Slider, SliderMarker, SliderMarkerGroup, SliderThumb, SliderTooltipMarker, SliderTooltipThumb } from '@rui-ark/vue-core/components/slider'
 import { ref } from 'vue'
 
-const value = ref([0])
+const testValue = ref([0])
 </script>
 
 <template>
   <div class="flex items-center gap-2">
-    <Slider v-model="value" class="w-75">
+    <Slider v-model="testValue" class="w-75">
       <SliderTooltipThumb :index="0" />
     </Slider>
 
@@ -15,17 +15,20 @@ const value = ref([0])
       <SliderThumb :index="0" />
       <SliderThumb :index="1" />
     </Slider>
-    <Slider v-model="value" class="w-75" size="lg">
+    <Slider v-model="testValue" class="w-75" size="lg">
       <SliderTooltipThumb
         :index="0"
         :open="() => true"
         skin="razer"
+        :positioning="{
+          strategy: 'fixed',
+        }"
       />
       <template #suffix>
         <SliderMarkerGroup>
-          <SliderMarker :value="10">
-            10
-          </SliderMarker>
+          <SliderMarker :value="10" />
+          <SliderTooltipMarker :value="20" skin="razer" />
+          <SliderTooltipMarker :value="50" :skin="testValue[0] >= 50 ? 'razer' : 'dark'" />
         </SliderMarkerGroup>
       </template>
     </Slider>

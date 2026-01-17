@@ -1,10 +1,6 @@
 <script lang="ts">
-export interface PopoverContentProps extends ArkPopoverContentProps {
+export interface PopoverContentProps extends ArkPopoverContentProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: PopoverVariants['size']
-  unstyled?: boolean
-  skin?: Skin
-  bordered?: PopoverVariants['bordered']
   ui?: {
     positioner?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
@@ -15,8 +11,7 @@ export interface PopoverContentProps extends ArkPopoverContentProps {
 
 <script setup lang="ts">
 import type { PopoverContentProps as ArkPopoverContentProps } from '@ark-ui/vue/popover'
-import type { PopoverVariants } from '@rui-ark/themes/crafts/popover'
-import type { Skin } from '@rui-ark/vue-core/providers/theme/theme-props'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Popover } from '@ark-ui/vue/popover'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -46,7 +41,7 @@ checkContextVNodePosition(defaultSlots.value, 'PopoverContext', 'PopoverContent'
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'PopoverArrow'))
 const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'PopoverArrow'))
 
-const theme = useTheme({ size, unstyled, bordered, skin })
+const theme = useTheme(computed(() => ({ size, unstyled, bordered, skin })))
 const { content, contentInner } = tvPopover()
 </script>
 

@@ -1,19 +1,18 @@
 <script lang="ts">
-export interface SliderThumbProps extends SliderThumbBaseProps {
+export interface SliderThumbProps extends SliderThumbBaseProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: SliderVariants['size']
-  unstyled?: boolean
 }
 </script>
 
 <script setup lang="ts">
 import type { SliderThumbBaseProps } from '@ark-ui/vue/slider'
-import type { SliderVariants } from '@rui-ark/themes/crafts/slider'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Slider } from '@ark-ui/vue/slider'
 import { tvSlider } from '@rui-ark/themes/crafts/slider'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -23,7 +22,7 @@ const {
 } = defineProps<SliderThumbProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { thumb } = tvSlider()
 </script>
 

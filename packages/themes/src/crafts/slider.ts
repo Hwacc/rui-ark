@@ -12,6 +12,7 @@ export const tvSlider = tv(
       range: '',
       thumb: 'rounded-full data-dragging:scale-120 transition-transform',
       marker: '',
+      markerDot: 'absolute left-1/2 -translate-x-1/2 rounded-full',
     },
     variants: {
       size: {
@@ -23,6 +24,7 @@ export const tvSlider = tv(
             'w-[max(var(--slider-thumb-width),.875rem)]',
             'h-[max(var(--slider-thumb-height),.875rem)]',
           ],
+          markerDot: 'size-2 -top-[calc(max(var(--slider-thumb-height),.875rem)/2+var(--spacing))]',
         },
         sm: {
           control: 'h-[max(var(--slider-thumb-height),.75rem)]',
@@ -32,6 +34,7 @@ export const tvSlider = tv(
             'w-[max(var(--slider-thumb-width),.625rem)]',
             'h-[max(var(--slider-thumb-height),.625rem)]',
           ],
+          markerDot: 'size-1.5 -top-[calc(max(var(--slider-thumb-height),.75rem)/2+var(--spacing)*0.75)]',
         },
         lg: {
           control: 'h-[max(var(--slider-thumb-height),1rem)]',
@@ -41,6 +44,7 @@ export const tvSlider = tv(
             'w-[max(var(--slider-thumb-width),1.125rem)]',
             'h-[max(var(--slider-thumb-height),1.125rem)]',
           ],
+          markerDot: 'size-2.5 -top-[calc(max(var(--slider-thumb-height),1rem)/2+var(--spacing)*1.25)]',
         },
       },
       orientation: {
@@ -66,6 +70,7 @@ export const tvSlider = tv(
       range: `${prefix}-range`,
       thumb: `${prefix}-thumb`,
       marker: `${prefix}-marker`,
+      markerDot: `${prefix}-marker-dot`,
     },
   },
 )

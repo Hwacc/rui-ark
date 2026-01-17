@@ -1,18 +1,17 @@
 <script lang="ts">
-export interface SwitchLabelProps {
+export interface SwitchLabelProps extends ThemeProps {
   class?: HTMLAttributes['class']
-  size?: SwitchVariants['size']
-  unstyled?: boolean
   asChild?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import type { SwitchVariants } from '@rui-ark/themes/crafts/switch'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { SwitchLabel } from '@ark-ui/vue/switch'
 import { tvSwitch } from '@rui-ark/themes/crafts/switch'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -21,7 +20,7 @@ const {
   asChild,
 } = defineProps<SwitchLabelProps>()
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { label } = tvSwitch()
 </script>
 

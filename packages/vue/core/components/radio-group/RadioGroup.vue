@@ -1,8 +1,6 @@
 <script lang="ts">
-export interface RadioGroupProps extends RadioGroupRootProps {
+export interface RadioGroupProps extends RadioGroupRootProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: RadioGroupVariants['size']
-  unstyled?: boolean
 }
 </script>
 
@@ -12,7 +10,7 @@ import type {
   RadioGroupRootEmits,
   RadioGroupRootProps,
 } from '@ark-ui/vue/radio-group'
-import type { RadioGroupVariants } from '@rui-ark/themes/crafts/radio-group'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { RadioGroup, useRadioGroup } from '@ark-ui/vue/radio-group'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -33,7 +31,7 @@ const forwarded = useForwardProps<RadioGroupProps, RadioGroupRootBaseProps>(
 )
 const radioGroup = useRadioGroup(forwarded, emit)
 
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { root } = tvRadioGroup()
 
 defineExpose({

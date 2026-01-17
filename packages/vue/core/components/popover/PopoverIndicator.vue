@@ -1,22 +1,21 @@
 <script lang="ts">
-export interface PopoverIndicatorProps {
+export interface PopoverIndicatorProps extends ThemeProps {
   class?: HtmlHTMLAttributes['class']
-  size?: PopoverVariants['size']
-  unstyled?: boolean
   asChild?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import type { PopoverVariants } from '@rui-ark/themes/crafts/popover'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HtmlHTMLAttributes } from 'vue'
 import { PopoverIndicator } from '@ark-ui/vue'
 import { tvPopover } from '@rui-ark/themes/crafts/popover'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ChevronDown } from 'lucide-vue-next'
+import { computed } from 'vue'
 
 const { class: propsClass, size, unstyled, asChild = true } = defineProps<PopoverIndicatorProps>()
-const theme = useTheme({ size, unstyled })
+const theme = useTheme(computed(() => ({ size, unstyled })))
 const { indicator } = tvPopover()
 </script>
 

@@ -3,6 +3,7 @@
  */
 import type { UseDialogContext } from '@ark-ui/vue/dialog'
 import type { DialogVariants } from '@rui-ark/themes/crafts/dialog'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { PropType } from 'vue'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import type {
@@ -20,7 +21,7 @@ import {
   DialogHeader,
 } from '.'
 
-interface DialogOptions {
+interface DialogOptions extends ThemeProps {
   title?: string | ((context: UseDialogContext) => any)
   content?: string | ((context: UseDialogContext) => any)
   footer?: boolean | ((context: UseDialogContext) => any)
@@ -31,8 +32,6 @@ interface DialogOptions {
     body?: ComponentProps<typeof DialogBody>
     footer?: ComponentProps<typeof DialogFooter>
   }
-  size?: DialogVariants['size']
-  unstyled?: boolean
   onOpenChange?: (
     details: OpenChangeDetails & { from: DialogTriggerFrom },
   ) => void

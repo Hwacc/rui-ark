@@ -1,8 +1,6 @@
 <script lang="ts">
-export interface SliderProps extends SliderRootBaseProps {
+export interface SliderProps extends SliderRootBaseProps, ThemeProps {
   class?: HTMLAttributes['class']
-  unstyled?: boolean
-  size?: SliderVariants['size']
   ui?: {
     root?: HTMLAttributes['class']
     control?: HTMLAttributes['class']
@@ -14,13 +12,15 @@ export interface SliderProps extends SliderRootBaseProps {
 
 <script setup lang="ts">
 import type { SliderRootBaseProps, SliderRootEmits } from '@ark-ui/vue/slider'
-import type { SliderVariants } from '@rui-ark/themes/crafts/slider'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Slider, useSlider } from '@ark-ui/vue/slider'
 import { tvSlider } from '@rui-ark/themes/crafts/slider'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
+import { computed, useTemplateRef, watch } from 'vue'
+import SliderBoundaryProvider from './SliderBoundaryProvider.vue'
 
 const {
   class: propsClass,
@@ -32,11 +32,13 @@ const {
 const emit = defineEmits<SliderRootEmits>()
 const forwarded = useForwardProps(props)
 const slider = useSlider(forwarded, emit)
+const controlRef = useTemplateRef('control')
+watch(controlRef, (el) => {
+  console.log('el', el)
+})
 
-console.log('slider', slider.value)
-
-const theme = useTheme({ size, unstyled })
-const { root, control, track, range } = tvSlider()
+const theme = useTheme(computed(() => ({ size, unstyled })))
+const { root, control: tvControl, track, range } = tvSlider()
 </script>
 
 <template>
@@ -51,38 +53,41 @@ const { root, control, track, range } = tvSlider()
     "
   >
     <ThemeProvider :value="theme">
-      <slot name="prefix" />
-      <Slider.Control
-        :class="
-          control({
-            class: ui?.control,
-            orientation: forwarded.orientation ?? 'horizontal',
-            ...theme,
-          })
-        "
-      >
-        <Slider.Track
+      <SliderBoundaryProvider :boundary="controlRef?.$el ?? 'clipping-ancestors'">
+        <slot name="prefix" />
+        <Slider.Control
+          ref="control"
           :class="
-            track({
-              class: ui?.track,
+            tvControl({
+              class: ui?.control,
               orientation: forwarded.orientation ?? 'horizontal',
               ...theme,
             })
           "
         >
-          <Slider.Range
+          <Slider.Track
             :class="
-              range({
-                class: ui?.range,
+              track({
+                class: ui?.track,
                 orientation: forwarded.orientation ?? 'horizontal',
                 ...theme,
               })
             "
-          />
-        </Slider.Track>
-        <slot />
-      </Slider.Control>
-      <slot name="suffix" />
+          >
+            <Slider.Range
+              :class="
+                range({
+                  class: ui?.range,
+                  orientation: forwarded.orientation ?? 'horizontal',
+                  ...theme,
+                })
+              "
+            />
+          </Slider.Track>
+          <slot />
+        </Slider.Control>
+        <slot name="suffix" />
+      </SliderBoundaryProvider>
     </ThemeProvider>
   </Slider.RootProvider>
 </template>

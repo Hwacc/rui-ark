@@ -1,15 +1,12 @@
 <script lang="ts">
-export interface MenuProps extends MenuRootProps {
+export interface MenuProps extends MenuRootProps, ThemeProps {
   class?: HTMLAttributes['class']
-  size?: MenuVariants['size']
-  unstyled?: boolean
-  bordered?: boolean
 }
 </script>
 
 <script setup lang="ts">
 import type { MenuRootEmits, MenuRootProps } from '@ark-ui/vue/menu'
-import type { MenuVariants } from '@rui-ark/themes/crafts/menu'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'
@@ -33,7 +30,7 @@ const menuConfig = useConfig(
   'menu',
   computed(() => ({ lazyMount, unmountOnExit })),
 )
-const theme = useTheme({ size, unstyled, bordered })
+const theme = useTheme(computed(() => ({ size, unstyled, bordered })))
 </script>
 
 <template>
