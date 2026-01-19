@@ -75,7 +75,7 @@ watch(
 )
 
 const { forwardRef } = useForwardExpose()
-const theme = useTheme(computed(() => ({ size, unstyled, skin })))
+const theme = useTheme(() => ({ size, unstyled, skin }))
 const { thumb: tvThumb } = tvSlider()
 </script>
 

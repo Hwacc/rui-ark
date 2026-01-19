@@ -46,7 +46,7 @@ const hasDialogHeader = computed(() =>
 const showContentClose = computed(() => showClose && !hasDialogHeader.value)
 
 const attrs = useAttrs()
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { positioner, content, close } = tvDialog()
 </script>
 

@@ -18,7 +18,6 @@ import { Switch, useForwardPropsEmits } from '@ark-ui/vue'
 import { tvSwitch } from '@rui-ark/themes/crafts/switch'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -30,7 +29,7 @@ const {
 const emit = defineEmits<SwitchRootEmits>()
 const forwarded = useForwardPropsEmits(props, emit)
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { root, control, thumb } = tvSwitch()
 </script>
 

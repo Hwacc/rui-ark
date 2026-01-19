@@ -12,7 +12,6 @@ import { useForwardProps } from '@ark-ui/vue'
 import { Slider } from '@ark-ui/vue/slider'
 import { tvSlider } from '@rui-ark/themes/crafts/slider'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -22,7 +21,7 @@ const {
 } = defineProps<SliderThumbProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { thumb } = tvSlider()
 </script>
 

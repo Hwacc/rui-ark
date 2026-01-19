@@ -18,7 +18,6 @@ import { Collapsible, useCollapsibleContext } from '@ark-ui/vue/collapsible'
 import { tvCollapsible } from '@rui-ark/themes/crafts/collapsible'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ChevronDown } from 'lucide-vue-next'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -31,7 +30,7 @@ const {
 const forwarded = useForwardProps(props)
 const context = useCollapsibleContext()
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { trigger, indicator: tvIndicator } = tvCollapsible()
 </script>
 

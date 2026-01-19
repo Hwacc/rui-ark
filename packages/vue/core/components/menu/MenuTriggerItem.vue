@@ -14,7 +14,6 @@ import { tvMenu } from '@rui-ark/themes/crafts/menu'
 import { cn } from '@rui-ark/themes/utils/cn'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ChevronRight } from 'lucide-vue-next'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -26,7 +25,7 @@ const forwarded = useForwardProps<
   MenuTriggerItemProps,
   MenuTriggerItemBaseProps
 >(props)
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { item, triggerItem, triggerItemIndicator } = tvMenu()
 </script>
 

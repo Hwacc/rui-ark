@@ -43,7 +43,7 @@ checkContextVNodePosition(defaultSlots.value, 'TooltipContext', 'TooltipContent'
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'TooltipArrow'))
 const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'TooltipArrow'))
 
-const theme = useTheme(computed(() => ({ size, unstyled, skin, bordered })))
+const theme = useTheme(() => ({ size, unstyled, skin, bordered }))
 const { content, contentInner } = tvTooltip()
 </script>
 

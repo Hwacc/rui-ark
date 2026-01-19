@@ -102,7 +102,7 @@ watch(
   },
 )
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 defineExpose({
   open: dialog.value.open,
   setOpen: (open: boolean, from?: DialogTriggerFrom) => {

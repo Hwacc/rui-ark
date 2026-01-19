@@ -11,7 +11,6 @@ import { useForwardProps } from '@ark-ui/vue'
 import { Collapsible } from '@ark-ui/vue/collapsible'
 import { tvCollapsible } from '@rui-ark/themes/crafts/collapsible'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -21,7 +20,7 @@ const {
 
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(computed(() => ({ unstyled })))
+const theme = useTheme(() => ({ unstyled }))
 const { content } = tvCollapsible()
 </script>
 

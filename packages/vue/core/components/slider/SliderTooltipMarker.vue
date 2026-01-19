@@ -19,7 +19,7 @@ import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { merge, pick } from 'lodash-es'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { injectSliderBoundaryContext } from './SliderBoundaryProvider.vue'
 
 const {
@@ -54,7 +54,10 @@ const tooltip = useTooltip(
   )),
 )
 
-const theme = useTheme(computed(() => ({ size, unstyled, skin })))
+watch(() => skin, () => {
+  console.log('skin', skin)
+})
+const theme = useTheme(() => ({ size, unstyled, skin }))
 const { markerDot } = tvSlider()
 </script>
 

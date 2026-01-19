@@ -72,10 +72,10 @@ const slotBindings = computed(() => ({
   context: messageContext.value,
 }))
 
-const theme = useTheme(computed(() => ({
+const theme = useTheme(() => ({
   size: size ?? options?.size,
   unstyled: unstyled ?? options?.unstyled,
-})))
+}))
 const { root, content, icon, close, description } = tvMessage({
   class: [ui?.root, propsClass],
   ...theme,

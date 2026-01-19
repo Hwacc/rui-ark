@@ -17,13 +17,13 @@ import { ark } from '@ark-ui/vue/factory'
 import { tvDialog } from '@rui-ark/themes/crafts/dialog'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { X } from 'lucide-vue-next'
-import { computed, useId } from 'vue'
+import { useId } from 'vue'
 import { DialogCloseTrigger } from '.'
 
 const { class: propsClass, unstyled, size } = defineProps<DialogHeaderProps>()
 
 const id = useId()
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { header, title, close } = tvDialog()
 </script>
 

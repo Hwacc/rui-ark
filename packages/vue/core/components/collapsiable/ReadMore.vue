@@ -17,7 +17,6 @@ import type { CollapsibleProps } from '.'
 import { useForwardProps } from '@ark-ui/vue'
 import { tvReadMore } from '@rui-ark/themes/crafts/collapsible'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed } from 'vue'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '.'
 
 const {
@@ -32,7 +31,7 @@ const {
 } = defineProps<ReadMoreProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(computed(() => ({ unstyled })))
+const theme = useTheme(() => ({ unstyled }))
 const { root, content, trigger } = tvReadMore()
 </script>
 

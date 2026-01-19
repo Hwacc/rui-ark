@@ -17,7 +17,6 @@ import { Select } from '@ark-ui/vue/select'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvSelect } from '@rui-ark/themes/crafts/select'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -28,7 +27,7 @@ const {
   ...props
 } = defineProps<SelectItemGroupProps>()
 const forwarded = useForwardProps(props)
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 
 const { itemGroup, itemGroupLabel } = tvSelect()
 </script>

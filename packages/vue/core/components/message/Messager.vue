@@ -12,7 +12,6 @@ import { createToaster, Toaster } from '@ark-ui/vue/toast'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { defaults } from 'lodash-es'
-import { computed } from 'vue'
 
 const {
   unstyled,
@@ -28,7 +27,7 @@ const messager = createToaster({
   placement: 'top',
 })
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 defineExpose({
   messager,
 })

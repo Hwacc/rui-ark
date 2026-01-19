@@ -11,7 +11,6 @@ import { EditablePreview } from '@ark-ui/vue/editable'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvEditable } from '@rui-ark/themes/crafts/editable'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -21,7 +20,7 @@ const {
 } = defineProps<EditablePreviewProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { preview } = tvEditable()
 </script>
 

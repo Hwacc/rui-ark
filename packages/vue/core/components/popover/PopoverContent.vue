@@ -41,7 +41,7 @@ checkContextVNodePosition(defaultSlots.value, 'PopoverContext', 'PopoverContent'
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'PopoverArrow'))
 const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'PopoverArrow'))
 
-const theme = useTheme(computed(() => ({ size, unstyled, bordered, skin })))
+const theme = useTheme(() => ({ size, unstyled, bordered, skin }))
 const { content, contentInner } = tvPopover()
 </script>
 

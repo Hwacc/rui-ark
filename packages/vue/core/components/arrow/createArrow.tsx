@@ -20,11 +20,11 @@ export function createArrow(
     name: ArrowNode.__name,
     setup(props) {
       const theme = useTheme(
-        computed(() => ({
+        () => ({
           size: props.size,
           bordered: props.bordered,
           skin: props.skin,
-        })),
+        }),
       )
       const arrowSize = computed(() => {
         switch (theme.value.size) {

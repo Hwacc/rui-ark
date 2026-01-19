@@ -14,7 +14,6 @@ import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvSelect } from '@rui-ark/themes/crafts/select'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ChevronDown, CircleX } from 'lucide-vue-next'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -26,7 +25,7 @@ const {
 } = defineProps<SelectTriggerProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(computed(() => ({ size, unstyled, bordered })))
+const theme = useTheme(() => ({ size, unstyled, bordered }))
 const { trigger, indicator, clearTrigger } = tvSelect()
 </script>
 

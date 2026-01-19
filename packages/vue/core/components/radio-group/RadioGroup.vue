@@ -31,7 +31,7 @@ const forwarded = useForwardProps<RadioGroupProps, RadioGroupRootBaseProps>(
 )
 const radioGroup = useRadioGroup(forwarded, emit)
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { root } = tvRadioGroup()
 
 defineExpose({

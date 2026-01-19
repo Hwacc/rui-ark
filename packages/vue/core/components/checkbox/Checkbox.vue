@@ -39,7 +39,7 @@ defineSlots<{
 
 const forwarded = useForwardProps(props)
 const checkbox = useCheckbox(forwarded, emit)
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { root, control, indicator, label: tvLabel } = tvCheckbox()
 
 defineExpose({

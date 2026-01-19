@@ -13,7 +13,6 @@ import { Slider, useSliderContext } from '@ark-ui/vue/slider'
 import { tvSlider } from '@rui-ark/themes/crafts/slider'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { pick } from 'lodash-es'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -24,7 +23,7 @@ const {
 const forwarded = useForwardProps(props)
 const context = useSliderContext()
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { marker, markerDot } = tvSlider()
 </script>
 

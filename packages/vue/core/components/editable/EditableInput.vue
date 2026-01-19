@@ -15,7 +15,7 @@ import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvEditableInput } from '@rui-ark/themes/crafts/editable'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { CircleX } from 'lucide-vue-next'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 const {
   class: propsClass,
@@ -46,7 +46,7 @@ function onClear() {
   })
 }
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { root, inner, clearable: tvClearable } = tvEditableInput()
 </script>
 

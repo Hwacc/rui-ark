@@ -27,7 +27,7 @@ const popoverConfig = useConfig(
   'popover',
   computed(() => ({ unmountOnExit, lazyMount })),
 )
-const theme = useTheme(computed(() => ({ size, unstyled, bordered, skin })))
+const theme = useTheme(() => ({ size, unstyled, bordered, skin }))
 </script>
 
 <template>

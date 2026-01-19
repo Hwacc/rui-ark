@@ -12,7 +12,7 @@ import { useForwardProps } from '@ark-ui/vue'
 import { Tabs, useTabsContext } from '@ark-ui/vue/tabs'
 import { tvTabs } from '@rui-ark/themes/crafts/tabs'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed, useTemplateRef, watchEffect } from 'vue'
+import { useTemplateRef, watchEffect } from 'vue'
 
 const { class: propsClass, size, unstyled, ...props } = defineProps<TabsListProps>()
 const forwarded = useForwardProps(props)
@@ -89,7 +89,7 @@ watchEffect(() => {
   }
 })
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { list: tvList } = tvTabs()
 </script>
 

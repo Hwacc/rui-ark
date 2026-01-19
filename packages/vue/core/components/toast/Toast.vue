@@ -67,10 +67,10 @@ const slotBindings = computed(() => ({
   context: toastContext.value,
 }))
 
-const theme = useTheme(computed(() => ({
+const theme = useTheme(() => ({
   size: size ?? options?.size,
   unstyled: unstyled ?? options?.unstyled,
-})))
+}))
 const { root, content, inner, icon, close, title, description } = tvToast({
   class: [ui?.root, propsClass],
   ...theme,

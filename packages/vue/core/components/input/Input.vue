@@ -77,7 +77,7 @@ function onBlur(event: Event) {
   })
 }
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { root, inner, clearable: tvClearable } = tvInput()
 </script>
 

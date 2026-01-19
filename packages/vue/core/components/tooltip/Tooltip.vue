@@ -27,7 +27,7 @@ const tooltipConfig = useConfig(
   computed(() => ({ lazyMount, unmountOnExit })),
 )
 const forwarded = useForwardPropsEmits(props, emit)
-const theme = useTheme(computed(() => ({ size, bordered, unstyled, skin })))
+const theme = useTheme(() => ({ size, bordered, unstyled, skin }))
 </script>
 
 <template>

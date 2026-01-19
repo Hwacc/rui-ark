@@ -18,7 +18,7 @@ export const tvTabs = tv({
       'disabled:pointer-events-none',
       'disabled:opacity-(--disabled-opacity)',
     ],
-    content: ['mt-2', 'data-[state=open]:motion-translate-x-in', 'data-[state=closed]:motion-translate-x-out'],
+    content: ['mt-2'],
     indicator: [],
   },
 
@@ -41,6 +41,14 @@ export const tvTabs = tv({
       vertical: {
         indicator: 'h-(--height)',
       },
+    },
+    prev: {
+      true: '',
+      false: '',
+    },
+    next: {
+      true: '',
+      false: '',
     },
   },
   compoundVariants: [
@@ -68,9 +76,26 @@ export const tvTabs = tv({
         indicator: 'h-1.5',
       },
     },
+    {
+      orientation: 'horizontal',
+      prev: true,
+      class: {
+        content: 'data-[state=open]:-motion-translate-x-in data-[state=open]:motion-opacity-in',
+      },
+    },
+    {
+      orientation: 'horizontal',
+      next: true,
+      class: {
+        content: 'data-[state=open]:motion-translate-x-in data-[state=open]:motion-opacity-in',
+      },
+    },
   ],
   defaultVariants: {
     size: 'base',
+    orientation: 'horizontal',
+    prev: false,
+    next: false,
   },
 }, {
   slots: {

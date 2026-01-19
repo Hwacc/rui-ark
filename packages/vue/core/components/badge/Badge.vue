@@ -15,7 +15,6 @@ import { ark } from '@ark-ui/vue/factory'
 import { tvBadge } from '@rui-ark/themes/crafts/badge'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { useForwardProps } from '@rui-ark/vue-core/libs/useForwardProps'
-import { computed } from 'vue'
 
 const {
   variant,
@@ -28,7 +27,7 @@ const {
 } = defineProps<BadgeProps>()
 
 const forwarded = useForwardProps(props)
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 </script>
 
 <template>

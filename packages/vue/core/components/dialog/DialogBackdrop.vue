@@ -12,7 +12,6 @@ import { useForwardProps } from '@ark-ui/vue'
 import { Dialog } from '@ark-ui/vue/dialog'
 import { tvDialog } from '@rui-ark/themes/crafts/dialog'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -21,7 +20,7 @@ const {
 } = defineProps<DialogBackdropProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(computed(() => ({ unstyled })))
+const theme = useTheme(() => ({ unstyled }))
 const { backdrop } = tvDialog()
 </script>
 

@@ -25,7 +25,6 @@ import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvRadioGroup } from '@rui-ark/themes/crafts/radio-group'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { Check, Circle } from 'lucide-vue-next'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -44,7 +43,7 @@ const forwarded = useForwardProps<RadioGroupItemProps, RadioGroupItemBaseProps>(
   props,
 )
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { item, itemControl, itemIndicator, itemText } = tvRadioGroup()
 </script>
 

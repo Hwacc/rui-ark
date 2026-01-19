@@ -14,7 +14,6 @@ import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { Icon } from '@iconify/vue'
 import { tvIcon } from '@rui-ark/themes/crafts/icon'
-import { computed } from 'vue'
 
 const {
   class: propsClass,
@@ -25,7 +24,7 @@ const {
 } = defineProps<IconProps>()
 
 const forwarded = useForwardProps(props)
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 </script>
 
 <template>

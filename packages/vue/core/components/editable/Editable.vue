@@ -84,7 +84,7 @@ const slotProps = computed<SlotProps>(() => {
   }
 })
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme((() => ({ size, unstyled })))
 const { root, area } = tvEditable()
 defineExpose(
   pick(editable.value, ['edit', 'clearValue', 'setValue', 'cancel', 'submit']),

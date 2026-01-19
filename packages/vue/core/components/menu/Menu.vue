@@ -30,7 +30,7 @@ const menuConfig = useConfig(
   'menu',
   computed(() => ({ lazyMount, unmountOnExit })),
 )
-const theme = useTheme(computed(() => ({ size, unstyled, bordered })))
+const theme = useTheme(() => ({ size, unstyled, bordered }))
 </script>
 
 <template>

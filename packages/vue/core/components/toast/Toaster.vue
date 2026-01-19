@@ -11,7 +11,6 @@ import type { ToastOptions } from '.'
 import { createToaster, Toaster } from '@ark-ui/vue/toast'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
-import { computed } from 'vue'
 
 const { toasterId, unstyled, size, ...props } = defineProps<ToasterProps>()
 defineSlots<{
@@ -19,7 +18,7 @@ defineSlots<{
 }>()
 const toaster = createToaster(props as CreateToasterProps)
 
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 defineExpose({
   toasterId,
   toaster,

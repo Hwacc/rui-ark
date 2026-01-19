@@ -42,7 +42,7 @@ checkContextVNodePosition(defaultSlots.value, 'MenuContext', 'MenuContent')
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'MenuArrow'))
 const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'MenuArrow'))
 
-const theme = useTheme(computed(() => ({ size, unstyled, bordered })))
+const theme = useTheme(() => ({ size, unstyled, bordered }))
 const { content, contentInner } = tvMenu()
 </script>
 

@@ -22,7 +22,7 @@ import { tvDialog } from '@rui-ark/themes/crafts/dialog'
 import { cn } from '@rui-ark/themes/utils/cn'
 import { Button } from '@rui-ark/vue-core/components/button'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { computed, useId } from 'vue'
+import { useId } from 'vue'
 import { DialogCloseTrigger, TriggerFrom } from '.'
 
 const {
@@ -37,7 +37,7 @@ const emits = defineEmits<{
   cancel: [event: MouseEvent]
 }>()
 const id = useId()
-const theme = useTheme(computed(() => ({ size, unstyled })))
+const theme = useTheme(() => ({ size, unstyled }))
 const { footer } = tvDialog()
 </script>
 

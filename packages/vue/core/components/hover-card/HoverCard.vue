@@ -34,7 +34,7 @@ const hoverCardConfig = useConfig(
     unmountOnExit,
   })),
 )
-const theme = useTheme(computed(() => ({ size, unstyled, bordered, skin })))
+const theme = useTheme((() => ({ size, unstyled, bordered, skin })))
 </script>
 
 <template>
