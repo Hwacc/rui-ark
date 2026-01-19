@@ -47,7 +47,7 @@ export function findVNodeByName(
   return undefined
 }
 
-export function excludeVNodesByName(nodes: VNode[] | undefined, name: string): VNode[] {
+export function findVNodesByName(nodes: VNode[] | undefined, name: string): VNode[] {
   const target = camelCase(name)
   const result: VNode[] = []
   if (isEmpty(nodes))
@@ -57,11 +57,34 @@ export function excludeVNodesByName(nodes: VNode[] | undefined, name: string): V
       continue
     if (typeof n.type === 'symbol' && Array.isArray(n.children)) {
       // is a slot node
-      result.push(...excludeVNodesByName(n.children as VNode[], name))
+      result.push(...findVNodesByName(n.children as VNode[], name))
       continue
     }
     const tName = (n.type as any).name || (n.type as any).__name
-    if (camelCase(tName) !== target)
+    if (camelCase(tName) === target)
+      result.push(n)
+  }
+  return result
+}
+
+export function excludeVNodesByName(node: VNode, name: string): VNode[] {
+  return excludeVNodesByNames([node], [camelCase(name)])
+}
+export function excludeVNodesByNames(nodes: VNode[] | undefined, name: string[]): VNode[] {
+  const targets = name.map(camelCase)
+  const result: VNode[] = []
+  if (isEmpty(nodes))
+    return []
+  for (const n of nodes!) {
+    if (!n || !n.type)
+      continue
+    if (typeof n.type === 'symbol' && Array.isArray(n.children)) {
+      // is a slot node
+      result.push(...excludeVNodesByNames(n.children as VNode[], name))
+      continue
+    }
+    const tName = (n.type as any).name || (n.type as any).__name
+    if (!targets.includes(camelCase(tName)))
       result.push(n)
   }
   return result
