@@ -32,7 +32,6 @@ import { findUp } from '@rui-ark/shared/dom'
 import { tvEditable } from '@rui-ark/themes/crafts/editable'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
-import { pick } from 'lodash-es'
 import { computed } from 'vue'
 
 const {
