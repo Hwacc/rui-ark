@@ -22,3 +22,10 @@
   overflow-anchor: auto;
 }
 
+@utility scrollbar-none {
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome / Safari */
+  }
+}
+

@@ -1,0 +1,9 @@
+@layer components {
+  .rui-scroll-area-scrollbar {
+    @apply bg-h58/40 rounded-[6px] hover:bg-rz-green active:bg-rz-green/70 focus:bg-rz-green/70;
+  }
+
+  .rui-scroll-area-thumb {
+    @apply bg-h58/40 rounded-[6px] hover:bg-rz-green active:bg-rz-green/70 focus:bg-rz-green/70;
+  }
+}
