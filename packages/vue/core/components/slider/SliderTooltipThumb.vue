@@ -27,7 +27,7 @@ import {
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
-import { merge } from 'lodash-es'
+import { merge } from 'es-toolkit/compat'
 import { computed, watch } from 'vue'
 import { injectSliderBoundaryContext } from './SliderBoundaryProvider.vue'
 

@@ -11,7 +11,7 @@ import type { MessageOptions } from '.'
 import { createToaster, Toaster } from '@ark-ui/vue/toast'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
-import { defaults } from 'lodash-es'
+import { defaults } from 'es-toolkit/compat'
 
 const {
   unstyled,

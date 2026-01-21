@@ -10,7 +10,6 @@ import type { DialogTriggerFrom } from './dialog-intercept-context'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { useDialogContext } from '@ark-ui/vue/dialog'
 import { ark } from '@ark-ui/vue/factory'
-import { merge } from 'lodash-es'
 import { computed } from 'vue'
 import {
   injectDialogInterceptContext,
@@ -27,7 +26,7 @@ const context = useDialogContext()
 const interceptContext = injectDialogInterceptContext()
 const triggerProps = computed(() => {
   const contextProps = context.value.getCloseTriggerProps()
-  return merge({}, contextProps, forwarded.value, {
+  return Object.assign({}, contextProps, forwarded.value, {
     onClick: (e: PointerEvent) => {
       interceptContext.value.triggerFrom.value = from
       contextProps.onClick?.(e)

@@ -1,6 +1,6 @@
 import type { ComputedRef, MaybeRefOrGetter } from 'vue'
 import type { RUIConfigContext } from '../providers/config/rui-config-context'
-import { camelCase, defaults } from 'lodash-es'
+import { camelCase, defaults } from 'es-toolkit/compat'
 import { computed, toValue } from 'vue'
 import { injectRUIConfigContext } from '../providers/config/rui-config-context'
 

@@ -3,7 +3,7 @@ import type * as toast from '@zag-js/toast'
 import type { VNodeChild } from 'vue'
 import type { MessageOptions } from '.'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
-import { isEmpty } from 'lodash-es'
+import { isEmpty } from 'es-toolkit/compat'
 import { computed } from 'vue'
 
 function useMessage(messager?: CreateToasterReturn) {

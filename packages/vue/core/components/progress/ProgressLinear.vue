@@ -2,6 +2,10 @@
 export interface ProgressLinearProps extends ProgressTrackBaseProps, ThemeProps {
   class?: HTMLAttributes['class']
   variant?: 'default' | 'robbin' | 'transfer'
+  ui?: {
+    track?: HTMLAttributes['class']
+    range?: HTMLAttributes['class']
+  }
 }
 </script>
 
@@ -21,21 +25,12 @@ const {
   size,
   unstyled,
   variant = 'default',
+  ui,
   ...props
 } = defineProps<ProgressLinearProps>()
 const forwarded = useForwardProps(props)
 const context = useProgressContext()
 const itemProps = computed<any>(() => context.value.getTrackProps())
-
-const trackRef = useTemplateRef<{ $el: HTMLDivElement }>('track')
-const trackSizeStyles = computed(() => {
-  if (!trackRef.value)
-    return {}
-  return {
-    '--width': `${trackRef.value.$el.clientWidth}px`,
-    '--height': `${trackRef.value.$el.clientHeight}px`,
-  }
-})
 
 const rangeRef = useTemplateRef<{ $el: HTMLDivElement }>('range')
 const transfer = useRangeTransfer(rangeRef)
@@ -51,22 +46,20 @@ const { track: tvTrack, range: tvRange } = tvProgress()
 <template>
   <Progress.Track
     v-bind="forwarded"
-    ref="track"
     :class="
       tvTrack({
-        class: propsClass,
+        class: [ui?.track, propsClass],
         orientation: itemProps['data-orientation'] ?? 'horizontal',
         ...theme,
       })
     "
     :data-variant="variant"
-    :style="trackSizeStyles"
   >
     <Progress.Range
       ref="range"
       :class="
         tvRange({
-          class: propsClass,
+          class: ui?.range,
           orientation: itemProps['data-orientation'] ?? 'horizontal',
           ...theme,
         })

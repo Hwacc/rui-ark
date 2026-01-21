@@ -1,5 +1,5 @@
 import type { VNode, VNodeChild } from 'vue'
-import { camelCase, isEmpty } from 'lodash-es'
+import { camelCase, isEmpty } from 'es-toolkit/compat'
 import { isVNode } from 'vue'
 
 export function someVNode(

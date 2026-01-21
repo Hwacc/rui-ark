@@ -8,7 +8,8 @@ export interface ToasterManagerProps {
 <script setup lang="ts">
 import type { VNode } from 'vue'
 import type { ToasterProps, ToasterWrap } from '.'
-import { isEmpty, isNil } from 'lodash-es'
+import { isNil } from 'es-toolkit'
+import { isEmpty } from 'es-toolkit/compat'
 import { computed, ref, useSlots } from 'vue'
 import { DEFAULT_TOASTER_ID, Toast, Toaster } from '.'
 

@@ -1,5 +1,8 @@
 <script lang="ts">
-export interface SliderTooltipMarkerProps extends SliderMarkerBaseProps, Omit<TooltipRootProps, 'open'>, ThemeProps {
+export interface SliderTooltipMarkerProps
+  extends SliderMarkerBaseProps,
+  Omit<TooltipRootProps, 'open'>,
+  ThemeProps {
   class?: HTMLAttributes['class']
   open?: (context: UnwrapRef<UseSliderContext>) => boolean
 }
@@ -18,7 +21,8 @@ import { TooltipArrow, TooltipContent, TooltipTrigger } from '@rui-ark/vue-core/
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
-import { merge, pick } from 'lodash-es'
+import { pick } from 'es-toolkit'
+import { merge } from 'es-toolkit/compat'
 import { computed } from 'vue'
 import { injectSliderBoundaryContext } from './SliderBoundaryProvider.vue'
 
@@ -36,7 +40,7 @@ const boundary = injectSliderBoundaryContext()
 const tooltipForwarded = useForwardProps(props)
 const configs = useConfig('tooltip')
 const tooltip = useTooltip(
-  computed(() => (
+  computed(() =>
     merge(
       {
         open: true,
@@ -50,8 +54,8 @@ const tooltip = useTooltip(
       },
       configs.value,
       tooltipForwarded.value,
-    )
-  )),
+    ),
+  ),
 )
 
 const theme = useTheme(() => ({ size, unstyled, skin }))
@@ -68,7 +72,7 @@ const { markerDot } = tvSlider()
               :class="markerDot({ ...theme })"
               data-scope="slider"
               data-part="marker-dot"
-              v-bind="pick(context.getMarkerProps({ value }), ['data-state'])"
+              v-bind="pick(context.getMarkerProps({ value }), ['data-state' as keyof HTMLAttributes])"
             />
           </slot>
         </Slider.Marker>

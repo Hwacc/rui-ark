@@ -8,21 +8,25 @@ export const tvProgress = tv({
     root: 'w-full flex flex-col items-center',
     track: '',
     range: '',
+    circle: '',
     circleTrack: '',
     circleRange: '',
   },
   variants: {
     size: {
       base: {
-        track: '',
+        track: 'rounded-[calc(var(--spacing)*1.5)]',
         range: 'rounded-[calc(var(--spacing)*1.5)]',
+        circle: [
+          '[--thickness:calc(var(--spacing)*1.5)]',
+        ],
       },
       sm: {
-        track: '',
+        track: 'rounded-[calc(var(--spacing))]',
         range: 'rounded-[calc(var(--spacing))]',
       },
       lg: {
-        track: '',
+        track: 'rounded-[calc(var(--spacing)*2)]',
         range: 'rounded-[calc(var(--spacing)*2)]',
       },
     },
@@ -38,48 +42,90 @@ export const tvProgress = tv({
       orientation: 'horizontal',
       size: 'base',
       class: {
-        track: 'w-full h-1.5 rounded-[calc(var(--spacing)*1.5)]',
-        range: 'h-full rounded-[calc(var(--spacing)*1.5)]',
+        track: [
+          'w-full',
+          'h-1.5',
+          '[--height:calc(var(--spacing)*1.5)]',
+        ],
+        range: [
+          'h-full',
+          '[--height:calc(var(--spacing)*1.5)]',
+        ],
       },
     },
     {
       orientation: 'horizontal',
       size: 'sm',
       class: {
-        track: 'w-full h-1 rounded-[calc(var(--spacing))]',
-        range: 'h-full rounded-[calc(var(--spacing))]',
+        track: [
+          'w-full',
+          'h-1',
+          '[--height:var(--spacing)]',
+        ],
+        range: [
+          'h-full',
+          '[--height:calc(var(--spacing))]',
+        ],
       },
     },
     {
       orientation: 'horizontal',
       size: 'lg',
       class: {
-        track: 'w-full h-2 rounded-[calc(var(--spacing)*2)]',
-        range: 'h-full rounded-[calc(var(--spacing)*2)]',
+        track: [
+          'w-full',
+          'h-2',
+          '[--height:calc(var(--spacing)*2)]',
+        ],
+        range: [
+          'h-full',
+          '[--height:calc(var(--spacing)*2)]',
+        ],
       },
     },
     {
       orientation: 'vertical',
       size: 'base',
       class: {
-        track: 'h-full w-1.5 rounded-[calc(var(--spacing)*1.5)]',
-        range: 'w-full rounded-[calc(var(--spacing)*1.5)]',
+        track: [
+          'h-full',
+          'w-1.5',
+          '[--width:calc(var(--spacing)*1.5)]',
+        ],
+        range: [
+          'w-full',
+          '[--width:calc(var(--spacing)*1.5)]',
+        ],
       },
     },
     {
       orientation: 'vertical',
       size: 'sm',
       class: {
-        track: 'h-full w-1 rounded-[calc(var(--spacing))]',
-        range: 'w-full rounded-[calc(var(--spacing))]',
+        track: [
+          'h-full',
+          'w-1',
+          '[--width:var(--spacing)]',
+        ],
+        range: [
+          'w-full',
+          '[--width:calc(var(--spacing))]',
+        ],
       },
     },
     {
       orientation: 'vertical',
       size: 'lg',
       class: {
-        track: 'h-full w-2 rounded-[calc(var(--spacing)*2)]',
-        range: 'w-full rounded-[calc(var(--spacing)*2)]',
+        track: [
+          'h-full',
+          'w-2',
+          '[--height:calc(var(--spacing)*2)]',
+        ],
+        range: [
+          'w-full',
+          '[--height:calc(var(--spacing)*2)]',
+        ],
       },
     },
   ],
@@ -92,6 +138,7 @@ export const tvProgress = tv({
     root: prefix,
     track: `${prefix}-track`,
     range: `${prefix}-range`,
+    circle: `${prefix}-circle`,
     circleTrack: `${prefix}-circle-track`,
     circleRange: `${prefix}-circle-range`,
   },

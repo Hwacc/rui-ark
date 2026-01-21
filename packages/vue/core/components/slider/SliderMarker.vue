@@ -12,14 +12,9 @@ import { useForwardProps } from '@ark-ui/vue'
 import { Slider, useSliderContext } from '@ark-ui/vue/slider'
 import { tvSlider } from '@rui-ark/themes/crafts/slider'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { pick } from 'lodash-es'
+import { pick } from 'es-toolkit'
 
-const {
-  class: propsClass,
-  size,
-  unstyled,
-  ...props
-} = defineProps<SliderMarkerProps>()
+const { class: propsClass, size, unstyled, ...props } = defineProps<SliderMarkerProps>()
 const forwarded = useForwardProps(props)
 const context = useSliderContext()
 
@@ -34,9 +29,11 @@ const { marker, markerDot } = tvSlider()
         :class="markerDot({ ...theme })"
         data-scope="slider"
         data-part="marker-dot"
-        v-bind="pick(context.getMarkerProps(forwarded), ['data-state'])"
+        v-bind="pick(context.getMarkerProps(forwarded), ['data-state' as keyof HTMLAttributes])"
       />
-      <span v-bind="pick(context.getMarkerProps(forwarded), ['data-state'])">
+      <span
+        v-bind="pick(context.getMarkerProps(forwarded), ['data-state' as keyof HTMLAttributes])"
+      >
         {{ forwarded.value }}
       </span>
     </slot>

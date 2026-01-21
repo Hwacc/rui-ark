@@ -1,11 +1,11 @@
 import type { ComputedRef, MaybeRefOrGetter } from 'vue'
 import type { ThemeProps } from '../providers/theme/theme-props'
-import { merge } from 'lodash-es'
+import { merge } from 'es-toolkit/compat'
 import { computed, toValue } from 'vue'
 import { injectThemeContext } from '../providers/theme/theme-props'
 import { useConfig } from './useConfig'
 
-export function useTheme<T = ThemeProps>(props?: MaybeRefOrGetter<T>): ComputedRef<T> {
+export function useTheme<T>(props?: MaybeRefOrGetter<T>): ComputedRef<T> {
   const configTheme = useConfig('theme')
   const contextTheme = injectThemeContext(computed(() => ({})))
   const propsTheme = computed(() => toValue(props) ?? {})
@@ -21,6 +21,6 @@ export function useTheme<T = ThemeProps>(props?: MaybeRefOrGetter<T>): ComputedR
       configTheme.value ?? {},
       contextTheme.value ?? {},
       cleaned,
-    )
+    ) as unknown as T
   })
 }
