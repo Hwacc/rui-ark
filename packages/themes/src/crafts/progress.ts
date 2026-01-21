@@ -14,30 +14,75 @@ export const tvProgress = tv({
   variants: {
     size: {
       base: {
-        track: 'h-1.5 rounded-[calc(var(--spacing)*1.5)]',
+        track: '',
         range: 'rounded-[calc(var(--spacing)*1.5)]',
       },
       sm: {
-        track: 'h-1 rounded-[calc(var(--spacing))]',
+        track: '',
         range: 'rounded-[calc(var(--spacing))]',
       },
       lg: {
-        track: 'h-2 rounded-[calc(var(--spacing)*2)]',
+        track: '',
         range: 'rounded-[calc(var(--spacing)*2)]',
       },
     },
 
     orientation: {
-      horizontal: {
-        track: 'w-full',
-        range: 'h-full',
-      },
-      vertical: {
-        track: 'h-full',
-        range: 'w-full',
-      },
+      horizontal: '',
+      vertical: '',
     },
   },
+
+  compoundVariants: [
+    {
+      orientation: 'horizontal',
+      size: 'base',
+      class: {
+        track: 'w-full h-1.5 rounded-[calc(var(--spacing)*1.5)]',
+        range: 'h-full rounded-[calc(var(--spacing)*1.5)]',
+      },
+    },
+    {
+      orientation: 'horizontal',
+      size: 'sm',
+      class: {
+        track: 'w-full h-1 rounded-[calc(var(--spacing))]',
+        range: 'h-full rounded-[calc(var(--spacing))]',
+      },
+    },
+    {
+      orientation: 'horizontal',
+      size: 'lg',
+      class: {
+        track: 'w-full h-2 rounded-[calc(var(--spacing)*2)]',
+        range: 'h-full rounded-[calc(var(--spacing)*2)]',
+      },
+    },
+    {
+      orientation: 'vertical',
+      size: 'base',
+      class: {
+        track: 'h-full w-1.5 rounded-[calc(var(--spacing)*1.5)]',
+        range: 'w-full rounded-[calc(var(--spacing)*1.5)]',
+      },
+    },
+    {
+      orientation: 'vertical',
+      size: 'sm',
+      class: {
+        track: 'h-full w-1 rounded-[calc(var(--spacing))]',
+        range: 'w-full rounded-[calc(var(--spacing))]',
+      },
+    },
+    {
+      orientation: 'vertical',
+      size: 'lg',
+      class: {
+        track: 'h-full w-2 rounded-[calc(var(--spacing)*2)]',
+        range: 'w-full rounded-[calc(var(--spacing)*2)]',
+      },
+    },
+  ],
   defaultVariants: {
     size: 'base',
     orientation: 'horizontal',

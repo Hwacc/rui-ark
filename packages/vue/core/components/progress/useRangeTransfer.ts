@@ -1,76 +1,44 @@
-import type { MaybeRef } from 'vue'
-import type { ProgressIndicatorVariants } from '.'
-import { colorHex2RgbObject, detectCssColorType } from '@rui/core/lib/colors'
-import { getNodeCssVar } from '@rui/core/lib/utils'
-import { reactive, ref, unref, watchEffect } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
+import { useProgressContext } from '@ark-ui/vue'
+import { colorHex2RgbObject, colorLab2RgbObject, detectCssColorType } from '@rui-ark/shared/color'
+import { getNodeCssVar } from '@rui-ark/shared/css'
+import { computed, reactive, watchEffect } from 'vue'
 
-export function useRangeTransfer(
-  variant: MaybeRef<ProgressIndicatorVariants['variant']>,
-  progress: MaybeRef<number | null | undefined>,
-) {
-  const rangeRef = ref<any>(null)
-  const transferStyle = reactive({
-    transform: `translateX(-${100 - (unref(progress) ?? 0)}%)`,
-    background: '',
+export function useRangeTransfer(range: Ref<{ $el: HTMLDivElement } | null>) {
+  const context = useProgressContext()
+  const step = computed(() => {
+    return (context.value.percent ?? 0) / 100
   })
-  watchEffect(
-    () => {
-      if (unref(variant) === 'transfer') {
-        const rangeEl = unref(rangeRef).$el
-          ? unref(rangeRef).$el
-          : unref(rangeRef)
-        transferStyle.transform = `translateX(-${
-          100 - (unref(progress) ?? 0)
-        }%)`
-        const { type: fromType, value: fromValue } = detectCssColorType(
-          getNodeCssVar(indicatorEl, '--transfer-from', '#000'),
-        )
-        const { type: toType, value: toValue } = detectCssColorType(
-          getNodeCssVar(indicatorEl, '--transfer-to', '#fff'),
-        )
+  const styles = reactive({ background: '' })
+  watchEffect(() => {
+    const from = detectCssColorType(getNodeCssVar(range.value?.$el, '--transfer-from', '#000'))
+    const to = detectCssColorType(getNodeCssVar(range.value?.$el, '--transfer-to', '#fff'))
 
-        if (fromType !== toType) {
-          throw new Error(
-            'transfer indicator from and to must be same color type',
-          )
-        }
-        const step = (unref(progress) ?? 0) / 100
-        switch (fromType) {
-          case 'lab': {
-            transferStyle.background = `lab(${
-              fromValue.l + (toValue.l - fromValue.l) * step
-            } ${fromValue.a + (toValue.a - fromValue.a) * step} ${
-              fromValue.b + (toValue.b - fromValue.b) * step
-            })`
-            break
-          }
-          case 'hex':
-          case 'hexa': {
-            const fromRGB = colorHex2RgbObject(fromValue)
-            const toRGB = colorHex2RgbObject(toValue)
-            transferStyle.background = `rgb(${
-              fromRGB.r + (toRGB.r - fromRGB.r) * step
-            } ${fromRGB.g + (toRGB.g - fromRGB.g) * step} ${
-              fromRGB.b + (toRGB.b - fromRGB.b) * step
-            })`
-            break
-          }
-          case 'rgb':
-          case 'rgba': {
-            transferStyle.background = `rgb(${
-              fromValue.r + (toValue.r - fromValue.r) * step
-            } ${fromValue.g + (toValue.g - fromValue.g) * step} ${
-              fromValue.b + (toValue.b - fromValue.b) * step
-            })`
-            break
-          }
-        }
+    if (from.type !== to.type) {
+      console.error(new Error('transfer indicator from and to must be same color type'))
+      return {} as CSSProperties
+    }
+    switch (from.type) {
+      case 'hex':
+      case 'hexa': {
+        const fromRGB = colorHex2RgbObject(from.value)
+        const toRGB = colorHex2RgbObject(to.value)
+        styles.background = `rgb(${fromRGB.r + (toRGB.r - fromRGB.r) * step.value} ${fromRGB.g + (toRGB.g - fromRGB.g) * step.value} ${fromRGB.b + (toRGB.b - fromRGB.b) * step.value})`
+        break
       }
-    },
-    { flush: 'post' },
-  )
-  return {
-    indicatorRef,
-    transferStyle,
-  }
+      case 'rgb':
+      case 'rgba': {
+        styles.background = `rgb(${from.value.r + (to.value.r - from.value.r) * step.value} ${from.value.g + (to.value.g - from.value.g) * step.value} ${from.value.b + (to.value.b - from.value.b) * step.value})`
+        break
+      }
+      case 'lab': {
+        const fromRGB = colorLab2RgbObject(from.value)
+        const toRGB = colorLab2RgbObject(to.value)
+        styles.background = `rgb(${fromRGB.r + (toRGB.r - fromRGB.r) * step.value} ${fromRGB.g + (toRGB.g - fromRGB.g) * step.value} ${fromRGB.b + (toRGB.b - fromRGB.b) * step.value})`
+        break
+      }
+    }
+  }, { flush: 'post' })
+
+  return { styles }
 }

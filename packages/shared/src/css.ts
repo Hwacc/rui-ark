@@ -1,3 +1,39 @@
+export function px2rem(px: number | string) {
+  if (typeof px === 'string') {
+    if (px.endsWith('rem'))
+      return parseFloat(px)
+    else px = parseFloat(px)
+  }
+  if (!px)
+    px = 0
+  const base = parseFloat(
+    window.getComputedStyle(document.documentElement).fontSize || '16px',
+  )
+  return px / base
+}
+
+export function rem2px(rem: number | string) {
+  if (typeof rem === 'string') {
+    if (rem.endsWith('px')) {
+      return parseFloat(rem)
+    }
+    else {
+      rem = parseFloat(rem)
+    }
+  }
+  if (!rem)
+    rem = 0
+  const base = parseFloat(
+    window.getComputedStyle(document.documentElement).fontSize || '16px',
+  )
+  return rem * base
+}
+
+export function spaceTimes(times: number) {
+  const spacing = parseFloat(getCssVar('--spacing') ?? '.25rem')
+  return times * rem2px(spacing)
+}
+
 export function getNodeCssVar(
   node: HTMLElement | null | undefined,
   varName: string,

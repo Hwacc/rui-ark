@@ -26,13 +26,13 @@
   --color-*: initial;
   --color-tw-ring-color: transparent;
   --color-rz-green: oklch(76.87% 0.2343 141.32);
-  --color-rz-green-dark: oklch(47.48% 0.1584 141.32);
-  --color-rz-green-dark-hover: oklch(59.25% 0.1135 141.32);
-  --color-rz-green-dark-active: oklch(33.16% 0.1092 141.32);
-  --color-rz-green-light: oklch(82.23% 0.1854 141.32);
-  --color-rz-green-border: oklch(45.35% 0.117 141.32);
-  --color-rz-green-border-hover: oklch(70.57% 0.1369 141.32);
-  --color-rz-green-border-active: oklch(45.88% 0.1354 141.32);
+  --color-rz-green-dark: oklch(47.48% 0.2343 141.32);
+  --color-rz-green-dark-hover: oklch(59.25% 0.2343 141.32);
+  --color-rz-green-dark-active: oklch(33.16% 0.2343 141.32);
+  --color-rz-green-light: oklch(82.23% 0.2343 141.32);
+  --color-rz-green-border: oklch(45.35% 0.2343 141.32);
+  --color-rz-green-border-hover: oklch(70.57% 0.2343 141.32);
+  --color-rz-green-border-active: oklch(45.88% 0.2343 141.32);
 
   --color-rz-orange: oklch(80.16% 0.1705 73.27);
   --color-rz-red: oklch(62.32% 0.2121 25.89);
@@ -89,7 +89,7 @@
   --text-xl--line-height: 1.5rem;
 
   /* Shadows */
-  --shadow-glory: 0 0 1.5625rem 0 oklch(86.64% 0.294827 141.32 / 47%);
+  --shadow-glory: 0 0 1.5625rem 0 oklch(86.64% 0.2343 141.32 / 47%);
   --shadow-black: 0 0 0.625rem 0 oklch(0% 0 0 / 80%);
   --shadow-black-md: 0 0 0.9375rem 0 oklch(0% 0 0 / 80%);
 
