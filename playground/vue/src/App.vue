@@ -9,6 +9,7 @@ import DialogExample from './examples/dialog/index.vue'
 import EditableExample from './examples/editable/index.vue'
 import InputExample from './examples/input/index.vue'
 import MenuExample from './examples/menu/index.vue'
+import ProgressExample from './examples/progress/index.vue'
 import ScrollAreaExample from './examples/scroll-area/index.vue'
 import SelectExample from './examples/select/index.vue'
 import SliderExample from './examples/slider/index.vue'
@@ -42,6 +43,7 @@ import TooltipExample from './examples/tooltip/index.vue'
       <SliderExample />
       <TabsExample />
       <ScrollAreaExample />
+      <ProgressExample />
     </div>
 
     <template #toaster>

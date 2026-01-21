@@ -1,36 +1,36 @@
 <script lang="ts">
-export interface ToggleGroupProps extends ToggleGroupRootBaseProps, ThemeProps {
+export interface ProgressProps extends ProgressRootBaseProps, ThemeProps {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
-import type { ToggleGroupRootBaseProps, ToggleGroupRootEmits } from '@ark-ui/vue/toggle-group'
+import type { ProgressRootBaseProps, ProgressRootEmits } from '@ark-ui/vue/progress'
 import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
-import { ToggleGroup, useToggleGroup } from '@ark-ui/vue/toggle-group'
-import { tvToggleGroup } from '@rui-ark/themes/crafts/toggle-group'
+import { Progress, useProgress } from '@ark-ui/vue/progress'
+import { tvProgress } from '@rui-ark/themes/crafts/progress'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 
-const { class: propsClass, size, unstyled, ...props } = defineProps<ToggleGroupProps>()
-const emit = defineEmits<ToggleGroupRootEmits>()
+const { class: propsClass, size, unstyled, ...props } = defineProps<ProgressProps>()
+const emit = defineEmits<ProgressRootEmits>()
 const forwarded = useForwardProps(props)
-const toggleGroup = useToggleGroup(forwarded, emit)
+const progress = useProgress(forwarded, emit)
 
 // theme
 const theme = useTheme(() => ({ size, unstyled }))
-const { root } = tvToggleGroup()
+const { root } = tvProgress()
 
 // expose
-defineExpose({ $api: toggleGroup })
+defineExpose({ $api: progress })
 useForwardExpose()
 </script>
 
 <template>
-  <ToggleGroup.RootProvider
-    :value="toggleGroup"
+  <Progress.RootProvider
+    :value="progress"
     :class="
       root({ class: propsClass, orientation: forwarded.orientation ?? 'horizontal', ...theme })
     "
@@ -38,5 +38,5 @@ useForwardExpose()
     <ThemeProvider :value="theme">
       <slot />
     </ThemeProvider>
-  </ToggleGroup.RootProvider>
+  </Progress.RootProvider>
 </template>

@@ -29,7 +29,7 @@ const { item } = tvToggleGroup()
     v-bind="forwarded"
     :class="
       item({
-        class: [propsClass],
+        class: propsClass,
         orientation: itemProps['data-orientation'] ?? 'horizontal',
         ...theme,
       })
