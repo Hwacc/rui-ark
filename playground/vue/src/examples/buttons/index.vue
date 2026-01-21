@@ -3,6 +3,7 @@ import { ToggleContext } from '@ark-ui/vue'
 import { Button } from '@rui-ark/vue-core/components/button'
 import { Icon } from '@rui-ark/vue-core/components/icon'
 import { Toggle } from '@rui-ark/vue-core/components/toggle'
+import { ToggleGroup, ToggleGroupItem } from '@rui-ark/vue-core/components/toggle-group'
 </script>
 
 <template>
@@ -46,6 +47,30 @@ import { Toggle } from '@rui-ark/vue-core/components/toggle'
           Toggle
         </ToggleContext>
       </Toggle>
+
+      <ToggleGroup>
+        <ToggleGroupItem value="a">
+          A
+        </ToggleGroupItem>
+        <ToggleGroupItem value="b">
+          B
+        </ToggleGroupItem>
+        <ToggleGroupItem value="c">
+          C
+        </ToggleGroupItem>
+      </ToggleGroup>
+
+      <ToggleGroup orientation="vertical">
+        <ToggleGroupItem value="a">
+          A
+        </ToggleGroupItem>
+        <ToggleGroupItem value="b">
+          B
+        </ToggleGroupItem>
+        <ToggleGroupItem value="c">
+          C
+        </ToggleGroupItem>
+      </ToggleGroup>
     </div>
   </div>
 </template>

@@ -34,15 +34,15 @@ export const tvButton = tv(
       },
       size: {
         base: {
-          root: 'h-[1.75rem] text-sm',
+          root: 'h-7 text-sm',
           loading: 'size-4',
         },
         sm: {
-          root: 'h-[1.5rem] text-xs',
+          root: 'h-6 text-xs',
           loading: 'size-3.5',
         },
         lg: {
-          root: 'h-[2rem] text-base',
+          root: 'h-8 text-base',
           loading: 'size-4.5',
         },
       },
