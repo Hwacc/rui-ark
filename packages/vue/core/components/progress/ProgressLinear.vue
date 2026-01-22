@@ -33,10 +33,11 @@ const context = useProgressContext()
 const itemProps = computed<any>(() => context.value.getTrackProps())
 
 const rangeRef = useTemplateRef<{ $el: HTMLDivElement }>('range')
-const transfer = useRangeTransfer(rangeRef)
-const rangeTransferStyle = computed(() => {
-  return variant === 'transfer' ? transfer.styles : undefined
-})
+const { styles: transferStyles } = useRangeTransfer(
+  rangeRef,
+  computed(() => variant),
+  'background',
+)
 
 // theme
 const theme = useTheme(() => ({ size, unstyled }))
@@ -65,7 +66,7 @@ const { track: tvTrack, range: tvRange } = tvProgress()
         })
       "
       :data-variant="variant"
-      :style="rangeTransferStyle"
+      :style="transferStyles"
     />
   </Progress.Track>
 </template>

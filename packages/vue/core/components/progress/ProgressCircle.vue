@@ -5,7 +5,7 @@ interface ProgressCircleTheme extends Omit<ThemeProps, 'size'> {
 
 export interface ProgressCircleProps extends ProgressCircleBaseProps, ProgressCircleTheme {
   class?: HTMLAttributes['class']
-  variant?: 'default' | 'robbin' | 'transfer'
+  variant?: 'default' | 'transfer'
 }
 </script>
 
@@ -17,9 +17,10 @@ import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Progress } from '@ark-ui/vue/progress'
 import { tvProgress } from '@rui-ark/themes/crafts/progress'
-import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { useCustomTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { omit } from 'es-toolkit'
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
+import { useRangeTransfer } from './useRangeTransfer'
 
 const {
   class: propsClass,
@@ -30,15 +31,41 @@ const {
 } = defineProps<ProgressCircleProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme<ProgressCircleTheme>(() => ({ size, unstyled }))
-const restTheme = computed(() => omit(theme.value, ['size']))
+const rangeRef = useTemplateRef<{ $el: HTMLDivElement }>('range')
+const { styles: transferStyles } = useRangeTransfer(
+  rangeRef,
+  computed(() => variant),
+  'stroke',
+)
 
+// theme
+const theme = useCustomTheme<ProgressCircleTheme>(() => ({ size, unstyled }))
+const themeRest = computed(() => omit(theme.value, ['size']))
 const { circle: tvCircle, circleTrack, circleRange } = tvProgress()
 </script>
 
 <template>
-  <Progress.Circle v-bind="forwarded" :class="tvCircle({ class: propsClass, ...restTheme })">
-    <Progress.CircleTrack :class="circleTrack({ class: propsClass, ...restTheme })" />
-    <Progress.CircleRange :class="circleRange({ class: propsClass, ...restTheme })" />
+  <Progress.Circle
+    v-bind="forwarded"
+    :class="
+      tvCircle({
+        class: propsClass,
+        size: typeof theme.size === 'string' ? theme.size : 'base',
+        ...themeRest,
+      })
+    "
+    :style="typeof theme.size === 'number' && { '--size': `${theme.size}px` }"
+    :data-variant="variant"
+  >
+    <Progress.CircleTrack
+      :class="circleTrack({ class: propsClass, ...themeRest })"
+      :data-variant="variant"
+    />
+    <Progress.CircleRange
+      ref="range"
+      :class="circleRange({ class: propsClass, ...themeRest })"
+      :data-variant="variant"
+      :style="transferStyles"
+    />
   </Progress.Circle>
 </template>

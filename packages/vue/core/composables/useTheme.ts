@@ -5,11 +5,14 @@ import { computed, toValue } from 'vue'
 import { injectThemeContext } from '../providers/theme/theme-props'
 import { useConfig } from './useConfig'
 
-export function useTheme<T>(props?: MaybeRefOrGetter<T>): ComputedRef<T> {
+export function useTheme(): ComputedRef<ThemeProps>
+export function useTheme<T = ThemeProps>(
+  props?: MaybeRefOrGetter<Partial<T>>,
+): ComputedRef<ThemeProps>
+export function useTheme<T>(props?: MaybeRefOrGetter<Partial<T>>): ComputedRef<T> {
   const configTheme = useConfig('theme')
   const contextTheme = injectThemeContext(computed(() => ({})))
   const propsTheme = computed(() => toValue(props) ?? {})
-
   return computed(() => {
     const cleaned: Partial<ThemeProps> = {}
     for (const [k, v] of Object.entries(propsTheme.value))
@@ -23,4 +26,8 @@ export function useTheme<T>(props?: MaybeRefOrGetter<T>): ComputedRef<T> {
       cleaned,
     ) as unknown as T
   })
+}
+
+export function useCustomTheme<T>(props?: MaybeRefOrGetter<T>): ComputedRef<T> {
+  return useTheme<T>(props) as ComputedRef<T>
 }

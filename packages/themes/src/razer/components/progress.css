@@ -49,7 +49,22 @@
       --transfer-to: oklch(80.16% 0.1705 73.27);
     }
   }
-  
+
+
+  .rui-progress-circle-track{
+    @apply stroke-rz-green/30;
+  }
+
+  .rui-progress-circle-range{
+    &[data-variant='default'] {
+      @apply stroke-rz-green;
+    }
+    &[data-variant='transfer'] {
+      --transfer-from: oklch(76.87% 0.2343 141.32);
+      --transfer-to: oklch(80.16% 0.1705 73.27);
+    }
+  }
+
   @keyframes robbin-left-to-right {
     to {
       background-position: 6px 0;

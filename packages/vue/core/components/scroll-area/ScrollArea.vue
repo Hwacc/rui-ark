@@ -16,7 +16,7 @@ import type { ScrollAreaTheme } from '.'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { ScrollArea, useScrollArea } from '@ark-ui/vue/scroll-area'
 import { tvScrollArea } from '@rui-ark/themes/crafts/scroll-area'
-import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { useCustomTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { excludeVNodesByNames, findVNodesByName } from '@rui-ark/vue-core/utils/vnode'
 import { computed, useSlots } from 'vue'
@@ -33,7 +33,7 @@ const otherNodes = computed(() =>
 )
 
 // theme
-const theme = useTheme<ScrollAreaTheme>(() => ({ size, unstyled }))
+const theme = useCustomTheme<ScrollAreaTheme>(() => ({ size, unstyled }))
 const { root, viewport, content } = tvScrollArea()
 
 // expose
