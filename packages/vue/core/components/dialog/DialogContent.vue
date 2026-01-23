@@ -22,7 +22,7 @@ import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { someVNode } from '@rui-ark/vue-core/utils/vnode'
 import { X } from 'lucide-vue-next'
 import { computed, useAttrs, useSlots } from 'vue'
-import { DialogBackdrop, DialogCloseTrigger } from '.'
+import { DialogCloseTrigger } from '.'
 
 defineOptions({
   inheritAttrs: false,
@@ -38,21 +38,18 @@ const {
 
 const slots = useSlots()
 const hasDialogHeader = computed(() =>
-  someVNode(
-    slots.default?.(),
-    v => (v.type as any)?.__name === 'DialogHeader',
-  ),
+  someVNode(slots.default?.(), v => (v.type as any)?.__name === 'DialogHeader'),
 )
 const showContentClose = computed(() => showClose && !hasDialogHeader.value)
 
 const attrs = useAttrs()
 const theme = useTheme(() => ({ size, unstyled }))
-const { positioner, content, close } = tvDialog()
+const { backdrop, positioner, content, close } = tvDialog()
 </script>
 
 <template>
   <Teleport to="body">
-    <DialogBackdrop :class="ui?.backdrop" :unstyled="theme.unstyled" />
+    <Dialog.Backdrop :class="backdrop({ class: ui?.backdrop, ...theme })" />
     <Dialog.Positioner :class="positioner({ class: ui?.positioner, ...theme })">
       <Dialog.Content
         v-bind="attrs"
@@ -60,14 +57,12 @@ const { positioner, content, close } = tvDialog()
       >
         <slot />
         <slot name="close">
-          <DialogCloseTrigger v-if="showContentClose" as-child>
+          <DialogCloseTrigger
+            v-if="showContentClose"
+            as-child
+          >
             <ark.button
-              :class="
-                cn(
-                  ['absolute', 'top-0', 'right-0'],
-                  close({ class: ui?.close, ...theme }),
-                )
-              "
+              :class="cn(['absolute', 'top-0', 'right-0'], close({ class: ui?.close, ...theme }))"
               data-variant="content-close"
             >
               <X />

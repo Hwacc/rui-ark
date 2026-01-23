@@ -9,8 +9,6 @@ import type {
   DialogTriggerFrom,
   OpenChangeDetails,
 } from './dialog-intercept-context'
-import { DialogContext } from '@ark-ui/vue/dialog'
-import { getCssVar } from '@rui-ark/shared/css'
 import { createApp, defineComponent, reactive, ref } from 'vue'
 import {
   Dialog,
@@ -19,6 +17,8 @@ import {
   DialogFooter,
   DialogHeader,
 } from '.'
+
+type OpenChangeDetailsWithFrom = OpenChangeDetails & { from: DialogTriggerFrom }
 
 interface DialogOptions extends ThemeProps {
   title?: string | ((context: UseDialogContext) => any)
@@ -31,9 +31,8 @@ interface DialogOptions extends ThemeProps {
     body?: ComponentProps<typeof DialogBody>
     footer?: ComponentProps<typeof DialogFooter>
   }
-  onOpenChange?: (
-    details: OpenChangeDetails & { from: DialogTriggerFrom },
-  ) => void
+  onOpenChange?: (details: OpenChangeDetailsWithFrom) => void
+  onAfterClose?: (details: OpenChangeDetailsWithFrom) => void
   onOk?: (event: MouseEvent) => void
   onCancel?: (event: MouseEvent) => void
 }
@@ -45,22 +44,25 @@ export function dialog(options: DialogOptions) {
     footer = true,
     render,
     widget,
-    onOpenChange,
     onOk,
     onCancel,
+    onOpenChange,
+    onAfterClose,
   } = reactive(options)
   const open = ref(false)
   const DialogComponent = defineComponent({
     name: 'Dialog',
     props: {
-      onClose: {
+      onAfterClose: {
         type: Function as PropType<
-          (details: OpenChangeDetails & { from: DialogTriggerFrom }) => void
+          (details: OpenChangeDetailsWithFrom) => void
         >,
         default: () => {},
       },
     },
     setup(props) {
+      const openChangeDetail = ref<OpenChangeDetails & { from: DialogTriggerFrom }>()
+
       return () => {
         return (
           <Dialog
@@ -68,66 +70,67 @@ export function dialog(options: DialogOptions) {
             lazy-mount
             unmount-on-exit
             onOpenChange={(details) => {
-              if (!details.open) {
-                props.onClose?.(details)
-              }
+              openChangeDetail.value = details
               onOpenChange?.(details)
             }}
+            onExitComplete={() => {
+              const details = openChangeDetail.value ?? { open: false, from: undefined }
+              props.onAfterClose?.(details)
+              onAfterClose?.(details)
+            }}
           >
-            <DialogContext>
-              {{
-                default: (context: UseDialogContext) => {
-                  if (render) {
-                    return (
-                      <DialogContent {...widget?.content}>
-                        {render(context)}
-                      </DialogContent>
-                    )
-                  }
+            {{
+              default: (context: UseDialogContext) => {
+                if (render) {
                   return (
                     <DialogContent {...widget?.content}>
-                      {title && (
-                        <DialogHeader {...widget?.header}>
-                          {{
-                            default: () => {
-                              return typeof title === 'function'
-                                ? title(context)
-                                : title
-                            },
-                          }}
-                        </DialogHeader>
-                      )}
-                      {content && (
-                        <DialogBody {...widget?.body}>
-                          {{
-                            default: () => {
-                              return typeof content === 'function'
-                                ? content(context)
-                                : content
-                            },
-                          }}
-                        </DialogBody>
-                      )}
-                      {footer && (
-                        <DialogFooter
-                          {...widget?.footer}
-                          onOk={onOk}
-                          onCancel={onCancel}
-                        >
-                          {{
-                            default: () => {
-                              return typeof footer === 'function'
-                                ? footer(context)
-                                : null
-                            },
-                          }}
-                        </DialogFooter>
-                      )}
+                      {render(context)}
                     </DialogContent>
                   )
-                },
-              }}
-            </DialogContext>
+                }
+                return (
+                  <DialogContent {...widget?.content}>
+                    {title && (
+                      <DialogHeader {...widget?.header}>
+                        {{
+                          default: () => {
+                            return typeof title === 'function'
+                              ? title(context)
+                              : title
+                          },
+                        }}
+                      </DialogHeader>
+                    )}
+                    {content && (
+                      <DialogBody {...widget?.body}>
+                        {{
+                          default: () => {
+                            return typeof content === 'function'
+                              ? content(context)
+                              : content
+                          },
+                        }}
+                      </DialogBody>
+                    )}
+                    {footer && (
+                      <DialogFooter
+                        {...widget?.footer}
+                        onOk={onOk}
+                        onCancel={onCancel}
+                      >
+                        {{
+                          default: () => {
+                            return typeof footer === 'function'
+                              ? footer(context)
+                              : null
+                          },
+                        }}
+                      </DialogFooter>
+                    )}
+                  </DialogContent>
+                )
+              },
+            }}
           </Dialog>
         )
       }
@@ -136,18 +139,9 @@ export function dialog(options: DialogOptions) {
 
   let dialogRootEl: HTMLDivElement | null = document.createElement('div')
   const dialogVueInstance = createApp(DialogComponent, {
-    onClose: () => {
-      /**
-       * HACK: Because ark-ui dialog didn't expose Precense 'exitComplete' event,
-       * so we need to wait for the motion duration to unmount the dialog.
-       * see: https://github.com/chakra-ui/ark/blob/c8c7aeef49d3f7de0ff6ddf05fc328714b97b98d/packages/vue/src/components/dialog/dialog-positioner.vue
-       * this is a temporary solution, maybe we should create a PR to solve it.
-       */
-      const motionDuration = getCssVar('--motion-duration', '0.2')
-      setTimeout(() => {
-        dialogRootEl = null
-        dialogVueInstance.unmount()
-      }, parseFloat(motionDuration) * 1000)
+    onAfterClose: () => {
+      dialogRootEl = null
+      dialogVueInstance.unmount()
     },
   })
   dialogVueInstance.mount(dialogRootEl)

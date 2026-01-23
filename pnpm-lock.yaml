@@ -48,8 +48,8 @@ importers:
   packages/vue/core:
     devDependencies:
       '@ark-ui/vue':
-        specifier: ^5.30.0
-        version: 5.30.0(vue@3.5.25(typescript@5.9.3))
+        specifier: npm:@hwacc/ark-ui-vue@5.30.1-pr.3758
+        version: '@hwacc/ark-ui-vue@5.30.1-pr.3758(vue@3.5.25(typescript@5.9.3))'
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.25(typescript@5.9.3))
@@ -81,8 +81,8 @@ importers:
   playground/vue:
     dependencies:
       '@ark-ui/vue':
-        specifier: ^5.30.0
-        version: 5.30.0(vue@3.5.25(typescript@5.9.3))
+        specifier: npm:@hwacc/ark-ui-vue@5.30.1-pr.3758
+        version: '@hwacc/ark-ui-vue@5.30.1-pr.3758(vue@3.5.25(typescript@5.9.3))'
       '@rui-ark/themes':
         specifier: workspace:*
         version: link:../../packages/themes
@@ -193,11 +193,6 @@ packages:
 
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
-
-  '@ark-ui/vue@5.30.0':
-    resolution: {integrity: sha512-AUA2kJnuqWboVefmlQIta7sr1o+AZz+cgCIVkm0zZ1FPERnoViSLhaAIFNHzVe45M9GunPbYjyBTUB90maCmcQ==}
-    peerDependencies:
-      vue: '>=3.5.0'
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -461,6 +456,11 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@hwacc/ark-ui-vue@5.30.1-pr.3758':
+    resolution: {integrity: sha512-iEXiQA3yzApY3+bKN7YbucTqRR3sLLe5Vtq2BBiZVp6HlwbImVFmiQCQpGFlSJE2Sgr+Q+4M+JRiNS99Ag8MHg==}
+    peerDependencies:
+      vue: '>=3.5.0'
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -2882,74 +2882,6 @@ snapshots:
       package-manager-detector: 1.6.0
       tinyexec: 1.0.2
 
-  '@ark-ui/vue@5.30.0(vue@3.5.25(typescript@5.9.3))':
-    dependencies:
-      '@internationalized/date': 3.10.0
-      '@zag-js/accordion': 1.31.1
-      '@zag-js/anatomy': 1.31.1
-      '@zag-js/angle-slider': 1.31.1
-      '@zag-js/async-list': 1.31.1
-      '@zag-js/auto-resize': 1.31.1
-      '@zag-js/avatar': 1.31.1
-      '@zag-js/bottom-sheet': 1.31.1
-      '@zag-js/carousel': 1.31.1
-      '@zag-js/checkbox': 1.31.1
-      '@zag-js/clipboard': 1.31.1
-      '@zag-js/collapsible': 1.31.1
-      '@zag-js/collection': 1.31.1
-      '@zag-js/color-picker': 1.31.1
-      '@zag-js/color-utils': 1.31.1
-      '@zag-js/combobox': 1.31.1
-      '@zag-js/core': 1.31.1
-      '@zag-js/date-picker': 1.31.1(@internationalized/date@3.10.0)
-      '@zag-js/date-utils': 1.31.1(@internationalized/date@3.10.0)
-      '@zag-js/dialog': 1.31.1
-      '@zag-js/dom-query': 1.31.1
-      '@zag-js/editable': 1.31.1
-      '@zag-js/file-upload': 1.31.1
-      '@zag-js/file-utils': 1.31.1
-      '@zag-js/floating-panel': 1.31.1
-      '@zag-js/focus-trap': 1.31.1
-      '@zag-js/highlight-word': 1.31.1
-      '@zag-js/hover-card': 1.31.1
-      '@zag-js/i18n-utils': 1.31.1
-      '@zag-js/image-cropper': 1.31.1
-      '@zag-js/json-tree-utils': 1.31.1
-      '@zag-js/listbox': 1.31.1
-      '@zag-js/marquee': 1.31.1
-      '@zag-js/menu': 1.31.1
-      '@zag-js/navigation-menu': 1.31.1
-      '@zag-js/number-input': 1.31.1
-      '@zag-js/pagination': 1.31.1
-      '@zag-js/password-input': 1.31.1
-      '@zag-js/pin-input': 1.31.1
-      '@zag-js/popover': 1.31.1
-      '@zag-js/presence': 1.31.1
-      '@zag-js/progress': 1.31.1
-      '@zag-js/qr-code': 1.31.1
-      '@zag-js/radio-group': 1.31.1
-      '@zag-js/rating-group': 1.31.1
-      '@zag-js/scroll-area': 1.31.1
-      '@zag-js/select': 1.31.1
-      '@zag-js/signature-pad': 1.31.1
-      '@zag-js/slider': 1.31.1
-      '@zag-js/splitter': 1.31.1
-      '@zag-js/steps': 1.31.1
-      '@zag-js/switch': 1.31.1
-      '@zag-js/tabs': 1.31.1
-      '@zag-js/tags-input': 1.31.1
-      '@zag-js/timer': 1.31.1
-      '@zag-js/toast': 1.31.1
-      '@zag-js/toggle': 1.31.1
-      '@zag-js/toggle-group': 1.31.1
-      '@zag-js/tooltip': 1.31.1
-      '@zag-js/tour': 1.31.1
-      '@zag-js/tree-view': 1.31.1
-      '@zag-js/types': 1.31.1
-      '@zag-js/utils': 1.31.1
-      '@zag-js/vue': 1.31.1(vue@3.5.25(typescript@5.9.3))
-      vue: 3.5.25(typescript@5.9.3)
-
   '@babel/code-frame@7.27.1':
     dependencies:
       '@babel/helper-validator-identifier': 7.28.5
@@ -3300,6 +3232,74 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@hwacc/ark-ui-vue@5.30.1-pr.3758(vue@3.5.25(typescript@5.9.3))':
+    dependencies:
+      '@internationalized/date': 3.10.0
+      '@zag-js/accordion': 1.31.1
+      '@zag-js/anatomy': 1.31.1
+      '@zag-js/angle-slider': 1.31.1
+      '@zag-js/async-list': 1.31.1
+      '@zag-js/auto-resize': 1.31.1
+      '@zag-js/avatar': 1.31.1
+      '@zag-js/bottom-sheet': 1.31.1
+      '@zag-js/carousel': 1.31.1
+      '@zag-js/checkbox': 1.31.1
+      '@zag-js/clipboard': 1.31.1
+      '@zag-js/collapsible': 1.31.1
+      '@zag-js/collection': 1.31.1
+      '@zag-js/color-picker': 1.31.1
+      '@zag-js/color-utils': 1.31.1
+      '@zag-js/combobox': 1.31.1
+      '@zag-js/core': 1.31.1
+      '@zag-js/date-picker': 1.31.1(@internationalized/date@3.10.0)
+      '@zag-js/date-utils': 1.31.1(@internationalized/date@3.10.0)
+      '@zag-js/dialog': 1.31.1
+      '@zag-js/dom-query': 1.31.1
+      '@zag-js/editable': 1.31.1
+      '@zag-js/file-upload': 1.31.1
+      '@zag-js/file-utils': 1.31.1
+      '@zag-js/floating-panel': 1.31.1
+      '@zag-js/focus-trap': 1.31.1
+      '@zag-js/highlight-word': 1.31.1
+      '@zag-js/hover-card': 1.31.1
+      '@zag-js/i18n-utils': 1.31.1
+      '@zag-js/image-cropper': 1.31.1
+      '@zag-js/json-tree-utils': 1.31.1
+      '@zag-js/listbox': 1.31.1
+      '@zag-js/marquee': 1.31.1
+      '@zag-js/menu': 1.31.1
+      '@zag-js/navigation-menu': 1.31.1
+      '@zag-js/number-input': 1.31.1
+      '@zag-js/pagination': 1.31.1
+      '@zag-js/password-input': 1.31.1
+      '@zag-js/pin-input': 1.31.1
+      '@zag-js/popover': 1.31.1
+      '@zag-js/presence': 1.31.1
+      '@zag-js/progress': 1.31.1
+      '@zag-js/qr-code': 1.31.1
+      '@zag-js/radio-group': 1.31.1
+      '@zag-js/rating-group': 1.31.1
+      '@zag-js/scroll-area': 1.31.1
+      '@zag-js/select': 1.31.1
+      '@zag-js/signature-pad': 1.31.1
+      '@zag-js/slider': 1.31.1
+      '@zag-js/splitter': 1.31.1
+      '@zag-js/steps': 1.31.1
+      '@zag-js/switch': 1.31.1
+      '@zag-js/tabs': 1.31.1
+      '@zag-js/tags-input': 1.31.1
+      '@zag-js/timer': 1.31.1
+      '@zag-js/toast': 1.31.1
+      '@zag-js/toggle': 1.31.1
+      '@zag-js/toggle-group': 1.31.1
+      '@zag-js/tooltip': 1.31.1
+      '@zag-js/tour': 1.31.1
+      '@zag-js/tree-view': 1.31.1
+      '@zag-js/types': 1.31.1
+      '@zag-js/utils': 1.31.1
+      '@zag-js/vue': 1.31.1(vue@3.5.25(typescript@5.9.3))
+      vue: 3.5.25(typescript@5.9.3)
 
   '@iconify/types@2.0.0': {}
 

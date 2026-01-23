@@ -17,7 +17,9 @@ import TestDialog from './TestDialog.vue'
 function handleOpenChange(details: any) {
   console.log('open change', details)
 }
-
+function handleExitComplete() {
+  console.log('exit complete')
+}
 function handleEscapeKeyDown(event: KeyboardEvent) {
   console.log('escape key down', event)
 }
@@ -58,6 +60,7 @@ function handleOpenOverlayDialog() {
       :unmount-on-exit="true"
       @open-change="handleOpenChange"
       @escape-key-down="handleEscapeKeyDown"
+      @exit-complete="handleExitComplete"
     >
       <DialogTrigger as-child>
         <Button class="w-fit">

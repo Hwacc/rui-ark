@@ -82,6 +82,8 @@ function _useOverlay() {
 
     overlays.push(options)
 
+    console.log('useOverlay -> create', overlays)
+
     return {
       ...options,
       open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
