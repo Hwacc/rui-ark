@@ -11,9 +11,11 @@ import {
 </script>
 
 <template>
-  <Dialog>
+  <Dialog open>
     <DialogTrigger as-child>
-      <Button class="w-fit"> Open Dialog </Button>
+      <Button class="w-fit">
+        Open Dialog
+      </Button>
     </DialogTrigger>
     <DialogContent class="w-120">
       <DialogHeader> Dialog Title </DialogHeader>

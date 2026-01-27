@@ -45,7 +45,7 @@ import { Dialog, useDialog } from '@ark-ui/vue/dialog'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { TriggerFrom } from './dialog-intercept-context'
 import DialogInterceptProvider from './DialogInterceptProvider.vue'
 
@@ -98,11 +98,22 @@ const dialog = useDialog(
     },
   })),
 )
+
 watch(
-  () => forwarded.value.open,
-  (val) => {
-    dialog.value.setOpen(val ?? false)
+  () => [forwarded.value.open, forwarded.value.defaultOpen],
+  ([open, defaultOpen]) => {
+    if (defaultOpen) {
+      nextTick(() => {
+        dialog.value.setOpen(true)
+      })
+    }
+    else if (open !== undefined) {
+      nextTick(() => {
+        dialog.value.setOpen(open ?? false)
+      })
+    }
   },
+  { immediate: true },
 )
 
 // theme
