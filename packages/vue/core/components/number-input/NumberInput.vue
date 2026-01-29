@@ -31,7 +31,12 @@ const {
   showTrigger = false,
   ...props
 } = defineProps<NumberInputProps>()
-const emits = defineEmits<NumberInputRootEmits>()
+const emits = defineEmits<
+  NumberInputRootEmits & {
+    focus: [event: FocusEvent]
+    blur: [event: FocusEvent]
+  }
+>()
 const numberInput = useNumberInput(useForwardProps(props), emits)
 
 // theme
@@ -55,6 +60,8 @@ useForwardExpose()
     >
       <NumberInput.Input
         :class="tvInputInput({ class: input({ class: ui?.input, ...theme }), ...theme })"
+        @focus="emits('focus', $event)"
+        @blur="emits('blur', $event)"
       />
       <div
         v-if="showTrigger"

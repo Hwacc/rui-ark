@@ -78,13 +78,13 @@ function onBlur(event: Event) {
 }
 
 const theme = useTheme(() => ({ size, unstyled }))
-const { root, input, clearable: tvClearable } = tvInput()
+const { root: tvRoot, input: tvInputInput, clearable: tvClearable } = tvInput()
 </script>
 
 <template>
   <ark.div
     :as-child="false"
-    :class="root({ class: [ui?.root, propsClass], ...theme })"
+    :class="tvRoot({ class: [ui?.root, propsClass], ...theme })"
     :data-state="inputState"
   >
     <slot name="prefix" />
@@ -92,7 +92,7 @@ const { root, input, clearable: tvClearable } = tvInput()
       :id="id ?? inputId"
       ref="input"
       v-model="modelValue"
-      :class="input({ class: [ui?.input], ...theme })"
+      :class="tvInputInput({ class: [ui?.input], ...theme })"
       :placeholder="placeholder"
       :data-state="inputState"
       :disabled="disabled ? true : undefined"

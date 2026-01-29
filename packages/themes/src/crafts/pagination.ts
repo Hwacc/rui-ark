@@ -6,15 +6,9 @@ const prefix = 'rui-pagination'
 export const tvPagination = tv(
   {
     slots: {
-      root: '',
+      root: 'flex items-center gap-2',
       control: 'flex items-center gap-2',
-      item: [
-        'inline-flex',
-        'items-center',
-        'justify-center',
-        'transition-all',
-        'rounded',
-      ],
+      item: ['inline-flex', 'items-center', 'justify-center', 'transition-all', 'rounded'],
       ellipsis: 'inline-flex items-center justify-center',
     },
 
@@ -50,3 +44,69 @@ export const tvPagination = tv(
 )
 
 export type PaginationVariantProps = VariantProps<typeof tvPagination>
+
+export const tvPaginationGoto = tv(
+  {
+    slots: {
+      root: 'flex items-center gap-2',
+      input: ['[&_[data-part="input"]]:px-0 [&_[data-part="input"]]:text-center'],
+    },
+    variants: {
+      size: {
+        base: {
+          input: 'text-sm size-8',
+        },
+        sm: {
+          input: 'text-xs size-6',
+        },
+        lg: {
+          input: 'text-base size-10',
+        },
+      },
+    },
+    defaultVariants: {
+      size: 'base',
+    },
+  },
+  {
+    slots: {
+      root: `${prefix}-goto`,
+      input: `${prefix}-goto-input`,
+    },
+  },
+)
+export type PaginationGotoVariantProps = VariantProps<typeof tvPaginationGoto>
+
+export const tvPaginationPageSize = tv(
+  {
+    slots: {
+      root: 'flex items-center gap-2',
+      control: '',
+      trigger: 'min-w-0',
+      value: '',
+      content: '',
+      item: '',
+    },
+    variants: {
+      size: {
+        base: '',
+        sm: '',
+        lg: '',
+      },
+    },
+    defaultVariants: {
+      size: 'base',
+    },
+  },
+  {
+    slots: {
+      root: `${prefix}-page-size`,
+      control: `${prefix}-page-size-control`,
+      trigger: `${prefix}-page-size-trigger`,
+      value: `${prefix}-page-size-value`,
+      content: `${prefix}-page-size-content`,
+      item: `${prefix}-page-size-item`,
+    },
+  },
+)
+export type PaginationPageSizeVariantProps = VariantProps<typeof tvPaginationPageSize>

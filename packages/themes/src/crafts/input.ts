@@ -8,7 +8,7 @@ export const tvInput = tv({
     root: [
       'flex',
       'items-center',
-      'min-w-[7.75rem]',
+      'min-w-0',
       'py-1.5',
       'px-2',
       'gap-2',

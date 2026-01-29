@@ -14,12 +14,7 @@ import { tvSelect } from '@rui-ark/themes/crafts/select'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { Check } from 'lucide-vue-next'
 
-const {
-  class: propsClass,
-  size,
-  unstyled = undefined,
-  ...props
-} = defineProps<SelectItemProps>()
+const { class: propsClass, size, unstyled = undefined, ...props } = defineProps<SelectItemProps>()
 const forwarded = useForwardProps(props)
 const theme = useTheme(() => ({ size, unstyled }))
 const { item, itemIndicator } = tvSelect()

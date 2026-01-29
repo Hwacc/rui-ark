@@ -25,6 +25,8 @@ const joined = computed(() => (lines.value.length ? lines.value.join('\n') : 'ï¼
         :min="0"
         :max="20"
         :step="5"
+        @input-focus="push('input-focus')"
+        @input-blur="push('input-blur')"
         @focus-change="(d) => push(`focus-change: focused=${d.focused} value=${d.value}`)"
         @value-change="(d) => push(`value-change: value=${d.value} number=${d.valueAsNumber}`)"
         @value-invalid="(d) => push(`value-invalid: reason=${d.reason} value=${d.value}`)"
@@ -35,4 +37,3 @@ const joined = computed(() => (lines.value.length ? lines.value.join('\n') : 'ï¼
     <pre class="w-full max-w-[520px] whitespace-pre-wrap rounded-md bg-h0f p-3 text-xs text-hcc">{{ joined }}</pre>
   </div>
 </template>
-
