@@ -4,15 +4,14 @@ import { Toggle } from '../index'
 
 <template>
   <div class="w-full flex flex-wrap items-center gap-4">
-    <Toggle size="sm">
+    <Toggle :theme="{ size: 'sm' }">
       size=sm
     </Toggle>
-    <Toggle size="base">
+    <Toggle :theme="{ size: 'base' }">
       size=base
     </Toggle>
-    <Toggle size="lg">
+    <Toggle :theme="{ size: 'lg' }">
       size=lg
     </Toggle>
   </div>
 </template>
-

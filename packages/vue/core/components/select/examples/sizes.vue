@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import { createListCollection } from '@ark-ui/vue/select'
 import { fakerEN } from '@faker-js/faker'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../index'
 
 const collection = createListCollection({
@@ -15,7 +15,7 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
 
 <template>
   <div class="w-full flex flex-col gap-4">
-    <Select v-for="size in sizes" :key="String(size)" :collection="collection" :size="size">
+    <Select v-for="size in sizes" :key="String(size)" :collection="collection" :theme="{ size }">
       <SelectTrigger class="w-60">
         <SelectValue :placeholder="`size=${String(size)}`" />
       </SelectTrigger>
@@ -27,4 +27,3 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
     </Select>
   </div>
 </template>
-

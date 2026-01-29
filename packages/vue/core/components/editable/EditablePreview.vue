@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface EditablePreviewProps extends ArkEditablePreviewProps, ThemeProps {
+export interface EditablePreviewProps extends EditablePreviewBaseProps, Theme {
   class?: string
 }
 </script>
 
 <script setup lang="ts">
-import type { EditablePreviewProps as ArkEditablePreviewProps } from '@ark-ui/vue/editable'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { EditablePreviewBaseProps } from '@ark-ui/vue/editable'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import { EditablePreview } from '@ark-ui/vue/editable'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvEditable } from '@rui-ark/themes/crafts/editable'
@@ -14,13 +14,12 @@ import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 
 const {
   class: propsClass,
-  unstyled = undefined,
-  size,
+  theme: propsTheme,
   ...props
 } = defineProps<EditablePreviewProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { preview } = tvEditable()
 </script>
 

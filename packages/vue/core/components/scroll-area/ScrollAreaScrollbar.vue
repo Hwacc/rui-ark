@@ -1,6 +1,7 @@
 <script lang="ts">
-export interface ScrollAreaScrollbarProps extends ScrollAreaScrollbarBaseProps, ScrollAreaTheme {
+export interface ScrollAreaScrollbarProps extends ScrollAreaScrollbarBaseProps {
   class?: HTMLAttributes['class']
+  theme?: ScrollAreaTheme
   ui?: {
     root?: HTMLAttributes['class']
     thumb?: HTMLAttributes['class']
@@ -19,15 +20,14 @@ import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ui,
   ...props
 } = defineProps<ScrollAreaScrollbarProps>()
 const forwarded = useForwardProps(props)
 
 // theme
-const theme = useTheme<ScrollAreaTheme>(() => ({ size, unstyled }))
+const theme = useTheme<ScrollAreaTheme>(() => propsTheme)
 const { scrollbar, thumb } = tvScrollArea()
 </script>
 

@@ -11,10 +11,10 @@ const showFullscreen = ref(false)
   <SpinProvider>
     <div class="w-full flex flex-col gap-3">
       <div class="flex items-center gap-2">
-        <Button size="sm" variant="outline" @click="showInline = !showInline">
+        <Button variant="outline" @click="showInline = !showInline">
           Toggle inline
         </Button>
-        <Button size="sm" variant="outline" @click="showFullscreen = !showFullscreen">
+        <Button variant="outline" @click="showFullscreen = !showFullscreen">
           Toggle fullscreen
         </Button>
         <div class="text-sm text-hcc">
@@ -37,4 +37,3 @@ const showFullscreen = ref(false)
     </div>
   </SpinProvider>
 </template>
-

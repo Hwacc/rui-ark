@@ -6,7 +6,7 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
 <template>
   <Tooltip :positioning="{ placement: 'bottom-start' }">
     <TooltipTrigger as-child>
-      <Button size="sm">
+      <Button>
         Hover tooltip
       </Button>
     </TooltipTrigger>
@@ -16,4 +16,3 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
     </TooltipContent>
   </Tooltip>
 </template>
-

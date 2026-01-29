@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface TagsInputItemProps extends TagsInputItemBaseProps, ThemeProps {
+export interface TagsInputItemProps extends TagsInputItemBaseProps, Theme {
   class?: HTMLAttributes['class']
   ui?: {
     root?: HTMLAttributes['class']
@@ -12,7 +12,7 @@ export interface TagsInputItemProps extends TagsInputItemBaseProps, ThemeProps {
 
 <script setup lang="ts">
 import type { TagsInputItemBaseProps } from '@ark-ui/vue/tags-input'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import type { TagsInputProvide } from '.'
 import { useForwardProps } from '@ark-ui/vue'
@@ -25,8 +25,7 @@ import { TAGS_INPUT_PROVIDE_KEY } from '.'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ui,
   ...props
 } = defineProps<TagsInputItemProps>()
@@ -48,7 +47,7 @@ watchEffect(
 )
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { item, itemPreview, itemInput, itemText } = tvTagsInput()
 const { root: tvInputRoot } = tvInput()
 </script>

@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface TabsListProps extends TabListBaseProps, ThemeProps {
+export interface TabsListProps extends TabListBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { TabListBaseProps } from '@ark-ui/vue/tabs'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Tabs, useTabsContext } from '@ark-ui/vue/tabs'
@@ -14,7 +14,7 @@ import { tvTabs } from '@rui-ark/themes/crafts/tabs'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { useTemplateRef, watchEffect } from 'vue'
 
-const { class: propsClass, size, unstyled = undefined, ...props } = defineProps<TabsListProps>()
+const { class: propsClass, theme: propsTheme, ...props } = defineProps<TabsListProps>()
 const forwarded = useForwardProps(props)
 const context = useTabsContext()
 const tabsListRef = useTemplateRef('tabsList')
@@ -89,7 +89,7 @@ watchEffect(() => {
   }
 })
 
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { list: tvList } = tvTabs()
 </script>
 

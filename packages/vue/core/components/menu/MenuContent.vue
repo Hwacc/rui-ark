@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface MenuContentProps extends ArkMenuContentProps, ThemeProps {
+export interface MenuContentProps extends ArkMenuContentProps, Theme {
   class?: HTMLAttributes['class']
   ui?: {
     positioner?: HTMLAttributes['class']
@@ -11,7 +11,7 @@ export interface MenuContentProps extends ArkMenuContentProps, ThemeProps {
 
 <script setup lang="ts">
 import type { MenuContentProps as ArkMenuContentProps } from '@ark-ui/vue/menu'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -26,9 +26,7 @@ import { computed, useSlots } from 'vue'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
-  bordered = undefined,
+  theme: propsTheme,
   ui,
   ...props
 } = defineProps<MenuContentProps>()
@@ -42,7 +40,8 @@ checkContextVNodePosition(defaultSlots.value, 'MenuContext', 'MenuContent')
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'MenuArrow'))
 const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'MenuArrow'))
 
-const theme = useTheme(() => ({ size, unstyled, bordered }))
+// theme
+const theme = useTheme(() => propsTheme)
 const { content, contentInner } = tvMenu()
 </script>
 
@@ -54,7 +53,7 @@ const { content, contentInner } = tvMenu()
     <Menu.Content
       v-bind="forwarded"
       :class="content({ class: [ui?.content, propsClass], ...theme })"
-      :data-bordered="theme.bordered ? 'true' : undefined"
+      :data-theme-bordered="theme.bordered ? '' : undefined"
     >
       <template v-if="arrowNode">
         <component :is="arrowNode" />

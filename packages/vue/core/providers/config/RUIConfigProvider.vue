@@ -29,6 +29,7 @@ import { provideRUIConfigContext } from './rui-config-context'
 const props = withDefaults(defineProps<RUIConfigProps>(), {
   theme: () => ({
     skin: undefined,
+    surface: undefined,
     size: 'base',
     unstyled: false,
     bordered: true,

@@ -14,19 +14,19 @@ const lg = ref(4)
     </div>
 
     <div class="w-full max-w-[520px] flex flex-col gap-3 rounded-md border border-h33 p-3">
-      <RatingGroup v-model="sm" size="sm" :count="5">
+      <RatingGroup v-model="sm" :theme="{ size: 'sm' }" :count="5">
         <template #default="{ items }">
           <RatingGroupItem v-for="item in items" :key="item" :index="item" />
         </template>
       </RatingGroup>
 
-      <RatingGroup v-model="base" size="base" :count="5">
+      <RatingGroup v-model="base" :theme="{ size: 'base' }" :count="5">
         <template #default="{ items }">
           <RatingGroupItem v-for="item in items" :key="item" :index="item" />
         </template>
       </RatingGroup>
 
-      <RatingGroup v-model="lg" size="lg" :count="5">
+      <RatingGroup v-model="lg" :theme="{ size: 'lg' }" :count="5">
         <template #default="{ items }">
           <RatingGroupItem v-for="item in items" :key="item" :index="item" />
         </template>
@@ -34,4 +34,3 @@ const lg = ref(4)
     </div>
   </div>
 </template>
-

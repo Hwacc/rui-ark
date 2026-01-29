@@ -1,7 +1,7 @@
 <script lang="ts">
 import type * as ZagSelect from '@zag-js/select'
 
-export interface SelectProps<T extends CollectionItem> extends SelectRootBaseProps<T>, ThemeProps {
+export interface SelectProps<T extends CollectionItem> extends SelectRootBaseProps<T>, Theme {
   class?: HTMLAttributes['class']
 }
 // 这里我们必须重新定义SelectEmits类型, 否则Volar/VLS在推断ts时会报错ts-plugin(2742)
@@ -22,7 +22,7 @@ export interface SelectEmits<T extends CollectionItem> {
 
 <script setup lang="ts" generic="T extends CollectionItem">
 import type { CollectionItem, SelectRootBaseProps, UseSelectProps } from '@ark-ui/vue/select'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Select, useSelect } from '@ark-ui/vue/select'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
@@ -33,8 +33,7 @@ import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   lazyMount = undefined,
   unmountOnExit = undefined,
   ...props
@@ -44,7 +43,7 @@ const selectConfig = useConfig('select', () => ({ lazyMount, unmountOnExit }))
 const selectRoot = useSelect<T>(useForwardProps(props) as unknown as UseSelectProps<T>, emits)
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root } = tvSelect()
 
 // expose

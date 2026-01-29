@@ -1,9 +1,10 @@
 <script setup lang="tsx">
+import type { ToasterManagerExpose } from '../index'
 import { useTemplateRef } from 'vue'
 import { Button } from '../../button'
 import { Toast, ToastCloseTrigger, Toaster, ToasterManager, useToast } from '../index'
 
-const manager = useTemplateRef('manager')
+const manager = useTemplateRef<ToasterManagerExpose>('manager')
 const { toast } = useToast(manager)
 
 function create() {
@@ -13,7 +14,9 @@ function create() {
       return (
         <div class="w-max flex items-center gap-2">
           <p class="text-sm">
-            Custom toast render, type: {context.type}
+            Custom toast render, type:
+            {' '}
+            {context.type}
           </p>
           <ToastCloseTrigger>
             <button class="text-sm underline">
@@ -29,7 +32,7 @@ function create() {
 
 <template>
   <div class="w-full flex flex-col gap-4">
-    <Button size="sm" @click="create">
+    <Button @click="create">
       Custom render
     </Button>
 
@@ -40,4 +43,3 @@ function create() {
     </ToasterManager>
   </div>
 </template>
-

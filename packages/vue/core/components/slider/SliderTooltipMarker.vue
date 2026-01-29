@@ -2,7 +2,7 @@
 export interface SliderTooltipMarkerProps
   extends SliderMarkerBaseProps,
   Omit<TooltipRootProps, 'open'>,
-  ThemeProps {
+  Theme {
   class?: HTMLAttributes['class']
   open?: (context: UnwrapRef<UseSliderContext>) => boolean
 }
@@ -11,7 +11,7 @@ export interface SliderTooltipMarkerProps
 <script setup lang="ts">
 import type { SliderMarkerBaseProps, UseSliderContext } from '@ark-ui/vue/slider'
 import type { TooltipRootProps } from '@ark-ui/vue/tooltip'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes, UnwrapRef } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Slider, useSliderContext } from '@ark-ui/vue/slider'
@@ -27,9 +27,7 @@ import { computed } from 'vue'
 import { injectSliderBoundaryContext } from './SliderBoundaryProvider.vue'
 
 const {
-  size,
-  unstyled = undefined,
-  skin,
+  theme: propsTheme,
   value,
   open, // tooltip prop
   ...props
@@ -58,7 +56,7 @@ const tooltip = useTooltip(
   ),
 )
 
-const theme = useTheme(() => ({ size, unstyled, skin }))
+const theme = useTheme(() => propsTheme)
 const { markerDot } = tvSlider()
 </script>
 

@@ -14,10 +14,27 @@ const lg = ref(3)
     </div>
 
     <div class="w-full max-w-[720px] flex flex-col gap-3 rounded-md border border-h33 p-3">
-      <Pagination v-model:page="sm" size="sm" :count="200" :default-page-size="10" :sibling-count="1" />
-      <Pagination v-model:page="base" size="base" :count="200" :default-page-size="10" :sibling-count="1" />
-      <Pagination v-model:page="lg" size="lg" :count="200" :default-page-size="10" :sibling-count="1" />
+      <Pagination
+        v-model:page="sm"
+        :theme="{ size: 'sm' }"
+        :count="200"
+        :default-page-size="10"
+        :sibling-count="1"
+      />
+      <Pagination
+        v-model:page="base"
+        :theme="{ size: 'base' }"
+        :count="200"
+        :default-page-size="10"
+        :sibling-count="1"
+      />
+      <Pagination
+        v-model:page="lg"
+        :theme="{ size: 'lg' }"
+        :count="200"
+        :default-page-size="10"
+        :sibling-count="1"
+      />
     </div>
   </div>
 </template>
-

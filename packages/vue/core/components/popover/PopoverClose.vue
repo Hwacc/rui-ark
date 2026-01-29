@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface PopoverCloseProps extends ThemeProps {
+export interface PopoverCloseProps extends Theme {
   class?: HTMLAttributes['class']
   asChild?: boolean
 }
 </script>
 
 <script lang="ts" setup>
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { PopoverCloseTrigger } from '@ark-ui/vue/popover'
@@ -16,12 +16,10 @@ import { X } from 'lucide-vue-next'
 
 const {
   class: propsClass,
-  unstyled = undefined,
-  size,
-  skin,
+  theme: propsTheme,
   asChild,
 } = defineProps<PopoverCloseProps>()
-const theme = useTheme(() => ({ size, unstyled, skin }))
+const theme = useTheme(() => propsTheme)
 const { close } = tvPopover()
 </script>
 
@@ -31,8 +29,9 @@ const { close } = tvPopover()
       <ark.button
         v-bind="$attrs"
         :class="close({ class: propsClass, ...theme })"
-        :data-skin="skin"
         :as-child="asChild"
+        :data-theme-skin="theme.skin"
+        :data-theme-surface="theme.surface"
       >
         <X />
       </ark.button>

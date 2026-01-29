@@ -9,10 +9,10 @@ const checked = ref(false)
 <template>
   <div class="w-full flex flex-col gap-3">
     <div class="flex items-center gap-2">
-      <Button size="sm" variant="outline" @click="checked = false">
+      <Button variant="outline" @click="checked = false">
         Set false
       </Button>
-      <Button size="sm" variant="outline" @click="checked = true">
+      <Button variant="outline" @click="checked = true">
         Set true
       </Button>
       <span class="text-sm text-hff">checked: {{ checked }}</span>

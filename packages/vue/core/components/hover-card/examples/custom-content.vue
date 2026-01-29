@@ -22,7 +22,7 @@ const content = fakerEN.lorem.sentences(2)
     >
       <HoverCardArrow
         class="[--arrow-background:var(--color-rz-green)] [--arrow-border:var(--color-h00)]"
-        size="lg"
+        :theme="{ size: 'lg' }"
       />
       <div class="flex flex-col gap-2">
         <div class="text-sm font-medium">
@@ -32,10 +32,10 @@ const content = fakerEN.lorem.sentences(2)
           {{ content }}
         </div>
         <div class="flex items-center gap-2">
-          <Button size="sm">
+          <Button>
             Action
           </Button>
-          <Button size="sm" variant="text">
+          <Button variant="text">
             Cancel
           </Button>
         </div>

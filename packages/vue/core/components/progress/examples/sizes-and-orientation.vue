@@ -18,7 +18,7 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
         :key="String(size)"
         class="w-80"
         :model-value="value"
-        :size="size"
+        :theme="{ size }"
       >
         <ProgressLinear />
       </Progress>
@@ -35,7 +35,7 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
           class="h-30"
           orientation="vertical"
           :model-value="value"
-          :size="size"
+          :theme="{ size }"
         >
           <ProgressLinear />
         </Progress>
@@ -43,4 +43,3 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
     </div>
   </div>
 </template>
-

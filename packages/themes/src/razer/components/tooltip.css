@@ -2,15 +2,15 @@
   .rui-tooltip-content {
     --border-radius: var(--radius);
     @apply shadow-rui-popper;
-    @apply data-bordered:border-h00;
-    @apply dark:data-bordered:border-h33;
-    @apply razer:border-h00;
+    @apply data-theme-bordered:border-h00;
+    @apply surface-dark:data-theme-bordered:border-h33;
+    @apply surface-razer:border-h00;
   }
 
   .rui-tooltip-content,
   .rui-tooltip-content-inner {
     @apply bg-hff text-h00;
-    @apply dark:bg-h00 dark:text-hff;
-    @apply razer:bg-rz-green razer:text-h00;
+    @apply surface-dark:bg-h00 surface-dark:text-hff;
+    @apply surface-razer:bg-rz-green surface-razer:text-h00;
   }
 }

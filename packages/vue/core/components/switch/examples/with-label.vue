@@ -8,9 +8,10 @@ import { Switch, SwitchLabel } from '../index'
       <SwitchLabel>Switch with label</SwitchLabel>
     </Switch>
 
-    <Switch size="lg">
-      <SwitchLabel class="font-medium">Large switch label</SwitchLabel>
+    <Switch :theme="{ size: 'lg' }">
+      <SwitchLabel class="font-medium">
+        Large switch label
+      </SwitchLabel>
     </Switch>
   </div>
 </template>
-

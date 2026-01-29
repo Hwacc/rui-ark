@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface PaginationPageSizeProps extends ThemeProps {
+export interface PaginationPageSizeProps extends Theme {
   class?: HTMLAttributes['class']
   sizes?: number[]
   placeholder?: string
@@ -15,7 +15,7 @@ export interface PaginationPageSizeProps extends ThemeProps {
 </script>
 
 <script setup lang="ts">
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { usePaginationContext } from '@ark-ui/vue'
 import { createListCollection } from '@ark-ui/vue/collection'
@@ -27,8 +27,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   sizes,
   placeholder,
   ui,
@@ -45,7 +44,7 @@ const sizeItems = computed(() => {
 const collection = computed(() => createListCollection({ items: sizeItems.value }))
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, control, trigger, value, content, item: tvItem } = tvPaginationPageSize()
 </script>
 

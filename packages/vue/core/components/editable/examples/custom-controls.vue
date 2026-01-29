@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Check, Pencil, X } from 'lucide-vue-next'
 import { Button } from '../../button'
 import {
   Editable,
@@ -9,7 +10,6 @@ import {
   EditablePreview,
   EditableSubmitTrigger,
 } from '../index'
-import { Check, Pencil, X } from 'lucide-vue-next'
 </script>
 
 <template>
@@ -41,4 +41,3 @@ import { Check, Pencil, X } from 'lucide-vue-next'
     </template>
   </Editable>
 </template>
-

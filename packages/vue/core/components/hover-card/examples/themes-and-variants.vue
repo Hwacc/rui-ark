@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { Button } from '../../button'
-import {
-  HoverCard,
-  HoverCardArrow,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '../index'
+import { HoverCard, HoverCardArrow, HoverCardContent, HoverCardTrigger } from '../index'
 </script>
 
 <template>
   <div class="w-full flex flex-wrap items-center gap-6">
-    <HoverCard size="sm" :positioning="{ placement: 'top' }">
+    <HoverCard :theme="{ size: 'sm' }" :positioning="{ placement: 'top' }">
       <HoverCardTrigger as-child>
         <Button variant="outline">
           sm
@@ -22,7 +17,7 @@ import {
       </HoverCardContent>
     </HoverCard>
 
-    <HoverCard size="base" :positioning="{ placement: 'top' }">
+    <HoverCard :theme="{ size: 'base' }" :positioning="{ placement: 'top' }">
       <HoverCardTrigger as-child>
         <Button variant="outline">
           base
@@ -34,7 +29,7 @@ import {
       </HoverCardContent>
     </HoverCard>
 
-    <HoverCard size="lg" :positioning="{ placement: 'top' }">
+    <HoverCard :theme="{ size: 'lg' }" :positioning="{ placement: 'top' }">
       <HoverCardTrigger as-child>
         <Button variant="outline">
           lg
@@ -46,7 +41,7 @@ import {
       </HoverCardContent>
     </HoverCard>
 
-    <HoverCard :bordered="false" :positioning="{ placement: 'top' }">
+    <HoverCard :theme="{ bordered: false }" :positioning="{ placement: 'top' }">
       <HoverCardTrigger as-child>
         <Button variant="outline">
           no border
@@ -58,7 +53,7 @@ import {
       </HoverCardContent>
     </HoverCard>
 
-    <HoverCard skin="dark" :positioning="{ placement: 'top' }">
+    <HoverCard :theme="{ surface: 'dark' }" :positioning="{ placement: 'top' }">
       <HoverCardTrigger as-child>
         <Button variant="outline">
           dark skin

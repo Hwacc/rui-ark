@@ -26,10 +26,10 @@ function createWithRender() {
 
 <template>
   <div class="w-full flex flex-col gap-4">
-    <Button size="sm" @click="create">
+    <Button :theme="{ size: 'sm' }" @click="create">
       Toast with slots
     </Button>
-    <Button size="sm" @click="createWithRender">
+    <Button :theme="{ size: 'sm' }" @click="createWithRender">
       Toast with render function
     </Button>
   </div>

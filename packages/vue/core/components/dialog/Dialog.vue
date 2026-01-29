@@ -3,7 +3,7 @@ export type DialogOpenChangeDetails = OpenChangeDetails & {
   // the trigger that toggled the dialog
   from: DialogTriggerFrom
 }
-export interface DialogProps extends DialogRootProps, ThemeProps {
+export interface DialogProps extends DialogRootProps, Theme {
   class?: HTMLAttributes['class']
 }
 type UseDialogPropsEx = UseDialogProps & {
@@ -29,7 +29,7 @@ import type {
   UseDialogProps,
   UseDialogReturn,
 } from '@ark-ui/vue/dialog'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import type {
   DialogInterceptContext,
@@ -51,8 +51,7 @@ import DialogInterceptProvider from './DialogInterceptProvider.vue'
 
 const {
   class: propsClass,
-  unstyled = undefined,
-  size,
+  theme: propsTheme,
   lazyMount = undefined,
   unmountOnExit = undefined,
   ...props
@@ -117,7 +116,7 @@ watch(
 )
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 
 // expose
 defineExpose({ $api: dialog as UseDialogReturn })

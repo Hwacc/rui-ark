@@ -1,6 +1,7 @@
 <script lang="ts">
-export interface ScrollAreaCornerProps extends ScrollAreaCornerBaseProps, ScrollAreaTheme {
+export interface ScrollAreaCornerProps extends ScrollAreaCornerBaseProps {
   class?: HTMLAttributes['class']
+  theme?: ScrollAreaTheme
 }
 </script>
 
@@ -15,14 +16,13 @@ import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ...props
 } = defineProps<ScrollAreaCornerProps>()
 const forwarded = useForwardProps(props)
 
 // theme
-const theme = useTheme<ScrollAreaTheme>(() => ({ size, unstyled }))
+const theme = useTheme<ScrollAreaTheme>(() => propsTheme)
 const { corner } = tvScrollArea()
 </script>
 

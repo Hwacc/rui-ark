@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface EditableInputProps extends EditableInputBaseProps, ThemeProps {
+export interface EditableInputProps extends EditableInputBaseProps, Theme {
   class?: HTMLAttributes['class']
   clearable?: boolean
 }
@@ -7,9 +7,9 @@ export interface EditableInputProps extends EditableInputBaseProps, ThemeProps {
 
 <script setup lang="ts">
 import type { EditableInputBaseProps } from '@ark-ui/vue/editable'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
-import { EditableInput, useEditableContext } from '@ark-ui/vue/editable'
+import { Editable, useEditableContext } from '@ark-ui/vue/editable'
 import { ark } from '@ark-ui/vue/factory'
 import { useForwardProps } from '@ark-ui/vue/utils'
 import { tvEditableInput } from '@rui-ark/themes/crafts/editable'
@@ -19,9 +19,8 @@ import { ref } from 'vue'
 
 const {
   class: propsClass,
-  unstyled = undefined,
+  theme: propsTheme,
   clearable,
-  size,
   ...props
 } = defineProps<EditableInputProps>()
 
@@ -46,7 +45,7 @@ function onClear() {
   })
 }
 
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, input, clearable: tvClearable } = tvEditableInput()
 </script>
 
@@ -62,7 +61,7 @@ const { root, input, clearable: tvClearable } = tvEditableInput()
     data-part="input-area"
     :data-state="isFocus ? 'focused' : 'idle'"
   >
-    <EditableInput
+    <Editable.Input
       v-bind="forwarded"
       ref="inputRef"
       :class="input({ class: [propsClass], ...theme })"

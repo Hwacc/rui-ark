@@ -13,22 +13,21 @@ const lg = ref('')
       <div class="w-18 text-sm text-hcc">
         sm
       </div>
-      <Hotkey v-model:hotkey="sm" class="w-80" size="sm" />
+      <Hotkey v-model:hotkey="sm" class="w-80" :theme="{ size: 'sm' }" />
     </div>
 
     <div class="flex items-center gap-3">
       <div class="w-18 text-sm text-hcc">
         base
       </div>
-      <Hotkey v-model:hotkey="base" class="w-80" size="base" />
+      <Hotkey v-model:hotkey="base" class="w-80" :theme="{ size: 'base' }" />
     </div>
 
     <div class="flex items-center gap-3">
       <div class="w-18 text-sm text-hcc">
         lg
       </div>
-      <Hotkey v-model:hotkey="lg" class="w-80" size="lg" />
+      <Hotkey v-model:hotkey="lg" class="w-80" :theme="{ size: 'lg' }" />
     </div>
   </div>
 </template>
-

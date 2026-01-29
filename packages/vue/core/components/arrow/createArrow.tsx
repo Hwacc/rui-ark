@@ -1,10 +1,10 @@
-import type { Skin, ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme, ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 import { cn } from '@rui-ark/themes/utils/cn'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { computed, defineComponent } from 'vue'
 
-export interface ArrowProps extends ThemeProps {
+export interface ArrowProps extends Theme {
   class?: HTMLAttributes['class']
   ui?: {
     arrow?: HTMLAttributes['class']
@@ -19,9 +19,6 @@ export function createArrow(
   return defineComponent<ArrowProps>({
     name: ArrowNode.__name,
     props: {
-      theme: {
-        type: Object as PropType<ThemeProps['theme']>,
-      },
       class: {
         type: String as HTMLAttributes['class'],
       },
@@ -31,10 +28,12 @@ export function createArrow(
           arrowTip?: HTMLAttributes['class']
         }>,
       },
+      theme: {
+        type: Object as PropType<ThemeProps>,
+      },
     },
     setup(props) {
-      const theme = useTheme(() => (props.theme ?? {}))
-      console.log('arrow theme', theme.value)
+      const theme = useTheme(() => props.theme)
       const arrowSize = computed(() => {
         switch (theme.value.size) {
           case 'sm':
@@ -50,15 +49,17 @@ export function createArrow(
         return (
           <ArrowNode
             class={cn('overflow-visible z-0', props.ui?.arrow, props.class)}
-            data-skin={theme.value.skin}
+            data-theme-skin={theme.value.skin}
+            data-theme-surface={theme.value.surface}
             style={{
               '--arrow-size': arrowSize.value,
             }}
           >
             <ArrowTipNode
               class={cn(theme.value.bordered && 'border', props.ui?.arrowTip)}
-              data-skin={theme.value.skin}
-              data-bordered={theme.value.bordered ? 'true' : undefined}
+              data-theme-skin={theme.value.skin}
+              data-theme-surface={theme.value.surface}
+              data-theme-bordered={theme.value.bordered ? '' : undefined}
             />
           </ArrowNode>
         )

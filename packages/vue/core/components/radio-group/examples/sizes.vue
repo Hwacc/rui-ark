@@ -16,7 +16,7 @@ const value = ref<string | undefined>(items[0]?.value)
   <div class="w-full flex flex-col gap-4">
     <div v-for="size in sizes" :key="String(size)" class="flex items-center gap-4">
       <span class="w-10 text-xs text-hff">{{ size }}</span>
-      <RadioGroup v-model="value" :size="size">
+      <RadioGroup v-model="value" :theme="{ size }">
         <RadioGroupItem
           v-for="item in items"
           :key="item.value"

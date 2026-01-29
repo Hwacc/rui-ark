@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface HotkeyProps extends PolymorphicProps, ThemeProps {
+export interface HotkeyProps extends PolymorphicProps, Theme {
   hotkey: string
   placeholder?: string | ((focused: boolean) => string)
   class?: HTMLAttributes['class']
@@ -14,7 +14,7 @@ export interface HotkeyProps extends PolymorphicProps, ThemeProps {
 
 <script setup lang="ts">
 import type { PolymorphicProps } from '@ark-ui/vue/factory'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { useForwardExpose } from '@ark-ui/vue/utils'
@@ -30,8 +30,7 @@ const {
   placeholder: propsPlaceholder = '',
   disabled,
   readonly,
-  unstyled = undefined,
-  size,
+  theme: propsTheme,
   ui,
 } = defineProps<HotkeyProps>()
 
@@ -275,7 +274,7 @@ watchEffect((cleanup) => {
 })
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, input } = tvHotkey()
 </script>
 

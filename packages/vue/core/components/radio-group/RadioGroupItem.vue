@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface RadioGroupItemProps extends RadioGroupItemBaseProps, ThemeProps {
+export interface RadioGroupItemProps extends RadioGroupItemBaseProps, Theme {
   class?: HTMLAttributes['class']
   label?: string
   variant?: RadioGroupVariants['variant']
@@ -18,7 +18,7 @@ import type {
   UseRadioGroupItemContext,
 } from '@ark-ui/vue/radio-group'
 import type { RadioGroupVariants } from '@rui-ark/themes/crafts/radio-group'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes, UnwrapRef } from 'vue'
 import { RadioGroup } from '@ark-ui/vue/radio-group'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -28,8 +28,7 @@ import { Check, Circle } from 'lucide-vue-next'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   label,
   ui,
   variant = 'default',
@@ -43,7 +42,7 @@ const forwarded = useForwardProps<RadioGroupItemProps, RadioGroupItemBaseProps>(
   props,
 )
 
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { item, itemControl, itemIndicator, itemText } = tvRadioGroup()
 </script>
 

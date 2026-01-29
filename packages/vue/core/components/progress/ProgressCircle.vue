@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface ProgressCircleProps extends ProgressCircleBaseProps, ProgressCircleTheme {
+export interface ProgressCircleProps extends ProgressCircleBaseProps {
   class?: HTMLAttributes['class']
   variant?: 'default' | 'transfer'
   ui?: {
@@ -7,6 +7,7 @@ export interface ProgressCircleProps extends ProgressCircleBaseProps, ProgressCi
     circleTrack?: HTMLAttributes['class']
     circleRange?: HTMLAttributes['class']
   }
+  theme?: ProgressCircleTheme
 }
 </script>
 
@@ -24,8 +25,7 @@ import { useRangeTransfer } from './useRangeTransfer'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   variant = 'default',
   ui,
   ...props
@@ -40,7 +40,7 @@ const { styles: transferStyles } = useRangeTransfer(
 )
 
 // theme
-const theme = useCustomTheme<ProgressCircleTheme>(() => ({ size, unstyled }))
+const theme = useCustomTheme<ProgressCircleTheme>(() => propsTheme)
 const themeRest = computed(() => omit(theme.value, ['size']))
 const { circle: tvCircle, circleTrack, circleRange } = tvProgress()
 </script>

@@ -11,7 +11,7 @@ import {
 
 <template>
   <div class="w-full flex flex-wrap items-center gap-4">
-    <Popover skin="dark" :positioning="{ placement: 'bottom-start' }">
+    <Popover :theme="{ surface: 'dark' }" :positioning="{ placement: 'bottom-start' }">
       <PopoverTrigger as-child>
         <Button variant="outline">
           Dark skin
@@ -26,7 +26,7 @@ import {
       </PopoverContent>
     </Popover>
 
-    <Popover :bordered="false" :positioning="{ placement: 'bottom-start' }">
+    <Popover :theme="{ bordered: false }" :positioning="{ placement: 'bottom-start' }">
       <PopoverTrigger as-child>
         <Button variant="outline">
           No border
@@ -41,7 +41,7 @@ import {
       </PopoverContent>
     </Popover>
 
-    <Popover size="sm" :positioning="{ placement: 'bottom-start' }">
+    <Popover :theme="{ size: 'sm' }" :positioning="{ placement: 'bottom-start' }">
       <PopoverTrigger as-child>
         <Button variant="outline">
           Small
@@ -56,7 +56,7 @@ import {
       </PopoverContent>
     </Popover>
 
-    <Popover size="lg" :positioning="{ placement: 'bottom-start' }">
+    <Popover :theme="{ size: 'lg' }" :positioning="{ placement: 'bottom-start' }">
       <PopoverTrigger as-child>
         <Button variant="outline">
           Large
@@ -72,4 +72,3 @@ import {
     </Popover>
   </div>
 </template>
-

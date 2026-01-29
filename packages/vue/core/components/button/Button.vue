@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface ButtonProps extends ThemeProps {
+export interface ButtonProps extends Theme {
   variant?: ButtonVariants['variant'] | string
   class?: HTMLAttributes['class']
   disabled?: boolean
@@ -20,7 +20,7 @@ export interface ButtonProps extends ThemeProps {
 
 <script setup lang="ts">
 import type { ButtonVariants } from '@rui-ark/themes/crafts/button'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { getNodeCssVar } from '@rui-ark/shared/css'
@@ -33,10 +33,9 @@ import { computed } from 'vue'
 
 const {
   variant = 'default',
-  size,
   class: propsClass,
+  theme: propsTheme,
   disabled,
-  unstyled = undefined,
   ripple = false,
   loading = false,
   asChild = false,
@@ -74,7 +73,7 @@ function onClick(event: MouseEvent) {
 }
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, loading: tvLoading } = tvButton()
 </script>
 
@@ -96,7 +95,7 @@ const { root, loading: tvLoading } = tvButton()
     :data-variant="variant"
     :data-ripple="ripple ? true : undefined"
     :data-loading="loading ? true : undefined"
-    :data-size="theme.size"
+    :data-theme-size="theme.size"
     :as-child="asChild"
     @click="onClick"
   >

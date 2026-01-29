@@ -1,11 +1,12 @@
 <script lang="ts">
-export interface ScrollAreaProps extends ScrollAreaRootBaseProps, ScrollAreaTheme {
+export interface ScrollAreaProps extends ScrollAreaRootBaseProps {
   class?: HTMLAttributes['class']
   ui?: {
     root?: HTMLAttributes['class']
     viewport?: HTMLAttributes['class']
     content?: HTMLAttributes['class']
   }
+  theme?: ScrollAreaTheme
 }
 export type ScrollAreaEmits = {
   scrollstart: [event: Event]
@@ -29,8 +30,7 @@ import { computed, useSlots, useTemplateRef } from 'vue'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ui,
   ...props
 } = defineProps<ScrollAreaProps>()
@@ -58,7 +58,7 @@ const isShowScrollbars = computed(() => ({
 }))
 
 // theme
-const theme = useCustomTheme<ScrollAreaTheme>(() => ({ size, unstyled }))
+const theme = useCustomTheme<ScrollAreaTheme>(() => propsTheme)
 const { root, viewport: tvViewport, content: tvContent } = tvScrollArea()
 
 // expose

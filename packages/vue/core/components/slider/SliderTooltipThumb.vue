@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface SliderTooltipThumbProps extends SliderThumbBaseProps, Omit<TooltipRootProps, 'open'>, ThemeProps {
+export interface SliderTooltipThumbProps extends SliderThumbBaseProps, Omit<TooltipRootProps, 'open'>, Theme {
   class?: HTMLAttributes['class']
   open?: (context: UnwrapRef<UseSliderContext>) => boolean
   widget?: {
@@ -12,7 +12,7 @@ export interface SliderTooltipThumbProps extends SliderThumbBaseProps, Omit<Tool
 <script setup lang="ts">
 import type { SliderThumbBaseProps, UseSliderContext } from '@ark-ui/vue/slider'
 import type { TooltipRootProps } from '@ark-ui/vue/tooltip'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes, UnwrapRef } from 'vue'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
@@ -33,13 +33,11 @@ import { injectSliderBoundaryContext } from './SliderBoundaryProvider.vue'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   index, // thumb prop
   name, // thumb prop
   open, // tooltip prop
   widget,
-  skin,
   ...props
 } = defineProps<SliderTooltipThumbProps>()
 const context = useSliderContext()
@@ -75,7 +73,8 @@ watch(
 )
 
 const { forwardRef } = useForwardExpose()
-const theme = useTheme(() => ({ size, unstyled, skin }))
+const theme = useTheme(() => propsTheme)
+console.log('theme', theme.value)
 const { thumb: tvThumb } = tvSlider()
 </script>
 
@@ -86,7 +85,7 @@ const { thumb: tvThumb } = tvSlider()
         <Slider.Thumb
           :ref="(el) => el && forwardRef(el)"
           :class="tvThumb({ class: [propsClass], ...theme })"
-          :data-size="theme.size"
+          :data-theme-size="theme.size"
           :index="index"
           :name="name"
         >

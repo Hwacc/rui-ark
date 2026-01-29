@@ -1,21 +1,17 @@
 <script setup lang="ts">
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { ark } from '@ark-ui/vue/factory'
 import { tvDialog } from '@rui-ark/themes/crafts/dialog'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { useId } from 'vue'
 
-const {
-  class: propsClass,
-  size,
-  unstyled = undefined,
-} = defineProps<{
-  class?: HTMLAttributes['class']
-} & ThemeProps>()
+const { class: propsClass, theme: propsTheme } = defineProps<
+  { class?: HTMLAttributes['class'] } & Theme
+>()
 
 const id = useId()
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { body } = tvDialog()
 </script>
 

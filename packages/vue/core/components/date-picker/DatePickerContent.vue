@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface DatePickerContentProps extends DatePickerContentBaseProps, ThemeProps {
+export interface DatePickerContentProps extends DatePickerContentBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { DatePickerContentBaseProps } from '@ark-ui/vue'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import type { DatePickerContentProvide } from '.'
 import { DatePicker } from '@ark-ui/vue'
@@ -19,12 +19,7 @@ import { compact } from 'es-toolkit'
 import { computed, provide, useSlots } from 'vue'
 import { DATE_PICKER_CONTENT_PROVIDE_KEY } from '.'
 
-const {
-  class: propsClass,
-  unstyled = undefined,
-  bordered = undefined,
-  ...props
-} = defineProps<DatePickerContentProps>()
+const { class: propsClass, theme: propsTheme, ...props } = defineProps<DatePickerContentProps>()
 const forwarded = useForwardProps(props)
 
 const slots = useSlots()
@@ -38,7 +33,7 @@ const viewCount = computed(() => {
 })
 
 // theme
-const theme = useTheme(() => ({ unstyled, bordered }))
+const theme = useTheme(() => propsTheme)
 const { content, contentInner } = tvDatePicker()
 
 // provide
@@ -47,10 +42,7 @@ provide<DatePickerContentProvide>(DATE_PICKER_CONTENT_PROVIDE_KEY, { viewCount }
 
 <template>
   <DatePicker.Positioner>
-    <DatePicker.Content
-      v-bind="forwarded"
-      :class="content({ class: [propsClass], ...theme })"
-    >
+    <DatePicker.Content v-bind="forwarded" :class="content({ class: [propsClass], ...theme })">
       <slot name="prefix" />
       <ark.div
         :class="contentInner({ ...theme })"

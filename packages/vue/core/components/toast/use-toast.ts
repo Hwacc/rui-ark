@@ -6,7 +6,7 @@ import { isEmpty } from 'es-toolkit/compat'
 import { computed, unref } from 'vue'
 import { DEFAULT_TOASTER_ID } from '.'
 
-function useToast(manager?: MaybeRef<ToasterManagerExpose | undefined>) {
+function useToast(manager?: MaybeRef<ToasterManagerExpose | null | undefined>) {
   const toasterManager = useConfig('toaster-manager')
   const toasters = computed(
     () => unref(manager)?.toasters ?? toasterManager.value?.toasters ?? [],

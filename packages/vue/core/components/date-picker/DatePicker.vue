@@ -1,7 +1,7 @@
 <script lang="ts">
 import type * as ZagDatePicker from '@zag-js/date-picker'
 
-export interface DatePickerProps extends DatePickerRootBaseProps, ThemeProps {}
+export interface DatePickerProps extends DatePickerRootBaseProps, Theme {}
 export type DatePickerRootEmits = {
   'focusChange': [details: ZagDatePicker.FocusChangeDetails]
   'openChange': [details: ZagDatePicker.OpenChangeDetails]
@@ -16,11 +16,11 @@ export type DatePickerRootEmits = {
 
 <script setup lang="ts">
 import type { DatePickerRootBaseProps, UseDatePickerProps } from '@ark-ui/vue'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import { DatePicker, useDatePicker, useForwardProps } from '@ark-ui/vue'
 import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 
-const { size, unstyled = undefined, ...props } = defineProps<DatePickerProps>()
+const { theme, ...props } = defineProps<DatePickerProps>()
 const emit = defineEmits<DatePickerRootEmits>()
 const datePicker = useDatePicker(useForwardProps<DatePickerProps, UseDatePickerProps>(props), emit)
 </script>

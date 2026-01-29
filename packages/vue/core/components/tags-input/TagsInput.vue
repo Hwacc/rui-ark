@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface TagsInputProps extends TagsInputRootBaseProps, ThemeProps {
+export interface TagsInputProps extends TagsInputRootBaseProps, Theme {
   class?: HTMLAttributes['class']
   inline?: TagsInputVariantProps['inline']
   ui?: {
@@ -13,7 +13,7 @@ export interface TagsInputProps extends TagsInputRootBaseProps, ThemeProps {
 <script setup lang="ts">
 import type { TagsInputRootBaseProps, TagsInputRootEmits } from '@ark-ui/vue/tags-input'
 import type { TagsInputVariantProps } from '@rui-ark/themes/crafts/tags-input'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { TagsInput, useTagsInput } from '@ark-ui/vue/tags-input'
@@ -27,8 +27,7 @@ import { ScrollArea, ScrollAreaScrollbar } from '../scroll-area'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   inline = true,
   ui,
   ...props
@@ -54,7 +53,7 @@ watch(
 )
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root: tvInputRoot, input: tvInputInput } = tvInput()
 const {
   root,
@@ -98,7 +97,7 @@ useForwardExpose()
           <slot :items="tagsInput.value" />
           <ScrollAreaScrollbar
             orientation="horizontal"
-            :size="theme.size === 'sm' ? 'xs' : 'sm'"
+            :theme="{ size: theme.size === 'sm' ? 'xs' : 'sm' }"
           />
         </ScrollArea>
         <slot

@@ -2,12 +2,12 @@
 /**
  * @description Imagine HoverCard is a interactive Tooltip.
  */
-export interface HoverCardProps extends HoverCardRootProps, ThemeProps {}
+export interface HoverCardProps extends HoverCardRootProps, Theme {}
 </script>
 
 <script setup lang="ts">
 import type { HoverCardRootEmits, HoverCardRootProps } from '@ark-ui/vue/hover-card'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme/theme-props'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import { HoverCard, useHoverCard } from '@ark-ui/vue/hover-card'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
@@ -16,10 +16,7 @@ import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { computed, mergeProps } from 'vue'
 
 const {
-  size,
-  unstyled = undefined,
-  bordered = undefined,
-  skin,
+  theme: propsTheme,
   lazyMount = undefined,
   unmountOnExit = undefined,
   ...props
@@ -44,7 +41,7 @@ const hoverCard = useHoverCard(
 )
 
 // theme
-const theme = useTheme(() => ({ size, unstyled, bordered, skin }))
+const theme = useTheme(() => propsTheme)
 
 // expose
 defineExpose({ $api: hoverCard })

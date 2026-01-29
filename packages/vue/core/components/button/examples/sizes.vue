@@ -4,15 +4,14 @@ import { Button } from '../index'
 
 <template>
   <div class="w-full flex items-center gap-4">
-    <Button size="sm">
+    <Button :theme="{ size: 'sm' }">
       Small
     </Button>
-    <Button size="base">
+    <Button :theme="{ size: 'base' }">
       Base
     </Button>
-    <Button size="lg">
+    <Button :theme="{ size: 'lg' }">
       Large
     </Button>
   </div>
 </template>
-

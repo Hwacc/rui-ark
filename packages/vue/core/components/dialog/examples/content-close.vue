@@ -44,7 +44,7 @@ const content = fakerEN.lorem.sentences(4)
 
         <template #close>
           <DialogCloseTrigger as-child :from="TriggerFrom.CLOSE_TRIGGER">
-            <Button class="absolute top-2 right-2" size="sm" variant="text">
+            <Button class="absolute top-2 right-2" variant="text">
               Close
             </Button>
           </DialogCloseTrigger>

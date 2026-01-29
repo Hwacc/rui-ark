@@ -15,10 +15,10 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
       </div>
       <div class="flex items-center gap-4">
         <Progress v-for="size in sizes" :key="String(size)" :model-value="value">
-          <ProgressCircle :size="size" />
+          <ProgressCircle :theme="{ size }" />
         </Progress>
         <Progress :model-value="value">
-          <ProgressCircle :size="120" />
+          <ProgressCircle :theme="{ size: 120 }" />
         </Progress>
       </div>
     </div>
@@ -29,7 +29,7 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
       </div>
       <div class="flex items-center gap-4">
         <Progress v-for="size in sizes" :key="`t-${String(size)}`" :model-value="value">
-          <ProgressCircle :size="size" variant="transfer" />
+          <ProgressCircle :theme="{ size }" variant="transfer" />
         </Progress>
       </div>
     </div>
@@ -40,10 +40,10 @@ const sizes: ThemeProps['size'][] = ['sm', 'base', 'lg']
       </div>
       <div class="flex items-center gap-4">
         <Progress v-for="size in sizes" :key="`a-${String(size)}`" :model-value="value">
-          <ProgressArc :size="size" variant="transfer" :theta="60" />
+          <ProgressArc :theme="{ size }" variant="transfer" :theta="60" />
         </Progress>
         <Progress :model-value="value">
-          <ProgressArc :size="120" variant="transfer" :theta="120" />
+          <ProgressArc :theme="{ size: 120 }" variant="transfer" :theta="120" />
         </Progress>
       </div>
     </div>

@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface TabsProps extends TabsRootBaseProps, ThemeProps {
+export interface TabsProps extends TabsRootBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { TabsRootBaseProps, TabsRootEmits } from '@ark-ui/vue/tabs'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { Tabs, useTabs } from '@ark-ui/vue/tabs'
@@ -16,7 +16,7 @@ import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { computed, useTemplateRef } from 'vue'
 import TabsProviderEx from './TabsProviderEx.vue'
 
-const { class: propsClass, size, unstyled = undefined, ...props } = defineProps<TabsProps>()
+const { class: propsClass, theme: propsTheme, ...props } = defineProps<TabsProps>()
 const emit = defineEmits<TabsRootEmits>()
 const forwarded = useForwardProps(props)
 const tabs = useTabs(forwarded, emit)
@@ -36,7 +36,7 @@ const index = computed(() => {
   return curIndex < 0 ? 0 : curIndex
 })
 
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root } = tvTabs()
 
 // expose

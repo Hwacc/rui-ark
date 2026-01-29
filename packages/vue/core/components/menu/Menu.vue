@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface MenuProps extends MenuRootProps, ThemeProps {
+export interface MenuProps extends MenuRootProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { MenuRootEmits, MenuRootProps } from '@ark-ui/vue/menu'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu, useMenu } from '@ark-ui/vue/menu'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
@@ -16,9 +16,7 @@ import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
-  bordered = undefined,
+  theme: propsTheme,
   lazyMount = undefined,
   unmountOnExit = undefined,
   ...props
@@ -28,7 +26,7 @@ const menuConfig = useConfig('menu', () => ({ lazyMount, unmountOnExit }))
 const menu = useMenu(useForwardProps(props), emits)
 
 // theme
-const theme = useTheme(() => ({ size, unstyled, bordered }))
+const theme = useTheme(() => propsTheme)
 
 // expose
 defineExpose({ $api: menu })

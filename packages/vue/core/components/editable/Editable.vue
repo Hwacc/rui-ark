@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface EditableRootProps extends ArkEditableRootProps, ThemeProps {
+export interface EditableRootProps extends EditableRootBaseProps, Theme {
   class?: HTMLAttributes['class']
   clearable?: boolean
   ui?: {
@@ -16,11 +16,11 @@ export interface SlotProps {
 
 <script setup lang="ts">
 import type {
-  EditableRootProps as ArkEditableRootProps,
+  EditableRootBaseProps,
   EditableRootEmits,
   UseEditableProps,
 } from '@ark-ui/vue/editable'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { EditableArea, EditableRootProvider, useEditable } from '@ark-ui/vue/editable'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
@@ -32,8 +32,7 @@ import { computed } from 'vue'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   clearable,
   ui,
   ...props
@@ -79,7 +78,7 @@ const slotProps = computed<SlotProps>(() => {
 })
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, area } = tvEditable()
 
 // expose

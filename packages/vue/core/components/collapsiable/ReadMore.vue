@@ -24,7 +24,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '.'
 
 const {
   class: propsClass,
-  unstyled = undefined,
+  theme: propsTheme,
   ui,
   text = {
     more: 'View More',
@@ -45,7 +45,8 @@ const isShowTrigger = computed(() => {
   return measuredHeight.value > collapsedHeight
 })
 
-const theme = useTheme(() => ({ unstyled }))
+// theme
+const theme = useTheme(() => propsTheme)
 const { root, content, trigger } = tvReadMore()
 </script>
 

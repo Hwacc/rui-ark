@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface CollapsibleProps extends CollapsibleRootBaseProps, ThemeProps {
+export interface CollapsibleProps extends CollapsibleRootBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { CollapsibleRootBaseProps, CollapsibleRootEmits } from '@ark-ui/vue/collapsible'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Collapsible, useCollapsible } from '@ark-ui/vue/collapsible'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
@@ -16,8 +16,7 @@ import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   asChild,
   ...props
 } = defineProps<CollapsibleProps>()
@@ -26,7 +25,7 @@ const forwarded = useForwardProps(props)
 const collapsiable = useCollapsible(forwarded, emit)
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root } = tvCollapsible()
 
 // expose

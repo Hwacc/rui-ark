@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface MenuRadioItemGroupProps extends ArkMenuRadioItemGroupProps, ThemeProps {
+export interface MenuRadioItemGroupProps extends ArkMenuRadioItemGroupProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
@@ -9,15 +9,14 @@ import type {
   MenuRadioItemGroupProps as ArkMenuRadioItemGroupProps,
   MenuRadioItemGroupEmits,
 } from '@ark-ui/vue/menu'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ...props
 } = defineProps<MenuRadioItemGroupProps>()
 const emit = defineEmits<MenuRadioItemGroupEmits>()

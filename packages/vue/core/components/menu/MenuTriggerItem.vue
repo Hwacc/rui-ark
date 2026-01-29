@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface MenuTriggerItemProps extends MenuTriggerItemBaseProps, ThemeProps {
+export interface MenuTriggerItemProps extends MenuTriggerItemBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { MenuTriggerItemBaseProps } from '@ark-ui/vue/menu'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -17,15 +17,16 @@ import { ChevronRight } from 'lucide-vue-next'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ...props
 } = defineProps<MenuTriggerItemProps>()
 const forwarded = useForwardProps<
   MenuTriggerItemProps,
   MenuTriggerItemBaseProps
 >(props)
-const theme = useTheme(() => ({ size, unstyled }))
+
+// theme
+const theme = useTheme(() => propsTheme)
 const { item, triggerItem, triggerItemIndicator } = tvMenu()
 </script>
 

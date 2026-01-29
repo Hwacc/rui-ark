@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface DialogFooterProps extends ThemeProps {
+export interface DialogFooterProps extends Theme {
   class?: HTMLAttributes['class']
   ui?: {
     root?: HTMLAttributes['class']
@@ -14,7 +14,7 @@ export interface DialogFooterProps extends ThemeProps {
 </script>
 
 <script setup lang="ts">
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { ark } from '@ark-ui/vue/factory'
@@ -27,8 +27,7 @@ import { DialogCloseTrigger, TriggerFrom } from '.'
 
 const {
   class: propsClass,
-  unstyled = undefined,
-  size,
+  theme: propsTheme,
   ui,
   widget,
 } = defineProps<DialogFooterProps>()
@@ -37,7 +36,9 @@ const emits = defineEmits<{
   cancel: [event: MouseEvent]
 }>()
 const id = useId()
-const theme = useTheme(() => ({ size, unstyled }))
+
+// theme
+const theme = useTheme(() => propsTheme)
 const { footer } = tvDialog()
 </script>
 

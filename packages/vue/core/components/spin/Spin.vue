@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface SpinProps extends PolymorphicProps, ThemeProps {
+export interface SpinProps extends PolymorphicProps, Theme {
   class?: HTMLAttributes['class']
   show?: boolean
   mode?: 'fullscreen' | 'inline'
@@ -15,7 +15,7 @@ export interface SpinProps extends PolymorphicProps, ThemeProps {
 
 <script setup lang="ts">
 import type { PolymorphicProps } from '@ark-ui/vue/factory'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes, VNode } from 'vue'
 import type { SpinRenderProps } from '.'
 import { ark } from '@ark-ui/vue/factory'
@@ -26,8 +26,7 @@ import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, ref, 
 const {
   show,
   mode,
-  size = 'base',
-  unstyled = undefined,
+  theme: propsTheme,
   delay,
   ui,
   class: propsClass,
@@ -96,7 +95,7 @@ onBeforeUnmount(() => {
   }
 })
 
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, mask, indicator, text } = tvSpin()
 </script>
 

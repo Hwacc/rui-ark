@@ -3,18 +3,18 @@
     --arrow-border: var(--color-h00);
     --arrow-background: var(--color-hff);
 
-    &[data-theme-mode='dark'] {
+    &[data-theme-surface='dark'] {
       --arrow-border: var(--color-h33);
       --arrow-background: var(--color-h00);
     }
 
-    &[data-theme-mode='razer'] {
+    &[data-theme-surface='razer'] {
       --arrow-border: var(--color-h00);
       --arrow-background: var(--color-rz-green);
     }
   }
 
   *:where([data-part='arrow-tip']) {
-    @apply bg-(--arrow-background) data-bordered:border-(--arrow-border);
+    @apply bg-(--arrow-background) data-theme-bordered:border-(--arrow-border);
   }
 }

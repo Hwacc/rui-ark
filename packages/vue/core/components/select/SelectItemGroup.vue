@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface SelectItemGroupProps extends SelectItemGroupBaseProps, ThemeProps {
+export interface SelectItemGroupProps extends SelectItemGroupBaseProps, Theme {
   class?: HTMLAttributes['class']
   label?: string
   ui?: {
@@ -11,7 +11,7 @@ export interface SelectItemGroupProps extends SelectItemGroupBaseProps, ThemePro
 
 <script setup lang="ts">
 import type { SelectItemGroupBaseProps } from '@ark-ui/vue/select'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Select } from '@ark-ui/vue/select'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -20,14 +20,13 @@ import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   label,
   ui,
   ...props
 } = defineProps<SelectItemGroupProps>()
 const forwarded = useForwardProps(props)
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 
 const { itemGroup, itemGroupLabel } = tvSelect()
 </script>

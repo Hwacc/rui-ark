@@ -9,13 +9,13 @@ const value = ref([10])
 <template>
   <div class="w-full flex flex-col gap-3">
     <div class="flex items-center gap-2">
-      <Button size="sm" variant="outline" @click="value = [0]">
+      <Button variant="outline" @click="value = [0]">
         Set 0
       </Button>
-      <Button size="sm" variant="outline" @click="value = [50]">
+      <Button variant="outline" @click="value = [50]">
         Set 50
       </Button>
-      <Button size="sm" variant="outline" @click="value = [100]">
+      <Button variant="outline" @click="value = [100]">
         Set 100
       </Button>
       <span class="text-sm text-hff">value: {{ value[0] }}</span>
@@ -26,4 +26,3 @@ const value = ref([10])
     </Slider>
   </div>
 </template>
-

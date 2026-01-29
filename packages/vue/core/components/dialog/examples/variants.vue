@@ -15,7 +15,7 @@ const content = fakerEN.lorem.sentences(3)
 
 <template>
   <div class="w-full flex flex-wrap items-center gap-4">
-    <Dialog size="sm">
+    <Dialog :theme="{ size: 'sm' }">
       <DialogTrigger as-child>
         <Button variant="outline">
           Small
@@ -28,7 +28,7 @@ const content = fakerEN.lorem.sentences(3)
       </DialogContent>
     </Dialog>
 
-    <Dialog size="base">
+    <Dialog :theme="{ size: 'base' }">
       <DialogTrigger as-child>
         <Button variant="outline">
           Base
@@ -41,7 +41,7 @@ const content = fakerEN.lorem.sentences(3)
       </DialogContent>
     </Dialog>
 
-    <Dialog size="lg">
+    <Dialog :theme="{ size: 'lg' }">
       <DialogTrigger as-child>
         <Button variant="outline">
           Large

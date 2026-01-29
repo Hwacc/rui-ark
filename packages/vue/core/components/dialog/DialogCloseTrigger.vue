@@ -1,11 +1,11 @@
 <script lang="ts">
-export interface DialogCloseTriggerProps extends ArkDialogCloseTriggerProps {
+export interface DialogCloseTriggerProps extends DialogCloseTriggerBaseProps {
   from?: DialogTriggerFrom
 }
 </script>
 
 <script setup lang="ts">
-import type { DialogCloseTriggerProps as ArkDialogCloseTriggerProps } from '@ark-ui/vue/dialog'
+import type { DialogCloseTriggerBaseProps } from '@ark-ui/vue/dialog'
 import type { DialogTriggerFrom } from './dialog-intercept-context'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { useDialogContext } from '@ark-ui/vue/dialog'

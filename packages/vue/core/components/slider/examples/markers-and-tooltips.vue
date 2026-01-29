@@ -18,13 +18,13 @@ const value = ref([40])
     </div>
 
     <div class="flex flex-col gap-40">
-      <Slider v-model="value" class="w-90" size="lg" :min="0" :max="100" :step="1">
-        <SliderTooltipThumb :index="0" skin="razer" />
+      <Slider v-model="value" class="w-90" :theme="{ size: 'lg' }" :min="0" :max="100" :step="1">
+        <SliderTooltipThumb :index="0" :theme="{ surface: 'razer' }" />
         <template #suffix>
           <SliderMarkerGroup>
             <SliderMarker :value="0" />
             <SliderMarker :value="25" />
-            <SliderTooltipMarker :value="50" skin="razer">
+            <SliderTooltipMarker :value="50" :theme="{ surface: 'razer' }">
               <template #content>
                 Mid: 50
               </template>
@@ -35,11 +35,10 @@ const value = ref([40])
         </template>
       </Slider>
 
-      <Slider v-model="value" class="w-90" size="lg">
+      <Slider v-model="value" class="w-90" :theme="{ size: 'lg' }">
         <SliderTooltipThumb
           :index="0"
           :open="() => true"
-          skin="razer"
           :positioning="{
             strategy: 'fixed',
           }"
@@ -47,8 +46,8 @@ const value = ref([40])
         <template #suffix>
           <SliderMarkerGroup>
             <SliderMarker :value="10" />
-            <SliderTooltipMarker :value="20" skin="razer" />
-            <SliderTooltipMarker :value="50" :skin="value[0] >= 50 ? 'razer' : 'dark'" />
+            <SliderTooltipMarker :value="20" :theme="{ surface: 'razer' }" />
+            <SliderTooltipMarker :value="50" :theme="{ surface: value[0] >= 50 ? 'razer' : 'dark' }" />
           </SliderMarkerGroup>
         </template>
       </Slider>

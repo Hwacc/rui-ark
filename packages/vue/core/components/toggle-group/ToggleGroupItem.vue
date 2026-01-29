@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface ToggleGroupItemProps extends ToggleGroupItemBaseProps, ThemeProps {
+export interface ToggleGroupItemProps extends ToggleGroupItemBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { ToggleGroupItemBaseProps } from '@ark-ui/vue/toggle-group'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { ToggleGroup, useToggleGroupContext } from '@ark-ui/vue/toggle-group'
@@ -16,8 +16,7 @@ import { computed } from 'vue'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ...props
 } = defineProps<ToggleGroupItemProps>()
 const forwarded = useForwardProps(props)
@@ -25,7 +24,7 @@ const context = useToggleGroupContext()
 const itemProps = computed<any>(() => context.value.getItemProps(forwarded.value))
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { item } = tvToggleGroup()
 </script>
 

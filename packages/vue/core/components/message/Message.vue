@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 /**
  * deal with ts-2742
  */
@@ -21,7 +20,7 @@ type PropTypes = NativeElements & {
 }
 interface UseToastContext extends ComputedRef<toast.Api<PropTypes>> {}
 
-export interface MessageProps extends ToastRootBaseProps, ThemeProps {
+export interface MessageProps extends ToastRootBaseProps, Theme {
   options: MessageOptions
   class?: HTMLAttributes['class']
   ui?: {
@@ -36,29 +35,16 @@ export interface MessageProps extends ToastRootBaseProps, ThemeProps {
 
 <script setup lang="ts">
 import type { ToastRootBaseProps } from '@ark-ui/vue/toast'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { MessageOptions } from '.'
 import { useForwardProps } from '@ark-ui/vue'
 import { ark } from '@ark-ui/vue/factory'
 import { Toast, useToastContext } from '@ark-ui/vue/toast'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import {
-  CircleAlert,
-  CircleCheck,
-  CircleX,
-  Info,
-  LoaderCircle,
-  X,
-} from 'lucide-vue-next'
+import { CircleAlert, CircleCheck, CircleX, Info, LoaderCircle, X } from 'lucide-vue-next'
 import { computed, h } from 'vue'
 
-const {
-  class: propsClass,
-  options,
-  ui,
-  size,
-  unstyled = undefined,
-  ...props
-} = defineProps<MessageProps>()
+const { class: propsClass, theme: propsTheme, options, ui, ...props } = defineProps<MessageProps>()
 defineSlots<{
   default: (props: UnwrapRef<typeof slotBindings>) => any
   icon: (props: UnwrapRef<typeof slotBindings>) => any
@@ -72,10 +58,7 @@ const slotBindings = computed(() => ({
   context: messageContext.value,
 }))
 
-const theme = useTheme(() => ({
-  size: size ?? options?.size,
-  unstyled: unstyled ?? options?.unstyled,
-}))
+const theme = useTheme(() => Object.assign({}, propsTheme, options?.theme))
 const { root, content, icon, close, description } = tvMessage({
   class: [ui?.root, propsClass],
   ...theme,
@@ -118,10 +101,7 @@ const iconVNode = computed(() => {
 </script>
 
 <template>
-  <Toast.Root
-    v-bind="forwarded"
-    :class="root({ class: [ui?.root, propsClass], ...theme })"
-  >
+  <Toast.Root v-bind="forwarded" :class="root({ class: [ui?.root, propsClass], ...theme })">
     <ark.div
       :class="content({ class: ui?.content, ...theme })"
       data-scope="toast"
@@ -139,9 +119,7 @@ const iconVNode = computed(() => {
             <component :is="options?.description(messageContext)" />
           </template>
           <template v-else>
-            <Toast.Description
-              :class="description({ class: ui?.description, ...theme })"
-            >
+            <Toast.Description :class="description({ class: ui?.description, ...theme })">
               {{ options?.description }}
             </Toast.Description>
           </template>

@@ -7,20 +7,19 @@ const value = ref('Size demo')
 
 <template>
   <div class="w-full flex flex-col gap-4">
-    <Editable v-model="value" size="sm" placeholder="Small">
+    <Editable v-model="value" :theme="{ size: 'sm' }" placeholder="Small">
       <EditableInput clearable />
       <EditablePreview />
     </Editable>
 
-    <Editable v-model="value" size="base" placeholder="Base">
+    <Editable v-model="value" :theme="{ size: 'base' }" placeholder="Base">
       <EditableInput clearable />
       <EditablePreview />
     </Editable>
 
-    <Editable v-model="value" size="lg" placeholder="Large">
+    <Editable v-model="value" :theme="{ size: 'lg' }" placeholder="Large">
       <EditableInput clearable />
       <EditablePreview />
     </Editable>
   </div>
 </template>
-

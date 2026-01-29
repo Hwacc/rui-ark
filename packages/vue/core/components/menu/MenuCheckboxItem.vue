@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface MenuCheckboxItemProps extends MenuCheckboxItemBaseProps, ThemeProps {
+export interface MenuCheckboxItemProps extends MenuCheckboxItemBaseProps, Theme {
   class?: HTMLAttributes['class']
   ui?: {
     root?: HTMLAttributes['class']
@@ -13,7 +13,7 @@ import type {
   MenuCheckboxItemBaseProps,
   MenuCheckboxItemEmits,
 } from '@ark-ui/vue/menu'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardPropsEmits } from '@ark-ui/vue/utils'
@@ -23,8 +23,7 @@ import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ui,
   ...props
 } = defineProps<MenuCheckboxItemProps>()
@@ -35,7 +34,8 @@ defineSlots<{
 }>()
 const forwarded = useForwardPropsEmits(props, emit)
 
-const theme = useTheme(() => ({ size, unstyled }))
+// theme
+const theme = useTheme(() => propsTheme)
 const { item } = tvMenu()
 </script>
 
@@ -48,8 +48,7 @@ const { item } = tvMenu()
       <Checkbox
         :class="ui?.checkbox"
         :checked="forwarded.checked"
-        :size="size"
-        :unstyled="unstyled"
+        :theme="theme"
       />
     </slot>
     <slot name="default" v-bind="{ checked: forwarded.checked }" />

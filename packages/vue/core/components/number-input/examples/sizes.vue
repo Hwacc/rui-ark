@@ -14,10 +14,30 @@ const lg = ref('16')
     </div>
 
     <div class="w-full max-w-[520px] flex flex-col gap-3 rounded-md border border-h33 p-3">
-      <NumberInput v-model="sm" size="sm" show-trigger :min="0" :max="100" :step="1" />
-      <NumberInput v-model="base" size="base" show-trigger :min="0" :max="100" :step="1" />
-      <NumberInput v-model="lg" size="lg" show-trigger :min="0" :max="100" :step="1" />
+      <NumberInput
+        v-model="sm"
+        :theme="{ size: 'sm' }"
+        show-trigger
+        :min="0"
+        :max="100"
+        :step="1"
+      />
+      <NumberInput
+        v-model="base"
+        :theme="{ size: 'base' }"
+        show-trigger
+        :min="0"
+        :max="100"
+        :step="1"
+      />
+      <NumberInput
+        v-model="lg"
+        :theme="{ size: 'lg' }"
+        show-trigger
+        :min="0"
+        :max="100"
+        :step="1"
+      />
     </div>
   </div>
 </template>
-

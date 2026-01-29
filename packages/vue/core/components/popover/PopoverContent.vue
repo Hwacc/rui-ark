@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface PopoverContentProps extends ArkPopoverContentProps, ThemeProps {
+export interface PopoverContentProps extends ArkPopoverContentProps, Theme {
   class?: HTMLAttributes['class']
   ui?: {
     positioner?: HTMLAttributes['class']
@@ -11,7 +11,7 @@ export interface PopoverContentProps extends ArkPopoverContentProps, ThemeProps 
 
 <script setup lang="ts">
 import type { PopoverContentProps as ArkPopoverContentProps } from '@ark-ui/vue/popover'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Popover } from '@ark-ui/vue/popover'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -26,10 +26,7 @@ import { computed, useSlots } from 'vue'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
-  bordered = undefined,
-  skin,
+  theme: propsTheme,
   ui,
   ...props
 } = defineProps<PopoverContentProps>()
@@ -41,7 +38,7 @@ checkContextVNodePosition(defaultSlots.value, 'PopoverContext', 'PopoverContent'
 const arrowNode = computed(() => findVNodeByName(defaultSlots.value, 'PopoverArrow'))
 const otherNodes = computed(() => excludeVNodesByName(defaultSlots.value, 'PopoverArrow'))
 
-const theme = useTheme(() => ({ size, unstyled, bordered, skin }))
+const theme = useTheme(() => propsTheme)
 const { content, contentInner } = tvPopover()
 </script>
 
@@ -53,15 +50,17 @@ const { content, contentInner } = tvPopover()
     <Popover.Content
       v-bind="forwarded"
       :class="content({ class: [ui?.content, propsClass], ...theme })"
-      :data-bordered="theme.bordered ? 'true' : undefined"
-      :data-skin="theme.skin"
+      :data-theme-bordered="theme.bordered ? '' : undefined"
+      :data-theme-skin="theme.skin"
+      :data-theme-surface="theme.surface"
     >
       <template v-if="arrowNode">
         <component :is="arrowNode" />
       </template>
       <div
         :class="contentInner({ class: [ui?.inner], ...theme })"
-        :data-skin="theme.skin"
+        :data-theme-skin="theme.skin"
+        :data-theme-surface="theme.surface"
       >
         <template v-for="node in otherNodes" :key="node.key">
           <component :is="node" />

@@ -9,7 +9,7 @@ const open = ref(false)
 <template>
   <div class="w-full flex flex-col gap-4">
     <div class="flex items-center gap-2">
-      <Button size="sm" variant="outline" @click="open = !open">
+      <Button variant="outline" @click="open = !open">
         Toggle open: {{ open }}
       </Button>
     </div>
@@ -17,7 +17,7 @@ const open = ref(false)
     <div class="flex flex-wrap items-center gap-4">
       <Tooltip :open-delay="600" :close-delay="200">
         <TooltipTrigger as-child>
-          <Button size="sm">
+          <Button>
             Delays (600/200)
           </Button>
         </TooltipTrigger>
@@ -29,7 +29,7 @@ const open = ref(false)
 
       <Tooltip v-model:open="open" :positioning="{ placement: 'bottom' }">
         <TooltipTrigger as-child>
-          <Button size="sm" variant="outline">
+          <Button variant="outline">
             Controlled open
           </Button>
         </TooltipTrigger>
@@ -41,4 +41,3 @@ const open = ref(false)
     </div>
   </div>
 </template>
-

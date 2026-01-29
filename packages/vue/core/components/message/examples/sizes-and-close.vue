@@ -7,7 +7,7 @@ const { message } = useMessage()
 function open(size: 'sm' | 'base' | 'lg', showClose: boolean) {
   message.create({
     type: 'info',
-    size,
+    theme: { size },
     showClose,
     description: `size=${size}, showClose=${showClose}`,
     duration: 3000,

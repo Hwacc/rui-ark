@@ -8,7 +8,7 @@
   }
 
   .rui-slider-thumb {
-    @apply data-[size=base]:border-[.1563rem] data-[size=sm]:border-2 data-[size=lg]:border-3;
+    @apply data-[theme-size=base]:border-[.1563rem] data-[theme-size=sm]:border-2 data-[theme-size=lg]:border-3;
     @apply border-rz-green bg-h00;
   }
 

@@ -4,7 +4,7 @@ import { Button } from '../../button'
 import { Menu, MenuContent, MenuItem, MenuItemText, MenuTrigger } from '../index'
 
 const open = ref(false)
-const highlightedValue = ref<string | null>(null)
+const highlightedValue = ref<string>()
 </script>
 
 <template>
@@ -42,4 +42,3 @@ const highlightedValue = ref<string | null>(null)
     </Menu>
   </div>
 </template>
-

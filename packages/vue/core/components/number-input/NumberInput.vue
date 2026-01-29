@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface NumberInputProps extends NumberInputRootBaseProps, ThemeProps {
+export interface NumberInputProps extends NumberInputRootBaseProps, Theme {
   class?: HTMLAttributes['class']
   showTrigger?: boolean
   ui?: {
@@ -14,7 +14,7 @@ export interface NumberInputProps extends NumberInputRootBaseProps, ThemeProps {
 
 <script setup lang="ts">
 import type { NumberInputRootBaseProps, NumberInputRootEmits } from '@ark-ui/vue/number-input'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { NumberInput, useNumberInput } from '@ark-ui/vue/number-input'
@@ -25,9 +25,8 @@ import { ChevronDown, ChevronUp } from 'lucide-vue-next'
 
 const {
   class: propsClass,
-  size,
+  theme: propsTheme,
   ui,
-  unstyled = undefined,
   showTrigger = false,
   ...props
 } = defineProps<NumberInputProps>()
@@ -40,7 +39,7 @@ const emits = defineEmits<
 const numberInput = useNumberInput(useForwardProps(props), emits)
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root: tvInputRoot, input: tvInputInput } = tvInput()
 const { root, control, input, triggerGroup, trigger } = tvNumberInput()
 

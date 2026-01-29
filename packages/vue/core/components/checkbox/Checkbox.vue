@@ -1,6 +1,6 @@
 <script lang="ts">
 export type CheckedState = boolean | 'indeterminate'
-export interface CheckboxProps extends CheckboxRootProps, ThemeProps {
+export interface CheckboxProps extends CheckboxRootProps, Theme {
   label?: string
   class?: HTMLAttributes['class']
   ui?: {
@@ -14,7 +14,7 @@ export interface CheckboxProps extends CheckboxRootProps, ThemeProps {
 
 <script setup lang="ts">
 import type { CheckboxRootEmits, CheckboxRootProps, UseCheckboxReturn } from '@ark-ui/vue/checkbox'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Checkbox, useCheckbox } from '@ark-ui/vue/checkbox'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
@@ -24,9 +24,8 @@ import { Check, Minus } from 'lucide-vue-next'
 
 const {
   class: propsClass,
+  theme: propsTheme,
   label,
-  size,
-  unstyled = undefined,
   ui,
   ...props
 } = defineProps<CheckboxProps>()
@@ -35,10 +34,11 @@ const slots = defineSlots<{
   indicator: (props: { checkedState: CheckedState }) => any
   label: () => any
 }>()
-const checkbox = useCheckbox(useForwardProps(props), emit)
+const forwarded = useForwardProps(props)
+const checkbox = useCheckbox(forwarded, emit)
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, control, indicator, label: tvLabel } = tvCheckbox()
 
 // expose

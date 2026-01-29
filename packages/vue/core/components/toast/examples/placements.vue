@@ -14,16 +14,16 @@ const { toast } = useToast(manager)
 <template>
   <div class="w-full flex flex-col gap-4">
     <div class="flex flex-wrap items-center gap-2">
-      <Button size="sm" @click="() => toast.create({ title: 'Top end', description: 'placement=top-end', placement: 'top-end' })">
+      <Button @click="() => toast.create({ title: 'Top end', description: 'placement=top-end', placement: 'top-end' })">
         top-end
       </Button>
-      <Button size="sm" @click="() => toast.create({ title: 'Top start', description: 'placement=top-start', placement: 'top-start' })">
+      <Button @click="() => toast.create({ title: 'Top start', description: 'placement=top-start', placement: 'top-start' })">
         top-start
       </Button>
-      <Button size="sm" @click="() => toast.create({ title: 'Bottom end', description: 'placement=bottom-end', placement: 'bottom-end' })">
+      <Button @click="() => toast.create({ title: 'Bottom end', description: 'placement=bottom-end', placement: 'bottom-end' })">
         bottom-end
       </Button>
-      <Button size="sm" @click="() => toast.create({ title: 'Bottom start', description: 'placement=bottom-start', placement: 'bottom-start' })">
+      <Button @click="() => toast.create({ title: 'Bottom start', description: 'placement=bottom-start', placement: 'bottom-start' })">
         bottom-start
       </Button>
     </div>

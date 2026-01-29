@@ -4,8 +4,8 @@ import { Input } from '../index'
 
 <template>
   <div class="w-full flex flex-col gap-3">
-    <Input class="w-60" size="sm" placeholder="Small" />
-    <Input class="w-60" size="base" placeholder="Base" />
-    <Input class="w-60" size="lg" placeholder="Large" />
+    <Input class="w-60" :theme="{ size: 'sm' }" placeholder="Small" />
+    <Input class="w-60" :theme="{ size: 'base' }" placeholder="Base" />
+    <Input class="w-60" :theme="{ size: 'lg' }" placeholder="Large" />
   </div>
 </template>

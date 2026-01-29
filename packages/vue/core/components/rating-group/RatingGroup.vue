@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface RatingGroupProps extends RatingGroupRootBaseProps, ThemeProps {
+export interface RatingGroupProps extends RatingGroupRootBaseProps, Theme {
   class?: HTMLAttributes['class']
   ui?: {
     root?: HTMLAttributes['class']
@@ -10,7 +10,7 @@ export interface RatingGroupProps extends RatingGroupRootBaseProps, ThemeProps {
 
 <script setup lang="ts">
 import type { RatingGroupRootBaseProps, RatingGroupRootEmits } from '@ark-ui/vue/rating-group'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { RatingGroup, useRatingGroup } from '@ark-ui/vue/rating-group'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
@@ -20,8 +20,7 @@ import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ui,
   ...props
 } = defineProps<RatingGroupProps>()
@@ -29,7 +28,7 @@ const emit = defineEmits<RatingGroupRootEmits>()
 const ratingGroup = useRatingGroup(useForwardProps(props), emit)
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, control } = tvRatingGroup()
 
 // expose

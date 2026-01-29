@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface PaginationGoToProps extends ThemeProps {
+export interface PaginationGoToProps extends Theme {
   class?: HTMLAttributes['class']
   ui?: {
     root?: HTMLAttributes['class']
@@ -9,7 +9,7 @@ export interface PaginationGoToProps extends ThemeProps {
 </script>
 
 <script setup lang="ts">
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { usePaginationContext } from '@ark-ui/vue'
 import { tvPaginationGoto } from '@rui-ark/themes/crafts/pagination'
@@ -20,8 +20,7 @@ import { PAGINATION_GO_TO_PROVIDE_KEY } from '.'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ui,
 } = defineProps<PaginationGoToProps>()
 
@@ -49,7 +48,7 @@ function goInputPage() {
 }
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { root, input } = tvPaginationGoto()
 
 provide(PAGINATION_GO_TO_PROVIDE_KEY, { goInputPage })

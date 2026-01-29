@@ -4,7 +4,7 @@ import { ToggleGroup, ToggleGroupItem } from '../index'
 
 <template>
   <div class="w-full flex flex-col gap-4">
-    <ToggleGroup :default-value="['b']" size="sm">
+    <ToggleGroup :default-value="['b']" :theme="{ size: 'sm' }">
       <ToggleGroupItem value="a">
         A
       </ToggleGroupItem>
@@ -16,7 +16,7 @@ import { ToggleGroup, ToggleGroupItem } from '../index'
       </ToggleGroupItem>
     </ToggleGroup>
 
-    <ToggleGroup :default-value="['b']" size="base">
+    <ToggleGroup :default-value="['b']" :theme="{ size: 'base' }">
       <ToggleGroupItem value="a">
         A
       </ToggleGroupItem>
@@ -28,7 +28,7 @@ import { ToggleGroup, ToggleGroupItem } from '../index'
       </ToggleGroupItem>
     </ToggleGroup>
 
-    <ToggleGroup :default-value="['b']" size="lg">
+    <ToggleGroup :default-value="['b']" :theme="{ size: 'lg' }">
       <ToggleGroupItem value="a">
         A
       </ToggleGroupItem>

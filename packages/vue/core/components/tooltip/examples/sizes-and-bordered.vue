@@ -5,11 +5,9 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
 
 <template>
   <div class="w-full flex flex-wrap items-center gap-4">
-    <Tooltip size="sm" :positioning="{ placement: 'top' }">
+    <Tooltip :theme="{ size: 'sm' }" :positioning="{ placement: 'top' }">
       <TooltipTrigger as-child>
-        <Button size="sm">
-          size=sm
-        </Button>
+        <Button> size=sm </Button>
       </TooltipTrigger>
       <TooltipContent>
         <TooltipArrow />
@@ -17,11 +15,9 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
       </TooltipContent>
     </Tooltip>
 
-    <Tooltip size="base" :positioning="{ placement: 'top' }">
+    <Tooltip :theme="{ size: 'base' }" :positioning="{ placement: 'top' }">
       <TooltipTrigger as-child>
-        <Button size="sm">
-          size=base
-        </Button>
+        <Button> size=base </Button>
       </TooltipTrigger>
       <TooltipContent>
         <TooltipArrow />
@@ -29,11 +25,9 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
       </TooltipContent>
     </Tooltip>
 
-    <Tooltip size="lg" :positioning="{ placement: 'top' }">
+    <Tooltip :theme="{ size: 'lg' }" :positioning="{ placement: 'top' }">
       <TooltipTrigger as-child>
-        <Button size="sm">
-          size=lg
-        </Button>
+        <Button> size=lg </Button>
       </TooltipTrigger>
       <TooltipContent>
         <TooltipArrow />
@@ -43,14 +37,13 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
 
     <Tooltip :positioning="{ placement: 'top' }">
       <TooltipTrigger as-child>
-        <Button size="sm" variant="outline">
+        <Button variant="outline">
           bordered=false
         </Button>
       </TooltipTrigger>
-      <TooltipContent :bordered="false">
+      <TooltipContent :theme="{ bordered: false }">
         Borderless tooltip
       </TooltipContent>
     </Tooltip>
   </div>
 </template>
-

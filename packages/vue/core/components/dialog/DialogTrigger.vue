@@ -1,11 +1,11 @@
 <script lang="ts">
-export interface DialogTriggerProps extends ArkDialogTriggerProps {
+export interface DialogTriggerProps extends DialogTriggerBaseProps {
   from?: DialogTriggerFrom
 }
 </script>
 
 <script setup lang="ts">
-import type { DialogTriggerProps as ArkDialogTriggerProps } from '@ark-ui/vue/dialog'
+import type { DialogTriggerBaseProps } from '@ark-ui/vue/dialog'
 import type { DialogTriggerFrom } from './dialog-intercept-context'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { useDialogContext } from '@ark-ui/vue/dialog'

@@ -52,6 +52,11 @@ export const tvEditable = tv(
 export const tvEditableInput = tv(
   {
     extend: tvInput,
+    slots: {
+      root: '',
+      input: 'min-w-20 w-fit',
+      clearable: '',
+    },
     compoundVariants: [
       {
         size: 'base',

@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface SelectTriggerProps extends ArkSelectTriggerProps, ThemeProps {
+export interface SelectTriggerProps extends ArkSelectTriggerProps, Theme {
   class?: HTMLAttributes['class']
   clearable?: boolean
 }
@@ -7,7 +7,7 @@ export interface SelectTriggerProps extends ArkSelectTriggerProps, ThemeProps {
 
 <script setup lang="ts">
 import type { SelectTriggerProps as ArkSelectTriggerProps } from '@ark-ui/vue/select'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { Select } from '@ark-ui/vue/select'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -17,15 +17,13 @@ import { ChevronDown, CircleX } from 'lucide-vue-next'
 
 const {
   class: propsClass,
-  unstyled = undefined,
-  bordered = undefined,
-  size,
+  theme: propsTheme,
   clearable,
   ...props
 } = defineProps<SelectTriggerProps>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(() => ({ size, unstyled, bordered }))
+const theme = useTheme(() => propsTheme)
 const { trigger, indicator, clearTrigger } = tvSelect()
 </script>
 

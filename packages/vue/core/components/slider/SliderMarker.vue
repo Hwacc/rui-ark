@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface SliderMarkerProps extends SliderMarkerBaseProps, ThemeProps {
+export interface SliderMarkerProps extends SliderMarkerBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { SliderMarkerBaseProps } from '@ark-ui/vue/slider'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Slider, useSliderContext } from '@ark-ui/vue/slider'
@@ -14,11 +14,11 @@ import { tvSlider } from '@rui-ark/themes/crafts/slider'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { pick } from 'es-toolkit'
 
-const { class: propsClass, size, unstyled = undefined, ...props } = defineProps<SliderMarkerProps>()
+const { class: propsClass, theme: propsTheme, ...props } = defineProps<SliderMarkerProps>()
 const forwarded = useForwardProps(props)
 const context = useSliderContext()
 
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { marker, markerDot } = tvSlider()
 </script>
 

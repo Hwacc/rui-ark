@@ -9,10 +9,10 @@ const pressed = ref(false)
 <template>
   <div class="w-full flex flex-col gap-3">
     <div class="flex items-center gap-2">
-      <Button size="sm" variant="outline" @click="pressed = false">
+      <Button variant="outline" @click="pressed = false">
         Set off
       </Button>
-      <Button size="sm" variant="outline" @click="pressed = true">
+      <Button variant="outline" @click="pressed = true">
         Set on
       </Button>
       <span class="text-sm text-hff">pressed: {{ pressed }}</span>
@@ -23,4 +23,3 @@ const pressed = ref(false)
     </Toggle>
   </div>
 </template>
-

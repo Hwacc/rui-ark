@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface CollapsibleTriggerProps extends ArkCollapsibleTriggerProps, ThemeProps {
+export interface CollapsibleTriggerProps extends ArkCollapsibleTriggerProps, Theme {
   class?: HTMLAttributes['class']
   indicator?: boolean
   ui?: {
@@ -11,7 +11,7 @@ export interface CollapsibleTriggerProps extends ArkCollapsibleTriggerProps, The
 
 <script setup lang="ts">
 import type { CollapsibleTriggerProps as ArkCollapsibleTriggerProps } from '@ark-ui/vue/collapsible'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Collapsible, useCollapsibleContext } from '@ark-ui/vue/collapsible'
@@ -21,16 +21,16 @@ import { ChevronDown } from 'lucide-vue-next'
 
 const {
   class: propsClass,
+  theme: propsTheme,
   indicator = true,
-  size,
-  unstyled = undefined,
   ui,
   ...props
 } = defineProps<CollapsibleTriggerProps>()
 const forwarded = useForwardProps(props)
 const context = useCollapsibleContext()
 
-const theme = useTheme(() => ({ size, unstyled }))
+// theme
+const theme = useTheme(() => propsTheme)
 const { trigger, indicator: tvIndicator } = tvCollapsible()
 </script>
 

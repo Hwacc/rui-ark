@@ -2,7 +2,7 @@
  * Message is a special toast, it pin position at the top center of the screen. and with icon and description.
  */
 import type { CreateToasterReturn, UseToastContext } from '@ark-ui/vue/toast'
-import type { MessageVariants } from '@rui-ark/themes/crafts/message'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 import type * as toast from '@zag-js/toast'
 import type { UnwrapRef, VNode, VNodeChild } from 'vue'
 
@@ -21,8 +21,7 @@ export interface MessagerExpose {
 
 export interface MessageOptions<T = any>
   extends Omit<toast.Options<T>, 'title' | 'description'> {
-  size?: MessageVariants['size']
-  unstyled?: boolean
+  theme?: ThemeProps
   description?: VNodeChild | ((context: UnwrapRef<UseToastContext>) => VNode)
   render?: (context: UnwrapRef<UseToastContext>) => any
   showClose?: boolean

@@ -1,10 +1,10 @@
 <script lang="ts">
-export interface TooltipProps extends TooltipRootProps, ThemeProps {}
+export interface TooltipProps extends TooltipRootProps, Theme {}
 </script>
 
 <script setup lang="ts">
 import type { TooltipRootEmits, TooltipRootProps } from '@ark-ui/vue/tooltip'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import { Tooltip, useTooltip } from '@ark-ui/vue/tooltip'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
 import { useConfig } from '@rui-ark/vue-core/composables/useConfig'
@@ -13,10 +13,7 @@ import { ThemeProvider } from '@rui-ark/vue-core/providers/theme'
 import { computed, mergeProps } from 'vue'
 
 const {
-  size,
-  bordered = undefined,
-  unstyled = undefined,
-  skin,
+  theme: propsTheme,
   lazyMount = undefined,
   unmountOnExit = undefined,
   ...props
@@ -37,7 +34,7 @@ const tooltip = useTooltip(
   emit,
 )
 
-const theme = useTheme(() => ({ size, bordered, unstyled, skin }))
+const theme = useTheme(() => propsTheme)
 // expose
 defineExpose({ $api: tooltip })
 useForwardExpose()

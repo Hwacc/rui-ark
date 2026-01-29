@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface MenuRadioItemProps extends MenuRadioItemBaseProps, ThemeProps {
+export interface MenuRadioItemProps extends MenuRadioItemBaseProps, Theme {
   class?: HTMLAttributes['class']
   variant?: RadioGroupVariants['variant']
   ui?: {
@@ -15,7 +15,7 @@ import type {
   UseMenuItemContext,
 } from '@ark-ui/vue/menu'
 import type { RadioGroupVariants } from '@rui-ark/themes/crafts/radio-group'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes, UnwrapRef } from 'vue'
 import { Menu } from '@ark-ui/vue/menu'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -27,8 +27,7 @@ import { Check, Circle } from 'lucide-vue-next'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   variant = 'default',
   ui,
   ...props
@@ -39,7 +38,8 @@ defineSlots<{
 }>()
 const forwarded = useForwardProps(props)
 
-const theme = useTheme(() => ({ size, unstyled }))
+// theme
+const theme = useTheme(() => propsTheme)
 const { item, radioItem } = tvMenu()
 const { itemIndicator } = tvRadioGroup()
 </script>

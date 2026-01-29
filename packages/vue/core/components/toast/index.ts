@@ -1,5 +1,5 @@
 import type { CreateToasterReturn, UseToastContext } from '@ark-ui/vue'
-import type { ToastVariants } from '@rui-ark/themes/crafts/toast'
+import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
 
 export { default as Toast, type ToastProps } from './Toast.vue'
 export { default as Toaster, type ToasterProps } from './Toaster.vue'
@@ -29,8 +29,7 @@ import type { UnwrapRef, VNode, VNodeChild } from 'vue'
 export interface ToastOptions<T = any>
   extends Omit<toast.Options<T>, 'title' | 'description'> {
   placement?: toast.Placement
-  size?: ToastVariants['size']
-  unstyled?: boolean
+  theme?: ThemeProps
   title?: VNodeChild | ((context: UnwrapRef<UseToastContext>) => VNode)
   description?: VNodeChild | ((context: UnwrapRef<UseToastContext>) => VNode)
   render?: (context: UnwrapRef<UseToastContext>) => any

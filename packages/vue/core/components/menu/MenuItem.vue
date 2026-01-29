@@ -1,12 +1,12 @@
 <script lang="ts">
-export interface MenuItemProps extends MenuItemBaseProps, ThemeProps {
+export interface MenuItemProps extends MenuItemBaseProps, Theme {
   class?: HTMLAttributes['class']
 }
 </script>
 
 <script setup lang="ts">
 import type { MenuItemBaseProps } from '@ark-ui/vue/menu'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { MenuItem } from '@ark-ui/vue/menu'
 import { useForwardProps } from '@ark-ui/vue/utils'
@@ -15,13 +15,13 @@ import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   ...props
 } = defineProps<MenuItemProps>()
 const forwarded = useForwardProps<MenuItemProps, MenuItemBaseProps>(props)
 
-const theme = useTheme(() => ({ size, unstyled }))
+// theme
+const theme = useTheme(() => propsTheme)
 const { item } = tvMenu()
 </script>
 

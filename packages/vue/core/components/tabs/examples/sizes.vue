@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsIndicator, TabsList, TabsTrigger } from '../inde
 
 <template>
   <div class="w-full flex flex-col gap-6">
-    <Tabs default-value="tab-1" size="sm">
+    <Tabs default-value="tab-1" :theme="{ size: 'sm' }">
       <TabsList class="w-80">
         <TabsTrigger value="tab-1">
           Small
@@ -28,7 +28,7 @@ import { Tabs, TabsContent, TabsIndicator, TabsList, TabsTrigger } from '../inde
       </TabsContent>
     </Tabs>
 
-    <Tabs default-value="tab-1" size="base">
+    <Tabs default-value="tab-1" :theme="{ size: 'base' }">
       <TabsList class="w-80">
         <TabsTrigger value="tab-1">
           Base
@@ -52,7 +52,7 @@ import { Tabs, TabsContent, TabsIndicator, TabsList, TabsTrigger } from '../inde
       </TabsContent>
     </Tabs>
 
-    <Tabs default-value="tab-1" size="lg">
+    <Tabs default-value="tab-1" :theme="{ size: 'lg' }">
       <TabsList class="w-80">
         <TabsTrigger value="tab-1">
           Large

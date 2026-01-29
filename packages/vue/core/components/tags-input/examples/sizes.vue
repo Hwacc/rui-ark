@@ -17,7 +17,7 @@ const lg = ref<string[]>(['Vue', 'React'])
 
     <div class="w-full max-w-[560px] flex flex-col gap-3">
       <div class="rounded-md border border-h33 p-3">
-        <TagsInput v-model="sm" size="sm">
+        <TagsInput v-model="sm" :theme="{ size: 'sm' }">
           <template #default="{ items }">
             <TagsInputItem
               v-for="(v, index) in items"
@@ -34,7 +34,7 @@ const lg = ref<string[]>(['Vue', 'React'])
       </div>
 
       <div class="rounded-md border border-h33 p-3">
-        <TagsInput v-model="base" size="base">
+        <TagsInput v-model="base" :theme="{ size: 'base' }">
           <template #default="{ items }">
             <TagsInputItem
               v-for="(v, index) in items"
@@ -51,7 +51,7 @@ const lg = ref<string[]>(['Vue', 'React'])
       </div>
 
       <div class="rounded-md border border-h33 p-3">
-        <TagsInput v-model="lg" size="lg">
+        <TagsInput v-model="lg" :theme="{ size: 'lg' }">
           <template #default="{ items }">
             <TagsInputItem
               v-for="(v, index) in items"

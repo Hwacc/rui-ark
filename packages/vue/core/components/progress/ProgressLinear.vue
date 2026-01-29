@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface ProgressLinearProps extends ProgressTrackBaseProps, ThemeProps {
+export interface ProgressLinearProps extends ProgressTrackBaseProps, Theme {
   class?: HTMLAttributes['class']
   variant?: 'default' | 'robbin' | 'transfer'
   ui?: {
@@ -11,7 +11,7 @@ export interface ProgressLinearProps extends ProgressTrackBaseProps, ThemeProps 
 
 <script setup lang="ts">
 import type { ProgressTrackBaseProps } from '@ark-ui/vue/progress'
-import type { ThemeProps } from '@rui-ark/vue-core/providers/theme'
+import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes } from 'vue'
 import { useForwardProps } from '@ark-ui/vue'
 import { Progress, useProgressContext } from '@ark-ui/vue/progress'
@@ -22,8 +22,7 @@ import { useRangeTransfer } from './useRangeTransfer'
 
 const {
   class: propsClass,
-  size,
-  unstyled = undefined,
+  theme: propsTheme,
   variant = 'default',
   ui,
   ...props
@@ -40,7 +39,7 @@ const { styles: transferStyles } = useRangeTransfer(
 )
 
 // theme
-const theme = useTheme(() => ({ size, unstyled }))
+const theme = useTheme(() => propsTheme)
 const { track: tvTrack, range: tvRange } = tvProgress()
 </script>
 

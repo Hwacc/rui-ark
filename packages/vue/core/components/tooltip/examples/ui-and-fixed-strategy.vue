@@ -12,7 +12,7 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
       }"
     >
       <TooltipTrigger as-child>
-        <Button size="sm" variant="outline">
+        <Button variant="outline">
           fixed strategy
         </Button>
       </TooltipTrigger>
@@ -28,4 +28,3 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '../index'
     </Tooltip>
   </div>
 </template>
-

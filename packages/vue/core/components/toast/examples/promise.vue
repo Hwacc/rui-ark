@@ -36,7 +36,7 @@ function run() {
 
 <template>
   <div class="w-full flex flex-col gap-4">
-    <Button size="sm" @click="run">
+    <Button :theme="{ size: 'sm' }" @click="run">
       Toast promise
     </Button>
   </div>
