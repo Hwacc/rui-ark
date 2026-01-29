@@ -1,7 +1,11 @@
 @import '../base/index.css';
 
-@custom-variant dark (&:where([data-skin=dark], [data-skin=dark] *));
-@custom-variant razer (&:where([data-skin=razer], [data-skin=razer] *));
+@custom-variant theme-razer (&:where(html[data-theme-skin=razer], html[data-theme-skin=razer] *));
+
+@custom-variant mode-dark (&:where([data-theme-mode=dark], [data-theme-mode=dark] *));
+@custom-variant mode-light (&:where([data-theme-mode=light], [data-theme-mode=light] *));
+@custom-variant mode-system (&:where([data-theme-mode=system], [data-theme-mode=system] *));
+
 @custom-variant success (&:where([data-type=success], [data-type=success] *));
 @custom-variant error (&:where([data-type=error], [data-type=error] *));
 @custom-variant warning (&:where([data-type=warning], [data-type=warning] *));

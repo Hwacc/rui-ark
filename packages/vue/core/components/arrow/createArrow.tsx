@@ -19,15 +19,8 @@ export function createArrow(
   return defineComponent<ArrowProps>({
     name: ArrowNode.__name,
     props: {
-      size: {
-        type: String as PropType<'sm' | 'lg' | 'base' | undefined>,
-      },
-      bordered: {
-        type: Boolean as PropType<boolean | undefined>,
-        default: undefined,
-      },
-      skin: {
-        type: String as PropType<Skin | undefined>,
+      theme: {
+        type: Object as PropType<ThemeProps['theme']>,
       },
       class: {
         type: String as HTMLAttributes['class'],
@@ -40,13 +33,7 @@ export function createArrow(
       },
     },
     setup(props) {
-      const theme = useTheme(
-        () => ({
-          size: props.size,
-          bordered: props.bordered,
-          skin: props.skin,
-        }),
-      )
+      const theme = useTheme(() => (props.theme ?? {}))
       console.log('arrow theme', theme.value)
       const arrowSize = computed(() => {
         switch (theme.value.size) {

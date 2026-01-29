@@ -3,12 +3,12 @@
     --arrow-border: var(--color-h00);
     --arrow-background: var(--color-hff);
 
-    &[data-skin='dark'] {
+    &[data-theme-mode='dark'] {
       --arrow-border: var(--color-h33);
       --arrow-background: var(--color-h00);
     }
 
-    &[data-skin='razer'] {
+    &[data-theme-mode='razer'] {
       --arrow-border: var(--color-h00);
       --arrow-background: var(--color-rz-green);
     }

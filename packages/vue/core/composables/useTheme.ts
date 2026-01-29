@@ -6,10 +6,10 @@ import { computed, toValue } from 'vue'
 import { injectThemeContext } from '../providers/theme/theme-props'
 import { useConfig } from './useConfig'
 
-export function useTheme(): ComputedRef<ThemeProps>
-export function useTheme<T = ThemeProps>(
+export function useTheme(): ComputedRef<ThemeProps['theme']>
+export function useTheme<T = ThemeProps['theme']>(
   props?: MaybeRefOrGetter<Partial<T>>,
-): ComputedRef<ThemeProps>
+): ComputedRef<ThemeProps['theme']>
 export function useTheme<T>(props?: MaybeRefOrGetter<Partial<T>>): ComputedRef<T> {
   const configTheme = useConfig('theme')
   const contextTheme = injectThemeContext(computed(() => ({})))
@@ -19,7 +19,13 @@ export function useTheme<T>(props?: MaybeRefOrGetter<Partial<T>>): ComputedRef<T
   }
   return computed(() => {
     return Object.assign(
-      { skin: undefined, size: 'base', unstyled: false, bordered: true },
+      {
+        skin: 'razer',
+        mode: 'dark',
+        size: 'base',
+        unstyled: false,
+        bordered: true,
+      },
       clean(configTheme),
       clean(contextTheme),
       clean(propsTheme),
