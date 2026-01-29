@@ -1,0 +1,5 @@
+@layer components {
+  .rui-date-picker-content {
+    @apply bg-h1a text-hcc border-h11 shadow-rui-popper;
+  }
+}

@@ -6,7 +6,7 @@ export interface PaginationGoToTriggerProps extends PolymorphicProps {}
 import type { PolymorphicProps } from '@ark-ui/vue/factory'
 import { ark } from '@ark-ui/vue/factory'
 import { inject } from 'vue'
-import { PAGINATION_GO_TO_PROVIDE_KEY } from './PaginationGoTo.vue'
+import { PAGINATION_GO_TO_PROVIDE_KEY } from '.'
 
 const props = defineProps<PaginationGoToTriggerProps>()
 const { goInputPage } = inject(PAGINATION_GO_TO_PROVIDE_KEY, { goInputPage: () => {} })

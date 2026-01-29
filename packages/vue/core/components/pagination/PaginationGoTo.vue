@@ -6,7 +6,6 @@ export interface PaginationGoToProps extends ThemeProps {
     input?: HTMLAttributes['class']
   }
 }
-export const PAGINATION_GO_TO_PROVIDE_KEY = Symbol('pagination-goto')
 </script>
 
 <script setup lang="ts">
@@ -17,6 +16,7 @@ import { tvPaginationGoto } from '@rui-ark/themes/crafts/pagination'
 import { NumberInput } from '@rui-ark/vue-core/components/number-input'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { provide, ref, watch } from 'vue'
+import { PAGINATION_GO_TO_PROVIDE_KEY } from '.'
 
 const {
   class: propsClass,
