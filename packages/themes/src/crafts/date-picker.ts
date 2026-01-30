@@ -72,12 +72,19 @@ export const tvDatePickerView = tv(
       viewControlTrigger: '',
       viewTrigger: 'rounded',
       table: 'grid gap-2',
-      tableHead: 'grid grid-cols-7',
-      tableHeader: 'flex items-center justify-center',
+      tableHead: 'grid',
+      tableHeader: 'block text-center truncate uppercase',
       tableBody: 'grid',
-      tableBodyRow: 'grid grid-cols-7',
-      tableBodyCell: ['w-full', 'aspect-square'],
-      tableBodyCellTrigger: ['flex', 'items-center', 'justify-center', 'size-full'],
+      tableBodyRow: 'grid',
+      tableBodyCell: '',
+      tableBodyCellTrigger: [
+        'relative',
+        'flex',
+        'items-center',
+        'justify-center',
+        'size-full',
+        'cursor-default',
+      ],
     },
     variants: {
       size: {
@@ -86,37 +93,103 @@ export const tvDatePickerView = tv(
           viewControl: '',
           viewControlTrigger: 'box-content size-4 p-2',
           viewTrigger: 'text-sm h-full px-1.5',
+          tableHeader: 'w-8 text-xs',
         },
         sm: {
           view: 'text-xs',
           viewControl: '',
           viewControlTrigger: 'box-content size-3 p-1.5',
           viewTrigger: 'text-xs h-full px-1',
+          tableHeader: 'w-7 text-xxs',
         },
         lg: {
           view: 'text-base',
           viewControl: '',
           viewControlTrigger: 'box-content size-4.5 p-2.5',
           viewTrigger: 'text-base h-full px-2',
+          tableHeader: 'w-10 text-sm',
         },
       },
 
-      weekDayType: {
-        short: {
-          tableHeader: 'px-1 uppercase',
+      view: {
+        day: {
+          tableHead: 'grid-cols-7',
+          tableBodyRow: 'grid-cols-7',
+          tableBodyCell: 'aspect-square',
         },
-        long: {
-          tableHeader: 'px-0.5',
+        month: {
+          tableBody: 'grid-cols-4',
+          tableBodyCell: 'aspect-[16/9]',
         },
-        narrow: {
-          tableHeader: 'px-1.5 uppercase',
+        year: '',
+      },
+
+      selected: {
+        true: {
+          tableBodyCellTrigger: 'rounded',
+        },
+      },
+
+      today: {
+        true: {
+          tableBodyCellTrigger: [
+            'after:content-[""]',
+            'after:absolute',
+            'after:top-0',
+            'after:right-0',
+            'after:rounded-full',
+          ],
         },
       },
     },
 
+    compoundVariants: [
+      {
+        size: 'base',
+        view: 'month',
+        class: {
+          tableBodyCell: 'w-14',
+        },
+      },
+      {
+        size: 'sm',
+        view: 'month',
+        class: {
+          tableBodyCell: 'w-12.5',
+        },
+      },
+      {
+        size: 'lg',
+        view: 'month',
+        class: {
+          tableBodyCell: 'w-17.5',
+        },
+      },
+      {
+        today: true,
+        size: 'base',
+        class: {
+          tableBodyCellTrigger: 'after:w-1.5 after:h-1.5',
+        },
+      },
+      {
+        today: true,
+        size: 'sm',
+        class: {
+          tableBodyCellTrigger: 'after:w-1.25 after:h-1.25',
+        },
+      },
+      {
+        today: true,
+        size: 'lg',
+        class: {
+          tableBodyCellTrigger: 'after:w-2 after:h-2',
+        },
+      },
+    ],
+
     defaultVariants: {
       size: 'base',
-      weekDayType: 'short',
     },
   },
   {

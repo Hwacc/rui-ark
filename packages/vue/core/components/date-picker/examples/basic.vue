@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ViewChangeDetails } from '@zag-js/date-picker'
 import { ref } from 'vue'
 import { Button } from '../../button'
 import {
@@ -6,10 +7,16 @@ import {
   DatePickerContent,
   DatePickerControl,
   DatePickerDayView,
+  DatePickerMonthView,
   DatePickerTrigger,
+  DatePickerYearView,
 } from '../index'
 
 const value = ref([])
+
+function handleViewChange(details: ViewChangeDetails) {
+  console.log('view change', details)
+}
 </script>
 
 <template>
@@ -19,7 +26,7 @@ const value = ref([])
     </div>
 
     <div class="w-full max-w-[520px] rounded-md border border-h33 p-3">
-      <DatePicker v-model="value">
+      <DatePicker v-model="value" @view-change="handleViewChange">
         <DatePickerControl class="w-fit">
           <DatePickerTrigger>
             <Button> Select Date</Button>
@@ -27,7 +34,9 @@ const value = ref([])
         </DatePickerControl>
 
         <DatePickerContent>
-          <DatePickerDayView />
+          <DatePickerDayView week-day-type="short" />
+          <DatePickerMonthView />
+          <DatePickerYearView />
         </DatePickerContent>
       </DatePicker>
     </div>

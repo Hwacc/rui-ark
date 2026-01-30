@@ -17,10 +17,6 @@ export function useTheme<T>(props?: MaybeRefOrGetter<Partial<T> | undefined>): C
   const clean = (obj: ComputedRef<ThemeProps | undefined>) => {
     return omitBy(obj.value ?? {}, value => isNil(value))
   }
-
-  console.log('propsTheme', propsTheme.value)
-  console.log('configTheme', configTheme.value)
-  console.log('contextTheme', contextTheme.value)
   return computed(() => {
     return Object.assign(
       {

@@ -1,7 +1,7 @@
 <script lang="ts">
-export interface DatePickerDayViewProps extends Theme {
+export interface DatePickerMonthViewProps extends Theme {
   class?: HTMLAttributes['class']
-  weekDayType?: 'short' | 'long' | 'narrow'
+  monthType?: 'short' | 'long'
 }
 </script>
 
@@ -13,30 +13,33 @@ import { DatePicker, useDatePickerContext } from '@ark-ui/vue'
 import { tvDatePickerView } from '@rui-ark/themes/crafts/date-picker'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next'
-import { computed, inject } from 'vue'
+import { computed, inject, watch } from 'vue'
 import { DATE_PICKER_CONTENT_PROVIDE_KEY } from '.'
 
 const {
   class: propsClass,
   theme: propsTheme,
-  weekDayType = 'short',
-} = defineProps<DatePickerDayViewProps>()
+  monthType = 'short',
+} = defineProps<DatePickerMonthViewProps>()
 const { viewsState } = inject<DatePickerContentProvide>(DATE_PICKER_CONTENT_PROVIDE_KEY, {
   viewsState: computed(() => ({
     count: 1,
-    hasDayView: true,
-    hasMonthView: false,
+    hasDayView: false,
+    hasMonthView: true,
     hasYearView: false,
   })),
 })
-
 const context = useDatePickerContext()
+watch(() => context.value.visibleRangeText, (text) => {
+  console.log('visibleRangeText', text)
+  console.log('view', context.value.view)
+})
 
 // theme
 const theme = useTheme(() =>
   Object.assign({}, propsTheme, {
-    view: 'day',
-    weekDayType,
+    view: 'month',
+    monthType,
   }),
 )
 const {
@@ -45,10 +48,7 @@ const {
   viewControlTrigger,
   viewTrigger,
   table,
-  tableHead,
-  tableHeader,
   tableBody,
-  tableBodyRow,
   tableBodyCell,
   tableBodyCellTrigger,
 } = tvDatePickerView()
@@ -56,7 +56,7 @@ const {
 
 <template>
   <DatePicker.View
-    view="day"
+    view="month"
     :class="view({ class: propsClass, ...theme })"
   >
     <DatePicker.ViewControl :class="viewControl({ ...theme })">
@@ -67,7 +67,7 @@ const {
         <ChevronLeft />
       </DatePicker.PrevTrigger>
       <DatePicker.ViewTrigger
-        v-if="viewsState.count > 1 && viewsState.hasMonthView"
+        v-if="viewsState.count > 1 && viewsState.hasYearView"
         :class="viewTrigger({ ...theme })"
       >
         <DatePicker.RangeText />
@@ -80,44 +80,29 @@ const {
         <ChevronRight />
       </DatePicker.NextTrigger>
     </DatePicker.ViewControl>
+
     <DatePicker.Table :class="table({ ...theme })">
-      <div
-        v-bind="context.getTableHeadProps()"
-        :class="tableHead({ ...theme })"
-      >
-        <div
-          v-for="(weekDay, id) in context.weekDays"
-          v-bind="context.getTableHeaderProps()"
-          :key="id"
-          :class="tableHeader({ ...theme })"
-        >
-          {{ weekDay[weekDayType] }}
-        </div>
-      </div>
       <div
         v-bind="context.getTableBodyProps()"
         :class="tableBody({ ...theme })"
       >
-        <div
-          v-for="(week, wid) in context.weeks"
-          :key="wid"
-          :class="tableBodyRow({ ...theme })"
+        <DatePicker.TableCell
+          v-for="(month, mid) in context.getMonths({ format: monthType })"
+          :key="mid"
+          :value="month.value"
+          :class="tableBodyCell({ ...theme })"
         >
-          <DatePicker.TableCell
-            v-for="(day, did) in week"
-            :key="did"
-            :value="day"
-            :class="tableBodyCell({ ...theme })"
+          <DatePicker.TableCellTrigger
+            :class="
+              tableBodyCellTrigger({
+                ...context.getMonthTableCellState({ value: month.value }),
+                ...theme,
+              })
+            "
           >
-            <DatePicker.TableCellTrigger
-              :class="
-                tableBodyCellTrigger({ ...context.getDayTableCellState({ value: day }), ...theme })
-              "
-            >
-              {{ day.day }}
-            </DatePicker.TableCellTrigger>
-          </DatePicker.TableCell>
-        </div>
+            {{ month.label }}
+          </DatePicker.TableCellTrigger>
+        </DatePicker.TableCell>
       </div>
     </DatePicker.Table>
   </DatePicker.View>

@@ -3,14 +3,24 @@
     @apply bg-h1a text-hcc border-h11 shadow-rui-popper;
   }
 
-  .rui-date-picker-table-body-cell {
-    &:has([data-selected]),
-    &:has([data-selected][data-outside-range]) {
-      @apply bg-rz-green text-h00;
+  .rui-date-picker-table-header {
+    @apply text-hff font-rob-bold;
+  }
+
+  .rui-date-picker-table-body-cell-trigger {
+    &[data-selected],
+    &[data-selected][data-outside-range] {
+      @apply bg-rz-green text-h00 ;
     }
 
-    &:has([data-outside-range]) {
+    &[data-outside-range] {
       @apply bg-h47;
+    }
+
+    &[data-today] {
+      &:after {
+        @apply  bg-rz-green;
+      }
     }
   }
 }
