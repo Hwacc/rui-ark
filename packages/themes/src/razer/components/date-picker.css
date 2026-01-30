@@ -7,7 +7,7 @@
     @apply text-hff font-rob-bold;
   }
 
-  .rui-date-picker-table-body-cell-trigger {
+  .rui-date-picker-table-cell-trigger {
     &[data-selected],
     &[data-selected][data-outside-range] {
       @apply bg-rz-green text-h00 ;
@@ -21,6 +21,18 @@
       &:after {
         @apply  bg-rz-green;
       }
+    }
+
+    &[data-in-range], &[data-in-hover-range] {
+      @apply bg-rz-green/80 text-h00;
+    }
+
+    &[data-range-start], &[data-hover-range-start] {
+      @apply bg-rz-green text-h00;
+    }
+
+    &[data-range-end], &[data-hover-range-end] {
+      @apply bg-rz-green text-h00;
     }
   }
 }

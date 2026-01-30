@@ -12,6 +12,7 @@ import type { DatePickerContentProvide } from '.'
 import { DatePicker, useDatePickerContext } from '@ark-ui/vue'
 import { tvDatePickerView } from '@rui-ark/themes/crafts/date-picker'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
+import { flatten } from 'es-toolkit'
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import { computed, inject } from 'vue'
 import { DATE_PICKER_CONTENT_PROVIDE_KEY } from '.'
@@ -48,9 +49,8 @@ const {
   tableHead,
   tableHeader,
   tableBody,
-  tableBodyRow,
-  tableBodyCell,
-  tableBodyCellTrigger,
+  tableCell,
+  tableCellTrigger,
 } = tvDatePickerView()
 </script>
 
@@ -98,26 +98,20 @@ const {
         v-bind="context.getTableBodyProps()"
         :class="tableBody({ ...theme })"
       >
-        <div
-          v-for="(week, wid) in context.weeks"
-          :key="wid"
-          :class="tableBodyRow({ ...theme })"
+        <DatePicker.TableCell
+          v-for="(day, did) in flatten(context.weeks)"
+          :key="did"
+          :value="day"
+          :class="tableCell({ ...theme })"
         >
-          <DatePicker.TableCell
-            v-for="(day, did) in week"
-            :key="did"
-            :value="day"
-            :class="tableBodyCell({ ...theme })"
+          <DatePicker.TableCellTrigger
+            :class="
+              tableCellTrigger({ ...context.getDayTableCellState({ value: day }), ...theme })
+            "
           >
-            <DatePicker.TableCellTrigger
-              :class="
-                tableBodyCellTrigger({ ...context.getDayTableCellState({ value: day }), ...theme })
-              "
-            >
-              {{ day.day }}
-            </DatePicker.TableCellTrigger>
-          </DatePicker.TableCell>
-        </div>
+            {{ day.day }}
+          </DatePicker.TableCellTrigger>
+        </DatePicker.TableCell>
       </div>
     </DatePicker.Table>
   </DatePicker.View>

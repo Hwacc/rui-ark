@@ -22,11 +22,10 @@ const {
   view,
   viewControl,
   viewControlTrigger,
-  viewTrigger,
   table,
   tableBody,
-  tableBodyCell,
-  tableBodyCellTrigger,
+  tableCell,
+  tableCellTrigger,
 } = tvDatePickerView()
 </script>
 
@@ -60,11 +59,11 @@ const {
           v-for="(year, yid) in flatten(context.getYearsGrid({ columns: 4 }))"
           :key="`year-${yid}`"
           :value="year.value"
-          :class="tableBodyCell({ ...theme })"
+          :class="tableCell({ ...theme })"
         >
           <DatePicker.TableCellTrigger
             :class="
-              tableBodyCellTrigger({
+              tableCellTrigger({
                 ...context.getYearTableCellState({ value: year.value }),
                 ...theme,
               })

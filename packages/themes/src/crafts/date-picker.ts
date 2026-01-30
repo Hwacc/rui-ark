@@ -75,9 +75,8 @@ export const tvDatePickerView = tv(
       tableHead: 'grid',
       tableHeader: 'block text-center truncate uppercase',
       tableBody: 'grid',
-      tableBodyRow: 'grid',
-      tableBodyCell: '',
-      tableBodyCellTrigger: [
+      tableCell: '',
+      tableCellTrigger: [
         'relative',
         'flex',
         'items-center',
@@ -114,25 +113,53 @@ export const tvDatePickerView = tv(
       view: {
         day: {
           tableHead: 'grid-cols-7',
-          tableBodyRow: 'grid-cols-7',
-          tableBodyCell: 'aspect-square',
+          tableBody: 'grid-cols-7',
+          tableCell: 'aspect-square',
         },
         month: {
           tableBody: 'grid-cols-4',
-          tableBodyCell: 'aspect-[16/9]',
+          tableCell: 'aspect-[16/9]',
         },
-        year: '',
+        year: {
+          tableBody: 'grid-cols-4',
+          tableCell: 'aspect-[16/9]',
+        },
       },
 
       selected: {
         true: {
-          tableBodyCellTrigger: 'rounded',
+          tableCellTrigger: 'rounded',
         },
       },
 
+      inRange: {
+        true: {
+          tableCellTrigger: 'rounded-none',
+        },
+      },
+      firstInRange: {
+        true: {
+          tableCellTrigger: 'rounded-tl rounded-bl',
+        },
+      },
+      firstInHoveredRange: {
+        true: {
+          tableCellTrigger: 'rounded-tl rounded-bl',
+        },
+      },
+      lastInRange: {
+        true: {
+          tableCellTrigger: 'rounded-br rounded-tr',
+        },
+      },
+      lastInHoveredRange: {
+        true: {
+          tableCellTrigger: 'rounded-br rounded-tr',
+        },
+      },
       today: {
         true: {
-          tableBodyCellTrigger: [
+          tableCellTrigger: [
             'after:content-[""]',
             'after:absolute',
             'after:top-0',
@@ -146,48 +173,47 @@ export const tvDatePickerView = tv(
     compoundVariants: [
       {
         size: 'base',
-        view: 'month',
+        view: ['month', 'year'],
         class: {
-          tableBodyCell: 'w-14',
+          tableCell: 'w-14',
         },
       },
       {
         size: 'sm',
-        view: 'month',
+        view: ['month', 'year'],
         class: {
-          tableBodyCell: 'w-12.5',
+          tableCell: 'w-12.5',
         },
       },
       {
         size: 'lg',
-        view: 'month',
+        view: ['month', 'year'],
         class: {
-          tableBodyCell: 'w-17.5',
+          tableCell: 'w-17.5',
         },
       },
       {
         today: true,
         size: 'base',
         class: {
-          tableBodyCellTrigger: 'after:w-1.5 after:h-1.5',
+          tableCellTrigger: 'after:w-1.5 after:h-1.5',
         },
       },
       {
         today: true,
         size: 'sm',
         class: {
-          tableBodyCellTrigger: 'after:w-1.25 after:h-1.25',
+          tableCellTrigger: 'after:w-1.25 after:h-1.25',
         },
       },
       {
         today: true,
         size: 'lg',
         class: {
-          tableBodyCellTrigger: 'after:w-2 after:h-2',
+          tableCellTrigger: 'after:w-2 after:h-2',
         },
       },
     ],
-
     defaultVariants: {
       size: 'base',
     },
@@ -202,9 +228,8 @@ export const tvDatePickerView = tv(
       tableHead: `${prefix}-table-head`,
       tableHeader: `${prefix}-table-header`,
       tableBody: `${prefix}-table-body`,
-      tableBodyRow: `${prefix}-table-body-row`,
-      tableBodyCell: `${prefix}-table-body-cell`,
-      tableBodyCellTrigger: `${prefix}-table-body-cell-trigger`,
+      tableCell: `${prefix}-table-cell`,
+      tableCellTrigger: `${prefix}-table-cell-trigger`,
     },
   },
 )

@@ -7,7 +7,7 @@ export { default as DatePickerDayView } from './DatePickerDayView.vue'
 export { default as DatePickerMonthView } from './DatePickerMonthView.vue'
 export { default as DatePickerYearView } from './DatePickerYearView.vue'
 
-export { DatePickerTrigger } from '@ark-ui/vue/date-picker'
+export { DatePickerTrigger, DatePickerValueText } from '@ark-ui/vue/date-picker'
 
 export type DatePickerContentProvide = {
   viewsState: ComputedRef<{

@@ -49,8 +49,8 @@ const {
   viewTrigger,
   table,
   tableBody,
-  tableBodyCell,
-  tableBodyCellTrigger,
+  tableCell,
+  tableCellTrigger,
 } = tvDatePickerView()
 </script>
 
@@ -90,11 +90,11 @@ const {
           v-for="(month, mid) in context.getMonths({ format: monthType })"
           :key="mid"
           :value="month.value"
-          :class="tableBodyCell({ ...theme })"
+          :class="tableCell({ ...theme })"
         >
           <DatePicker.TableCellTrigger
             :class="
-              tableBodyCellTrigger({
+              tableCellTrigger({
                 ...context.getMonthTableCellState({ value: month.value }),
                 ...theme,
               })
