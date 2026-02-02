@@ -2,11 +2,12 @@ import type { UseTreeViewNodeContext } from '@ark-ui/vue'
 import type { Theme } from '@rui-ark/vue-core/providers/theme'
 import type { HTMLAttributes, PropType, SlotsType, UnwrapRef, VNode } from 'vue'
 import { TreeView } from '@ark-ui/vue'
+import { tvCheckbox as tvCheckboxCrafts } from '@rui-ark/themes/crafts/checkbox'
 import { tvTreeBranch, tvTreeItem } from '@rui-ark/themes/crafts/tree'
 import { useTheme } from '@rui-ark/vue-core/composables/useTheme'
-import { ChevronRight } from 'lucide-vue-next'
+import { Check, ChevronRight, Minus } from 'lucide-vue-next'
 import { cloneVNode, defineComponent, isVNode, toRefs, unref } from 'vue'
-import { TreeNode } from '.'
+import { TreeCheckboxNode } from '.'
 import { Icon } from '../icon'
 
 interface Node {
@@ -32,7 +33,7 @@ interface KeyMap {
 }
 
 export default defineComponent({
-  name: 'TreeNode',
+  name: 'TreeCheckboxNode',
   props: {
     ui: {
       type: Object as PropType<{
@@ -44,10 +45,14 @@ export default defineComponent({
         branchIndicator?: HTMLAttributes['class']
         branchContent?: HTMLAttributes['class']
         branchIndentGuide?: HTMLAttributes['class']
+        branchCheckbox?: HTMLAttributes['class']
+        branchCheckboxIndicator?: HTMLAttributes['class']
         item?: HTMLAttributes['class']
         itemTitle?: HTMLAttributes['class']
         itemIcon?: HTMLAttributes['class']
         itemText?: HTMLAttributes['class']
+        itemCheckbox?: HTMLAttributes['class']
+        itemCheckboxIndicator?: HTMLAttributes['class']
       }>,
       default: () => ({}),
     },
@@ -91,6 +96,7 @@ export default defineComponent({
     const theme = useTheme(() => props.theme)
     const tvBranch = tvTreeBranch()
     const tvItem = tvTreeItem()
+    const tvCheckbox = tvCheckboxCrafts()
 
     return () => {
       const uNode = unref(node)
@@ -158,6 +164,23 @@ export default defineComponent({
                                         data-scope="tree-view"
                                         data-part="branch-title"
                                       >
+                                        <TreeView.NodeCheckbox
+                                          class={tvCheckbox.control({
+                                            class: tvBranch.checkbox({ class: uUi.branchCheckbox, ...theme.value }),
+                                            ...theme.value,
+                                          })}
+                                        >
+                                          <TreeView.NodeCheckboxIndicator class={tvCheckbox.indicator({
+                                            class: tvBranch.checkboxIndicator({ class: uUi.branchCheckboxIndicator, ...theme.value }),
+                                            ...theme.value,
+                                          })}
+                                          >
+                                            {{
+                                              default: () => <Check class={tvCheckbox.indicatorChecked({ ...theme.value })} />,
+                                              indeterminate: () => <Minus class={tvCheckbox.indicatorMinus({ ...theme.value })} />,
+                                            }}
+                                          </TreeView.NodeCheckboxIndicator>
+                                        </TreeView.NodeCheckbox>
                                         {renderIcon(
                                           {
                                             node: uNode,
@@ -184,7 +207,7 @@ export default defineComponent({
                             {
                               (uNode[uKeyMap.children] as Node[]).map((child, index) => {
                                 return (
-                                  <TreeNode
+                                  <TreeCheckboxNode
                                     key={child[uKeyMap.id] as string}
                                     node={child}
                                     indexPath={[...uIndexPath, index]}
@@ -212,6 +235,22 @@ export default defineComponent({
                                     data-scope="tree-view"
                                     data-part="item-title"
                                   >
+                                    <TreeView.NodeCheckbox class={tvCheckbox.control({
+                                      class: tvItem.checkbox({ class: uUi.itemCheckbox, ...theme.value }),
+                                      ...theme.value,
+                                    })}
+                                    >
+                                      <TreeView.NodeCheckboxIndicator class={tvCheckbox.indicator({
+                                        class: tvItem.checkboxIndicator({ class: uUi.itemCheckboxIndicator, ...theme.value }),
+                                        ...theme.value,
+                                      })}
+                                      >
+                                        {{
+                                          default: () => <Check class={tvCheckbox.indicatorChecked({ ...theme.value })} />,
+                                          indeterminate: () => <Minus class={tvCheckbox.indicatorMinus({ ...theme.value })} />,
+                                        }}
+                                      </TreeView.NodeCheckboxIndicator>
+                                    </TreeView.NodeCheckbox>
                                     {renderIcon(
                                       {
                                         node: uNode,

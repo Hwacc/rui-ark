@@ -32,7 +32,7 @@ const { item, itemIndicator } = tvSelect()
     </Select.ItemText>
     <slot name="indicator">
       <Select.ItemIndicator :class="itemIndicator({ ...theme })">
-        <Check :style="{ width: '1lh', height: '1lh' }" />
+        <Check :style="{ width: '0.875lh', height: '0.875lh' }" />
       </Select.ItemIndicator>
     </slot>
   </Select.Item>
