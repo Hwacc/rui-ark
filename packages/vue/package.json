@@ -1,11 +1,6 @@
 {
-  "name": "@rui-ark/vue",
-  "version": "1.0.0",
-  "packageManager": "pnpm@10.13.1",
-  "description": "",
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
+  "name": "@rui-ark/vue-storybook",
+  "author": "razer.hua",
   "scripts": {
     "dev": "storybook dev --host 0.0.0.0 --port 4399",
     "build:story": "storybook build",
@@ -21,6 +16,7 @@
     "@storybook/addon-docs": "^10.2.0",
     "@storybook/addon-themes": "^10.2.0",
     "@tailwindcss/postcss": "^4.1.18",
+    "@vueuse/core": "^14.1.0",
     "storybook": "^10.2.0",
     "storybook-vue3-rsbuild": "^3.2.2",
     "tailwindcss": "^4.1.18",

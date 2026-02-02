@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
   "description": "",
-  "author": "",
+  "author": "razer.hua",
   "license": "ISC",
   "keywords": [],
   "exports": {
@@ -29,7 +29,6 @@
     "@internationalized/date": "^3.10.1",
     "@rui-ark/shared": "workspace:*",
     "@rui-ark/themes": "workspace:*",
-    "@vueuse/core": "^14.1.0",
     "@zag-js/date-picker": "^1.33.1",
     "@zag-js/select": "^1.33.1",
     "@zag-js/toast": "^1.33.1",

@@ -68,6 +68,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.1.18
         version: 4.1.18
+      '@vueuse/core':
+        specifier: ^14.1.0
+        version: 14.1.0(vue@3.5.27(typescript@5.9.3))
       storybook:
         specifier: ^10.2.0
         version: 10.2.0(@testing-library/dom@10.4.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -81,8 +84,56 @@ importers:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
 
+  packages/vue/add-ons:
+    devDependencies:
+      '@floating-ui/vue':
+        specifier: ^1.1.10
+        version: 1.1.10(vue@3.5.27(typescript@5.9.3))
+      '@rui-ark/shared':
+        specifier: workspace:*
+        version: link:../../shared
+      '@rui-ark/themes':
+        specifier: workspace:*
+        version: link:../../themes
+      '@vueuse/core':
+        specifier: ^14.1.0
+        version: 14.1.0(vue@3.5.27(typescript@5.9.3))
+      vue:
+        specifier: ^3.5.27
+        version: 3.5.27(typescript@5.9.3)
+
+  packages/vue/add-ons/directives/v-aria:
+    dependencies:
+      '@rui-ark/shared':
+        specifier: workspace:*
+        version: link:../../../../shared
+      '@rui-ark/themes':
+        specifier: workspace:*
+        version: link:../../../../themes
+      vue:
+        specifier: ^3.5.27
+        version: 3.5.27(typescript@5.9.3)
+
+  packages/vue/add-ons/directives/v-title:
+    dependencies:
+      '@floating-ui/vue':
+        specifier: ^1.1.10
+        version: 1.1.10(vue@3.5.27(typescript@5.9.3))
+      '@rui-ark/shared':
+        specifier: workspace:*
+        version: link:../../../../shared
+      '@rui-ark/themes':
+        specifier: workspace:*
+        version: link:../../../../themes
+      vue:
+        specifier: ^3.5.27
+        version: 3.5.27(typescript@5.9.3)
+
   packages/vue/core:
     dependencies:
+      '@vueuse/core':
+        specifier: ^14.1.0
+        version: 14.1.0(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: ^3.5.0
         version: 3.5.27(typescript@5.9.3)
@@ -102,9 +153,6 @@ importers:
       '@rui-ark/themes':
         specifier: workspace:*
         version: link:../../themes
-      '@vueuse/core':
-        specifier: ^14.1.0
-        version: 14.1.0(vue@3.5.27(typescript@5.9.3))
       '@zag-js/date-picker':
         specifier: ^1.33.1
         version: 1.33.1(@internationalized/date@3.10.1)
@@ -697,9 +745,6 @@ packages:
     resolution: {integrity: sha512-C3mrr3b5dRVlKPJdfrAXS8+dq+rq8Qm5SNRazca0JKgw1HQERFmrVb0towvMmw5uu8hHKNiQasMaR/tydf3Zsg==}
     engines: {node: ^20.19.0 || ^22.13.0 || ^23.5.0 || >=24.0.0, npm: '>=10'}
 
-  '@floating-ui/core@1.7.3':
-    resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==}
-
   '@floating-ui/core@1.7.4':
     resolution: {integrity: sha512-C3HlIdsBxszvm5McXlB8PeOEWfBhcGBTZGkGlWc2U0KFY5IwG5OQEuQ8rq52DZmcHDlPLd+YFBK+cZcytwIFWg==}
 
@@ -711,6 +756,9 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@floating-ui/vue@1.1.10':
+    resolution: {integrity: sha512-vdf8f6rHnFPPLRsmL4p12wYl+Ux4mOJOkjzKEMYVnwdf7UFdvBtHlLvQyx8iKG5vhPRbDRgZxdtpmyigDPjzYg==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -4227,6 +4275,17 @@ packages:
   vue-component-type-helpers@3.2.4:
     resolution: {integrity: sha512-05lR16HeZDcDpB23ku5b5f1fBOoHqFnMiKRr2CiEvbG5Ux4Yi0McmQBOET0dR0nxDXosxyVqv67q6CzS3AK8rw==}
 
+  vue-demi@0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
   vue-docgen-api@4.79.2:
     resolution: {integrity: sha512-n9ENAcs+40awPZMsas7STqjkZiVlIjxIKgiJr5rSohDP0/JCrD9VtlzNojafsA1MChm/hz2h3PDtUedx3lbgfA==}
     peerDependencies:
@@ -4938,17 +4997,13 @@ snapshots:
 
   '@faker-js/faker@10.1.0': {}
 
-  '@floating-ui/core@1.7.3':
-    dependencies:
-      '@floating-ui/utils': 0.2.10
-
   '@floating-ui/core@1.7.4':
     dependencies:
       '@floating-ui/utils': 0.2.10
 
   '@floating-ui/dom@1.7.4':
     dependencies:
-      '@floating-ui/core': 1.7.3
+      '@floating-ui/core': 1.7.4
       '@floating-ui/utils': 0.2.10
 
   '@floating-ui/dom@1.7.5':
@@ -4957,6 +5012,15 @@ snapshots:
       '@floating-ui/utils': 0.2.10
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@floating-ui/vue@1.1.10(vue@3.5.27(typescript@5.9.3))':
+    dependencies:
+      '@floating-ui/dom': 1.7.5
+      '@floating-ui/utils': 0.2.10
+      vue-demi: 0.14.10(vue@3.5.27(typescript@5.9.3))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
 
   '@humanfs/core@0.19.1': {}
 
@@ -9525,6 +9589,10 @@ snapshots:
   vue-component-type-helpers@3.2.1: {}
 
   vue-component-type-helpers@3.2.4: {}
+
+  vue-demi@0.14.10(vue@3.5.27(typescript@5.9.3)):
+    dependencies:
+      vue: 3.5.27(typescript@5.9.3)
 
   vue-docgen-api@4.79.2(vue@3.5.27(typescript@5.9.3)):
     dependencies:
