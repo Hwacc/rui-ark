@@ -1,8 +1,14 @@
 {
-  "name": "@rui-ark/vue/addons",
+  "name": "@rui-ark/vue-addons",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
   "description": "",
+  "exports": {
+    "./v-lazy": "./v-lazy/src/index.ts",
+    "./v-title": "./v-title/src/index.ts",
+    "./v-aria": "./v-aria/src/index.ts",
+    "./virtual": "./virtual/src/index.ts"
+  },
   "author": "",
   "license": "ISC",
   "keywords": [],

@@ -1,5 +1,5 @@
 {
-  "name": "@rui-ark/vue/addons/virtual",
+  "name": "@rui-ark/vue-addons:virtual",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
   "description": "",
