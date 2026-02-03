@@ -10,7 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@floating-ui/vue": "^1.1.10",
     "@rui-ark/shared": "workspace:*",
     "@rui-ark/themes": "workspace:*",
     "@vueuse/core": "^14.1.0",
