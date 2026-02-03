@@ -1,16 +1,12 @@
 {
-  "name": "@rui-ark/vue/v-lazy",
-  "type": "module",
+  "name": "@rui-ark/vue/addons/virtual",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "exports": {
-    ".": "./src/index.ts"
-  },
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +14,8 @@
     "vue": "^3.5.27"
   },
   "dependencies": {
-    "assign-deep": "^1.0.1",
+    "@tanstack/vue-virtual": "^3.13.18",
     "es-toolkit": "^1.44.0",
-    "vue-lazyload": "^3.0.0"
+    "lucide-vue-next": "^0.562.0"
   }
 }

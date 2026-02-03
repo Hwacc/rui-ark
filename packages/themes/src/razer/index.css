@@ -33,5 +33,6 @@
 @import './components/number-input.css';
 @import './components/date-picker.css';
 @import './components/tree.css';
+@import './components/virtual.css';
 
 @import './directives/title.css';

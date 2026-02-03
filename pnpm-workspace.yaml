@@ -3,9 +3,7 @@ shellEmulator: true
 trustPolicy: no-downgrade
 
 packages:
-  - packages/*
-  - packages/vue/core
-  - packages/vue/addons
+  - packages/**
   - playground/*
 ignoredBuiltDependencies:
   - core-js

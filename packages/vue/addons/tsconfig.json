@@ -31,6 +31,7 @@
   },
   "references": [{ "path": "../../themes" }, { "path": "../../shared" }],
   "include": [
+    "context/**/*.ts",
     "components/**/*.ts",
     "components/**/*.tsx",
     "components/**/*.vue",
