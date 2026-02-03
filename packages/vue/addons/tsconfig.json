@@ -40,7 +40,8 @@
     "composables/**/*.vue",
     "directives/**/*.ts",
     "directives/**/*.tsx",
-    "directives/**/*.vue"
+    "directives/**/*.vue",
+    "types/**/*.d.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

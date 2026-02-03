@@ -24,6 +24,9 @@ const preview: Preview = {
       },
     },
     viewport: { disable: true },
+    docs: {
+      codePanel: true,
+    },
   },
 
   initialGlobals: {
@@ -31,22 +34,32 @@ const preview: Preview = {
   },
 
   decorators: [
-    story => defineComponent({
-      name: 'RUIStory',
-      setup() {
-        return () => h(
-          RUIConfig,
-          {},
-          {
-            default: () => h(story()),
-            toaster: () => ([
-              h(Toaster, { placement: 'top-end', overlap: true }, { default: ({ toast }) => h(Toast, { options: toast }) }),
-              h(Toaster, { placement: 'bottom-end', overlap: true }, { default: ({ toast }) => h(Toast, { options: toast }) }),
-            ]),
-          },
-        )
-      },
-    }),
+    story =>
+      defineComponent({
+        name: 'RUIStory',
+        setup() {
+          return () =>
+            h(
+              RUIConfig,
+              {},
+              {
+                default: () => h(story()),
+                toaster: () => [
+                  h(
+                    Toaster,
+                    { placement: 'top-end', overlap: true },
+                    { default: ({ toast }) => h(Toast, { options: toast }) },
+                  ),
+                  h(
+                    Toaster,
+                    { placement: 'bottom-end', overlap: true },
+                    { default: ({ toast }) => h(Toast, { options: toast }) },
+                  ),
+                ],
+              },
+            )
+        },
+      }),
   ],
 }
 
