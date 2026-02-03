@@ -7,10 +7,10 @@
   "license": "ISC",
   "keywords": [],
   "exports": {
-    "./v-lazy": "./v-lazy/src/index.ts",
-    "./v-title": "./v-title/src/index.ts",
-    "./v-aria": "./v-aria/src/index.ts",
-    "./virtual": "./virtual/src/index.ts"
+    "./v-lazy": "./directives/v-lazy/src/index.ts",
+    "./v-title": "./directives/v-title/src/index.ts",
+    "./v-aria": "./directives/v-aria/src/index.ts",
+    "./virtual": "./components/virtual/src/index.ts"
   },
   "main": "index.js",
   "scripts": {

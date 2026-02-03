@@ -1,21 +1,19 @@
 {
-  "name": "@rui-ark/vue-addons:virtual",
+  "name": "@rui-ark/vue-addons-v-aria",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "main": "index.js",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
     "vue": "^3.5.27"
-  },
-  "dependencies": {
-    "@tanstack/vue-virtual": "^3.13.18",
-    "es-toolkit": "^1.44.0",
-    "lucide-vue-next": "^0.562.0"
   }
 }
