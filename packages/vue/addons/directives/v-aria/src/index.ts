@@ -50,7 +50,7 @@ function cleanup(el: ElementExband) {
   }
 }
 
-const directive = {
+const vAria = {
   // Vue 3 hooks
   mounted(el: ElementExband, binding: DirectiveBinding) {
     apply(el, binding)
@@ -76,4 +76,4 @@ const directive = {
   },
 }
 
-export default directive
+export { vAria }
