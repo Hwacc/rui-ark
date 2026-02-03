@@ -87,28 +87,13 @@ importers:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
 
-  packages/vue/addons/components/virtual:
-    dependencies:
-      '@tanstack/vue-virtual':
-        specifier: ^3.13.18
-        version: 3.13.18(vue@3.5.27(typescript@5.9.3))
-      es-toolkit:
-        specifier: ^1.44.0
-        version: 1.44.0
-      lucide-vue-next:
-        specifier: ^0.562.0
-        version: 0.562.0(vue@3.5.27(typescript@5.9.3))
-      vue:
-        specifier: ^3.5.27
-        version: 3.5.27(typescript@5.9.3)
-
-  packages/vue/addons/directives/v-aria:
+  packages/vue/addons/v-aria:
     dependencies:
       vue:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
 
-  packages/vue/addons/directives/v-lazy:
+  packages/vue/addons/v-lazy:
     dependencies:
       assign-deep:
         specifier: ^1.0.1
@@ -123,14 +108,29 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
 
-  packages/vue/addons/directives/v-title:
+  packages/vue/addons/v-title:
     dependencies:
       '@floating-ui/vue':
         specifier: ^1.1.10
         version: 1.1.10(vue@3.5.27(typescript@5.9.3))
       '@rui-ark/themes':
         specifier: workspace:*
-        version: link:../../../../themes
+        version: link:../../../themes
+      vue:
+        specifier: ^3.5.27
+        version: 3.5.27(typescript@5.9.3)
+
+  packages/vue/addons/virtual:
+    dependencies:
+      '@tanstack/vue-virtual':
+        specifier: ^3.13.18
+        version: 3.13.18(vue@3.5.27(typescript@5.9.3))
+      es-toolkit:
+        specifier: ^1.44.0
+        version: 1.44.0
+      lucide-vue-next:
+        specifier: ^0.562.0
+        version: 0.562.0(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
