@@ -102,51 +102,6 @@ importers:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
 
-  packages/vue/add-ons/directives/v-aria:
-    dependencies:
-      '@rui-ark/shared':
-        specifier: workspace:*
-        version: link:../../../../shared
-      '@rui-ark/themes':
-        specifier: workspace:*
-        version: link:../../../../themes
-      vue:
-        specifier: ^3.5.27
-        version: 3.5.27(typescript@5.9.3)
-
-  packages/vue/add-ons/directives/v-lazy:
-    dependencies:
-      '@rui-ark/shared':
-        specifier: workspace:*
-        version: link:../../../../shared
-      '@rui-ark/themes':
-        specifier: workspace:*
-        version: link:../../../../themes
-      es-toolkit:
-        specifier: ^1.44.0
-        version: 1.44.0
-      vue:
-        specifier: ^3.5.27
-        version: 3.5.27(typescript@5.9.3)
-      vue-lazyload:
-        specifier: ^3.0.0
-        version: 3.0.0
-
-  packages/vue/add-ons/directives/v-title:
-    dependencies:
-      '@floating-ui/vue':
-        specifier: ^1.1.10
-        version: 1.1.10(vue@3.5.27(typescript@5.9.3))
-      '@rui-ark/shared':
-        specifier: workspace:*
-        version: link:../../../../shared
-      '@rui-ark/themes':
-        specifier: workspace:*
-        version: link:../../../../themes
-      vue:
-        specifier: ^3.5.27
-        version: 3.5.27(typescript@5.9.3)
-
   packages/vue/core:
     dependencies:
       '@rui-ark/shared':
@@ -4326,9 +4281,6 @@ packages:
     resolution: {integrity: sha512-K3wt3iVmNGaFEOUR4JIThQRWfqokxLfnPslD41FDZB2ajXp789+wCqJyGYlIFsvEQ2P61PInw6/ph5iiqg51gg==}
     peerDependencies:
       vue: '>=2'
-
-  vue-lazyload@3.0.0:
-    resolution: {integrity: sha512-h2keL/Rj550dLgesgOtXJS9qOiSMmuJNeVlfNAYV1/IYwOQYaWk5mFJlwRxmZDK9YC5gECcFLYYj7z1lKSf9ug==}
 
   vue@3.5.25:
     resolution: {integrity: sha512-YLVdgv2K13WJ6n+kD5owehKtEXwdwXuj2TTyJMsO7pSeKw2bfRNZGjhB7YzrpbMYj5b5QsUebHpOqR3R3ziy/g==}
@@ -9657,8 +9609,6 @@ snapshots:
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.5.27(typescript@5.9.3)):
     dependencies:
       vue: 3.5.27(typescript@5.9.3)
-
-  vue-lazyload@3.0.0: {}
 
   vue@3.5.25(typescript@5.9.3):
     dependencies:

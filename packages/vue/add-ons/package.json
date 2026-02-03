@@ -1,4 +1,5 @@
 {
+  "name": "@rui-ark/vue/add-ons",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
   "description": "",
