@@ -98,18 +98,24 @@ const dialog = useDialog(
   })),
 )
 
+const initialized = ref(false)
 watch(
   () => [forwarded.value.open, forwarded.value.defaultOpen],
-  ([open, defaultOpen]) => {
-    if (defaultOpen && typeof open === 'undefined') {
-      nextTick(() => {
-        dialog.value.setOpen(true)
-      })
+  async ([open, defaultOpen]) => {
+    if (!initialized.value) {
+      initialized.value = true
+      await nextTick()
+      if (typeof open === 'undefined') {
+        dialog.value.setOpen(!!defaultOpen)
+      }
+      else {
+        dialog.value.setOpen(!!open)
+      }
+      return
     }
-    else {
-      nextTick(() => {
-        dialog.value.setOpen(open ?? false)
-      })
+    if (typeof open !== 'undefined') {
+      await nextTick()
+      dialog.value.setOpen(!!open)
     }
   },
   { immediate: true },

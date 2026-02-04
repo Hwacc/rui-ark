@@ -66,10 +66,8 @@ type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'clo
 
 function _useOverlay() {
   const overlays = shallowReactive<Overlay[]>([])
-
   const create = <T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> => {
     const { props, defaultOpen, destroyOnClose } = _options || {}
-
     const options = reactive<Overlay>({
       id: Symbol(import.meta.env?.DEV ? 'useOverlay' : ''),
       isOpen: !!defaultOpen,
@@ -79,11 +77,7 @@ function _useOverlay() {
       originalProps: props || {},
       props: { ...props },
     })
-
     overlays.push(options)
-
-    console.log('useOverlay -> create', overlays)
-
     return {
       ...options,
       open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
@@ -94,7 +88,6 @@ function _useOverlay() {
 
   const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T> => {
     const overlay = getOverlay(id)
-
     // If props are provided, merge them with the original props, otherwise use the original props
     if (props) {
       overlay.props = { ...overlay.originalProps, ...props }
@@ -102,12 +95,9 @@ function _useOverlay() {
     else {
       overlay.props = { ...overlay.originalProps }
     }
-
     overlay.isOpen = true
     overlay.isMounted = true
-
     const result = new Promise<any>(resolve => overlay.resolvePromise = resolve)
-
     return Object.assign(result, {
       id,
       isMounted: overlay.isMounted,
@@ -118,9 +108,7 @@ function _useOverlay() {
 
   const close = (id: symbol, value?: any): void => {
     const overlay = getOverlay(id)
-
     overlay.isOpen = false
-
     // Resolve the promise if it exists
     if (overlay.resolvePromise) {
       overlay.resolvePromise(value)
@@ -134,9 +122,7 @@ function _useOverlay() {
 
   const unmount = (id: symbol): void => {
     const overlay = getOverlay(id)
-
     overlay.isMounted = false
-
     if (overlay.destroyOnClose) {
       const index = overlays.findIndex(overlay => overlay.id === id)
       overlays.splice(index, 1)
@@ -145,23 +131,19 @@ function _useOverlay() {
 
   const patch = <T extends Component>(id: symbol, props: Partial<ComponentProps<T>>): void => {
     const overlay = getOverlay(id)
-
     overlay.props = { ...overlay.props, ...props }
   }
 
   const getOverlay = (id: symbol): Overlay => {
     const overlay = overlays.find(overlay => overlay.id === id)
-
     if (!overlay) {
       throw new Error('Overlay not found')
     }
-
     return overlay
   }
 
   const isOpen = (id: symbol): boolean => {
     const overlay = getOverlay(id)
-
     return overlay.isOpen
   }
 
