@@ -85,9 +85,12 @@ export function excludeVNodesByNames(nodes: VNode[] | undefined, name: string[])
   return result
 }
 
-export function hasChildVNodeByName(node: VNode, name: string): boolean {
-  if (isEmpty(node.children))
+export function hasChildVNodeByName(node: VNode | VNode[] | undefined, name: string): boolean {
+  if (!node)
     return false
+  if (Array.isArray(node)) {
+    return node.some(n => hasChildVNodeByName(n, name))
+  }
   const target = camelCase(name)
   if (Array.isArray(node.children)) {
     for (const n of node.children) {

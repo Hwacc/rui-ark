@@ -32,6 +32,7 @@
     "@rui-ark/shared": "workspace:*",
     "@rui-ark/themes": "workspace:*",
     "@zag-js/date-picker": "^1.33.1",
+    "@zag-js/floating-panel": "^1.33.1",
     "@zag-js/select": "^1.33.1",
     "@zag-js/toast": "^1.33.1",
     "@zag-js/tree-view": "^1.33.1",

@@ -19,7 +19,7 @@ import { ark } from '@ark-ui/vue/factory'
 import { tvDialog } from '@rui-ark/themes/crafts/core/dialog'
 import { cn } from '@rui-ark/themes/utils/cn'
 import { useTheme } from '@rui-ark/vue/composables/useTheme'
-import { someVNode } from '@rui-ark/vue/utils/vnode'
+import { hasChildVNodeByName } from '@rui-ark/vue/utils/vnode'
 import { X } from 'lucide-vue-next'
 import { computed, useAttrs, useSlots } from 'vue'
 import { DialogCloseTrigger } from '.'
@@ -36,9 +36,8 @@ const {
 } = defineProps<DialogContentProps>()
 
 const slots = useSlots()
-const hasDialogHeader = computed(() =>
-  someVNode(slots.default?.(), v => (v.type as any)?.__name === 'DialogHeader'),
-)
+const defaultSlots = computed(() => slots.default?.())
+const hasDialogHeader = computed(() => hasChildVNodeByName(defaultSlots.value, 'DialogHeader'))
 const showContentClose = computed(() => showClose && !hasDialogHeader.value)
 
 const attrs = useAttrs()
