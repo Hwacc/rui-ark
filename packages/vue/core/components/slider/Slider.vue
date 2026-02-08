@@ -25,6 +25,7 @@ import SliderBoundaryProvider from './SliderBoundaryProvider.vue'
 const { class: propsClass, theme: propsTheme, ui, ...props } = defineProps<SliderProps>()
 const emit = defineEmits<SliderRootEmits>()
 const forwarded = useForwardProps(props)
+
 const slider = useSlider(forwarded, emit)
 const controlRef = useTemplateRef('control')
 

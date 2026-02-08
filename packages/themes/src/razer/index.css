@@ -34,5 +34,6 @@
 @import './components/date-picker.css';
 @import './components/tree.css';
 @import './components/virtual.css';
+@import './components/floating-panel.css';
 
 @import './directives/title.css';

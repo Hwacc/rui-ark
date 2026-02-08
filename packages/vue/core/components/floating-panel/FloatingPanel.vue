@@ -8,6 +8,8 @@ import type {
 
 export interface FloatingPanelProps extends FloatingPanelRootBaseProps, Theme {
   class?: HTMLAttributes['class']
+  opacity?: number
+  pinned?: boolean
 }
 /**
  * address ts __VLS_export error
@@ -34,22 +36,63 @@ import type { HTMLAttributes } from 'vue'
 import { FloatingPanel, useFloatingPanel, useForwardExpose, useForwardProps } from '@ark-ui/vue'
 import { useTheme } from '@rui-ark/vue/composables/useTheme'
 import { ThemeProvider } from '@rui-ark/vue/providers/theme'
+import { clamp } from 'es-toolkit'
+import { computed, ref } from 'vue'
+import { provideFloatingPanelAppearanceContext } from './floating-panel-appearance-context'
 
 const {
   class: propsClass,
   theme: propsTheme,
+  opacity: propsOpacity = 100,
+  pinned: propsPinned = false,
   lazyMount = undefined,
   unmountOnExit = undefined,
+  draggable = true,
   ...props
 } = defineProps<FloatingPanelProps>()
 const emit = defineEmits<FloatingPanelRootEmits>()
-const floatingPanel = useFloatingPanel(useForwardProps(props), emit)
+const forwarded = useForwardProps(props)
+
+const pinned = ref(propsPinned)
+function setPinned(_pinned: boolean) {
+  pinned.value = _pinned
+}
+const opacity = ref(propsOpacity)
+function setOpacity(_opacity: number) {
+  opacity.value = clamp(_opacity, 0, 100)
+}
+const mergedProps = computed(() => {
+  return {
+    ...forwarded.value,
+    draggable: !pinned.value && draggable,
+  }
+})
+const floatingPanel = useFloatingPanel(mergedProps, emit)
+
+// appearance context
+provideFloatingPanelAppearanceContext({
+  opacity,
+  pinned,
+  setOpacity,
+  setPinned,
+})
 
 // theme
 const theme = useTheme(() => propsTheme)
 
 // expose
-defineExpose({ $api: floatingPanel })
+defineExpose({
+  $api: Object.assign({}, floatingPanel, {
+    pinned,
+    setPinned: (p: boolean) => {
+      pinned.value = p
+    },
+    opacity,
+    setOpacity: (o: number) => {
+      opacity.value = clamp(o, 0, 100)
+    },
+  }),
+})
 useForwardExpose()
 </script>
 

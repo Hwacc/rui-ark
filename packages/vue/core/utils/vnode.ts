@@ -92,6 +92,9 @@ export function hasChildVNodeByName(node: VNode | VNode[] | undefined, name: str
     return node.some(n => hasChildVNodeByName(n, name))
   }
   const target = camelCase(name)
+  const nodeName = (node.type as any).name || (node.type as any).__name
+  if (camelCase(nodeName) === target)
+    return true
   if (Array.isArray(node.children)) {
     for (const n of node.children) {
       if (!isVNode(n))

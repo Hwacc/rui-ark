@@ -21,7 +21,7 @@ import { cn } from '@rui-ark/themes/utils/cn'
 import { useTheme } from '@rui-ark/vue/composables/useTheme'
 import { hasChildVNodeByName } from '@rui-ark/vue/utils/vnode'
 import { X } from 'lucide-vue-next'
-import { computed, useAttrs, useSlots } from 'vue'
+import { computed, useAttrs, useSlots, watch } from 'vue'
 import { DialogCloseTrigger } from '.'
 
 defineOptions({
@@ -37,7 +37,12 @@ const {
 
 const slots = useSlots()
 const defaultSlots = computed(() => slots.default?.())
+console.log('defaultSlots', defaultSlots.value)
 const hasDialogHeader = computed(() => hasChildVNodeByName(defaultSlots.value, 'DialogHeader'))
+watch(hasDialogHeader, (value: boolean) => {
+  console.log('hasDialogHeader', value)
+})
+
 const showContentClose = computed(() => showClose && !hasDialogHeader.value)
 
 const attrs = useAttrs()
