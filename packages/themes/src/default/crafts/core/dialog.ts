@@ -37,7 +37,7 @@ export const tvDialog = tv(
       size: {
         xs: {
           body: 'p-4 text-xs',
-          footer: 'p-4 gap-4 text-xs',
+          footer: 'px-4 py-3 gap-4 text-xs',
           header: 'py-2 px-4 text-xs',
           close: [
             'p-0.25',
@@ -48,7 +48,7 @@ export const tvDialog = tv(
         },
         sm: {
           body: 'p-5 text-sm',
-          footer: 'p-5 gap-5 text-sm',
+          footer: 'px-5 py-4 gap-5 text-sm',
           header: 'py-2.5 px-5 text-sm',
           close: [
             'p-0.5',
@@ -60,7 +60,7 @@ export const tvDialog = tv(
         },
         base: {
           body: 'p-6 text-base',
-          footer: 'p-6 gap-6 text-base',
+          footer: 'px-6 py-5 gap-6 text-base',
           header: 'py-3 px-6 text-base',
           close: [
             'p-0.75',
@@ -71,7 +71,7 @@ export const tvDialog = tv(
         },
         lg: {
           body: 'p-8 text-lg',
-          footer: 'p-8 gap-8 text-lg',
+          footer: 'px-8 py-6 gap-8 text-lg',
           header: 'py-4 px-8 text-lg',
           close: [
             'p-1',

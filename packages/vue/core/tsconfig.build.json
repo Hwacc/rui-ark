@@ -1,9 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.build.tsbuildinfo",
+    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
     "paths": {
-      "@rui-ark/vue/*": ["src/*"]
+      "@rui-ark/vue/*": ["./src/*"]
     },
     "declaration": true,
     "declarationMap": false,

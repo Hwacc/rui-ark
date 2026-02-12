@@ -14,7 +14,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "rslib build --tsconfig ./tsconfig.build.json && vue-tsc --project tsconfig.build.json",
+    "build": "rslib build --tsconfig ./tsconfig.build.json && vue-tsc --project tsconfig.build.json && tsc-alias --project tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
@@ -31,7 +31,7 @@
     "vue-component-type-helpers": "^3.2.1"
   },
   "devDependencies": {
-    "@ark-ui/vue": "npm:@hwacc/ark-ui-vue@5.31.0-leading.2",
+    "@ark-ui/vue": "npm:@hwacc/ark-ui-vue@5.31.0-leading.3",
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.10.1",
     "@rsbuild/plugin-babel": "^1.0.6",

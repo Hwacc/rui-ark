@@ -1,7 +1,7 @@
 import type { Preview } from 'storybook-vue3-rsbuild'
+import { Toast, Toaster } from '@rui-ark/vue/components/toast'
+import { RUIConfig } from '@rui-ark/vue/providers/config'
 import { defineComponent, h } from 'vue'
-import { Toast, Toaster } from '../core/components/toast'
-import { RUIConfig } from '../core/providers/config'
 
 import '@rui-ark/themes/razer/index.css'
 import './style.css'

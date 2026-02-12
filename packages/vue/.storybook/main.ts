@@ -3,7 +3,7 @@ import { mergeRsbuildConfig } from '@rsbuild/core'
 
 const config: StorybookConfig = {
   stories: [
-    '../core/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../core/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../addons/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-themes'],
