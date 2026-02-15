@@ -3,10 +3,14 @@
   "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
-  "description": "",
+  "description": "Themes for Rark UI",
   "author": "Hwacc(mshcccck@gmail.com)",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "rark-ui",
+    "themes",
+    "tailwind"
+  ],
   "exports": {
     "./razer": {
       "types": "./dist/razer/index.d.ts",
@@ -21,6 +25,9 @@
     "./razer/index.css": "./dist/razer/index.css",
     "./default/index.css": "./dist/default/index.css"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "pnpm -s run build:js && pnpm -s run build:css",
     "build:js": "tsc",

@@ -152,6 +152,12 @@ importers:
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.27(typescript@5.9.3))
+      '@rark-ui/shared':
+        specifier: ^1.0.0
+        version: 1.0.0
+      '@rark-ui/themes':
+        specifier: ^1.0.0
+        version: 1.0.0(tailwindcss@4.1.18)
       '@vueuse/core':
         specifier: ^14.1.0
         version: 14.1.0(vue@3.5.27(typescript@5.9.3))
@@ -174,12 +180,6 @@ importers:
       '@internationalized/date':
         specifier: ^3.10.1
         version: 3.10.1
-      '@rark-ui/shared':
-        specifier: workspace:*
-        version: link:../../shared
-      '@rark-ui/themes':
-        specifier: workspace:*
-        version: link:../../themes
       '@rsbuild/plugin-babel':
         specifier: ^1.0.6
         version: 1.0.6(@rsbuild/core@1.7.3)
@@ -1348,6 +1348,12 @@ packages:
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
+
+  '@rark-ui/shared@1.0.0':
+    resolution: {integrity: sha512-Dctq6D/PbBotcnTjsAlyFgE6RhBCs0dvuBdOhR6XKVFZZXYxyuHs0Z4GBcbIM9QmJWFG6nFAhf4IrClb9XHCGQ==}
+
+  '@rark-ui/themes@1.0.0':
+    resolution: {integrity: sha512-M529cNOcHLigX4uzEkFpVBx3aGbFwLFCiPtX/KkwnymHINi9B/dG0IQnqrmqB5n7OAa3x/2BxkwD3WKr37kDdQ==}
 
   '@rollup/rollup-android-arm-eabi@4.57.1':
     resolution: {integrity: sha512-A6ehUVSiSaaliTxai040ZpZ2zTevHYbvu/lDoeAteHI8QnaosIzm4qwtezfRg1jOYaUmnzLX1AOD6Z+UJjtifg==}
@@ -6280,6 +6286,15 @@ snapshots:
   '@pkgr/core@0.2.9': {}
 
   '@polka/url@1.0.0-next.29': {}
+
+  '@rark-ui/shared@1.0.0': {}
+
+  '@rark-ui/themes@1.0.0(tailwindcss@4.1.18)':
+    dependencies:
+      tailwind-merge: 3.4.0
+      tailwind-variants: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
+    transitivePeerDependencies:
+      - tailwindcss
 
   '@rollup/rollup-android-arm-eabi@4.57.1':
     optional: true

@@ -4,7 +4,7 @@
   "packageManager": "pnpm@10.13.1",
   "description": "",
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [],
   "exports": {
     ".": "./src/index.ts"

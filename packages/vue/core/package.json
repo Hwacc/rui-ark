@@ -3,28 +3,52 @@
   "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
-  "description": "",
-  "author": "razer.hua",
+  "description": "Vue core components for Rark UI, based on Ark UI",
+  "author": "Hwacc(mshcccck@gmail.com)",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "rark-ui",
+    "ark-ui",
+    "vue"
+  ],
   "exports": {
-    "./components/*": "./src/components/*",
-    "./composables/*": "./src/composables/*",
-    "./providers/*": "./src/providers/*"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/**/*.d.ts",
+      "import": "./dist/components/**/*.js"
+    },
+    "./composables/*": {
+      "types": "./dist/composables/**/*.d.ts",
+      "import": "./dist/composables/**/*.js"
+    },
+    "./providers/*": {
+      "types": "./dist/providers/**/*.d.ts",
+      "import": "./dist/providers/**/*.js"
+    },
+    "./utils/*": {
+      "types": "./dist/utils/**/*.d.ts",
+      "import": "./dist/utils/**/*.js"
+    }
   },
   "main": "index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rslib build --tsconfig ./tsconfig.build.json && vue-tsc --project tsconfig.build.json && tsc-alias --project tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
     "@ark-ui/vue": "^5.31.0",
-    "@rark-ui/shared": "^1.0.0",
-    "@rark-ui/themes": "^1.0.0",
     "vue": "^3.5.0"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
+    "@rark-ui/shared": "^1.0.0",
+    "@rark-ui/themes": "^1.0.0",
     "@vueuse/core": "^14.1.0",
     "es-toolkit": "^1.44.0",
     "lucide-vue-next": "^0.563.0",

@@ -1,7 +1,9 @@
 {
   "name": "@rark-ui/vue-storybook",
   "type": "module",
-  "author": "razer.hua",
+  "description": "Vue stories for Rark UI",
+  "author": "Hwacc(mshcccck@gmail.com)",
+  "license": "MIT",
   "scripts": {
     "dev": "storybook dev --host 0.0.0.0 --port 4399",
     "build:story": "storybook build",

@@ -100,7 +100,10 @@ const scrollAreaStyle = computed(() => {
   }
 })
 
+// themes
 const { base, scroll } = addonsCrafts.tvVirtualList()
+
+// expose
 defineExpose({
   get virtualizer() {
     return virtualizer.value

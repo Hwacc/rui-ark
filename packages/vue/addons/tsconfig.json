@@ -16,7 +16,7 @@
     "moduleResolution": "Bundler",
     "paths": {
       "@rark-ui/shared/*": ["../../shared/src/*"],
-      "@rark-ui/themes/*": ["../../themes/*"]
+      "@rark-ui/themes/*": ["../../themes/src/*"]
     },
 
     "allowImportingTsExtensions": true,

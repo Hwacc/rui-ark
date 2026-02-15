@@ -1,1 +1,0 @@
-export { cn, cnMerge, cx } from 'tailwind-variants';

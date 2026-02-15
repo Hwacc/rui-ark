@@ -1,13 +1,20 @@
 {
   "name": "@rark-ui/vue-addons-virtual",
+  "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
-  "description": "",
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
+  "description": "Virtual components for Rark UI",
+  "author": "Hwacc(mshcccck@gmail.com)",
+  "license": "MIT",
+  "keywords": [
+    "rark-ui",
+    "vue",
+    "addons",
+    "virtual"
+  ],
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
