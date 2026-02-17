@@ -19,11 +19,9 @@
     "vue": "^3.5.27"
   },
   "dependencies": {
-    "assign-deep": "^1.0.1",
     "es-toolkit": "^1.44.0"
   },
   "devDependencies": {
-    "@rslib/core": "0.19.4",
-    "vue-lazyload": "^3.0.0"
+    "@rslib/core": "0.19.4"
   }
 }

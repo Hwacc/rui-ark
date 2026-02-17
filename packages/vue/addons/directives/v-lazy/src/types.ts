@@ -1,4 +1,4 @@
-import type { VueLazyloadOptions } from 'vue-lazyload'
+import type { VueLazyloadOptions } from './source/types/lazyload'
 
 export interface VueLazyloadOptionsEx extends VueLazyloadOptions {
   // 延迟加载(ms)

@@ -1,9 +1,10 @@
 import type { App, Directive, Plugin } from 'vue'
+import type Lazy from './source/lazy'
 import type { VueLazyloadOptionsEx } from './types'
-import LazyComponent from 'vue-lazyload/src/lazy-component'
-import LazyContainer from 'vue-lazyload/src/lazy-container'
-import LazyImage from 'vue-lazyload/src/lazy-image'
 import LazyEx from './lazy'
+import LazyComponent from './source/lazy-component'
+import LazyContainer from './source/lazy-container'
+import LazyImage from './source/lazy-image'
 
 const plugin: Plugin<[options?: VueLazyloadOptionsEx]> = {
   /*
@@ -13,7 +14,7 @@ const plugin: Plugin<[options?: VueLazyloadOptionsEx]> = {
    */
   install(app: App, options: VueLazyloadOptionsEx = {}) {
     const lazy = new LazyEx(options)
-    const lazyContainer = new LazyContainer(lazy)
+    const lazyContainer = new LazyContainer(lazy as Lazy)
 
     const vueVersion = Number(app.version.split('.')[0])
     if (vueVersion < 3)
@@ -24,11 +25,11 @@ const plugin: Plugin<[options?: VueLazyloadOptionsEx]> = {
     app.provide('Lazyload', lazy)
 
     if (options.lazyComponent) {
-      app.component('lazy-component', LazyComponent(lazy))
+      app.component('lazy-component', LazyComponent(lazy as Lazy))
     }
 
     if (options.lazyImage) {
-      app.component('lazy-image', LazyImage(lazy))
+      app.component('lazy-image', LazyImage(lazy as Lazy))
     }
 
     app.directive('lazy', {

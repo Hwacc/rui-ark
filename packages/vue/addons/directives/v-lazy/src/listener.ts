@@ -1,8 +1,8 @@
-import type { ImageCache } from 'vue-lazyload/src/util'
+import type { ImageCache } from './source/util'
 import type { VueLazyloadOptionsEx } from './types'
 import { isArray, isEmpty } from 'es-toolkit/compat'
-import ReactiveListener from 'vue-lazyload/src/listener'
-import { loadImageAsync } from 'vue-lazyload/src/util'
+import ReactiveListener from './source/listener'
+import { loadImageAsync } from './source/util'
 import { loadImageArrAsync } from './utils'
 
 class ReactiveListenerEx extends ReactiveListener {

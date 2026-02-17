@@ -2,9 +2,9 @@ import type { DirectiveBinding, VNode } from 'vue'
 import type { VueLazyloadOptionsEx } from './types'
 import { isArray, merge } from 'es-toolkit/compat'
 import { nextTick } from 'vue'
-import Lazy from 'vue-lazyload/src/lazy'
-import { getBestSelectionFromSrcset, inBrowser, scrollParent } from 'vue-lazyload/src/util'
 import ReactiveListenerEx from './listener'
+import Lazy from './source/lazy'
+import { getBestSelectionFromSrcset, inBrowser, scrollParent } from './source/util'
 
 type TeventType = 'loading' | 'loaded' | 'error'
 

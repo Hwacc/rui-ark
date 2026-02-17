@@ -4,6 +4,8 @@
     "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
     "rootDir": "./src",
     "allowImportingTsExtensions": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "declaration": true,
     "declarationMap": false,
     "emitDeclarationOnly": false,
