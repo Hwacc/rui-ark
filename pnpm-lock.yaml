@@ -101,6 +101,9 @@ importers:
 
   packages/vue/addons/components/virtual:
     dependencies:
+      '@rark-ui/vue-addons-shared':
+        specifier: ^1.0.0
+        version: 1.0.0(vue@3.5.27(typescript@5.9.3))
       '@tanstack/vue-virtual':
         specifier: ^3.13.18
         version: 3.13.18(vue@3.5.27(typescript@5.9.3))
@@ -129,6 +132,12 @@ importers:
       rsbuild-plugin-unplugin-vue:
         specifier: ^0.1.0
         version: 0.1.0(@rsbuild/core@1.7.3)(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.1)(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)
+      tsc-alias:
+        specifier: ^1.8.16
+        version: 1.8.16
+      vue-tsc:
+        specifier: ^3.2.4
+        version: 3.2.4(typescript@5.9.3)
 
   packages/vue/addons/directives/v-aria:
     dependencies:
@@ -159,6 +168,15 @@ importers:
       '@rark-ui/themes':
         specifier: workspace:*
         version: link:../../../../themes
+      vue:
+        specifier: ^3.5.27
+        version: 3.5.27(typescript@5.9.3)
+
+  packages/vue/addons/shared:
+    dependencies:
+      '@vueuse/core':
+        specifier: ^14.1.0
+        version: 14.1.0(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
@@ -1360,6 +1378,11 @@ packages:
 
   '@rark-ui/themes@1.0.0':
     resolution: {integrity: sha512-M529cNOcHLigX4uzEkFpVBx3aGbFwLFCiPtX/KkwnymHINi9B/dG0IQnqrmqB5n7OAa3x/2BxkwD3WKr37kDdQ==}
+
+  '@rark-ui/vue-addons-shared@1.0.0':
+    resolution: {integrity: sha512-pV/cvzdbft2zPb9dEOmuJCOlOSeAYIY+LyX1EGMEjEqOrl2UWOWpp0iQHjftFU3jSUyXUDGGuLVKye1G56OodQ==}
+    peerDependencies:
+      vue: ^3.5.27
 
   '@rollup/rollup-android-arm-eabi@4.57.1':
     resolution: {integrity: sha512-A6ehUVSiSaaliTxai040ZpZ2zTevHYbvu/lDoeAteHI8QnaosIzm4qwtezfRg1jOYaUmnzLX1AOD6Z+UJjtifg==}
@@ -6264,6 +6287,11 @@ snapshots:
       tailwind-variants: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
     transitivePeerDependencies:
       - tailwindcss
+
+  '@rark-ui/vue-addons-shared@1.0.0(vue@3.5.27(typescript@5.9.3))':
+    dependencies:
+      '@vueuse/core': 14.1.0(vue@3.5.27(typescript@5.9.3))
+      vue: 3.5.27(typescript@5.9.3)
 
   '@rollup/rollup-android-arm-eabi@4.57.1':
     optional: true

@@ -8,7 +8,7 @@ export default defineConfig({
     {
       format: 'esm',
       bundle: true,
-      dts: false,
+      dts: true,
     },
   ],
   source: {
@@ -20,6 +20,9 @@ export default defineConfig({
   },
   output: {
     target: 'web',
+    externals: {
+      '@rark-ui/vue-addons-shared': '@rark-ui/vue-addons-shared',
+    },
   },
   plugins: [
     pluginBabel({

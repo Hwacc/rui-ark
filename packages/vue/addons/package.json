@@ -2,17 +2,14 @@
   "name": "@rark-ui/vue-addons",
   "version": "1.0.0",
   "packageManager": "pnpm@10.13.1",
-  "description": "",
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
-  "exports": {
-    "./v-lazy": "./directives/v-lazy/src/index.ts",
-    "./v-title": "./directives/v-title/src/index.ts",
-    "./v-aria": "./directives/v-aria/src/index.ts",
-    "./virtual": "./components/virtual/src/index.ts"
-  },
-  "main": "index.js",
+  "description": "Vue addons for Rark UI",
+  "author": "Hwacc(mshcccck@gmail.com)",
+  "license": "MIT",
+  "keywords": [
+    "rark-ui",
+    "vue",
+    "addons"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }

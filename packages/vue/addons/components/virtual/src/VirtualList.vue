@@ -2,9 +2,9 @@
 import type { Virtualizer } from '@tanstack/vue-virtual'
 import type { HTMLAttributes } from 'vue'
 import type { VirtualListProps } from '.'
+import { useForwardExpose } from '@rark-ui/vue-addons-shared'
 import { ref } from 'vue'
 import { VirtualRoot } from '.'
-import { useForwardExpose } from '../../../composables/useForwardExpose'
 import VirtualListImpl from './VirtualListImpl.vue'
 
 const props = defineProps<

@@ -41,5 +41,8 @@
     "tailwindcss": "^4.1.18",
     "tailwindcss-animated": "^2.0.0",
     "tailwindcss-motion": "^1.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

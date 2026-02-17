@@ -4,8 +4,10 @@
     max-width: 31.25rem;
     border-radius: .125rem;
     word-break: break-word;
-    border: 1px solid;
-    z-index: 9999;
+    border: 1px solid oklch(0% 0 0);
+    z-index: var(--z-devtools, 9999);
+    background-color: oklch(94.91% 0 0);
+    color: oklch(0% 0 0);
 
     &[data-size='base'] {
       font-size: .75rem;
@@ -14,6 +16,12 @@
     &[data-size='lg'] {
       font-size: .875rem;
       padding: .375rem .5rem;
+    }
+
+    &[data-theme-surface='dark'] {
+      background-color: oklch(38.67% 0 0);
+      color: oklch(94.91% 0 0);
+      border: none;
     }
   }
 }

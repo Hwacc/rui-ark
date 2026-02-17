@@ -36,7 +36,6 @@ class TitleTooltip {
           middleware: [flip(), shift(), offset(4), hide()],
         })
         if (!middlewareData.hide?.referenceHidden) {
-          console.log(x, y)
           Object.assign(this.titleTipNode.style, {
             left: `${x}px`,
             top: `${y}px`,

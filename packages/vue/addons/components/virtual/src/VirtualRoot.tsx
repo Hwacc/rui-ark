@@ -1,8 +1,8 @@
 import type { Virtualizer } from '@tanstack/vue-virtual'
 import type { Ref, ShallowRef } from 'vue'
+import { createContext } from '@rark-ui/vue-addons-shared'
 import { defineComponent, ref } from 'vue'
 import { LOADING_STATE } from '.'
-import { createContext } from '../../../context/createContext'
 
 type VirtualContext = {
   parentEl?: Ref<Element | null | undefined>

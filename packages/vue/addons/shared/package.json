@@ -1,0 +1,38 @@
+{
+  "name": "@rark-ui/vue-addons-shared",
+  "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.13.1",
+  "description": "Shared utilities for Rark UI Vue Addons",
+  "author": "Hwacc(mshcccck@gmail.com)",
+  "license": "MIT",
+  "keywords": [
+    "rark-ui",
+    "vue",
+    "addons",
+    "shared"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.27"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

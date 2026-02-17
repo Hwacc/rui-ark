@@ -2,21 +2,28 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
+    "rootDir": "./src",
     "declaration": true,
     "declarationMap": false,
     "emitDeclarationOnly": true,
     "noEmit": false,
     "outDir": "./dist"
   },
+  "paths": {
+    "@rark-ui/vue-addons-shared": ["../../shared/src"]
+  },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "types.d.ts"
   ],
   "exclude": [
     "node_modules",
     "dist",
     "src/virtual.stories.ts",
-    "src/examples/**/*.vue"
+    "src/examples/**/*.vue",
+    "../../composables/**/*.ts",
+    "../../context/**/*.ts"
   ]
 }

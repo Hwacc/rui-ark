@@ -1,6 +1,6 @@
 import type { VNode } from 'vue'
 import { Fragment, useSlots } from 'vue'
-import { injectVirtualContext } from '.'
+import { injectVirtualContext } from './VirtualRoot'
 
 export function useDetectSlotNode() {
   const slots = useSlots()

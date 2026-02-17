@@ -15,12 +15,9 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@rark-ui/shared/*": ["../../shared/src/*"],
-      "@rark-ui/themes/*": ["../../themes/src/*"]
+      "@rark-ui/addons/*": ["./*"]
     },
-
     "allowImportingTsExtensions": true,
-
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
@@ -29,19 +26,17 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "references": [{ "path": "../../themes" }, { "path": "../../shared" }],
   "include": [
     "context/**/*.ts",
     "components/**/*.ts",
     "components/**/*.tsx",
     "components/**/*.vue",
-    "composables/**/*.ts",
-    "composables/**/*.tsx",
-    "composables/**/*.vue",
     "directives/**/*.ts",
     "directives/**/*.tsx",
     "directives/**/*.vue",
-    "types/**/*.d.ts"
+    "shared/**/*.ts",
+    "shared/**/*.tsx",
+    "shared/**/*.vue"
   ],
   "exclude": ["node_modules", "dist"]
 }

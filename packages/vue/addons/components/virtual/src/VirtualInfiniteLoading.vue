@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue'
 import type { LoadingStateHandler } from '.'
+import { useForwardExpose } from '@rark-ui/vue-addons-shared'
 import { LoaderCircle } from 'lucide-vue-next'
 import { twMerge } from 'tailwind-merge'
 import { onMounted, onUnmounted, shallowRef } from 'vue'
 import { injectVirtualContext, LOADING_STATE } from '.'
-import { useForwardExpose } from '../../../composables/useForwardExpose'
 
 defineOptions({
   name: 'VirtualInfiniteLoading',

@@ -1,12 +1,12 @@
 <script lang="ts" generic="T" setup>
 import type { HTMLAttributes } from 'vue'
 import type { VirtualListProps } from '.'
+import { useForwardProps } from '@rark-ui/vue-addons-shared'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { merge } from 'es-toolkit/compat'
 import { twMerge } from 'tailwind-merge'
 import { cloneVNode, computed, h, useTemplateRef } from 'vue'
 import { injectVirtualContext } from '.'
-import { useForwardProps } from '../../../composables/useForwardProps'
 import { useDetectSlotNode } from './useDetectSlotNode'
 
 const {
