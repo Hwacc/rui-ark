@@ -1,0 +1,53 @@
+name: Build Package
+description: Setup toolchain and build one monorepo package
+
+inputs:
+  package_name:
+    description: Package name to build (e.g. @rark-ui/vue)
+    required: true
+  package_dir:
+    description: Package directory (e.g. packages/vue/core)
+    required: true
+  version:
+    description: Version from tag (semver only)
+    required: true
+  node_version:
+    description: Node.js version for CI
+    required: false
+    default: "22"
+  pnpm_version:
+    description: pnpm version for CI
+    required: false
+    default: "10"
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node_version }}
+        registry-url: https://registry.npmjs.org
+        cache: pnpm
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm_version }}
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+
+    - name: Align package version with tag
+      shell: bash
+      run: |
+        pnpm --dir "${{ inputs.package_dir }}" version "${{ inputs.version }}" --no-git-tag-version
+
+    - name: Build target package (with deps)
+      shell: bash
+      run: |
+        pnpm turbo run build --filter="${{ inputs.package_name }}..."

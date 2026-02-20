@@ -1,0 +1,74 @@
+name: Resolve Package From Tag
+description: Parse Git tag and map it to package metadata
+
+outputs:
+  package_name:
+    description: Target package name
+    value: ${{ steps.parse.outputs.package_name }}
+  package_dir:
+    description: Target package directory
+    value: ${{ steps.parse.outputs.package_dir }}
+  version:
+    description: Parsed version from tag
+    value: ${{ steps.parse.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Parse tag and resolve package
+      id: parse
+      shell: bash
+      run: |
+        tag="${GITHUB_REF_NAME}"
+
+        if [[ ! "$tag" =~ ^([a-z-]+)-v([0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?)$ ]]; then
+          echo "Invalid tag format: $tag"
+          echo "Expected format: <scope>-v<semver>, e.g. vue-v1.2.3"
+          exit 1
+        fi
+
+        scope="${BASH_REMATCH[1]}"
+        version="${BASH_REMATCH[2]}"
+
+        case "$scope" in
+          vue)
+            package_name="@rark-ui/vue"
+            package_dir="packages/vue/core"
+            ;;
+          shared)
+            package_name="@rark-ui/shared"
+            package_dir="packages/shared"
+            ;;
+          themes)
+            package_name="@rark-ui/themes"
+            package_dir="packages/themes"
+            ;;
+          vue-addons-shared)
+            package_name="@rark-ui/vue-addons-shared"
+            package_dir="packages/vue/addons/shared"
+            ;;
+          vue-addons-virtual)
+            package_name="@rark-ui/vue-addons-virtual"
+            package_dir="packages/vue/addons/components/virtual"
+            ;;
+          vue-addons-v-lazy)
+            package_name="@rark-ui/vue-addons-v-lazy"
+            package_dir="packages/vue/addons/directives/v-lazy"
+            ;;
+          vue-addons-v-title)
+            package_name="@rark-ui/vue-addons-v-title"
+            package_dir="packages/vue/addons/directives/v-title"
+            ;;
+          vue-addons-v-aria)
+            package_name="@rark-ui/vue-addons-v-aria"
+            package_dir="packages/vue/addons/directives/v-aria"
+            ;;
+          *)
+            echo "Unsupported scope in tag: $scope"
+            exit 1
+            ;;
+        esac
+
+        echo "package_name=$package_name" >> "$GITHUB_OUTPUT"
+        echo "package_dir=$package_dir" >> "$GITHUB_OUTPUT"
+        echo "version=$version" >> "$GITHUB_OUTPUT"
