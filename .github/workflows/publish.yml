@@ -2,8 +2,6 @@ name: Publish Package
 
 on:
   push:
-    branches:
-      - main
     tags:
       - 'vue-v*.*.*'
       - 'shared-v*.*.*'
@@ -19,6 +17,8 @@ jobs:
       package_dir: ${{ steps.resolve_tag.outputs.package_dir }}
       version: ${{ steps.resolve_tag.outputs.version }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Resolve package metadata
         id: resolve_tag
         uses: ./.github/actions/resolve-tag
@@ -30,9 +30,6 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Build package by composite action
         uses: ./.github/actions/build
         with:
