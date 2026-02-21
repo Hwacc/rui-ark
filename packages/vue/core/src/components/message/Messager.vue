@@ -6,9 +6,9 @@ import { ThemeProvider } from '@rark-ui/vue/providers/theme'
 import { defaults } from 'es-toolkit/compat'
 
 const { theme: propsTheme, showClose = true, ...props } = defineProps<MessagerProps>()
-defineSlots<{
-  default: (props: { message: MessageOptions }) => any
-}>()
+// slots
+defineSlots<{ default: (props: { message: MessageOptions<any> }) => any }>()
+
 const messager = createToaster({
   ...props,
   placement: 'top',

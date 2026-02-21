@@ -1,4 +1,4 @@
-import type { CreateToasterReturn, ToastRootBaseProps, ToastStoreProps } from '@ark-ui/vue'
+import type { CreateToasterReturn, ToastRootBaseProps } from '@ark-ui/vue'
 import type { ThemeCrafts, ThemeNoCrafts } from '@rark-ui/vue/providers'
 import type * as toast from '@zag-js/toast'
 import type * as ZagToast from '@zag-js/toast'
@@ -49,10 +49,65 @@ export interface ToastProps extends ToastRootBaseProps, ThemeNoCrafts {
     close?: HTMLAttributes['class']
   }
 }
-export interface ToasterProps extends /* @vue-ignore */ ToastStoreProps, ThemeCrafts<'tvToast'> {
-  toasterId?: string
-}
+
 export interface ToasterManagerProps {
   disableDefaultToaster?: boolean
   defaultToasterProps?: ToasterProps
+}
+
+export interface ToasterProps extends ToastStoreProps, ThemeCrafts<'tvToast'> {
+  toasterId?: string
+}
+
+/**
+ *  to deal with vue-sfc error and  let defineProps create props right
+ *  copy from @ark-ui/vue/toast/types.ts
+ */
+interface ToastStoreProps {
+  /**
+   * The placement of the toast
+   * @default "bottom"
+   */
+  placement?: Placement | undefined
+  /**
+   * The maximum number of toasts. When the number of toasts exceeds this limit, the new toasts are queued.
+   * @default 24
+   */
+  max?: number | undefined
+  /**
+   * Whether to overlap the toasts
+   */
+  overlap?: boolean | undefined
+  /**
+   * The duration of the toast.
+   * By default, it is determined by the type of the toast.
+   */
+  duration?: number | undefined
+  /**
+   * The gap between the toasts
+   * @default 16
+   */
+  gap?: number | undefined
+  /**
+   * The offset from the safe environment edge of the viewport
+   * @default "1rem"
+   */
+  offsets?: string | Record<'left' | 'right' | 'bottom' | 'top', string> | undefined
+  /**
+   * The hotkey that will move focus to the toast group
+   * @default '["altKey", "KeyT"]'
+   */
+  hotkey?: string[] | undefined
+  /**
+   * The duration for the toast to kept alive before it is removed.
+   * Useful for exit transitions.
+   *
+   * @default 200
+   */
+  removeDelay?: number | undefined
+  /**
+   * Whether to pause toast when the user leaves the browser tab
+   * @default false
+   */
+  pauseOnPageIdle?: boolean | undefined
 }

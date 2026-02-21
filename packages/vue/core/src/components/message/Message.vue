@@ -127,15 +127,11 @@ const iconVNode = computed(() => {
           name="close"
           v-bind="slotBindings"
         >
-          <Toast.CloseTrigger>
-            <X
-              v-if="messageContext.type !== 'loading'"
-              :class="crafts.close({ class: ui?.close, ...theme })"
-            />
-            <ark.div
-              v-else
-              :class="crafts.close({ class: ui?.close, ...theme })"
-            />
+          <Toast.CloseTrigger
+            v-if="messageContext.type !== 'loading'"
+            :class="crafts.close({ class: ui?.close, ...theme })"
+          >
+            <X class="size-[1lh]" />
           </Toast.CloseTrigger>
         </slot>
       </slot>

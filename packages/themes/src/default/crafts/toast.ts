@@ -12,7 +12,7 @@ export const tvToast = tv(
       title: '',
       description: '',
       icon: 'size-[1lh]',
-      close: 'size-[1lh]',
+      close: '',
     },
     variants: {
       size: {

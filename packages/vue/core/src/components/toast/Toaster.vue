@@ -6,9 +6,11 @@ import { useTheme } from '@rark-ui/vue/composables/useTheme'
 import { ThemeProvider } from '@rark-ui/vue/providers/theme'
 
 const { toasterId, theme: propsTheme, ...props } = defineProps<ToasterProps>()
+// slots
 defineSlots<{
-  default: (props: { toast: ToastOptions }) => any
+  default: (props: { toast: ToastOptions<any> }) => any
 }>()
+
 const toaster = createToaster(props as CreateToasterProps)
 
 // theme
@@ -22,7 +24,10 @@ defineExpose({
 </script>
 
 <template>
-  <Toaster v-slot="toast" :toaster="toaster">
+  <Toaster
+    v-slot="toast"
+    :toaster="toaster"
+  >
     <ThemeProvider :value="theme">
       <slot :toast="toast" />
     </ThemeProvider>
