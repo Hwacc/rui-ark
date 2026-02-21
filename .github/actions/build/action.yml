@@ -43,7 +43,7 @@ runs:
       shell: bash
       run: |
         cd "${{ inputs.package_dir }}"
-        pnpm version "${{ inputs.version }}" --no-git-tag-version
+        pnpm version "${{ inputs.version }}" --no-git-tag-version --allow-same-version
 
     - name: Build target package (with deps)
       shell: bash
