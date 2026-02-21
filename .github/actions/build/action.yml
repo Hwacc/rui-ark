@@ -42,7 +42,8 @@ runs:
     - name: Align package version with tag
       shell: bash
       run: |
-        pnpm -C "${{ inputs.package_dir }}" version "${{ inputs.version }}" --no-git-tag-version
+        cd "${{ inputs.package_dir }}"
+        pnpm version "${{ inputs.version }}" --no-git-tag-version
 
     - name: Build target package (with deps)
       shell: bash
