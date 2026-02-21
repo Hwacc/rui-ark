@@ -168,16 +168,19 @@ export default defineComponent({
                                             ...theme.value,
                                           })}
                                         >
-                                          <TreeView.NodeCheckboxIndicator class={checkboxCrafts.value.indicator({
-                                            class: branchCrafts.value.checkboxIndicator({ class: uUi.branchCheckboxIndicator, ...theme.value }),
-                                            ...theme.value,
-                                          })}
+                                          <div
+                                            class={checkboxCrafts.value.indicator({
+                                              class: branchCrafts.value.checkboxIndicator({ class: uUi.branchCheckboxIndicator, ...theme.value }),
+                                              ...theme.value,
+                                            })}
                                           >
-                                            {{
-                                              default: () => <Check class={checkboxCrafts.value.indicatorChecked({ ...theme.value })} />,
-                                              indeterminate: () => <Minus class={checkboxCrafts.value.indicatorMinus({ ...theme.value })} />,
-                                            }}
-                                          </TreeView.NodeCheckboxIndicator>
+                                            <TreeView.NodeCheckboxIndicator>
+                                              {{
+                                                default: () => <Check class={checkboxCrafts.value.indicatorChecked({ ...theme.value })} />,
+                                                indeterminate: () => <Minus class={checkboxCrafts.value.indicatorMinus({ ...theme.value })} />,
+                                              }}
+                                            </TreeView.NodeCheckboxIndicator>
+                                          </div>
                                         </TreeView.NodeCheckbox>
                                         {renderIcon(
                                           {
@@ -238,16 +241,21 @@ export default defineComponent({
                                       ...theme.value,
                                     })}
                                     >
-                                      <TreeView.NodeCheckboxIndicator class={checkboxCrafts.value.indicator({
-                                        class: itemCrafts.value.checkboxIndicator({ class: uUi.itemCheckboxIndicator, ...theme.value }),
-                                        ...theme.value,
-                                      })}
+                                      <div
+                                        class={
+                                          checkboxCrafts.value.indicator({
+                                            class: itemCrafts.value.checkboxIndicator({ class: uUi.itemCheckboxIndicator, ...theme.value }),
+                                            ...theme.value,
+                                          })
+                                        }
                                       >
-                                        {{
-                                          default: () => <Check class={checkboxCrafts.value.indicatorChecked({ ...theme.value })} />,
-                                          indeterminate: () => <Minus class={checkboxCrafts.value.indicatorMinus({ ...theme.value })} />,
-                                        }}
-                                      </TreeView.NodeCheckboxIndicator>
+                                        <TreeView.NodeCheckboxIndicator>
+                                          {{
+                                            default: () => <Check class={checkboxCrafts.value.indicatorChecked({ ...theme.value })} />,
+                                            indeterminate: () => <Minus class={checkboxCrafts.value.indicatorMinus({ ...theme.value })} />,
+                                          }}
+                                        </TreeView.NodeCheckboxIndicator>
+                                      </div>
                                     </TreeView.NodeCheckbox>
                                     {renderIcon(
                                       {

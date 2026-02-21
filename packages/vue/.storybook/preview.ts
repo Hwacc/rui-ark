@@ -3,7 +3,6 @@ import { defineComponent, h } from 'vue'
 import { Toast, Toaster } from '../core/src/components/toast'
 import { RUIConfig } from '../core/src/providers/config'
 
-import '@rark-ui/themes/razer/index.css'
 import './style.css'
 
 const preview: Preview = {

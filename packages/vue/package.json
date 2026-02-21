@@ -9,6 +9,9 @@
     "build": "storybook build -o .storybook-static",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "@rark-ui/themes": "workspace:*"
+  },
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
     "@rsbuild/core": "^1.6.15",

@@ -1,3 +1,9 @@
+@import 'tailwindcss';
+@import '@rark-ui/themes/razer/index.css';
+@import '@rark-ui/themes/razer/preset.css';
+
+@config '../tailwind.config.ts';
+
 :root {
   color: var(--color-hff);
 }
