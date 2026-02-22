@@ -1,7 +1,7 @@
 {
   "name": "@rark-ui/vue-addons-virtual",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "packageManager": "pnpm@10.13.1",
   "description": "Virtual components for Rark UI",
   "author": {
