@@ -1,7 +1,7 @@
 import type { UseTreeViewNodeContext } from '@ark-ui/vue'
 import type { ThemeNoCrafts } from '@rark-ui/vue/providers/theme'
 import type { HTMLAttributes, PropType, SlotsType, UnwrapRef, VNode } from 'vue'
-import { TreeView } from '@ark-ui/vue'
+import { TreeView, useTreeViewContext } from '@ark-ui/vue'
 import { useTheme } from '@rark-ui/vue/composables/useTheme'
 import { Check, ChevronRight, Minus } from 'lucide-vue-next'
 import { cloneVNode, computed, defineComponent, isVNode, toRefs, unref } from 'vue'
@@ -89,7 +89,7 @@ export default defineComponent({
 
   setup(props, { attrs, slots }) {
     const { node, nodeIndent, indexPath, keyMap, ui } = toRefs(props)
-
+    const treeViewContext = useTreeViewContext()
     // theme
     const theme = useTheme(() => props.theme)
     const branchCrafts = computed(() => theme.value.crafts.tvTreeBranch())
@@ -222,7 +222,13 @@ export default defineComponent({
                     }
                     {
                       !uNode[uKeyMap.children] && (
-                        <TreeView.Item {...attrs} class={itemCrafts.value.root({ class: uUi.item, ...theme.value })}>
+                        <TreeView.Item
+                          {...attrs}
+                          class={itemCrafts.value.root({ class: uUi.item, ...theme.value })}
+                          onClick={() => {
+                            treeViewContext.value.toggleChecked(uNode[uKeyMap.id] as string, false)
+                          }}
+                        >
                           {
                             slots.item
                               ? slots.item({

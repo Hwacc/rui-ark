@@ -163,7 +163,7 @@ function measureElement(el: Element | ComponentPublicInstance) {
   >
     <!-- scroll area -->
     <div
-      :class="twMerge('rui-virtual-grid_scroll', ui?.scroll, propsClass)"
+      :class="twMerge('rui-virtual-grid_scroll', ui?.scroll)"
       :style="{
         width: `${totalSizeColumns}px`,
         height: `${totalSizeRows}px`,

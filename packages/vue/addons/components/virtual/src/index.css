@@ -10,7 +10,7 @@
 }
 
 @layer components {
-  .rui-virtual-list {
+  .rui-virtual-list, .rui-virtual-grid {
     width: 100%;
     height: 100%;
     overflow: auto;
