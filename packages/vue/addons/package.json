@@ -1,5 +1,6 @@
 {
   "name": "@rark-ui/vue-addons",
+  "private": true,
   "packageManager": "pnpm@10.13.1",
   "description": "Vue addons for Rark UI",
   "author": {
