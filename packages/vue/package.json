@@ -1,6 +1,7 @@
 {
   "name": "@rark-ui/vue-storybook",
   "type": "module",
+  "private": true,
   "description": "Vue stories for Rark UI",
   "author": {
     "name": "Hwacc",
