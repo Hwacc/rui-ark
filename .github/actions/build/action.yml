@@ -1,24 +1,10 @@
 name: Build Package
-description: Setup toolchain and build one monorepo package
+description: Setup toolchain and build monorepo packages
 
 inputs:
   package_name:
     description: Package name to build (e.g. @rark-ui/vue)
-    required: true
-  package_dir:
-    description: Package directory (e.g. packages/vue/core)
-    required: true
-  version:
-    description: Version from tag (semver only)
-    required: true
-  node_version:
-    description: Node.js version for CI
     required: false
-    default: '22'
-  pnpm_version:
-    description: pnpm version for CI
-    required: false
-    default: '10'
 
 runs:
   using: composite
@@ -26,7 +12,7 @@ runs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ inputs.node_version }}
+        node-version: '22'
         registry-url: https://registry.npmjs.org
 
     - name: Setup pnpm
@@ -39,13 +25,58 @@ runs:
       shell: bash
       run: pnpm install --no-frozen-lockfile
 
-    - name: Align package version with tag
+    - name: Build release-target packages
+      if: ${{ inputs.package_name == '' }}
       shell: bash
       run: |
-        cd "${{ inputs.package_dir }}"
-        pnpm version "${{ inputs.version }}" --no-git-tag-version --allow-same-version
+        set -euo pipefail
+
+        # 1) Prefer package manifests changed in the latest commit (version PR merge).
+        mapfile -t changed_manifests < <(git diff --name-only HEAD~1 HEAD -- 'packages/**/package.json' || true)
+        package_names=()
+
+        for manifest in "${changed_manifests[@]}"; do
+          if [[ -n "$manifest" && -f "$manifest" ]]; then
+            name=$(node -e "try { const pkg = require('./${manifest}'); if (pkg.name) process.stdout.write(pkg.name); } catch {}")
+            if [[ -n "$name" ]]; then
+              package_names+=("$name")
+            fi
+          fi
+        done
+
+        # 2) Fallback to unreleased changesets if no version-bumped manifests were found.
+        if [[ ${#package_names[@]} -eq 0 ]]; then
+          pnpm changeset status --output=.changeset-status.json >/dev/null 2>&1 || true
+          if [[ -f .changeset-status.json ]]; then
+            mapfile -t package_names < <(node -e "try { const fs = require('fs'); const data = JSON.parse(fs.readFileSync('.changeset-status.json', 'utf8')); const names = [...new Set((data.releases || []).map(r => r.name).filter(Boolean))]; process.stdout.write(names.join('\n')); } catch {}")
+          fi
+        fi
+
+        if [[ ${#package_names[@]} -eq 0 ]]; then
+          echo "No release-target packages detected; skipping build."
+          exit 0
+        fi
+
+        # De-duplicate package names while preserving order.
+        unique_packages=()
+        declare -A seen=()
+        for pkg in "${package_names[@]}"; do
+          if [[ -z "${seen[$pkg]+x}" ]]; then
+            seen[$pkg]=1
+            unique_packages+=("$pkg")
+          fi
+        done
+
+        args=()
+        for pkg in "${unique_packages[@]}"; do
+          args+=(--filter="${pkg}...")
+        done
+
+        echo "Building release-target packages: ${unique_packages[*]}"
+        pnpm turbo run build "${args[@]}"
 
     - name: Build target package (with deps)
+      if: ${{ inputs.package_name != '' }}
       shell: bash
       run: |
         pnpm turbo run build --filter="${{ inputs.package_name }}..."
