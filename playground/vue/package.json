@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@ark-ui/vue": "npm:@hwacc/ark-ui-vue@5.31.0-leading.3",
-    "@rark-ui/themes": "^1.2.0",
-    "@rark-ui/vue": "^1.2.1",
+    "@rark-ui/themes": "workspace:*",
+    "@rark-ui/vue": "workspace:*",
     "lucide-vue-next": "^0.563.0",
     "vue": "^3.5.25"
   },
