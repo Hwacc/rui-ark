@@ -1,0 +1,49 @@
+{
+  "name": "@rark-ui/vue-addons-swiper",
+  "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.13.1",
+  "description": "Swiper components for Rark UI",
+  "author": {
+    "name": "Hwacc",
+    "email": "mshcccck@gmail.com",
+    "url": "https://github.com/Hwacc/rark-ui"
+  },
+  "license": "MIT",
+  "keywords": [
+    "rark-ui",
+    "vue",
+    "addons",
+    "swiper"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "module": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib build --tsconfig ./tsconfig.build.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.27"
+  },
+  "dependencies": {
+    "@rark-ui/vue-addons-shared": "^1.0.0",
+    "swiper": "^12.1.2"
+  },
+  "devDependencies": {
+    "@rsbuild/plugin-babel": "^1.0.6",
+    "@rsbuild/plugin-vue": "^1.2.2",
+    "@rsbuild/plugin-vue-jsx": "^1.1.1",
+    "vue-tsc": "^1.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
