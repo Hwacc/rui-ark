@@ -1,13 +1,15 @@
 import type { ComputedRef, MaybeRefOrGetter } from 'vue'
 import type { Crafts, ThemeProps } from '../providers/theme/theme-props'
-import { crafts } from '@rark-ui/themes/default'
+import { crafts, tv } from '@rark-ui/themes/default'
 import { omitBy } from 'es-toolkit'
-import { isNil } from 'es-toolkit/compat'
-import { computed, toValue } from 'vue'
+import { isNil, keysIn } from 'es-toolkit/compat'
+import { computed, getCurrentInstance, toValue } from 'vue'
 import { injectThemeContext } from '../providers/theme/theme-props'
 import { useConfig } from './useConfig'
 
 type UseThemeReturn = ComputedRef<Omit<ThemeProps, 'crafts'> & { crafts: Crafts }>
+
+const CRAFTS_KEYS = keysIn(crafts)
 
 function pickDefined<T extends Record<string, any>>(obj?: T) {
   if (!obj)
@@ -27,6 +29,9 @@ export function useTheme<T>(props?: MaybeRefOrGetter<Partial<T> | undefined>): U
   const configTheme = useConfig('theme')
   const contextTheme = injectThemeContext(computed(() => ({})))
   const propsTheme = computed(() => toValue(props) ?? {})
+
+  const vm = getCurrentInstance()
+  const compName = vm?.type.__name
 
   return computed(() => {
     const { crafts: configCrafts, ...configRest } = clean(configTheme) as any
@@ -51,7 +56,18 @@ export function useTheme<T>(props?: MaybeRefOrGetter<Partial<T> | undefined>): U
       crafts,
       pickDefined<Crafts>(configCrafts as Crafts | undefined),
       pickDefined<Crafts>(contextCrafts as Crafts | undefined),
-      pickDefined<Crafts>(propsCrafts as Crafts | undefined),
+      propsCrafts
+        ? typeof propsCrafts === 'function'
+          ? propsCrafts()
+          : CRAFTS_KEYS.includes(`tv${compName}`)
+            ? {
+                [`tv${compName}`]: tv({
+                  extend: crafts[`tv${compName}` as keyof typeof crafts],
+                  ...propsCrafts,
+                }),
+              }
+            : {}
+        : {},
     ) as Crafts
 
     return {

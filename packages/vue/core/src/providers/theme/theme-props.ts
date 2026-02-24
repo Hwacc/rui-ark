@@ -16,8 +16,27 @@ export interface ThemeProps {
 export interface Theme {
   theme?: ThemeProps
 }
+
+type ShallowKeyed<T> = Partial<Record<Extract<keyof T, string>, any>>
+type CraftInput<T> = T extends {
+  base?: infer B
+  slots?: infer S
+  variants?: infer V
+  defaultVariants?: infer D
+}
+  ? {
+      base?: ShallowKeyed<B>
+      slots?: ShallowKeyed<S>
+      variants?: ShallowKeyed<V>
+      defaultVariants?: ShallowKeyed<D>
+      compoundVariants?: Array<Record<string, any>>
+      compoundSlots?: Array<Record<string, any>>
+    }
+  : never
 export interface ThemeCrafts<K extends keyof Crafts> {
-  theme?: Omit<ThemeProps, 'crafts'> & ({ crafts?: Record<K, ReturnType<typeof tv>> } | {})
+  theme?: Omit<ThemeProps, 'crafts'> & {
+    crafts?: CraftInput<Crafts[K]> | (() => ReturnType<typeof tv>)
+  }
 }
 export interface ThemeNoCrafts {
   theme?: Omit<ThemeProps, 'crafts'>

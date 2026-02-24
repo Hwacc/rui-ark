@@ -2,6 +2,8 @@ import type { Meta } from 'storybook-vue3-rsbuild'
 
 import BasicExample from './examples/basic.vue'
 import BasicExampleRaw from './examples/basic.vue?raw'
+import CraftsExample from './examples/crafts.vue'
+import CraftsExampleRaw from './examples/crafts.vue?raw'
 import SizesExample from './examples/sizes.vue'
 import SizesExampleRaw from './examples/sizes.vue?raw'
 import VariantsExample from './examples/variants.vue'
@@ -54,6 +56,21 @@ export const Sizes = {
   },
   render: () => ({
     components: { Component: SizesExample },
+    template: '<Component />',
+  }),
+}
+
+export const Crafts = {
+  parameters: {
+    docs: {
+      source: {
+        code: CraftsExampleRaw,
+        language: 'html',
+      },
+    },
+  },
+  render: () => ({
+    components: { Component: CraftsExample },
     template: '<Component />',
   }),
 }
