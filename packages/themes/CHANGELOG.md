@@ -1,5 +1,19 @@
 # @rark-ui/themes
 
+## 1.4.0
+
+### Minor Changes
+
+- 8c172d6: - @rark-ui/shared:
+  - Fixed dependency issues to improve package stability.
+  - Add parseCubicBezier func
+  - @rark-ui/themes:
+    - Fixed dependency issues to improve package stability.
+  - @rark-ui/vue:
+    - Fixed Crafts type issues
+    - Fixed useTheme Crafts judgement
+    - Fixed dependency issues to improve package stability.
+
 ## 1.3.0
 
 ### Minor Changes
