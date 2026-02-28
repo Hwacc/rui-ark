@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
-    "@rark-ui/shared": "^1.0.0",
+    "@rark-ui/shared": "^1.2.6",
     "@rark-ui/themes": "^1.2.2",
     "@vueuse/core": "^14.1.0",
     "es-toolkit": "^1.44.0",
