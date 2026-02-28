@@ -1,7 +1,6 @@
 {
   "name": "@rark-ui/vue-addons-swiper",
   "type": "module",
-  "version": "1.0.1",
   "packageManager": "pnpm@10.13.1",
   "description": "Swiper components for Rark UI",
   "author": {
