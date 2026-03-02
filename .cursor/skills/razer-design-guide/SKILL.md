@@ -1,10 +1,10 @@
 ---
-name: razer-style-guide
+name: razer-design-guide
 description: Provides Razer brand design system and style guide for Pencil design work. Use when designing components in .pen files, working with Razer theme, creating UI components following Razer brand guidelines, or when the user mentions Razer design system, style guide, or Pencil design.
 version: 1.0.0
 ---
 
-# Razer 设计指南
+# Razer 组件设计指南
 
 ## First thing first
 在使用Pencil设计组件时:
