@@ -4,6 +4,14 @@
 
 ### Minor Changes
 
+- d49b664: - Fix addons swiper control components not displaying or responding
+  - Fix vue-docgen warning during story build
+  - Fix CSS build @property warning
+
+## 1.2.0
+
+### Minor Changes
+
 - 4195866: - Fix addons swiper control components not displaying or responding
   - Fix vue-docgen warning during story build
   - Fix CSS build @property warning
