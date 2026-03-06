@@ -34,12 +34,12 @@ async function loadMoreSentence($state: LoadingStateHandler) {
 <template>
   <div class="w-full flex flex-col items-center gap-3">
     <div>
-      <p class="pb-2 text-rz-green">
+      <p class="pb-2 text-[#00ff9f]">
         Dynamic Virtual List
       </p>
 
       <VirtualList
-        class="w-100 h-100 border border-h55 rounded-md overflow-x-hidden"
+        class="w-100 h-100 border border-[#555555] rounded-md overflow-x-hidden"
         :gap="20"
         :data-source="longSentenceList"
       >
@@ -54,11 +54,11 @@ async function loadMoreSentence($state: LoadingStateHandler) {
     </div>
 
     <div>
-      <p class="pb-2 text-rz-green">
+      <p class="pb-2 text-[#00ff9f]">
         Dynamic Virtual List with Infinite Loading
       </p>
       <VirtualList
-        class="w-100 h-100 border border-h55 rounded-md overflow-x-hidden"
+        class="w-100 h-100 border border-[#555555] rounded-md overflow-x-hidden"
         :gap="20"
         :data-source="asyncSentenceList"
       >

@@ -3,10 +3,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [
-    ["@rark-ui/vue", "@rark-ui/shared", "@rark-ui/themes"],
-    ["@rark-ui/vue-addons-virtual", "@rark-ui/vue-addons-shared"]
-  ],
+  "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",

@@ -8,6 +8,12 @@ import type {
 } from 'swiper/types'
 import type { HTMLAttributes } from 'vue'
 
+export type { Swiper, SwiperEvents, SwiperOptions } from 'swiper/types'
+export interface SwiperExpose {
+  swiper: Swiper | undefined
+  $el: HTMLElement | undefined
+}
+
 export interface SwiperProps extends SwiperOptions {
   /**
    * 自定义容器标签名
@@ -38,7 +44,8 @@ export interface SwiperSlots {
   'wrapper-end': () => any
 }
 
-export interface SwiperNavigationProps extends Omit<NavigationOptions, 'enabled' | 'nextEl' | 'prevEl'> {
+export interface SwiperNavigationProps
+  extends Omit<NavigationOptions, 'enabled' | 'nextEl' | 'prevEl'> {
   class?: HTMLAttributes['class']
   swiper?: Swiper
 }

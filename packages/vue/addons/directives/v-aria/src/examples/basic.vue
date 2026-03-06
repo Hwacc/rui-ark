@@ -10,7 +10,7 @@ function onAction() {
 
 <template>
   <div class="w-full flex flex-col gap-3">
-    <p class="text-sm text-hcc">
+    <p class="text-sm text-[#d0d0d0]">
       给非原生可交互元素补齐 aria / role / tabindex，并支持 Enter 触发 action
     </p>
 
@@ -20,12 +20,12 @@ function onAction() {
         label: 'Press Enter to trigger action',
         action: onAction,
       }"
-      class="w-fit select-none rounded border border-h55 bg-h22 px-3 py-2 text-sm text-hff"
+      class="w-fit select-none rounded border border-[#555555] bg-[#2a2a2a] px-3 py-2 text-sm text-white"
     >
       Focus me then press Enter
     </div>
 
-    <div class="text-xs text-hcc">
+    <div class="text-xs text-[#d0d0d0]">
       <div v-for="(line, i) in logs" :key="i">
         {{ line }}
       </div>

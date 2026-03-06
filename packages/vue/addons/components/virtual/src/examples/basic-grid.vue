@@ -33,11 +33,11 @@ async function loadMoreName($state: LoadingStateHandler) {
 <template>
   <div class="w-full flex flex-col items-center gap-3">
     <div>
-      <p class="pb-2 text-rz-green">
+      <p class="pb-2 text-[#00ff9f]">
         Basic Virtual Grid
       </p>
       <VirtualGrid
-        class="w-100 h-100 border border-h55 rounded-md"
+        class="w-100 h-100 border border-[#555555] rounded-md"
         :data-source="longNameList"
         :row="20"
         :gap="[20, 20]"
@@ -52,11 +52,11 @@ async function loadMoreName($state: LoadingStateHandler) {
     </div>
 
     <div>
-      <p class="pb-2 text-rz-green">
+      <p class="pb-2 text-[#00ff9f]">
         Basic Virtual Grid with Infinite Loading
       </p>
       <VirtualGrid
-        class="w-100 h-100 border border-h55 rounded-md"
+        class="w-100 h-100 border border-[#555555] rounded-md"
         :data-source="asyncNameList"
         :row="20"
         :gap="[20, 20]"

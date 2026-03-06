@@ -10,11 +10,11 @@ const longNameList = Array.from({ length: 1000 })
 <template>
   <div class="w-full flex flex-col items-center gap-3">
     <div>
-      <p class="pb-2 text-rz-green">
+      <p class="pb-2 text-[#00ff9f]">
         Vertical Virtual List
       </p>
       <VirtualList
-        class="w-100 h-100 border border-h55 rounded-md"
+        class="w-100 h-100 border border-[#555555] rounded-md"
         :data-source="longNameList"
       >
         <VirtualListItem v-slot="{ data, index }">
@@ -24,11 +24,11 @@ const longNameList = Array.from({ length: 1000 })
     </div>
 
     <div class="flex-1">
-      <p class="pb-2 text-rz-green">
+      <p class="pb-2 text-[#00ff9f]">
         Horizontal Virtual List
       </p>
       <VirtualList
-        class="w-100 h-25 border border-h55 rounded-md"
+        class="w-100 h-25 border border-[#555555] rounded-md"
         :data-source="longNameList"
         horizontal
         :estimate-size="() => 100"

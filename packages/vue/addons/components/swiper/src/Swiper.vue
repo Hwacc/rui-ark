@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { Swiper as SwiperInstance } from 'swiper/types'
-import type { SwiperEmits, SwiperProps, SwiperSlots } from '.'
+import type { SwiperEmits, SwiperExpose, SwiperProps, SwiperSlots } from '.'
 import { useForwardPropsEmits } from '@rark-ui/vue-addons-shared'
 import { Swiper } from 'swiper/vue'
 import { twMerge } from 'tailwind-merge'
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { useSwiperModule } from './utils'
 
 defineOptions({
@@ -13,10 +13,11 @@ defineOptions({
 
 const { class: propsClass, direction = 'horizontal', ...props } = defineProps<SwiperProps>()
 const emits = defineEmits<SwiperEmits>()
-
 defineSlots<SwiperSlots>()
 
-const swiperInstance = ref<SwiperInstance | null>(null)
+const forwarded = useForwardPropsEmits(props, emits)
+
+const swiperInstance = shallowRef<SwiperInstance | null>(null)
 const swiperEl = ref<HTMLElement>()
 const { hasModule } = useSwiperModule(swiperInstance)
 
@@ -52,8 +53,6 @@ function onKeyDown(event: KeyboardEvent) {
 }
 
 defineExpose({ swiper: swiperInstance, $el: swiperEl })
-
-const forwarded = useForwardPropsEmits(props, emits)
 </script>
 
 <template>
@@ -77,19 +76,34 @@ const forwarded = useForwardPropsEmits(props, emits)
       data-part="root"
       @swiper="onSwiperInit"
     >
-      <template v-if="$slots.default" #default>
+      <template
+        v-if="$slots.default"
+        #default
+      >
         <slot />
       </template>
-      <template v-if="$slots['container-start']" #container-start>
+      <template
+        v-if="$slots['container-start']"
+        #container-start
+      >
         <slot name="container-start" />
       </template>
-      <template v-if="$slots['container-end']" #container-end>
+      <template
+        v-if="$slots['container-end']"
+        #container-end
+      >
         <slot name="container-end" />
       </template>
-      <template v-if="$slots['wrapper-start']" #wrapper-start>
+      <template
+        v-if="$slots['wrapper-start']"
+        #wrapper-start
+      >
         <slot name="wrapper-start" />
       </template>
-      <template v-if="$slots['wrapper-end']" #wrapper-end>
+      <template
+        v-if="$slots['wrapper-end']"
+        #wrapper-end
+      >
         <slot name="wrapper-end" />
       </template>
     </Swiper>

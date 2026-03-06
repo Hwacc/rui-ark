@@ -10,17 +10,17 @@ const srcs = Array.from({ length: 8 }, (_, i) => ({
 
 <template>
   <div class="flex flex-col gap-3">
-    <p class="text-sm text-hcc">
+    <p class="text-sm text-[#d0d0d0]">
       自定义滚动容器：<code>v-lazy.scroller:src</code>（modifier 名即容器 ref）
     </p>
 
-    <div class="h-52 w-80 overflow-auto rounded border border-h55 p-3">
+    <div class="h-52 w-80 overflow-auto rounded border border-[#555555] p-3">
       <div class="flex flex-col gap-6">
         <img
           v-for="(src, i) in srcs"
           :key="i"
           v-lazy="src"
-          class="w-full h-28 rounded border border-h55 object-cover"
+          class="w-full h-28 rounded border border-[#555555] object-cover"
           :alt="`lazy-${i}`"
         >
       </div>

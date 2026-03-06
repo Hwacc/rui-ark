@@ -4,7 +4,7 @@ import { vLazy } from '../index'
 
 <template>
   <div class="flex flex-col gap-3">
-    <p class="text-sm text-hcc">
+    <p class="text-sm text-[#d0d0d0]">
       src 数组用法
     </p>
     <img
@@ -16,7 +16,7 @@ import { vLazy } from '../index'
         loading: 'http://iph.href.lu/240x160?text=Loading&bg=000088',
         error: 'http://iph.href.lu/240x160?text=Error&bg=aa0000',
       }"
-      class="w-60 h-40 rounded border border-h55 object-cover"
+      class="w-60 h-40 rounded border border-[#555555] object-cover"
       alt="array-src"
     >
     <img
@@ -28,7 +28,7 @@ import { vLazy } from '../index'
         loading: 'http://iph.href.lu/240x160?text=Loading&bg=000088',
         error: 'http://iph.href.lu/240x160?text=Error&bg=aa0000',
       }"
-      class="w-60 h-40 rounded border border-h55 object-cover"
+      class="w-60 h-40 rounded border border-[#555555] object-cover"
       alt="array-src"
     >
   </div>

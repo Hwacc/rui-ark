@@ -79,6 +79,7 @@ watchEffect((cleanup) => {
                 getMinBulletSize() * (5 + (forwared.value.dynamicMainBullets ?? 1))
                 + activeBulletSize
               }px`
+              console.log('width', pagiRef.value.style.width)
             }
           })
         }
