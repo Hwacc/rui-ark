@@ -1,5 +1,12 @@
 # @rark-ui/vue
 
+## 1.5.2
+
+### Patch Changes
+
+- Updated dependencies [3922b6e]
+  - @rark-ui/themes@1.5.1
+
 ## 1.5.1
 
 ### Patch Changes

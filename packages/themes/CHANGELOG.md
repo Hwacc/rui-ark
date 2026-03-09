@@ -1,5 +1,11 @@
 # @rark-ui/themes
 
+## 1.5.1
+
+### Patch Changes
+
+- 3922b6e: chore: update dependencies for tailwindcss utilities
+
 ## 1.5.0
 
 ### Minor Changes
