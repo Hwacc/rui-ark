@@ -1,4 +1,5 @@
-import type { crafts, tv } from '@rark-ui/themes/default'
+import type { crafts } from '@rark-ui/themes/default'
+import type { tv } from '@rark-ui/themes/utils'
 import type { ComputedRef } from 'vue'
 import { createContext } from '@ark-ui/vue/utils'
 
