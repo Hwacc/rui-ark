@@ -1,5 +1,11 @@
 # @rark-ui/vue
 
+## 1.5.1
+
+### Patch Changes
+
+- 30fdbb7: fix: theme uitls import
+
 ## 1.5.0
 
 ### Minor Changes
