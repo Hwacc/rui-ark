@@ -1,5 +1,21 @@
 # @rark-ui/vue
 
+## 1.5.0
+
+### Minor Changes
+
+- 31a8016: - Added new CSS files for animations and easing functions to improve UI transitions.
+  - Updated package.json to include new utility exports for better accessibility.
+  - Refactored imports in various components to utilize the new utility functions, ensuring consistency across the theme.
+
+### Patch Changes
+
+- 460ab09: fixed: add MenuContext export
+- b67b936: fixed: Add SpinProvider to RUIConfig
+- 3e99b47: fix: update key binding in ScrollArea component for improved rendering
+- Updated dependencies [31a8016]
+  - @rark-ui/themes@1.5.0
+
 ## 1.4.0
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # @rark-ui/themes
 
+## 1.5.0
+
+### Minor Changes
+
+- 31a8016: - Added new CSS files for animations and easing functions to improve UI transitions.
+  - Updated package.json to include new utility exports for better accessibility.
+  - Refactored imports in various components to utilize the new utility functions, ensuring consistency across the theme.
+
 ## 1.4.0
 
 ### Minor Changes
