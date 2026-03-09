@@ -98,7 +98,12 @@ provideRUIConfigContext(
 
 <template>
   <ThemeProvider :value="props.theme">
-    <slot />
+    <SpinProvider>
+      <slot />
+      <template #icon>
+        <slot name="spin-icon" />
+      </template>
+    </SpinProvider>
     <ToasterManager
       ref="toasterManager"
       v-bind="props.toasterManager"
@@ -116,6 +121,5 @@ provideRUIConfigContext(
       </slot>
     </Messager>
     <OverlayProvider />
-    <SpinProvider />
   </ThemeProvider>
 </template>
