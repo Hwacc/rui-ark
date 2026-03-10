@@ -1,6 +1,6 @@
 {
   "name": "@rark-ui/vue-addons-u-murri",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "packageManager": "pnpm@10.13.1",
   "description": "Murri composable for Rark UI",
   "author": {
