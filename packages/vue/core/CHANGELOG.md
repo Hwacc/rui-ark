@@ -1,5 +1,13 @@
 # @rark-ui/vue
 
+## 1.5.6
+
+### Patch Changes
+
+- c73779c: - Updated the renderName function in TreeCheckboxNode and TreeNode components to directly return strings or VNodes, removing unnecessary conditional checks.
+  - Enhanced code readability and maintainability by streamlining the rendering logic.
+- b33508c: - **Checkbox, Radio, Select, Tree**: Broadened the supported value types for `model-value` to allow more flexible data structures and improve type safety
+
 ## 1.5.5
 
 ### Patch Changes
