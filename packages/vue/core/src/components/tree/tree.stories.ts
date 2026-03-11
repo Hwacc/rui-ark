@@ -4,6 +4,8 @@ import BasicExample from './examples/basic.vue'
 import BasicExampleRaw from './examples/basic.vue?raw'
 import CheckboxExample from './examples/checkbox.vue'
 import CheckboxExampleRaw from './examples/checkbox.vue?raw'
+import CustomDatatypeExample from './examples/custom-datatype.vue'
+import CustomDatatypeExampleRaw from './examples/custom-datatype.vue?raw'
 import EventsExample from './examples/events.vue'
 import EventsExampleRaw from './examples/events.vue?raw'
 import SelectionModesExample from './examples/selection-modes.vue'
@@ -58,6 +60,21 @@ export const Checkbox = {
   },
   render: () => ({
     components: { Component: CheckboxExample },
+    template: '<Component />',
+  }),
+}
+
+export const CustomDatatype = {
+  parameters: {
+    docs: {
+      source: {
+        code: CustomDatatypeExampleRaw,
+        language: 'html',
+      },
+    },
+  },
+  render: () => ({
+    components: { Component: CustomDatatypeExample },
     template: '<Component />',
   }),
 }
