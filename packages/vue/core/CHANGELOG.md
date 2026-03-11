@@ -1,5 +1,13 @@
 # @rark-ui/vue
 
+## 1.5.7
+
+### Patch Changes
+
+- aa2072c: fix: make hidden input visually hidden
+
+  Add `class="hidden"` to form-associated HiddenInput components (Checkbox, Slider, RadioGroup, Switch, TagsInput) so they are properly hidden from view while remaining accessible for form submission.
+
 ## 1.5.6
 
 ### Patch Changes
