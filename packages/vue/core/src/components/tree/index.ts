@@ -1,3 +1,4 @@
+export type { TreeKeyMap, TreeNodeData } from './props'
 export * from './props'
 export { default as Tree } from './Tree.vue'
 export { default as TreeCheckboxNode } from './TreeCheckboxNode.tsx'

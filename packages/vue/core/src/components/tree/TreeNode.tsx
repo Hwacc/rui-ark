@@ -1,6 +1,7 @@
 import type { UseTreeViewNodeContext } from '@ark-ui/vue'
 import type { ThemeNoCrafts } from '@rark-ui/vue/providers/theme'
-import type { HTMLAttributes, PropType, SlotsType, UnwrapRef, VNode } from 'vue'
+import type { HTMLAttributes, PropType, SlotsType, UnwrapRef } from 'vue'
+import type { TreeKeyMap, TreeNodeData } from './props'
 import { TreeView } from '@ark-ui/vue'
 import { useTheme } from '@rark-ui/vue/composables/useTheme'
 import { ChevronRight } from 'lucide-vue-next'
@@ -8,26 +9,12 @@ import { cloneVNode, computed, defineComponent, isVNode, toRefs, unref } from 'v
 import { TreeNode } from '.'
 import { Icon } from '../icon'
 
-interface Node {
+/** 合并 keyMap 后的完整类型（用于 slots） */
+interface ResolvedKeyMap {
   id: string
   name: string
-  children?: Node[]
-  icon?: string | VNode | (
-    (
-      props: {
-        node: Node
-        state: UnwrapRef<UseTreeViewNodeContext>
-        class: HTMLAttributes['class']
-      },
-    ) => VNode
-  )
-}
-
-interface KeyMap {
-  id: keyof Node
-  name: keyof Node
-  children: keyof Node
-  icon: keyof Node
+  children: string
+  icon: string
 }
 
 export default defineComponent({
@@ -55,7 +42,7 @@ export default defineComponent({
       default: () => ({}),
     },
     node: {
-      type: Object as PropType<Node>,
+      type: Object as PropType<TreeNodeData>,
       default: () => ({}),
       required: true,
     },
@@ -68,7 +55,7 @@ export default defineComponent({
       required: true,
     },
     keyMap: {
-      type: Object as PropType<Partial<KeyMap>>,
+      type: Object as PropType<Partial<TreeKeyMap>>,
       default: () => ({
         id: 'id',
         name: 'name',
@@ -79,8 +66,8 @@ export default defineComponent({
   },
 
   slots: Object as SlotsType<{
-    branch: (props: { node: Node, keyMap: KeyMap, state: UnwrapRef<UseTreeViewNodeContext> }) => any
-    item: (props: { node: Node, keyMap: KeyMap, state: UnwrapRef<UseTreeViewNodeContext> }) => any
+    branch: (props: { node: TreeNodeData, keyMap: ResolvedKeyMap, state: UnwrapRef<UseTreeViewNodeContext> }) => any
+    item: (props: { node: TreeNodeData, keyMap: ResolvedKeyMap, state: UnwrapRef<UseTreeViewNodeContext> }) => any
   }>,
 
   setup(props, { attrs, slots }) {
@@ -105,7 +92,7 @@ export default defineComponent({
 
       function renderIcon(
         iconProps: {
-          node: Node
+          node: TreeNodeData
           state: UnwrapRef<UseTreeViewNodeContext>
           class: HTMLAttributes['class']
         },
@@ -181,12 +168,13 @@ export default defineComponent({
                           <TreeView.BranchContent class={branchCrafts.value.content({ class: uUi.branchContent, ...theme.value })}>
                             <TreeView.BranchIndentGuide />
                             {
-                              (uNode[uKeyMap.children] as Node[]).map((child, index) => {
+                              (uNode[uKeyMap.children] as TreeNodeData[]).map((child, index) => {
                                 return (
                                   <TreeNode
                                     key={child[uKeyMap.id] as string}
                                     node={child}
                                     indexPath={[...uIndexPath, index]}
+                                    keyMap={uKeyMap}
                                   />
                                 )
                               })
