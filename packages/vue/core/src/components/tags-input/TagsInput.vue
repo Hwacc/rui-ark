@@ -90,6 +90,6 @@ useForwardExpose()
       </TagsInput.Control>
       <slot name="suffix" />
     </ThemeProvider>
-    <TagsInput.HiddenInput />
+    <TagsInput.HiddenInput class="hidden" />
   </TagsInput.RootProvider>
 </template>

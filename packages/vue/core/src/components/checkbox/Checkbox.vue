@@ -60,6 +60,6 @@ useForwardExpose()
         <span>{{ label }}</span>
       </slot>
     </Checkbox.Label>
-    <Checkbox.HiddenInput />
+    <Checkbox.HiddenInput class="hidden" />
   </Checkbox.RootProvider>
 </template>

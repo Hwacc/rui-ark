@@ -4,13 +4,14 @@ import { ScrollArea, ScrollAreaScrollbar } from '../index'
 
 <template>
   <ScrollArea class="w-100 h-50 bg-h22">
-    <div class="h-120 w-100 p-3 text-sm text-hff">
+    <div class="h-120 w-100 text-sm text-hff overflow-hidden">
       <p>Scroll area (vertical)</p>
-      <p class="text-hcc">Scroll down to see scrollbar behavior.</p>
+      <p class="text-hcc">
+        Scroll down to see scrollbar behavior.
+      </p>
       <div class="h-80" />
       <p>Bottom</p>
     </div>
     <ScrollAreaScrollbar />
   </ScrollArea>
 </template>
-

@@ -28,7 +28,7 @@ useForwardExpose()
       <Switch.Control :class="crafts.control({ class: ui?.control, ...theme })">
         <Switch.Thumb :class="crafts.thumb({ class: ui?.thumb, ...theme })" />
       </Switch.Control>
-      <Switch.HiddenInput />
+      <Switch.HiddenInput class="hidden" />
       <slot />
     </ThemeProvider>
   </Switch.RootProvider>

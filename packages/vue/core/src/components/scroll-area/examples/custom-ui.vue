@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Checkbox } from '@rark-ui/vue/components/checkbox'
 import { ScrollArea, ScrollAreaCorner, ScrollAreaScrollbar } from '../index'
 </script>
 
@@ -16,6 +17,7 @@ import { ScrollArea, ScrollAreaCorner, ScrollAreaScrollbar } from '../index'
       <div class="h-120" />
       End
     </div>
+    <Checkbox label="Checkbox" />
 
     <ScrollAreaScrollbar
       :ui="{ root: 'bg-h00/20', thumb: 'bg-rz-green/70 hover:bg-rz-green' }"
