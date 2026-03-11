@@ -1,5 +1,12 @@
 # @rark-ui/vue
 
+## 1.5.3
+
+### Patch Changes
+
+- c098b85: - Added TreeKeyMap and TreeNodeData types to facilitate custom data structures in the Tree component.
+  - Updated TreeCheckboxNode and TreeNode components to utilize the new types for improved flexibility.
+
 ## 1.5.2
 
 ### Patch Changes
