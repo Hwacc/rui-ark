@@ -1,10 +1,22 @@
-import type { CollectionItem, SelectContentBaseProps, SelectItemBaseProps, SelectItemGroupBaseProps, SelectRootBaseProps, SelectTriggerBaseProps } from '@ark-ui/vue/select'
+import type {
+  CollectionItem,
+  SelectContentBaseProps,
+  SelectItemBaseProps,
+  SelectItemGroupBaseProps,
+  SelectRootBaseProps,
+  SelectTriggerBaseProps,
+} from '@ark-ui/vue/select'
 import type { ThemeCrafts, ThemeNoCrafts } from '@rark-ui/vue/providers'
 import type * as ZagSelect from '@zag-js/select'
 import type { HTMLAttributes } from 'vue'
 
-export interface SelectProps<T extends CollectionItem> extends SelectRootBaseProps<T>, ThemeCrafts<'tvSelect'> {
+export type SelectValueType = string | number | boolean | null | symbol | bigint
+export interface SelectProps<T extends CollectionItem>
+  extends Omit<SelectRootBaseProps<T>, 'modelValue' | 'defaultValue'>,
+  ThemeCrafts<'tvSelect'> {
   class?: HTMLAttributes['class']
+  modelValue?: SelectValueType[]
+  defaultValue?: SelectValueType[]
 }
 
 // ts-plugin(2742)
@@ -16,9 +28,9 @@ export interface SelectEmits<T extends CollectionItem> {
   'pointerDownOutside': [event: ZagSelect.PointerDownOutsideEvent]
   'select': [details: ZagSelect.SelectionDetails]
   'valueChange': [details: ZagSelect.ValueChangeDetails<T>]
-  'update:modelValue': [value: string[]]
+  'update:modelValue': [value: SelectValueType[]]
   'update:open': [open: boolean]
-  'update:highlightedValue': [value: string | null]
+  'update:highlightedValue': [value: SelectValueType]
 }
 
 export interface SelectContentProps extends SelectContentBaseProps, ThemeNoCrafts {

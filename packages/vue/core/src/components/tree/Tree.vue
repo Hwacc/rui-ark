@@ -1,7 +1,6 @@
 <script setup lang="ts" generic="T = TreeNode">
 import type { TreeNode } from '@ark-ui/vue/tree-view'
-import type { TreeProps } from '.'
-import type { TreeViewRootEmits } from './tree'
+import type { TreeProps, TreeViewRootEmits } from '.'
 import { useForwardProps } from '@ark-ui/vue'
 import { TreeView, useTreeView } from '@ark-ui/vue/tree-view'
 import { useTheme } from '@rark-ui/vue/composables/useTheme'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { RadioGroupRootEmits } from '@ark-ui/vue/radio-group'
-import type { RadioGroupProps } from '.'
+import type { UseRadioGroupProps } from '@ark-ui/vue/radio-group'
+import type { RadioGroupProps, RadioGroupRootEmits } from '.'
 import { RadioGroup, useRadioGroup } from '@ark-ui/vue/radio-group'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
 import { useTheme } from '@rark-ui/vue/composables/useTheme'
@@ -9,7 +9,7 @@ import { computed } from 'vue'
 
 const { class: propsClass, theme: propsTheme, ...props } = defineProps<RadioGroupProps>()
 const emit = defineEmits<RadioGroupRootEmits>()
-const radioGroup = useRadioGroup(useForwardProps(props), emit)
+const radioGroup = useRadioGroup(useForwardProps(props) as unknown as UseRadioGroupProps, emit)
 
 // theme
 const theme = useTheme(() => propsTheme)

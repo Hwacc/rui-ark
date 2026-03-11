@@ -1,9 +1,13 @@
-import type { CheckboxRootProps } from '@ark-ui/vue/checkbox'
-import type { ThemeCrafts } from '@rark-ui/vue/providers'
+import type { ThemeCrafts, ThemeNoCrafts } from '@rark-ui/vue/providers'
 import type { HTMLAttributes } from 'vue'
+import type { CheckboxGroupBaseProps, CheckboxRootBaseProps } from './checkbox'
 
 export type CheckedState = boolean | 'indeterminate'
-export interface CheckboxProps extends CheckboxRootProps, ThemeCrafts<'tvCheckbox'> {
+export type CheckboxValueType = string | number | symbol | bigint | null
+
+export interface CheckboxProps
+  extends Omit<CheckboxRootBaseProps, 'value'>,
+  ThemeCrafts<'tvCheckbox'> {
   label?: string
   class?: HTMLAttributes['class']
   ui?: {
@@ -12,4 +16,21 @@ export interface CheckboxProps extends CheckboxRootProps, ThemeCrafts<'tvCheckbo
     indicator?: HTMLAttributes['class']
     label?: HTMLAttributes['class']
   }
+  value?: CheckboxValueType
+}
+
+export interface CheckboxGroupProps
+  extends Omit<CheckboxGroupBaseProps, 'modelValue' | 'defaultValue'>,
+  ThemeNoCrafts {
+  class?: HTMLAttributes['class']
+  modelValue?: CheckboxValueType[]
+  defaultValue?: CheckboxValueType[]
+}
+
+export interface CheckboxGroupRootEmits {
+  /**
+   * Functional called when the value changes.
+   */
+  'valueChange': [value: CheckboxValueType[]]
+  'update:modelValue': [value: CheckboxValueType[]]
 }

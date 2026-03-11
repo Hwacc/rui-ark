@@ -3,11 +3,11 @@ import { fakerEN } from '@faker-js/faker'
 import { ref } from 'vue'
 import { RadioGroup, RadioGroupItem } from '../index'
 
-const items = Array.from({ length: 5 }, () => {
+const items = Array.from({ length: 5 }, (_, i) => {
   const cat = fakerEN.animal.cat()
-  return { label: cat, value: cat }
+  return { label: cat, value: i }
 })
-const value = ref<string | undefined>(items[0]?.value)
+const value = ref<number>(items[1]?.value)
 </script>
 
 <template>

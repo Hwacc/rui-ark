@@ -1,5 +1,5 @@
 import type { TreeNode } from '@ark-ui/vue/tree-view'
-import type * as treeView from '@zag-ui/tree-view'
+import type * as treeView from '@zag-js/tree-view'
 
 export type RootEmits<T extends TreeNode> = {
   /**
@@ -55,5 +55,3 @@ export type RootEmits<T extends TreeNode> = {
    */
   'update:checkedValue': [value: string[]]
 }
-
-export interface TreeViewRootEmits<T extends TreeNode> extends RootEmits<T> {}

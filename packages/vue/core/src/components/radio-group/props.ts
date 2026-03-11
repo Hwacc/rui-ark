@@ -3,11 +3,30 @@ import type { RadioGroupVariants } from '@rark-ui/themes/default'
 import type { ThemeCrafts, ThemeNoCrafts } from '@rark-ui/vue/providers'
 import type { HTMLAttributes } from 'vue'
 
-export interface RadioGroupProps extends RadioGroupRootBaseProps, ThemeCrafts<'tvRadioGroup'> {
+export type RadioGroupValueType = string | number | symbol | bigint | null
+interface ValueChangeDetails {
+  value: RadioGroupValueType
+}
+export interface RadioGroupProps
+  extends Omit<RadioGroupRootBaseProps, 'modelValue' | 'defaultValue'>,
+  ThemeCrafts<'tvRadioGroup'> {
   class?: HTMLAttributes['class']
+  modelValue?: RadioGroupValueType
+  defaultValue?: RadioGroupValueType
 }
 
-export interface RadioGroupItemProps extends RadioGroupItemBaseProps, ThemeNoCrafts {
+export interface RadioGroupRootEmits {
+  /**
+   * Function called once a radio is checked
+   */
+  'valueChange': [details: ValueChangeDetails]
+  /**
+   * The callback fired when the model value changes.
+   */
+  'update:modelValue': [value: ValueChangeDetails['value']]
+}
+
+export interface RadioGroupItemProps extends Omit<RadioGroupItemBaseProps, 'value'>, ThemeNoCrafts {
   class?: HTMLAttributes['class']
   label?: string
   variant?: RadioGroupVariants['variant']
@@ -17,4 +36,5 @@ export interface RadioGroupItemProps extends RadioGroupItemBaseProps, ThemeNoCra
     indicator?: HTMLAttributes['class']
     text?: HTMLAttributes['class']
   }
+  value: RadioGroupValueType
 }

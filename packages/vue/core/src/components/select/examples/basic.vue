@@ -7,10 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 const collection = createListCollection({
   items: Array.from({ length: 6 }, (_, index) => ({
     label: fakerEN.animal.bird(),
-    value: `${index}`,
+    value: index,
   })),
 })
-const modelValue = ref<string[]>([])
+const modelValue = ref<number[]>([2])
 </script>
 
 <template>
@@ -19,7 +19,10 @@ const modelValue = ref<string[]>([])
       modelValue: {{ modelValue }}
     </div>
 
-    <Select v-model="modelValue" :collection="collection">
+    <Select
+      v-model="modelValue"
+      :collection="collection"
+    >
       <SelectTrigger class="w-60">
         <SelectValue placeholder="Select an animal" />
       </SelectTrigger>

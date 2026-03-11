@@ -17,6 +17,7 @@ const {
 } = defineProps<SelectProps<T>>()
 const emits = defineEmits<SelectEmits<T>>()
 const selectConfig = useConfig('select', () => ({ lazyMount, unmountOnExit }))
+
 const selectRoot = useSelect<T>(useForwardProps(props) as unknown as UseSelectProps<T>, emits)
 
 // theme

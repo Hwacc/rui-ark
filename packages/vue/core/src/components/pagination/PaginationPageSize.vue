@@ -16,12 +16,12 @@ const {
 } = defineProps<PaginationPageSizeProps>()
 
 const context = usePaginationContext()
-const modelValue = ref<string[]>([String(context.value.pageSize)])
-watch(modelValue, (v: string[]) => context.value.setPageSize(Number(v[0])), { immediate: true })
+const modelValue = ref([context.value.pageSize])
+watch(modelValue, v => context.value.setPageSize(v[0]), { immediate: true })
 
 const sizeItems = computed(() => {
   const list = uniq(sizes?.length ? sizes : [10, 20, 30, 50])
-  return list.map(n => ({ label: String(n), value: String(n) }))
+  return list.map(n => ({ label: String(n), value: n }))
 })
 const collection = computed(() => createListCollection({ items: sizeItems.value }))
 

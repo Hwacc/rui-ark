@@ -9,7 +9,7 @@ const items = Array.from({ length: 5 }, (_, index) => {
   const bird = fakerEN.animal.bird()
   return {
     label: `${bird} ${index === 4 ? '(disabled)' : ''}`,
-    value: bird,
+    value: index,
     disabled: index === 4,
   }
 })
@@ -27,7 +27,7 @@ const items = Array.from({ length: 5 }, (_, index) => {
           :key="item.value"
           :label="item.label"
           :value="item.value"
-          :name="item.value"
+          :name="item.label"
           :disabled="item.disabled"
         />
       </div>

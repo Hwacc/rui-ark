@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { CheckboxRootEmits, UseCheckboxReturn } from '@ark-ui/vue/checkbox'
-import type { CheckboxProps, CheckedState } from '.'
+import type { CheckboxRootEmits, UseCheckboxProps, UseCheckboxReturn } from '@ark-ui/vue/checkbox'
+import type { CheckboxProps, CheckedState } from './props'
 import { Checkbox, useCheckbox } from '@ark-ui/vue/checkbox'
 import { useForwardExpose, useForwardProps } from '@ark-ui/vue/utils'
 import { useTheme } from '@rark-ui/vue/composables/useTheme'
@@ -13,7 +13,7 @@ const slots = defineSlots<{
   indicator: (props: { checkedState: CheckedState }) => any
   label: () => any
 }>()
-const forwarded = useForwardProps(props)
+const forwarded = useForwardProps<CheckboxProps, UseCheckboxProps>(props)
 const checkbox = useCheckbox(forwarded, emit)
 
 // theme
