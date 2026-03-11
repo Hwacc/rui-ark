@@ -110,6 +110,25 @@ export default defineComponent({
         return <></>
       }
 
+      function renderName(
+        nameProps: {
+          node: TreeNodeData
+          state: UnwrapRef<UseTreeViewNodeContext>
+        },
+      ) {
+        const name = uNode[uKeyMap.name]
+        if (typeof name === 'string') {
+          return <>{name}</>
+        }
+        else if (isVNode(name)) {
+          return cloneVNode(name)
+        }
+        else if (typeof name === 'function') {
+          return name(nameProps)
+        }
+        return <></>
+      }
+
       return (
         <TreeView.NodeProvider node={uNode} indexPath={uIndexPath}>
           <TreeView.NodeContext>
@@ -155,7 +174,12 @@ export default defineComponent({
                                           },
                                         )}
                                         <TreeView.BranchText class={branchCrafts.value.text({ class: uUi.branchText, ...theme.value })}>
-                                          {uNode[uKeyMap.name]}
+                                          {
+                                            renderName({
+                                              node: uNode,
+                                              state: nodeState,
+                                            })
+                                          }
                                         </TreeView.BranchText>
                                       </div>
                                       <TreeView.BranchIndicator class={branchCrafts.value.indicator({ class: uUi.branchIndicator, ...theme.value })}>
@@ -207,7 +231,12 @@ export default defineComponent({
                                       },
                                     )}
                                     <TreeView.ItemText class={itemCrafts.value.text({ class: uUi.itemText, ...theme.value })}>
-                                      {uNode[uKeyMap.name]}
+                                      {
+                                        renderName({
+                                          node: uNode,
+                                          state: nodeState,
+                                        })
+                                      }
                                     </TreeView.ItemText>
                                   </div>
                                 )
