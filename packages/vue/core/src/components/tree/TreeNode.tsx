@@ -5,9 +5,10 @@ import type { TreeKeyMap, TreeNodeData } from './props'
 import { TreeView } from '@ark-ui/vue'
 import { useTheme } from '@rark-ui/vue/composables/useTheme'
 import { ChevronRight } from 'lucide-vue-next'
-import { cloneVNode, computed, defineComponent, isVNode, toRefs, unref } from 'vue'
+import { cloneVNode, defineComponent, isVNode, toRefs, unref } from 'vue'
 import { TreeNode } from '.'
 import { Icon } from '../icon'
+import { injectTreeContext } from './tree-context'
 
 /** 合并 keyMap 后的完整类型（用于 slots） */
 interface ResolvedKeyMap {
@@ -50,10 +51,6 @@ export default defineComponent({
         itemIcon?: HTMLAttributes['class']
         itemText?: HTMLAttributes['class']
       }>,
-      default: () => ({}),
-    },
-    theme: {
-      type: Object as PropType<ThemeNoCrafts>,
       default: () => ({}),
     },
     node: {
@@ -110,27 +107,38 @@ export default defineComponent({
   },
 
   slots: Object as SlotsType<{
-    branch: (props: { node: TreeNodeData, keyMap: ResolvedKeyMap, state: UnwrapRef<UseTreeViewNodeContext> }) => any
-    item: (props: { node: TreeNodeData, keyMap: ResolvedKeyMap, state: UnwrapRef<UseTreeViewNodeContext> }) => any
+    branch: (props: {
+      node: TreeNodeData
+      keyMap: ResolvedKeyMap
+      state: UnwrapRef<UseTreeViewNodeContext>
+    }) => any
+    item: (props: {
+      node: TreeNodeData
+      keyMap: ResolvedKeyMap
+      state: UnwrapRef<UseTreeViewNodeContext>
+    }) => any
   }>,
 
   setup(props, { attrs, slots }) {
     const { node, nodeIndent, indexPath, keyMap, ui } = toRefs(props)
-
-    // theme
-    const theme = useTheme(() => props.theme)
-    const branchCrafts = computed(() => theme.value.crafts.tvTreeBranch())
-    const itemCrafts = computed(() => theme.value.crafts.tvTreeItem())
+    const theme = useTheme()
+    const { branchCrafts, itemCrafts } = injectTreeContext()
 
     return () => {
+      const uTheme = unref(theme)
+      const uBranchCrafts = unref(branchCrafts)
+      const uItemCrafts = unref(itemCrafts)
       const uNode = unref(node)
       const uIndexPath = unref(indexPath)
-      const uKeyMap = Object.assign({
-        id: 'id',
-        name: 'name',
-        children: 'children',
-        icon: 'icon',
-      }, unref(keyMap))
+      const uKeyMap = Object.assign(
+        {
+          id: 'id',
+          name: 'name',
+          children: 'children',
+          icon: 'icon',
+        },
+        unref(keyMap),
+      )
       const uUi = unref(ui)
       const attrsClass = attrs.class as HTMLAttributes['class']
 
@@ -138,125 +146,132 @@ export default defineComponent({
         <TreeView.NodeProvider node={uNode} indexPath={uIndexPath}>
           <TreeView.NodeContext>
             {{
-              default: (nodeState: UnwrapRef<UseTreeViewNodeContext>) =>
-                (
-                  <>
-                    {
-                      uNode[uKeyMap.children] && (
-                        <TreeView.Branch
-                          {...attrs}
-                          class={
-                            branchCrafts.value.root({
-                              class: [uUi.branch, attrsClass],
-                              ...theme.value,
-                            })
-                          }
-                          style={unref(nodeIndent) ? { '--indent': `${unref(nodeIndent)}px` } : undefined}
-                        >
-                          <TreeView.BranchControl class={branchCrafts.value.control({ class: uUi.branchControl, ...theme.value })}>
-                            {
-                              slots.branch
-                                ? slots.branch({
-                                    node: uNode,
-                                    keyMap: uKeyMap,
-                                    state: nodeState,
-                                  })
-                                : (
-                                    <>
-                                      <div
-                                        class={branchCrafts.value.title({ class: uUi.branchTitle, ...theme.value })}
-                                        data-scope="tree-view"
-                                        data-part="branch-title"
-                                      >
-                                        {props.renderIcon(
-                                          {
-                                            node: uNode,
-                                            icon: uNode[uKeyMap.icon] as any,
-                                            state: nodeState,
-                                            class: branchCrafts.value.icon({
-                                              class: uUi.branchIcon,
-                                              ...theme.value,
-                                            }),
-                                          },
-                                        )}
-                                        <TreeView.BranchText class={branchCrafts.value.text({ class: uUi.branchText, ...theme.value })}>
-                                          {
-                                            props.renderName({
-                                              name: uNode[uKeyMap.name] as any,
-                                              node: uNode,
-                                              state: nodeState,
-                                            })
-                                          }
-                                        </TreeView.BranchText>
-                                      </div>
-                                      <TreeView.BranchIndicator class={branchCrafts.value.indicator({ class: uUi.branchIndicator, ...theme.value })}>
-                                        <ChevronRight style={{ width: '1lh', height: '1lh' }} />
-                                      </TreeView.BranchIndicator>
-                                    </>
-                                  )
-                            }
-                          </TreeView.BranchControl>
-                          <TreeView.BranchContent class={branchCrafts.value.content({ class: uUi.branchContent, ...theme.value })}>
-                            <TreeView.BranchIndentGuide />
-                            {
-                              (uNode[uKeyMap.children] as TreeNodeData[]).map((child, index) => {
-                                return (
-                                  <TreeNode
-                                    key={child[uKeyMap.id] as string}
-                                    node={child}
-                                    indexPath={[...uIndexPath, index]}
-                                    keyMap={uKeyMap}
-                                    renderIcon={props.renderIcon}
-                                    renderName={props.renderName}
-                                  />
-                                )
+              default: (nodeState: UnwrapRef<UseTreeViewNodeContext>) => (
+                <>
+                  {uNode[uKeyMap.children] && (
+                    <TreeView.Branch
+                      {...attrs}
+                      class={uBranchCrafts.root({
+                        class: [uUi.branch, attrsClass],
+                        ...uTheme,
+                      })}
+                      style={
+                        unref(nodeIndent) ? { '--indent': `${unref(nodeIndent)}px` } : undefined
+                      }
+                    >
+                      <TreeView.BranchControl
+                        class={uBranchCrafts.control({ class: uUi.branchControl, ...uTheme })}
+                      >
+                        {slots.branch
+                          ? (
+                              slots.branch({
+                                node: uNode,
+                                keyMap: uKeyMap,
+                                state: nodeState,
                               })
-                            }
-                          </TreeView.BranchContent>
-                        </TreeView.Branch>
-                      )
-                    }
-                    {
-                      !uNode[uKeyMap.children] && (
-                        <TreeView.Item {...attrs} class={itemCrafts.value.root({ class: uUi.item, ...theme.value })}>
-                          {
-                            slots.item
-                              ? slots.item({
-                                  node: uNode,
-                                  keyMap: uKeyMap,
-                                  state: nodeState,
-                                })
-                              : (
-                                  <div
-                                    class={itemCrafts.value.title({ class: uUi.itemTitle, ...theme.value })}
-                                    data-scope="tree-view"
-                                    data-part="item-title"
+                            )
+                          : (
+                              <>
+                                <div
+                                  class={uBranchCrafts.title({
+                                    class: uUi.branchTitle,
+                                    ...uTheme,
+                                  })}
+                                  data-scope="tree-view"
+                                  data-part="branch-title"
+                                >
+                                  {props.renderIcon({
+                                    node: uNode,
+                                    icon: uNode[uKeyMap.icon] as any,
+                                    state: nodeState,
+                                    class: uBranchCrafts.icon({
+                                      class: uUi.branchIcon,
+                                      ...uTheme,
+                                    }),
+                                  })}
+                                  <TreeView.BranchText
+                                    class={uBranchCrafts.text({
+                                      class: uUi.branchText,
+                                      ...uTheme,
+                                    })}
                                   >
-                                    {props.renderIcon(
-                                      {
-                                        node: uNode,
-                                        icon: uNode[uKeyMap.icon] as any,
-                                        state: nodeState,
-                                        class: itemCrafts.value.icon({ class: uUi.itemIcon, ...theme.value }),
-                                      },
-                                    )}
-                                    <TreeView.ItemText class={itemCrafts.value.text({ class: uUi.itemText, ...theme.value })}>
-                                      {
-                                        props.renderName({
-                                          name: uNode[uKeyMap.name] as any,
-                                          node: uNode,
-                                          state: nodeState,
-                                        })
-                                      }
-                                    </TreeView.ItemText>
-                                  </div>
-                                )
-                          }
-                        </TreeView.Item>
-                      )
-                    }
-                  </>
-                ),
+                                    {props.renderName({
+                                      name: uNode[uKeyMap.name] as any,
+                                      node: uNode,
+                                      state: nodeState,
+                                    })}
+                                  </TreeView.BranchText>
+                                </div>
+                                <TreeView.BranchIndicator
+                                  class={uBranchCrafts.indicator({
+                                    class: uUi.branchIndicator,
+                                    ...uTheme,
+                                  })}
+                                >
+                                  <ChevronRight style={{ width: '1lh', height: '1lh' }} />
+                                </TreeView.BranchIndicator>
+                              </>
+                            )}
+                      </TreeView.BranchControl>
+                      <TreeView.BranchContent
+                        class={uBranchCrafts.content({ class: uUi.branchContent, ...uTheme })}
+                      >
+                        <TreeView.BranchIndentGuide />
+                        {(uNode[uKeyMap.children] as TreeNodeData[]).map((child, index) => {
+                          return (
+                            <TreeNode
+                              key={child[uKeyMap.id] as string}
+                              node={child}
+                              indexPath={[...uIndexPath, index]}
+                              keyMap={uKeyMap}
+                              renderIcon={props.renderIcon}
+                              renderName={props.renderName}
+                            />
+                          )
+                        })}
+                      </TreeView.BranchContent>
+                    </TreeView.Branch>
+                  )}
+                  {!uNode[uKeyMap.children] && (
+                    <TreeView.Item
+                      {...attrs}
+                      class={uItemCrafts.root({ class: uUi.item, ...uTheme })}
+                    >
+                      {slots.item
+                        ? (
+                            slots.item({
+                              node: uNode,
+                              keyMap: uKeyMap,
+                              state: nodeState,
+                            })
+                          )
+                        : (
+                            <div
+                              class={uItemCrafts.title({ class: uUi.itemTitle, ...uTheme })}
+                              data-scope="tree-view"
+                              data-part="item-title"
+                            >
+                              {props.renderIcon({
+                                node: uNode,
+                                icon: uNode[uKeyMap.icon] as any,
+                                state: nodeState,
+                                class: uItemCrafts.icon({ class: uUi.itemIcon, ...uTheme }),
+                              })}
+                              <TreeView.ItemText
+                                class={uItemCrafts.text({ class: uUi.itemText, ...uTheme })}
+                              >
+                                {props.renderName({
+                                  name: uNode[uKeyMap.name] as any,
+                                  node: uNode,
+                                  state: nodeState,
+                                })}
+                              </TreeView.ItemText>
+                            </div>
+                          )}
+                    </TreeView.Item>
+                  )}
+                </>
+              ),
             }}
           </TreeView.NodeContext>
         </TreeView.NodeProvider>

@@ -5,8 +5,8 @@ import { createTreeCollection } from '@ark-ui/vue/tree-view'
 import { computed, ref } from 'vue'
 import { Tree, TreeCheckboxNode, TreeNode } from '../index'
 
-// 使用自定义字段名称的数据结构
-type CustomNode = {
+// 使用自定义字段名称的数据结构（含索引签名以兼容 TreeNodeData）
+interface CustomNode extends Record<string, unknown> {
   nodeId: string
   label: string
   iconName?: string

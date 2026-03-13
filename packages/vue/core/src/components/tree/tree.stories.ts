@@ -10,8 +10,12 @@ import CustomPropsRenderExample from './examples/custom-props-render.vue'
 import CustomPropsRenderExampleRaw from './examples/custom-props-render.vue?raw'
 import CustomRenderExample from './examples/custom-render.vue'
 import CustomRenderExampleRaw from './examples/custom-render.vue?raw'
+import DialogTreeExample from './examples/dialog-tree.vue'
+import DialogTreeExampleRaw from './examples/dialog-tree.vue?raw'
 import EventsExample from './examples/events.vue'
 import EventsExampleRaw from './examples/events.vue?raw'
+import LargeDataExample from './examples/large-data.vue'
+import LargeDataExampleRaw from './examples/large-data.vue?raw'
 import SelectionModesExample from './examples/selection-modes.vue'
 import SelectionModesExampleRaw from './examples/selection-modes.vue?raw'
 import SizesExample from './examples/sizes.vue'
@@ -34,6 +38,21 @@ export const Basic = {
   },
   render: () => ({
     components: { Component: BasicExample },
+    template: '<Component />',
+  }),
+}
+
+export const LargeData = {
+  parameters: {
+    docs: {
+      source: {
+        code: LargeDataExampleRaw,
+        language: 'html',
+      },
+    },
+  },
+  render: () => ({
+    components: { Component: LargeDataExample },
     template: '<Component />',
   }),
 }
@@ -139,6 +158,21 @@ export const Sizes = {
   },
   render: () => ({
     components: { Component: SizesExample },
+    template: '<Component />',
+  }),
+}
+
+export const DialogTree = {
+  parameters: {
+    docs: {
+      source: {
+        code: DialogTreeExampleRaw,
+        language: 'html',
+      },
+    },
+  },
+  render: () => ({
+    components: { Component: DialogTreeExample },
     template: '<Component />',
   }),
 }

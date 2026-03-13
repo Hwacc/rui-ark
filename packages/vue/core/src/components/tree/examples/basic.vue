@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type { TreeCollection } from '@ark-ui/vue/tree-view'
 import { createTreeCollection } from '@ark-ui/vue/tree-view'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { Tree, TreeNode } from '../index'
 
 type Node = {
@@ -34,14 +33,12 @@ const rootNode: Node = {
   ],
 }
 
-const collection = computed<TreeCollection<Node>>(() => {
-  return createTreeCollection<Node>({
-    rootNode,
-    nodeToValue: node => node.id,
-    nodeToString: node => node.name,
-    nodeToChildren: node => node.children ?? [],
-    isNodeDisabled: () => false,
-  })
+const collection = createTreeCollection<Node>({
+  rootNode,
+  nodeToValue: node => node.id,
+  nodeToString: node => node.name,
+  nodeToChildren: node => node.children ?? [],
+  isNodeDisabled: () => false,
 })
 
 const expandedValue = ref<string[]>(['docs'])

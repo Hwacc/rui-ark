@@ -6,15 +6,23 @@ import { TreeView, useTreeView } from '@ark-ui/vue/tree-view'
 import { useTheme } from '@rark-ui/vue/composables/useTheme'
 import { ThemeProvider } from '@rark-ui/vue/providers/theme'
 import { computed } from 'vue'
+import { provideTreeContext } from './tree-context'
 
 const { class: propsClass, theme: propsTheme, ui, ...props } = defineProps<TreeProps<T>>()
 const emits = defineEmits<TreeViewRootEmits<T>>()
 const forwarded = useForwardProps<TreeProps<T>, any>(props)
 const treeView = useTreeView<T>(forwarded, emits)
 
-// theme
+// theme（根节点统一 provide，供 TreeNode/TreeCheckboxNode inject，避免每节点 useTheme）
 const theme = useTheme(() => propsTheme)
 const crafts = computed(() => theme.value.crafts.tvTree())
+
+// context
+provideTreeContext({
+  branchCrafts: computed(() => theme.value.crafts.tvTreeBranch()),
+  itemCrafts: computed(() => theme.value.crafts.tvTreeItem()),
+  checkboxCrafts: computed(() => theme.value.crafts.tvCheckbox()),
+})
 </script>
 
 <template>
