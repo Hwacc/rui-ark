@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { createTreeCollection } from '@ark-ui/vue/tree-view'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Tree, TreeNode } from '../index'
 
 type Node = {
@@ -66,13 +66,15 @@ const rootNode: Node = {
   children,
 }
 
-const collection = createTreeCollection<Node>({
-  rootNode,
-  nodeToValue: node => node.id,
-  nodeToString: node => node.name,
-  nodeToChildren: node => node.children ?? [],
-  isNodeDisabled: () => false,
-})
+const collection = computed(() =>
+  createTreeCollection<Node>({
+    rootNode,
+    nodeToValue: node => node.id,
+    nodeToString: node => node.name,
+    nodeToChildren: node => node.children ?? [],
+    isNodeDisabled: () => false,
+  }),
+)
 
 const expandedValue = ref<string[]>(['branch-0', 'branch-1'])
 const selectedValue = ref<string[]>(['branch-0-0'])
@@ -90,6 +92,8 @@ const selectedValue = ref<string[]>(['branch-0-0'])
         v-model:expanded-value="expandedValue"
         v-model:selected-value="selectedValue"
         :collection="collection"
+        lazy-mount
+        unmount-on-exit
       >
         <TreeNode
           v-for="(node, index) in rootNode.children"

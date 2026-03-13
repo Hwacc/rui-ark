@@ -13,6 +13,8 @@ const emits = defineEmits<TreeViewRootEmits<T>>()
 const forwarded = useForwardProps<TreeProps<T>, any>(props)
 const treeView = useTreeView<T>(forwarded, emits)
 
+console.log('treeView props', forwarded.value, treeView.value)
+
 // theme（根节点统一 provide，供 TreeNode/TreeCheckboxNode inject，避免每节点 useTheme）
 const theme = useTheme(() => propsTheme)
 const crafts = computed(() => theme.value.crafts.tvTree())
